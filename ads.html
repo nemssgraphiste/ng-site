@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicité Digitale (Ads) | NG Creative — Google, Meta & TikTok Ads</title>
+    <meta name="description" content="Campagnes publicitaires Google Ads, Meta Ads et TikTok Ads gérées par des experts. Stratégie, création, lancement, optimisation et reporting pour maximiser votre ROAS.">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Montserrat','sans-serif'],aquire:['Aquire','sans-serif']},colors:{brand:{black:'#0a0a0a',white:'#f7f7f7',gray:'#1f1f1f',light:'#e5e5e5'}}}}}</script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+
+        :root {
+            --font-display: 'Montserrat', sans-serif;
+            --font-brand: 'Aquire', 'Montserrat', sans-serif;
+            --font-copy: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* Sur fond sombre */
+            --text-dark-primary: #f7f7f7;
+            --text-dark-body: #d8d5ce;
+            --text-dark-muted: #aaa69e;
+            --text-dark-subtle: #88847c;
+
+            /* Sur fond clair */
+            --text-light-primary: #0a0a0a;
+            --text-light-body: #34322e;
+            --text-light-muted: #69655e;
+            --text-light-subtle: #77736c;
+        }
+
+        [dir="rtl"] {
+            --font-copy: 'Noto Sans Arabic', 'Manrope', sans-serif;
+            --font-display: 'Noto Sans Arabic', 'Montserrat', sans-serif;
+        }
+
+        @font-face{font-family:'Aquire';src:url('Aquire.otf') format('opentype');}
+        body{font-family:'Montserrat',sans-serif;background-color:#0a0a0a;color:#f7f7f7;overflow-x:hidden;-webkit-font-smoothing:auto!important;}
+        .text-stroke{font-style:italic;color:#0a0a0a;text-shadow:-1px -1px 0 #f7f7f7,0 -1px 0 #f7f7f7,1px -1px 0 #f7f7f7,1px 0 0 #f7f7f7,1px 1px 0 #f7f7f7,0 1px 0 #f7f7f7,-1px 1px 0 #f7f7f7,-1px 0 0 #f7f7f7;}
+        .text-stroke-black{font-style:italic;color:#f7f7f7;text-shadow:-1px -1px 0 #0a0a0a,0 -1px 0 #0a0a0a,1px -1px 0 #0a0a0a,1px 0 0 #0a0a0a,1px 1px 0 #0a0a0a,0 1px 0 #0a0a0a,-1px 1px 0 #0a0a0a,-1px 0 0 #0a0a0a;}
+        .btn-hover-effect{position:relative;overflow:hidden;}.btn-hover-effect::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:1px;background-color:currentColor;transform:scaleX(0);transform-origin:right;transition:transform 0.3s ease;}.btn-hover-effect:hover::after{transform:scaleX(1);transform-origin:left;}
+        .fade-in-up{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease-out,transform 0.8s ease-out;}.fade-in-up.visible{opacity:1;transform:translateY(0);}
+        @keyframes slowZoom{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}.animate-slow-zoom{animation:slowZoom 30s ease-in-out infinite;}
+        ::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:#0a0a0a;}::-webkit-scrollbar-thumb{background:#333;border-radius:4px;}
+        [x-cloak]{display:none!important;}.rounded-full{-webkit-background-clip:padding-box;background-clip:padding-box;}
+        .tag-pill{display:inline-flex;align-items:center;padding:0.4rem 1rem;border:1px solid rgba(247,247,247,0.15);border-radius:9999px;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9ca3af;background:rgba(255,255,255,0.04);transition:all 0.3s ease;}.tag-pill:hover{border-color:rgba(247,247,247,0.4);color:#f7f7f7;background:rgba(255,255,255,0.08);}
+        .prestation-number{font-family:'Aquire','Montserrat',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.2em;color:#6b7280;}
+        .service-label {
+            font-family: var(--font-copy);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-dark-muted);
+        }
+        .prestation-row{transition:background 0.3s ease;}.prestation-row:hover{background:rgba(247,247,247,0.03);}
+
+        /* ── Plateforme cards ── */
+        
+
+        /* ── Funnel CSS ── */
+        .funnel-step{
+            position:relative;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:rgba(247,247,247,0.06);
+            border:1px solid rgba(247,247,247,0.1);
+            transition:all 0.3s ease;
+        }
+        .funnel-step:hover{background:rgba(247,247,247,0.1);border-color:rgba(247,247,247,0.25);}
+        .funnel-step::after{
+            content:'';
+            position:absolute;
+            bottom:-1px;
+            left:50%;
+            transform:translateX(-50%);
+            width:0;
+            height:0;
+            border-left:12px solid transparent;
+            border-right:12px solid transparent;
+            border-top:10px solid rgba(247,247,247,0.1);
+            z-index:1;
+        }
+        .funnel-step:last-child::after{display:none;}
+
+        /* ── Process step ads ── */
+        .ads-process-step{
+            border-left:1px solid rgba(247,247,247,0.12);
+            padding-left:1.5rem;
+            position:relative;
+            transition:border-color 0.3s;
+        }
+        .ads-process-step:hover{border-color:rgba(247,247,247,0.35);}
+        .ads-process-step::before{content:'';position:absolute;left:-4px;top:0.25rem;width:7px;height:7px;border-radius:50%;background:#f7f7f7;}
+
+        /* ── KPI cards (fond blanc) ── */
+        .kpi-card{background:#fff;border:1px solid rgba(10,10,10,0.1);border-radius:1rem;padding:1.5rem;text-align:center;transition:all 0.3s;}
+        .kpi-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.1);}
+
+        @media(prefers-reduced-motion:reduce){.fade-in-up{opacity:1;transform:none;transition:none;}.animate-slow-zoom{animation:none;}*{transition-duration:0.01ms!important;animation-duration:0.01ms!important;}}
+    
+        /* ── Hero Eyebrow Component ── */
+        .ng-hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+        .ng-hero-eyebrow-number {
+            font-family: var(--font-copy);
+            font-size: clamp(0.68rem, 1vw, 0.72rem);
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.1em;
+            color: rgba(247, 247, 247, 0.7);
+            flex-shrink: 0;
+        }
+        .ng-hero-eyebrow-line {
+            display: inline-block;
+            width: clamp(28px, 4vw, 40px);
+            height: 1px;
+            background-color: rgba(247, 247, 247, 0.6);
+            flex-shrink: 0;
+        }
+        .ng-hero-eyebrow-name {
+            font-family: var(--font-copy);
+            font-size: clamp(0.7rem, 1.1vw, 0.75rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #f7f7f7;
+        }
+
+        /* ── Hero Intro & Subtitle ── */
+        .ng-hero-intro {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.15rem;
+            max-width: 52ch;
+        }
+        .ng-hero-intro-line {
+            display: block;
+            width: clamp(24px, 3.5vw, 36px);
+            height: 1px;
+            background-color: rgba(247, 247, 247, 0.65);
+            flex-shrink: 0;
+            margin-top: 0.75rem;
+            transform-origin: left center;
+        }
+        [dir="rtl"] .ng-hero-intro-line {
+            transform-origin: right center;
+        }
+        .ng-service-hero-copy {
+            font-family: var(--font-copy);
+            font-weight: 600;
+            font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+            line-height: 1.6;
+            color: #f7f7f7;
+            margin: 0;
+            border-inline-start: none;
+            padding-inline-start: 0;
+        }
+
+        /* Subtle hero intro animation */
+        .observer-target.visible .ng-hero-intro-line {
+            animation: heroLineGrow 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .observer-target.visible .ng-service-hero-copy {
+            animation: heroCopyReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards;
+        }
+
+        @keyframes heroLineGrow {
+            from { transform: scaleX(0); opacity: 0; }
+            to { transform: scaleX(1); opacity: 1; }
+        }
+        @keyframes heroCopyReveal {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ng-hero-intro-line,
+            .ng-service-hero-copy {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* ── Solid White Hero Title ── */
+        .ng-hero-title-solid {
+            color: #f7f7f7;
+            font-style: normal;
+            text-shadow: none;
+            -webkit-text-stroke: 0;
+            -webkit-text-fill-color: #f7f7f7;
+        }
+
+        /* ── Capabilities Grid (T12) ── */
+        .ng-capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        }
+        .ng-capability-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            padding-block: 0.875rem;
+            border-top: 1px solid rgba(247,247,247,0.07);
+        }
+        .ng-cap-index {
+            font-family: var(--font-copy);
+            font-size: 0.58rem;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.12em;
+            color: var(--text-dark-subtle);
+            flex-shrink: 0;
+        }
+        .ng-cap-label {
+            font-family: var(--font-copy);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark-body);
+            letter-spacing: 0.02em;
+        }
+
+    
+        /* ── Platform Directory Component ── */
+        .platform-directory {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            border-top: 1px solid rgba(247, 247, 247, 0.12);
+            border-bottom: 1px solid rgba(247, 247, 247, 0.12);
+        }
+        .platform-row {
+            display: grid;
+            grid-template-columns: minmax(200px, 0.85fr) minmax(300px, 1.4fr) minmax(220px, 1fr);
+            align-items: start;
+            gap: 2.5rem;
+            padding: 2.5rem 1.25rem;
+            border-bottom: 1px solid rgba(247, 247, 247, 0.12);
+            position: relative;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s ease;
+        }
+        .platform-row:last-child {
+            border-bottom: none;
+        }
+        .platform-row:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+        .platform-identity {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+        .platform-logo {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .platform-row:hover .platform-logo {
+            transform: translateX(3px);
+        }
+        [dir="rtl"] .platform-row:hover .platform-logo {
+            transform: translateX(-3px);
+        }
+        .platform-name {
+            font-family: var(--font-display);
+            font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            color: #f7f7f7;
+            line-height: 1.1;
+            margin: 0;
+        }
+        .platform-description {
+            font-family: var(--font-copy);
+            font-size: 0.935rem;
+            font-weight: 500;
+            line-height: 1.65;
+            color: var(--text-dark-body);
+            margin: 0;
+            max-width: 48ch;
+        }
+        .platform-formats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem 1.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .platform-format {
+            font-family: var(--font-copy);
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #f7f7f7;
+            padding-top: 0.45rem;
+            border-top: 1px solid rgba(247, 247, 247, 0.12);
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .platform-row:hover .platform-format {
+            border-color: rgba(247, 247, 247, 0.28);
+        }
+
+        /* Platform Stagger Animation */
+        .observer-target.visible .platform-row:nth-child(1) {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.05s;
+        }
+        .observer-target.visible .platform-row:nth-child(2) {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.14s;
+        }
+        .observer-target.visible .platform-row:nth-child(3) {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.23s;
+        }
+
+        @media (max-width: 1023px) {
+            .platform-row {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 2rem 0.5rem;
+            }
+            .platform-description {
+                max-width: 100%;
+            }
+        }
+        @media (max-width: 640px) {
+            .platform-formats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.5rem 1rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .platform-row {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* ── Hero split + illustration ── */
+        .ng-hero-split {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: clamp(2rem, 5vw, 5rem);
+            align-items: center;
+        }
+        .ng-hero-text-col { min-width: 0; }
+        .ng-hero-illus-col { min-width: 0; }
+        @media (max-width: 1023px) {
+            .ng-hero-illus-col { display: none !important; }
+        }
+
+        /* ── ADS — Matrice de déclinaison ── */
+        .ads-hero-visual {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            pointer-events: none;
+        }
+        .ads-svg { width: 100%; height: auto; display: block; }
+
+        /* Point de focus : repositionnement en boucle */
+        .ads-focus {
+            animation: ads-focus-move 12s ease-in-out infinite;
+            will-change: transform;
+        }
+        @keyframes ads-focus-move {
+            0%   { transform: translate(114px, 90px);  opacity: 0.9; }
+            28%  { transform: translate(270px, 218px); opacity: 0.8; }
+            56%  { transform: translate(360px, 145px); opacity: 0.85; }
+            84%  { transform: translate(114px, 268px); opacity: 0.8; }
+            100% { transform: translate(114px, 90px);  opacity: 0.9; }
+        }
+
+        /* Lignes de diffusion : tracé progressif */
+        .ads-line {
+            stroke-dasharray: 250;
+            stroke-dashoffset: 250;
+            animation: ads-line-draw 2s cubic-bezier(0.22,1,0.36,1) forwards;
+        }
+        .ads-line-1 { animation-delay: 0.3s; }
+        .ads-line-2 { animation-delay: 0.5s; }
+        .ads-line-3 { animation-delay: 0.7s; }
+        @keyframes ads-line-draw { to { stroke-dashoffset: 0; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ads-focus { animation: none !important; transform: translate(114px, 90px) !important; }
+            .ads-line { animation: none !important; stroke-dashoffset: 0 !important; }
+        }
+    </style>
+</head>
+<body class="selection:bg-white selection:text-black">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:font-bold focus:rounded">Aller au contenu</a>
+
+    <!-- HEADER -->
+    <header x-data="{mobileMenuOpen:false,scrolled:false,langOpen:false,currentLang:'FR',currentFlag:'🇫🇷',init(){const s=localStorage.getItem('n_graphiste_lang')||'FR';this.currentLang=s;const f={FR:'🇫🇷',EN:'🇬🇧',ES:'🇪🇸',AR:'🇸🇦'};this.currentFlag=f[s]||'🇫🇷';}}"
+    @scroll.window="scrolled=(window.pageYOffset>50)"
+    @keydown.escape.window="mobileMenuOpen=false;langOpen=false"
+    :class="scrolled?'bg-brand-black/90 backdrop-blur-md py-4':'bg-transparent py-6'"
+    class="fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 md:px-12" role="banner">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4 md:gap-6 z-50">
+                <a href="index.html" class="flex items-center" aria-label="NG Creative — Accueil"><img src="LOGO1HEAD.png" alt="Logo NG Creative" class="h-8 md:h-10 w-auto object-contain transition-all duration-700 hover:scale-105"></a>
+                <div class="flex items-center gap-4 border-l border-white/20 pl-4 md:pl-6">
+                    <a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="Instagram"><svg class="w-5 h-5 md:w-[1.4rem] md:h-[1.4rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    <a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="X"><svg class="w-[1.15rem] h-[1.15rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                    <a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="TikTok"><svg class="w-5 h-5" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a>
+                </div>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center text-sm font-semibold tracking-wide" aria-label="Navigation principale">
+                <a href="index.html#services" class="hover:text-gray-400 transition-colors" data-i18n="nav_services">SERVICES</a>
+                <a href="index.html#clients" class="hover:text-gray-400 transition-colors" data-i18n="nav_clients">CLIENTS</a>
+                <a href="index.html#structure" class="hover:text-gray-400 transition-colors" data-i18n="nav_structure">STRUCTURE</a>
+                <a href="contact.html" class="px-6 py-3 border border-white hover:bg-white hover:text-black transition-colors duration-300 rounded-full flex items-center gap-2"><span data-i18n="nav_contact">CONTACT</span><i data-lucide="arrow-up-right" class="w-4 h-4" aria-hidden="true"></i></a>
+                <div class="relative">
+                    <button @click="langOpen=!langOpen" @click.outside="langOpen=false" class="flex items-center gap-2 px-3 py-2 border border-white/20 rounded-full hover:bg-white/10 transition-all text-xs font-bold tracking-wider uppercase focus:outline-none" :aria-expanded="langOpen" aria-label="Changer la langue">
+                        <span x-text="currentFlag" class="text-base leading-none"></span><span x-text="currentLang"></span>
+                        <svg class="w-3 h-3 text-gray-400 transition-transform duration-200" :class="langOpen?'rotate-180':''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div x-show="langOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95 -translate-y-2" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-95 -translate-y-2" class="absolute right-0 mt-2 w-36 bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl py-2 z-50" x-cloak>
+                        <button @click="currentLang='FR';currentFlag='🇫🇷';langOpen=false;changeLanguage('FR')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇫🇷</span> Français</button>
+                        <button @click="currentLang='EN';currentFlag='🇬🇧';langOpen=false;changeLanguage('EN')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇬🇧</span> English</button>
+                        <button @click="currentLang='ES';currentFlag='🇪🇸';langOpen=false;changeLanguage('ES')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇪🇸</span> Español</button>
+                        <button @click="currentLang='AR';currentFlag='🇸🇦';langOpen=false;changeLanguage('AR')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇸🇦</span> العربية</button>
+                    </div>
+                </div>
+                <a href="Plaquette-Commerciale-NG-Creative.pdf" download="Plaquette-Commerciale-NG-Creative.pdf" class="btn-hover-effect text-xs font-bold tracking-wider uppercase text-white py-1" data-i18n="nav_plaquette">TÉLÉCHARGER LA PLAQUETTE</a>
+            </nav>
+            <button @click="mobileMenuOpen=!mobileMenuOpen;if(mobileMenuOpen)document.body.style.overflow='hidden';else document.body.style.overflow='';" class="md:hidden z-50 focus:outline-none" :aria-expanded="mobileMenuOpen" aria-label="Ouvrir le menu">
+                <i data-lucide="menu" x-show="!mobileMenuOpen" class="w-8 h-8" aria-hidden="true"></i>
+                <i data-lucide="x" x-show="mobileMenuOpen" class="w-8 h-8" x-cloak aria-hidden="true"></i>
+            </button>
+            <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-full" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-full" class="fixed inset-0 bg-brand-black flex flex-col justify-center items-center gap-8 text-2xl font-bold uppercase z-40" x-cloak role="dialog" aria-modal="true">
+                <a href="index.html#services" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_services">Services</a>
+                <a href="index.html#clients" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_clients">Clients</a>
+                <a href="index.html#structure" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_structure">Structure</a>
+                <a href="Plaquette-Commerciale-NG-Creative.pdf" download @click="mobileMenuOpen=false;document.body.style.overflow='';" class="btn-hover-effect text-lg tracking-wider text-white" data-i18n="nav_plaquette">TÉLÉCHARGER LA PLAQUETTE</a>
+                <a href="contact.html" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="mt-4 px-8 py-4 border border-white hover:bg-white hover:text-black transition-colors rounded-full" data-i18n="nav_contact">Contact</a>
+                <div class="flex gap-4 mt-4 pt-4 border-t border-white/10">
+                    <button @click="changeLanguage('FR');currentLang='FR';currentFlag='🇫🇷';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="Français">🇫🇷</button>
+                    <button @click="changeLanguage('EN');currentLang='EN';currentFlag='🇬🇧';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="English">🇬🇧</button>
+                    <button @click="changeLanguage('ES');currentLang='ES';currentFlag='🇪🇸';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="Español">🇪🇸</button>
+                    <button @click="changeLanguage('AR');currentLang='AR';currentFlag='🇸🇦';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="العربية">🇸🇦</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- HERO -->
+        <section class="relative min-h-screen flex items-center pt-32 pb-20 px-6 md:px-12 overflow-hidden isolate">
+            <div class="absolute inset-0">
+                <img src="FOND 1.png" alt="" class="w-full h-full object-cover opacity-20 animate-slow-zoom origin-center" aria-hidden="true">
+                <div class="absolute inset-0 bg-gradient-to-b from-brand-black/70 via-brand-black/80 to-brand-black"></div>
+            </div>
+            <div class="max-w-7xl mx-auto w-full relative observer-target fade-in-up">
+                <div class="ng-hero-split">
+                    <div class="ng-hero-text-col">
+                        <h1 class="font-black uppercase leading-none tracking-tighter mb-8" style="font-size: clamp(2.8rem, 7.5vw, 7rem);">
+                            <span data-i18n="ads_h1_1">PUBLI</span><span class="ng-hero-title-solid" data-i18n="ads_h1_2">CITÉ ADS</span>
+                        </h1>
+                        <div class="ng-hero-intro mb-10">
+                                    <p class="ng-service-hero-copy" data-i18n="ads_hero_desc">Google, Meta ou TikTok : nous structurons les campagnes, produisons les créations et suivons les données pour concentrer le budget sur ce qui fonctionne.</p>
+                                </div>
+                        <a href="contact.html" class="inline-flex items-center gap-3 text-base md:text-lg font-bold uppercase tracking-wider py-4 px-8 border border-white hover:bg-white hover:text-black transition-all duration-300 rounded-full focus:outline-none" data-i18n="ads_cta_hero">LANCER UNE CAMPAGNE <i data-lucide="arrow-up-right" class="w-5 h-5" aria-hidden="true"></i></a>
+                    </div>
+
+                    <!-- ILLUSTRATION : Matrice de déclinaison publicitaire -->
+                    <div class="ng-hero-illus-col" aria-hidden="true">
+                        <figure class="ads-hero-visual">
+                            <svg class="ads-svg" viewBox="0 0 440 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                <!-- ══ Composition maîtresse (16:9) ══ -->
+                                <rect x="20" y="40" width="188" height="106" stroke="rgba(247,247,247,0.28)" stroke-width="1.5" fill="rgba(255,255,255,0.025)"/>
+                                <rect x="28" y="48" width="172" height="90" fill="rgba(247,247,247,0.03)" stroke="rgba(247,247,247,0.08)" stroke-width="0.5"/>
+                                <!-- Contenu abstrait -->
+                                <rect x="36" y="58" width="100" height="10" rx="1" fill="rgba(247,247,247,0.15)"/>
+                                <rect x="36" y="72" width="70" height="7" rx="1" fill="rgba(247,247,247,0.08)"/>
+                                <rect x="36" y="100" width="50" height="14" rx="7" stroke="rgba(247,247,247,0.3)" stroke-width="1" fill="none"/>
+                                <rect x="130" y="54" width="62" height="76" rx="2" fill="rgba(247,247,247,0.06)" stroke="rgba(247,247,247,0.12)" stroke-width="0.5"/>
+                                <!-- Label 16:9 -->
+                                <text x="20" y="158" font-family="monospace" font-size="7" font-weight="700" letter-spacing="0.12em" fill="rgba(247,247,247,0.3)">16:9</text>
+                                <!-- Coins de cadrage -->
+                                <line x1="20" y1="40" x2="34" y2="40" stroke="rgba(247,247,247,0.6)" stroke-width="1.5"/>
+                                <line x1="20" y1="40" x2="20" y2="54" stroke="rgba(247,247,247,0.6)" stroke-width="1.5"/>
+                                <line x1="208" y1="40" x2="194" y2="40" stroke="rgba(247,247,247,0.6)" stroke-width="1.5"/>
+                                <line x1="208" y1="40" x2="208" y2="54" stroke="rgba(247,247,247,0.6)" stroke-width="1.5"/>
+
+                                <!-- ══ Format carré (1:1) ══ -->
+                                <rect x="240" y="30" width="92" height="92" stroke="rgba(247,247,247,0.18)" stroke-width="1" fill="rgba(255,255,255,0.015)"/>
+                                <rect x="248" y="38" width="76" height="76" fill="rgba(247,247,247,0.025)" stroke="rgba(247,247,247,0.07)" stroke-width="0.5"/>
+                                <rect x="256" y="48" width="60" height="8" rx="1" fill="rgba(247,247,247,0.1)"/>
+                                <rect x="256" y="62" width="44" height="6" rx="1" fill="rgba(247,247,247,0.06)"/>
+                                <rect x="256" y="82" width="36" height="10" rx="5" stroke="rgba(247,247,247,0.2)" stroke-width="0.75" fill="none"/>
+                                <text x="240" y="134" font-family="monospace" font-size="7" font-weight="700" letter-spacing="0.1em" fill="rgba(247,247,247,0.2)">1:1</text>
+
+                                <!-- ══ Format portrait (9:16) ══ -->
+                                <rect x="352" y="20" width="72" height="128" stroke="rgba(247,247,247,0.18)" stroke-width="1" fill="rgba(255,255,255,0.015)"/>
+                                <rect x="358" y="28" width="60" height="112" fill="rgba(247,247,247,0.02)" stroke="rgba(247,247,247,0.06)" stroke-width="0.5"/>
+                                <rect x="364" y="36" width="48" height="8" rx="1" fill="rgba(247,247,247,0.1)"/>
+                                <rect x="364" y="50" width="36" height="6" rx="1" fill="rgba(247,247,247,0.06)"/>
+                                <rect x="370" y="62" width="36" height="50" rx="1" fill="rgba(247,247,247,0.05)" stroke="rgba(247,247,247,0.1)" stroke-width="0.5"/>
+                                <rect x="364" y="118" width="48" height="10" rx="5" stroke="rgba(247,247,247,0.2)" stroke-width="0.75" fill="none"/>
+                                <text x="352" y="162" font-family="monospace" font-size="7" font-weight="700" letter-spacing="0.1em" fill="rgba(247,247,247,0.2)">9:16</text>
+
+                                <!-- ══ Format bannière (4:1) ══ -->
+                                <rect x="20" y="200" width="198" height="50" stroke="rgba(247,247,247,0.16)" stroke-width="1" fill="rgba(255,255,255,0.012)"/>
+                                <rect x="28" y="208" width="62" height="34" rx="1" fill="rgba(247,247,247,0.05)" stroke="rgba(247,247,247,0.08)" stroke-width="0.5"/>
+                                <rect x="100" y="212" width="80" height="8" rx="1" fill="rgba(247,247,247,0.1)"/>
+                                <rect x="100" y="224" width="60" height="6" rx="1" fill="rgba(247,247,247,0.06)"/>
+                                <rect x="176" y="212" width="36" height="14" rx="7" stroke="rgba(247,247,247,0.22)" stroke-width="0.75" fill="none"/>
+                                <text x="20" y="262" font-family="monospace" font-size="7" font-weight="700" letter-spacing="0.1em" fill="rgba(247,247,247,0.2)">4:1 BANNIÈRE</text>
+
+                                <!-- ══ Lignes de diffusion (animées) ══ -->
+                                <line class="ads-line ads-line-1" x1="208" y1="70" x2="240" y2="76" stroke="rgba(247,247,247,0.2)" stroke-width="0.75"/>
+                                <line class="ads-line ads-line-2" x1="208" y1="80" x2="352" y2="60" stroke="rgba(247,247,247,0.15)" stroke-width="0.75"/>
+                                <line class="ads-line ads-line-3" x1="114" y1="146" x2="60" y2="200" stroke="rgba(247,247,247,0.15)" stroke-width="0.75"/>
+
+                                <!-- ══ Point de focus animé ── -->
+                                <g class="ads-focus">
+                                    <circle r="6" cx="0" cy="0" stroke="rgba(247,247,247,0.8)" stroke-width="1" fill="none"/>
+                                    <circle r="1.5" cx="0" cy="0" fill="rgba(247,247,247,0.9)"/>
+                                    <line x1="-10" y1="0" x2="-7" y2="0" stroke="rgba(247,247,247,0.6)" stroke-width="0.75"/>
+                                    <line x1="7" y1="0" x2="10" y2="0" stroke="rgba(247,247,247,0.6)" stroke-width="0.75"/>
+                                    <line x1="0" y1="-10" x2="0" y2="-7" stroke="rgba(247,247,247,0.6)" stroke-width="0.75"/>
+                                    <line x1="0" y1="7" x2="0" y2="10" stroke="rgba(247,247,247,0.6)" stroke-width="0.75"/>
+                                </g>
+
+                            </svg>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAGS -->
+        <section class="py-12 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto"><div class="ng-capabilities-grid observer-target fade-in-up">
+                    <div class="ng-capability-item"><span class="ng-cap-index">01</span><span class="ng-cap-label">Google Search</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">02</span><span class="ng-cap-label">Google Display</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">03</span><span class="ng-cap-label">YouTube Ads</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">04</span><span class="ng-cap-label">Meta Ads</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">05</span><span class="ng-cap-label">Instagram Ads</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">06</span><span class="ng-cap-label">TikTok Ads</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">07</span><span class="ng-cap-label" data-i18n="ads_tag1">Retargeting</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">08</span><span class="ng-cap-label" data-i18n="ads_tag2">Génération de Leads</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">09</span><span class="ng-cap-label" data-i18n="ads_tag3">E-Commerce Ads</span></div>
+                </div>
+            </div></div>
+        </section>
+
+        <!-- PLATEFORMES -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 observer-target fade-in-up">
+                    <p class="service-label mb-4" data-i18n="ads_platforms_label">NOS PLATEFORMES</p>
+                    <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">
+                        <span data-i18n="ads_platforms_h2_1">3 LEVIERS,</span><br>
+                        <span class="text-stroke" data-i18n="ads_platforms_h2_2">1 STRATÉGIE</span>
+                    </h2>
+                </div>
+                
+                <div class="platform-directory observer-target fade-in-up">
+                    <!-- Google -->
+                    <article class="platform-row platform-row-google">
+                        <div class="platform-identity">
+                            <svg viewBox="0 0 24 24" class="platform-logo" fill="none" aria-hidden="true">
+                                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                            </svg>
+                            <h3 class="platform-name">Google Ads</h3>
+                        </div>
+                        <p class="platform-description" data-i18n="ads_g_desc">Capturez la demande existante. Search, Display, Shopping et YouTube : nous gérons vos campagnes sur tout l'écosystème Google pour toucher vos cibles au bon moment.</p>
+                        <ul class="platform-formats" aria-label="Formats Google Ads">
+                            <li class="platform-format">Search</li>
+                            <li class="platform-format">Shopping</li>
+                            <li class="platform-format">Display</li>
+                            <li class="platform-format">YouTube</li>
+                        </ul>
+                    </article>
+
+                    <!-- Meta -->
+                    <article class="platform-row platform-row-meta">
+                        <div class="platform-identity">
+                            <svg viewBox="0 0 24 24" class="platform-logo" fill="#1877F2" aria-hidden="true">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                            <h3 class="platform-name">Meta Ads</h3>
+                        </div>
+                        <p class="platform-description" data-i18n="ads_m_desc">Créez de la demande. Facebook et Instagram Ads pour générer de la notoriété, des leads et des ventes. Ciblages avancés par audience, lookalike et retargeting.</p>
+                        <ul class="platform-formats" aria-label="Formats Meta Ads">
+                            <li class="platform-format">Facebook</li>
+                            <li class="platform-format">Instagram</li>
+                            <li class="platform-format">Reels Ads</li>
+                            <li class="platform-format">Lead Ads</li>
+                        </ul>
+                    </article>
+
+                    <!-- TikTok -->
+                    <article class="platform-row platform-row-tiktok">
+                        <div class="platform-identity">
+                            <svg viewBox="0 0 24 24" class="platform-logo" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-2.891 2.891 2.896 2.896 0 0 1-2.891-2.891 2.896 2.896 0 0 1 2.891-2.891c.315 0 .618.053.9.15V9.458a6.34 6.34 0 0 0-.9-.065A6.336 6.336 0 0 0 3.147 15.73a6.336 6.336 0 0 0 6.336 6.336 6.336 6.336 0 0 0 6.336-6.336V8.922a8.214 8.214 0 0 0 3.77 1.209V6.686z" fill="#FE2C55"/>
+                                <path d="M18.8 6.1a4.793 4.793 0 0 1-3.77-4.245V1.4h-3.445v13.672a2.896 2.896 0 0 1-2.891 2.891 2.896 2.896 0 0 1-2.891-2.891 2.896 2.896 0 0 1 2.891-2.891c.315 0 .618.053.9.15V8.858a6.34 6.34 0 0 0-.9-.065A6.336 6.336 0 0 0 2.347 15.13a6.336 6.336 0 0 0 6.336 6.336 6.336 6.336 0 0 0 6.336-6.336V8.322a8.214 8.214 0 0 0 3.77 1.209V6.1z" fill="#25F4EE" style="mix-blend-mode: screen;"/>
+                                <path d="M19.189 6.386a4.793 4.793 0 0 1-3.77-4.245V1.7h-3.445v13.672a2.896 2.896 0 0 1-2.891 2.891 2.896 2.896 0 0 1-2.891-2.891 2.896 2.896 0 0 1 2.891-2.891c.315 0 .618.053.9.15V9.158a6.34 6.34 0 0 0-.9-.065A6.336 6.336 0 0 0 2.747 15.43a6.336 6.336 0 0 0 6.336 6.336 6.336 6.336 0 0 0 6.336-6.336V8.622a8.214 8.214 0 0 0 3.77 1.209V6.386z" fill="#FFFFFF"/>
+                            </svg>
+                            <h3 class="platform-name">TikTok Ads</h3>
+                        </div>
+                        <p class="platform-description" data-i18n="ads_t_desc">La croissance organique de demain, la performance d'aujourd'hui. In-Feed Ads, TopView et Spark Ads pour toucher les audiences jeunes et engagées sur la plateforme à la plus forte croissance.</p>
+                        <ul class="platform-formats" aria-label="Formats TikTok Ads">
+                            <li class="platform-format">In-Feed</li>
+                            <li class="platform-format">TopView</li>
+                            <li class="platform-format">Spark Ads</li>
+                            <li class="platform-format">Shopping</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- FUNNEL DE CONVERSION CSS -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    <div class="observer-target fade-in-up">
+                        <p class="service-label mb-4" data-i18n="ads_funnel_label">APPROCHE FULL-FUNNEL</p>
+                        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
+                            <span data-i18n="ads_funnel_h2_1">CHAQUE ÉTAPE</span><br>
+                            <span class="text-stroke" data-i18n="ads_funnel_h2_2">OPTIMISÉE</span>
+                        </h2>
+                        <p class="text-gray-400 font-semibold leading-relaxed max-w-md" data-i18n="ads_funnel_desc">Une campagne performante n'est pas un simple annonce. C'est une stratégie full-funnel qui accompagne votre prospect de la découverte à la fidélisation, avec le bon message sur la bonne plateforme au bon moment.</p>
+                    </div>
+                    <div class="observer-target fade-in-up">
+                        <!-- Funnel visuel -->
+                        <div class="flex flex-col gap-1 max-w-sm mx-auto lg:mx-0">
+                            <div class="funnel-step h-14 rounded-t-xl" style="width:100%">
+                                <div class="flex items-center gap-3">
+                                    <p class="prestation-number">01</p>
+                                    <p class="font-black text-sm uppercase tracking-tight" data-i18n="ads_funnel1">Notoriété</p>
+                                </div>
+                            </div>
+                            <div class="funnel-step h-14" style="width:88%;margin:0 6%">
+                                <div class="flex items-center gap-3">
+                                    <p class="prestation-number">02</p>
+                                    <p class="font-black text-sm uppercase tracking-tight" data-i18n="ads_funnel2">Considération</p>
+                                </div>
+                            </div>
+                            <div class="funnel-step h-14" style="width:72%;margin:0 14%">
+                                <div class="flex items-center gap-3">
+                                    <p class="prestation-number">03</p>
+                                    <p class="font-black text-sm uppercase tracking-tight" data-i18n="ads_funnel3">Conversion</p>
+                                </div>
+                            </div>
+                            <div class="funnel-step h-14 rounded-b-xl" style="width:52%;margin:0 24%">
+                                <div class="flex items-center gap-3">
+                                    <p class="prestation-number">04</p>
+                                    <p class="font-black text-sm uppercase tracking-tight" data-i18n="ads_funnel4">Fidélisation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRESTATIONS -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 md:mb-24 observer-target fade-in-up">
+                    <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter">
+                        <span data-i18n="ads_presta_h2_1">NOS</span> <span class="text-stroke" data-i18n="ads_presta_h2_2">PRESTATIONS</span>
+                    </h2>
+                </div>
+                <div class="space-y-0 divide-y divide-gray-900">
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">01</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="ads_p1_title">Audit & Stratégie</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="ads_p1_desc">Audit complet de vos campagnes existantes, analyse de la concurrence et définition de la stratégie media. Choix des plateformes, des objectifs, des budgets et du mix créatif. Une stratégie solide est le fondement de toute campagne rentable.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">02</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="ads_p2_title">Création des Visuels Ads</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="ads_p2_desc">Production de tous les assets créatifs : visuels statiques, vidéos courtes, carrousels, stories et formats verticaux. Chaque création est conçue pour capter l'attention dans les 3 premières secondes et maximiser le taux de clic, en respectant les formats natifs de chaque plateforme.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">03</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="ads_p3_title">Lancement & Paramétrage</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="ads_p3_desc">Configuration technique complète : pixels de tracking, événements de conversion, audiences personnalisées, lookalike audiences, structure de campagnes (campagne / adset / annonce). Nous posons les bases d'un tracking fiable pour piloter par la donnée.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">04</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="ads_p4_title">Optimisation Continue</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="ads_p4_desc">Tests A/B des créatifs et des audiences, ajustements budgétaires, exclusion des segments non performants, scaling des annonces gagnantes. Nous gérons vos campagnes comme si c'était les nôtres — avec une vigilance quotidienne sur la performance.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">05</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="ads_p5_title">Reporting & Analyse</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="ads_p5_desc">Tableaux de bord clairs avec les métriques qui comptent : CPA, ROAS, CPL, CTR, taux de conversion. Reporting mensuel avec synthèse des actions menées, résultats obtenus et recommandations pour la période suivante. Vous gardez le contrôle, nous gérons l'exécution.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KPIs SUIVIS (fond blanc) -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-white text-brand-black rounded-t-[3rem] md:rounded-t-[5rem]">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 observer-target fade-in-up">
+                    <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">
+                        <span data-i18n="ads_kpi_h2_1">PILOTEZ</span><br>
+                        <span class="text-stroke-black" data-i18n="ads_kpi_h2_2">PAR LA DONNÉE</span>
+                    </h2>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 observer-target fade-in-up">
+                    <div class="kpi-card">
+                        <p class="font-black text-2xl uppercase tracking-tight text-black mb-2">ROAS</p>
+                        <p class="text-xs text-gray-500 font-semibold" data-i18n="ads_kpi1">Retour sur dépenses publicitaires</p>
+                    </div>
+                    <div class="kpi-card">
+                        <p class="font-black text-2xl uppercase tracking-tight text-black mb-2">CPA</p>
+                        <p class="text-xs text-gray-500 font-semibold" data-i18n="ads_kpi2">Coût par acquisition</p>
+                    </div>
+                    <div class="kpi-card">
+                        <p class="font-black text-2xl uppercase tracking-tight text-black mb-2">CTR</p>
+                        <p class="text-xs text-gray-500 font-semibold" data-i18n="ads_kpi3">Taux de clic</p>
+                    </div>
+                    <div class="kpi-card">
+                        <p class="font-black text-2xl uppercase tracking-tight text-black mb-2">CPL</p>
+                        <p class="text-xs text-gray-500 font-semibold" data-i18n="ads_kpi4">Coût par lead</p>
+                    </div>
+                    <div class="kpi-card">
+                        <p class="font-black text-2xl uppercase tracking-tight text-black mb-2">CVR</p>
+                        <p class="text-xs text-gray-500 font-semibold" data-i18n="ads_kpi5">Taux de conversion</p>
+                    </div>
+                </div>
+                <div class="mt-12 p-6 bg-gray-50 rounded-2xl border border-gray-200 observer-target fade-in-up">
+                    <p class="text-xs text-gray-400 font-semibold" data-i18n="ads_kpi_note">Note : Les indicateurs ci-dessus sont présentés à titre illustratif. Les performances réelles varient selon le secteur, le budget, la saisonnalité et la stratégie mise en place. Nous construisons des objectifs réalistes avec chaque client en phase de discovery.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-24 md:py-40 px-6 md:px-12 bg-brand-black relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]"><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white rounded-full blur-[100px]" aria-hidden="true"></div></div>
+            <div class="max-w-5xl mx-auto text-center relative observer-target fade-in-up">
+                <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-none tracking-tighter mb-8">
+                    <span data-i18n="ads_cta_h2_1">SCALEZ</span><br>
+                    <span class="text-stroke" data-i18n="ads_cta_h2_2">VOTRE ROAS.</span>
+                </h2>
+                <a href="contact.html" class="inline-flex items-center gap-3 text-lg md:text-xl font-bold uppercase tracking-wider py-5 px-10 border border-white hover:bg-white hover:text-black transition-all duration-300 rounded-full focus:outline-none" data-i18n="ads_cta_btn">CONTACTEZ-NOUS <i data-lucide="arrow-up-right" class="w-5 h-5" aria-hidden="true"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-black pt-20 pb-10 px-6 md:px-12 border-t border-gray-900" role="contentinfo">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            <div><a href="index.html" class="flex items-center mb-6"><img src="LOGO1HEAD.png" alt="Logo NG Creative" class="h-8 w-auto object-contain"></a><p class="text-sm leading-relaxed" style="font-family: var(--font-copy); color: var(--text-dark-muted); font-weight: 400;" data-i18n="footer_tagline">Direction créative, contenus et expériences digitales.</p></div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_services">Services</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="audiovisuel.html" class="hover:text-gray-400 transition-colors" data-i18n="s1_title">Audiovisuel</a></li>
+                    <li><a href="sites-web.html" class="hover:text-gray-400 transition-colors" data-i18n="s2_title">Sites Web</a></li>
+                    <li><a href="graphisme.html" class="hover:text-gray-400 transition-colors" data-i18n="s3_title">Graphisme</a></li>
+                    <li><a href="impression.html" class="hover:text-gray-400 transition-colors" data-i18n="s4_title">Impression</a></li>
+                    <li><a href="ads.html" class="text-white font-bold" aria-current="page" data-i18n="s5_title">Ads</a></li>
+                    <li><a href="marketing-local.html" class="hover:text-gray-400 transition-colors" data-i18n="s6_title">Marketing Local</a></li>
+                    <li><a href="influence.html" class="hover:text-gray-400 transition-colors" data-i18n="s7_title">Influence</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_nav">Navigation</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="index.html" class="hover:text-gray-400 transition-colors font-bold" data-i18n="footer_home">Accueil</a></li>
+                    <li><a href="contact.html" class="hover:text-gray-400 transition-colors font-bold" data-i18n="nav_contact">Contact</a></li>
+                    <li><a href="Plaquette-Commerciale-NG-Creative.pdf" download class="hover:text-gray-400 transition-colors font-bold" data-i18n="footer_plaquette">Plaquette</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_follow">Suivez-nous</h4>
+                <div class="flex gap-5">
+                    <a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="Instagram"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    <a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="X"><svg class="w-[1.15rem] h-[1.15rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                    <a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="TikTok"><svg class="w-5 h-5" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-600 text-xs font-bold">© 2026 NG Creative. <span data-i18n="rights">Tous droits réservés.</span></p>
+            <p class="text-gray-600 text-xs font-bold" data-i18n="made_with">Conçu avec passion.</p>
+        </div>
+    </footer>
+
+    <script>
+        const translations={
+            FR:{nav_services:"SERVICES",nav_clients:"CLIENTS",nav_structure:"STRUCTURE",nav_contact:"CONTACT",nav_plaquette:"TÉLÉCHARGER LA PLAQUETTE",ads_hero_service_name:"PUBLICITÉ ADS",ads_label:"05 / PUBLICITÉ ADS",ads_h1_1:"PUBLI",ads_h1_2:"CITÉ ADS",ads_hero_desc:"Google, Meta ou TikTok : nous structurons les campagnes, produisons les créations et suivons les données pour concentrer le budget sur ce qui fonctionne.",ads_cta_hero:"LANCER UNE CAMPAGNE",ads_tag1:"Retargeting",ads_tag2:"Génération de Leads",ads_tag3:"E-Commerce Ads",ads_platforms_label:"NOS PLATEFORMES",ads_platforms_h2_1:"3 LEVIERS,",ads_platforms_h2_2:"1 STRATÉGIE",ads_g_desc:"Capturez la demande existante. Search, Display, Shopping et YouTube : nous gérons vos campagnes sur tout l'écosystème Google.",ads_m_desc:"Créez de la demande. Facebook et Instagram Ads pour générer de la notoriété, des leads et des ventes. Ciblages avancés.",ads_t_desc:"La croissance organique de demain, la performance d'aujourd'hui. In-Feed Ads, TopView et Spark Ads.",ads_funnel_label:"APPROCHE FULL-FUNNEL",ads_funnel_h2_1:"CHAQUE ÉTAPE",ads_funnel_h2_2:"OPTIMISÉE",ads_funnel_desc:"Une campagne performante n'est pas un simple annonce. C'est une stratégie full-funnel qui accompagne votre prospect de la découverte à la fidélisation.",ads_funnel1:"Notoriété",ads_funnel2:"Considération",ads_funnel3:"Conversion",ads_funnel4:"Fidélisation",ads_presta_h2_1:"NOS",ads_presta_h2_2:"PRESTATIONS",ads_p1_title:"Audit & Stratégie",ads_p1_desc:"Audit complet de vos campagnes existantes, analyse de la concurrence et définition de la stratégie media. Choix des plateformes, des objectifs, des budgets et du mix créatif.",ads_p2_title:"Création des Visuels Ads",ads_p2_desc:"Production de tous les assets créatifs : visuels statiques, vidéos courtes, carrousels, stories et formats verticaux. Chaque création est conçue pour capter l'attention dans les 3 premières secondes.",ads_p3_title:"Lancement & Paramétrage",ads_p3_desc:"Configuration technique complète : pixels de tracking, événements de conversion, audiences personnalisées, structure de campagnes.",ads_p4_title:"Optimisation Continue",ads_p4_desc:"Tests A/B des créatifs et des audiences, ajustements budgétaires, exclusion des segments non performants, scaling des annonces gagnantes.",ads_p5_title:"Reporting & Analyse",ads_p5_desc:"Tableaux de bord clairs avec les métriques qui comptent : CPA, ROAS, CPL, CTR, taux de conversion. Reporting mensuel avec synthèse et recommandations.",ads_kpi_label:"INDICATEURS SUIVIS",ads_kpi_h2_1:"PILOTEZ",ads_kpi_h2_2:"PAR LA DONNÉE",ads_kpi1:"Retour sur dépenses publicitaires",ads_kpi2:"Coût par acquisition",ads_kpi3:"Taux de clic",ads_kpi4:"Coût par lead",ads_kpi5:"Taux de conversion",ads_kpi_note:"Note : Les indicateurs ci-dessus sont présentés à titre illustratif. Les performances réelles varient selon le secteur, le budget, la saisonnalité et la stratégie.",ads_cta_label:"PROCHAINE ÉTAPE",ads_cta_h2_1:"SCALEZ",ads_cta_h2_2:"VOTRE ROAS.",ads_cta_desc:"Discutez de votre budget et de vos objectifs. Nous proposons un plan media sur-mesure et un devis sous 24h.",ads_cta_btn:"CONTACTEZ-NOUS",footer_tagline: "Direction créative, contenus et expériences digitales.",footer_title_services:"Services",footer_title_nav:"Navigation",footer_title_follow:"Suivez-nous",footer_home:"Accueil",footer_plaquette:"Plaquette",s1_title:"Audiovisuel",s2_title:"Sites Web",s3_title:"Graphisme",s4_title:"Impression",s5_title:"Ads",s6_title:"Marketing Local",s7_title:"Influence",rights:"Tous droits réservés.",made_with: "Conçu par NG Creative."},
+            EN:{ads_hero_service_name:"PAID ADS",nav_services:"SERVICES",nav_clients:"CLIENTS",nav_structure:"STRUCTURE",nav_contact:"CONTACT",nav_plaquette:"DOWNLOAD OUR BROCHURE",ads_label:"05 / DIGITAL ADS",ads_h1_1:"DIGIT",ads_h1_2:"AL ADS",ads_hero_desc:"Google, Meta or TikTok: we structure campaigns, produce ad creatives and track data to direct budget where it performs best.",ads_cta_hero:"LAUNCH A CAMPAIGN",ads_tag1:"Retargeting",ads_tag2:"Lead Generation",ads_tag3:"E-Commerce Ads",ads_platforms_label:"OUR PLATFORMS",ads_platforms_h2_1:"3 LEVERS,",ads_platforms_h2_2:"1 STRATEGY",ads_g_desc:"Capture existing demand. Search, Display, Shopping and YouTube: we manage your campaigns across the entire Google ecosystem.",ads_m_desc:"Create demand. Facebook and Instagram Ads to build awareness, generate leads and drive sales with advanced audience targeting.",ads_t_desc:"Tomorrow's organic growth, today's performance. In-Feed Ads, TopView and Spark Ads for highly engaged audiences.",ads_funnel_label:"FULL-FUNNEL APPROACH",ads_funnel_h2_1:"EVERY STAGE",ads_funnel_h2_2:"OPTIMISED",ads_funnel_desc:"A high-performing campaign is more than a single ad. It is a full-funnel strategy that guides your prospect from discovery to loyalty.",ads_funnel1:"Awareness",ads_funnel2:"Consideration",ads_funnel3:"Conversion",ads_funnel4:"Retention",ads_presta_h2_1:"OUR",ads_presta_h2_2:"SERVICES",ads_p1_title:"Audit & Strategy",ads_p1_desc:"Complete audit of your existing campaigns, competitive analysis and media strategy definition. Platform selection, objectives, budgets and creative mix.",ads_p2_title:"Ad Creative Production",ads_p2_desc:"Full asset production: static visuals, short videos, carousels, stories and vertical formats. Every creative is designed to grab attention in 3 seconds.",ads_p3_title:"Launch & Setup",ads_p3_desc:"Full technical configuration: tracking pixels, conversion events, custom audiences and campaign architecture.",ads_p4_title:"Continuous Optimisation",ads_p4_desc:"A/B testing of creatives and audiences, budget adjustments, exclusion of underperforming segments, scaling winning ads.",ads_p5_title:"Reporting & Analysis",ads_p5_desc:"Clear dashboards with the metrics that matter: CPA, ROAS, CPL, CTR, conversion rate. Monthly reporting with results and recommendations.",ads_kpi_label:"TRACKED METRICS",ads_kpi_h2_1:"DRIVEN BY",ads_kpi_h2_2:"DATA.",ads_kpi1:"Return on ad spend",ads_kpi2:"Cost per acquisition",ads_kpi3:"Click-through rate",ads_kpi4:"Cost per lead",ads_kpi5:"Conversion rate",ads_kpi_note:"Note: The metrics above are illustrative. Real performance varies by sector, budget, seasonality and strategy. We set realistic goals with each client during discovery.",ads_cta_label:"NEXT STEP",ads_cta_h2_1:"SCALE",ads_cta_h2_2:"YOUR ROAS.",ads_cta_desc:"Discuss your budget and goals with our experts. We will propose a custom media plan and a quote within 24 hours.",ads_cta_btn:"CONTACT US",footer_tagline: "Creative direction, content and digital experiences.",footer_title_services:"Services",footer_title_nav:"Navigation",footer_title_follow:"Follow Us",footer_home:"Home",footer_plaquette:"Brochure",s1_title:"Audiovisual",s2_title:"Websites",s3_title:"Graphic Design",s4_title:"Printing",s5_title:"Ads",s6_title:"Local Marketing",s7_title:"Influence",rights:"All rights reserved.",made_with: "Designed by NG Creative."},
+            ES:{ads_hero_service_name:"PUBLICIDAD ADS",nav_services:"SERVICIOS",nav_clients:"CLIENTES",nav_structure:"ESTRUCTURA",nav_contact:"CONTACTO",nav_plaquette:"DESCARGAR EL DOSSIER",ads_label:"05 / PUBLICIDAD ADS",ads_h1_1:"PUBLI",ads_h1_2:"CIDAD ADS",ads_hero_desc:"Google, Meta o TikTok: estructuramos campañas, producimos creatividades y seguimos los datos para enfocar el presupuesto en lo que funciona.",ads_cta_hero:"LANZAR UNA CAMPAÑA",ads_tag1:"Retargeting",ads_tag2:"Generación de Leads",ads_tag3:"E-Commerce Ads",ads_platforms_label:"NUESTRAS PLATAFORMAS",ads_platforms_h2_1:"3 PALANCAS,",ads_platforms_h2_2:"1 ESTRATEGIA",ads_g_desc:"Capture la demanda existente. Search, Display, Shopping y YouTube: gestionamos sus campañas en todo el ecosistema Google.",ads_m_desc:"Cree demanda. Facebook e Instagram Ads para notoriedad, leads y ventas con segmentación avanzada.",ads_t_desc:"El crecimiento orgánico del mañana, el rendimiento de hoy. In-Feed Ads, TopView y Spark Ads.",ads_funnel_label:"ENFOQUE FULL-FUNNEL",ads_funnel_h2_1:"CADA ETAPA",ads_funnel_h2_2:"OPTIMIZADA",ads_funnel_desc:"Una campaña de alto rendimiento no es un simple anuncio. Es una estrategia full-funnel que acompaña al prospecto de la descubrimiento a la fidelización.",ads_funnel1:"Notoriedad",ads_funnel2:"Consideración",ads_funnel3:"Conversión",ads_funnel4:"Fidelización",ads_presta_h2_1:"NUESTROS",ads_presta_h2_2:"SERVICIOS",ads_p1_title:"Auditoría & Estrategia",ads_p1_desc:"Auditoría completa de sus campañas, análisis de la competencia y definición de la estrategia de medios.",ads_p2_title:"Creación de Creatividades",ads_p2_desc:"Producción de todos los activos: visuales estáticos, vídeos cortos, carruseles y formatos verticales para captar la atención en 3 segundos.",ads_p3_title:"Lanzamiento & Configuración",ads_p3_desc:"Configuración técnica completa: píxeles de seguimiento, eventos de conversión, audiencias personalizadas y estructura de campaña.",ads_p4_title:"Optimización Continua",ads_p4_desc:"Pruebas A/B de creatividades y audiencias, ajustes presupuestarios y escalado de anuncios ganadores.",ads_p5_title:"Informes & Análisis",ads_p5_desc:"Paneles claros con las métricas que importan: CPA, ROAS, CPL, CTR, tasa de conversión. Informes mensuales con resultados y recomendaciones.",ads_kpi_label:"INDICADORES SEGUIDOS",ads_kpi_h2_1:"GUIADO POR",ads_kpi_h2_2:"LOS DATOS.",ads_kpi1:"Retorno de la inversión publicitaria",ads_kpi2:"Coste por adquisición",ads_kpi3:"Tasa de clics",ads_kpi4:"Coste por lead",ads_kpi5:"Tasa de conversión",ads_kpi_note:"Nota: Los indicadores son ilustrativos. El rendimiento real varía según el sector, presupuesto, estacionalidad y estrategia.",ads_cta_label:"PRÓXIMO PASO",ads_cta_h2_1:"ESCALE",ads_cta_h2_2:"SU ROAS.",ads_cta_desc:"Hable de su presupuesto y objetivos. Proponemos un plan de medios a medida y un presupuesto en 24h.",ads_cta_btn:"CONTÁCTENOS",footer_tagline: "Dirección creativa, contenidos y experiencias digitales.",footer_title_services:"Servicios",footer_title_nav:"Navegación",footer_title_follow:"Síganos",footer_home:"Inicio",footer_plaquette:"Dossier",s1_title:"Audiovisual",s2_title:"Sitios Web",s3_title:"Diseño Gráfico",s4_title:"Impresión",s5_title:"Ads",s6_title:"Marketing Local",s7_title:"Influencia",rights:"Todos los derechos reservados.",made_with: "Diseñado por NG Creative."},
+            AR:{ads_hero_service_name:"الإعلانات الممولة",nav_services:"الخدمات",nav_clients:"العملاء",nav_structure:"منهجيتنا",nav_contact:"اتصل بنا",nav_plaquette:"تحميل الكتيب التعريفي",ads_label:"05 / الإعلان الرقمي",ads_h1_1:"إعلان",ads_h1_2:"رقمي",ads_hero_desc:"جوجل، ميتا أو تيك توك: نهيكل الحملات، ننتج المواد الإعلانية ونتتبع البيانات لتركيز الميزانية على ما يحقق أفضل عائد.",ads_cta_hero:"إطلاق حملة",ads_tag1:"إعادة الاستهداف",ads_tag2:"توليد العملاء المحتملين",ads_tag3:"إعلانات التجارة الإلكترونية",ads_platforms_label:"منصاتنا",ads_platforms_h2_1:"3 روافع،",ads_platforms_h2_2:"استراتيجية واحدة",ads_g_desc:"استحوذ على الطلب القائم. Search وDisplay وShopping وYouTube: نُدير حملاتك عبر كامل منظومة Google.",ads_m_desc:"أنشئ الطلب. إعلانات Facebook وInstagram لبناء الوعي وتوليد العملاء والمبيعات باستهداف متقدم.",ads_t_desc:"نمو العضوي لغد، وأداء اليوم. In-Feed وTopView وSpark Ads لجمهور متفاعل.",ads_funnel_label:"نهج الفانل الكامل",ads_funnel_h2_1:"كل مرحلة",ads_funnel_h2_2:"مُحسَّنة",ads_funnel_desc:"الحملة الناجحة ليست مجرد إعلان. هي استراتيجية فانل كاملة ترافق عميلك من الاكتشاف إلى الولاء.",ads_funnel1:"الوعي",ads_funnel2:"الاعتبار",ads_funnel3:"التحويل",ads_funnel4:"الاحتفاظ",ads_presta_h2_1:"خدماتنا",ads_presta_h2_2:"الاحترافية",ads_p1_title:"التدقيق والاستراتيجية",ads_p1_desc:"تدقيق شامل للحملات القائمة وتحليل المنافسة وتحديد استراتيجية الإعلام.",ads_p2_title:"إنشاء الإبداعات الإعلانية",ads_p2_desc:"إنتاج جميع الأصول الإبداعية: صور ثابتة وفيديوهات قصيرة وكاروسيلات وتنسيقات رأسية.",ads_p3_title:"الإطلاق والتكوين",ads_p3_desc:"تكوين تقني كامل: بكسلات التتبع وأحداث التحويل والجماهير المخصصة وهيكل الحملة.",ads_p4_title:"التحسين المستمر",ads_p4_desc:"اختبارات A/B للإبداعات والجماهير وتعديلات الميزانية وتوسيع الإعلانات الرابحة.",ads_p5_title:"التقارير والتحليل",ads_p5_desc:"لوحات تحكم واضحة مع المقاييس المهمة. تقارير شهرية بالنتائج والتوصيات.",ads_kpi_label:"المؤشرات المتتبعة",ads_kpi_h2_1:"مُوجَّه",ads_kpi_h2_2:"بالبيانات",ads_kpi1:"العائد على الإنفاق الإعلاني",ads_kpi2:"تكلفة الاكتساب",ads_kpi3:"معدل النقر",ads_kpi4:"تكلفة العميل المحتمل",ads_kpi5:"معدل التحويل",ads_kpi_note:"ملاحظة: المؤشرات أعلاه توضيحية. الأداء الفعلي يتفاوت حسب القطاع والميزانية والموسمية والاستراتيجية.",ads_cta_label:"الخطوة التالية",ads_cta_h2_1:"ضاعف",ads_cta_h2_2:"عائدك الإعلاني.",ads_cta_desc:"ناقش ميزانيتك وأهدافك مع خبرائنا. نقترح خطة إعلامية مخصصة وعرض سعر خلال 24 ساعة.",ads_cta_btn:"تواصل معنا",footer_tagline: "إدارة إبداعية ومحتوى وتجارب رقمية.",footer_title_services:"الخدمات",footer_title_nav:"التنقل",footer_title_follow:"تابعنا",footer_home:"الرئيسية",footer_plaquette:"الكتيب",s1_title:"الإنتاج السمعي البصري",s2_title:"تطوير المواقع",s3_title:"التصميم الجرافيكي",s4_title:"الطباعة",s5_title:"الإعلانات",s6_title:"التسويق المحلي",s7_title:"التسويق عبر المؤثرين",rights:"جميع الحقوق محفوظة.",made_with: "تصميم بواسطة NG Creative."}
+        };
+        function changeLanguage(lang){localStorage.setItem('n_graphiste_lang',lang);document.documentElement.lang=lang.toLowerCase();document.documentElement.dir=(lang==='AR')?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(translations[lang]&&translations[lang][k]!==undefined)el.textContent=translations[lang][k];});}
+        document.addEventListener('DOMContentLoaded',()=>{const s=localStorage.getItem('n_graphiste_lang')||'FR';changeLanguage(s);if(typeof lucide!=='undefined')lucide.createIcons();if('IntersectionObserver' in window){const o=new IntersectionObserver((e)=>{e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target);}});},{threshold:0.08});document.querySelectorAll('.observer-target').forEach(el=>o.observe(el));}else{document.querySelectorAll('.observer-target').forEach(el=>el.classList.add('visible'));}});
+    </script>
+</body>
+</html>

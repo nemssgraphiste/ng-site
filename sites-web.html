@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sites Web | NG Creative — Création de Sites Performants</title>
+    <meta name="description" content="Création de sites web vitrine et e-commerce : UX design, performances optimales, SEO intégré. Des plateformes qui convertissent et propulsent votre business.">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Montserrat', 'sans-serif'], aquire: ['Aquire', 'sans-serif'] },
+                    colors: { brand: { black: '#0a0a0a', white: '#f7f7f7', gray: '#1f1f1f', light: '#e5e5e5' } }
+                }
+            }
+        }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+
+        :root {
+            --font-display: 'Montserrat', sans-serif;
+            --font-brand: 'Aquire', 'Montserrat', sans-serif;
+            --font-copy: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* Sur fond sombre */
+            --text-dark-primary: #f7f7f7;
+            --text-dark-body: #d8d5ce;
+            --text-dark-muted: #aaa69e;
+            --text-dark-subtle: #88847c;
+
+            /* Sur fond clair */
+            --text-light-primary: #0a0a0a;
+            --text-light-body: #34322e;
+            --text-light-muted: #69655e;
+            --text-light-subtle: #77736c;
+        }
+
+        [dir="rtl"] {
+            --font-copy: 'Noto Sans Arabic', 'Manrope', sans-serif;
+            --font-display: 'Noto Sans Arabic', 'Montserrat', sans-serif;
+        }
+
+        @font-face {
+            font-family: 'Aquire';
+            src: url('Aquire.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body { font-family: 'Montserrat', sans-serif; background-color: #0a0a0a; color: #f7f7f7; overflow-x: hidden; -webkit-font-smoothing: auto !important; }
+        .text-stroke { font-style: italic; color: #0a0a0a; text-shadow: -1px -1px 0 #f7f7f7,0 -1px 0 #f7f7f7,1px -1px 0 #f7f7f7,1px 0 0 #f7f7f7,1px 1px 0 #f7f7f7,0 1px 0 #f7f7f7,-1px 1px 0 #f7f7f7,-1px 0 0 #f7f7f7; }
+        .text-stroke-black { font-style: italic; color: #f7f7f7; text-shadow: -1px -1px 0 #0a0a0a,0 -1px 0 #0a0a0a,1px -1px 0 #0a0a0a,1px 0 0 #0a0a0a,1px 1px 0 #0a0a0a,0 1px 0 #0a0a0a,-1px 1px 0 #0a0a0a,-1px 0 0 #0a0a0a; }
+        .btn-hover-effect { position: relative; overflow: hidden; }
+        .btn-hover-effect::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: currentColor; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; }
+        .btn-hover-effect:hover::after { transform: scaleX(1); transform-origin: left; }
+        .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+        @keyframes slowZoom { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        .animate-slow-zoom { animation: slowZoom 30s ease-in-out infinite; }
+        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #0a0a0a; } ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        [x-cloak] { display: none !important; }
+        .rounded-full { -webkit-background-clip: padding-box; background-clip: padding-box; }
+        .tag-pill { display: inline-flex; align-items: center; padding: 0.4rem 1rem; border: 1px solid rgba(247,247,247,0.15); border-radius: 9999px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9ca3af; background: rgba(255,255,255,0.04); transition: all 0.3s ease; }
+        .tag-pill:hover { border-color: rgba(247,247,247,0.4); color: #f7f7f7; background: rgba(255,255,255,0.08); }
+        .prestation-number { font-family: 'Aquire', 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 400; letter-spacing: 0.2em; color: #6b7280; }
+        .service-label {
+            font-family: var(--font-copy);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-dark-muted);
+        }
+        .prestation-row { transition: background 0.3s ease; }
+        .prestation-row:hover { background: rgba(247,247,247,0.03); }
+
+        /* ── Browser mockup CSS ── */
+        .browser-frame {
+            border: 1px solid rgba(247,247,247,0.15);
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.03);
+        }
+        .browser-bar {
+            background: rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(247,247,247,0.08);
+            padding: 0.6rem 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .browser-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+        .browser-url {
+            flex: 1;
+            background: rgba(255,255,255,0.06);
+            border-radius: 4px;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #6b7280;
+            letter-spacing: 0.05em;
+            font-family: 'Montserrat', monospace;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .browser-content { padding: 1.25rem; }
+
+        /* ── Process accordéon / étapes ── */
+        .process-step {
+            border-bottom: 1px solid rgba(247,247,247,0.08);
+            transition: all 0.3s ease;
+        }
+        .process-step:hover { background: rgba(247,247,247,0.03); }
+
+        /* ══ Pilier / Proof block ══ */
+        .ng-proof-grid {
+            border: 1px solid rgba(10,10,10,0.1);
+            border-radius: 2px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .ng-proof-item {
+            padding: 2rem 1.75rem;
+            position: relative;
+        }
+        .ng-proof-item + .ng-proof-item {
+            border-inline-start: 1px solid rgba(10,10,10,0.1);
+        }
+        .ng-proof-number {
+            font-family: 'Aquire', 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            color: #9ca3af;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+        .ng-proof-title {
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            color: #0a0a0a;
+            margin-bottom: 0.875rem;
+            line-height: 1.2;
+        }
+        .ng-proof-desc {
+            font-family: var(--font-copy);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: var(--text-light-body);
+            font-weight: 400;
+        }
+        @media (max-width: 767px) {
+            .ng-proof-grid {
+                grid-template-columns: 1fr;
+            }
+            .ng-proof-item + .ng-proof-item {
+                border-inline-start: none;
+                border-top: 1px solid rgba(10,10,10,0.1);
+            }
+        }
+        
+        /* ── Hero Eyebrow Component ── */
+        .ng-hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+        .ng-hero-eyebrow-number {
+            font-family: var(--font-copy);
+            font-size: clamp(0.68rem, 1vw, 0.72rem);
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.1em;
+            color: rgba(247, 247, 247, 0.7);
+            flex-shrink: 0;
+        }
+        .ng-hero-eyebrow-line {
+            display: inline-block;
+            width: clamp(28px, 4vw, 40px);
+            height: 1px;
+            background-color: rgba(247, 247, 247, 0.6);
+            flex-shrink: 0;
+        }
+        .ng-hero-eyebrow-name {
+            font-family: var(--font-copy);
+            font-size: clamp(0.7rem, 1.1vw, 0.75rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #f7f7f7;
+        }
+
+        /* ── Hero Intro & Subtitle ── */
+        .ng-hero-intro {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.15rem;
+            max-width: 52ch;
+        }
+        .ng-hero-intro-line {
+            display: block;
+            width: clamp(24px, 3.5vw, 36px);
+            height: 1px;
+            background-color: rgba(247, 247, 247, 0.65);
+            flex-shrink: 0;
+            margin-top: 0.75rem;
+            transform-origin: left center;
+        }
+        [dir="rtl"] .ng-hero-intro-line {
+            transform-origin: right center;
+        }
+        .ng-service-hero-copy {
+            font-family: var(--font-copy);
+            font-weight: 600;
+            font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+            line-height: 1.6;
+            color: #f7f7f7;
+            margin: 0;
+            border-inline-start: none;
+            padding-inline-start: 0;
+        }
+
+        /* Subtle hero intro animation */
+        .observer-target.visible .ng-hero-intro-line {
+            animation: heroLineGrow 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .observer-target.visible .ng-service-hero-copy {
+            animation: heroCopyReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards;
+        }
+
+        @keyframes heroLineGrow {
+            from { transform: scaleX(0); opacity: 0; }
+            to { transform: scaleX(1); opacity: 1; }
+        }
+        @keyframes heroCopyReveal {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ng-hero-intro-line,
+            .ng-service-hero-copy {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* ── Solid White Hero Title ── */
+        .ng-hero-title-solid {
+            color: #f7f7f7;
+            font-style: normal;
+            text-shadow: none;
+            -webkit-text-stroke: 0;
+            -webkit-text-fill-color: #f7f7f7;
+        }
+
+        /* ── Capabilities Grid (T12) ── */
+        .ng-capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        }
+        .ng-capability-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            padding-block: 0.875rem;
+            border-top: 1px solid rgba(247,247,247,0.07);
+        }
+        .ng-cap-index {
+            font-family: var(--font-copy);
+            font-size: 0.58rem;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.12em;
+            color: var(--text-dark-subtle);
+            flex-shrink: 0;
+        }
+        .ng-cap-label {
+            font-family: var(--font-copy);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark-body);
+            letter-spacing: 0.02em;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ng-proof-item { transition: none !important; }
+        }
+
+        /* ══ Livrables list ══ */
+        .ng-deliverables-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border: 1px solid rgba(10,10,10,0.1);
+            border-radius: 2px;
+        }
+        .ng-deliverable-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            padding: 1.25rem 1.25rem;
+            border-bottom: 1px solid rgba(10,10,10,0.08);
+        }
+        .ng-deliverable-item:nth-child(odd) {
+            border-inline-end: 1px solid rgba(10,10,10,0.08);
+        }
+        .ng-deliverable-item:nth-last-child(-n+2) {
+            border-bottom: none;
+        }
+        .ng-deliverable-num {
+            font-family: 'Aquire', 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.18em;
+            color: #d1d5db;
+            flex-shrink: 0;
+            padding-top: 0.15em;
+            min-width: 1.75rem;
+        }
+        .ng-deliverable-title {
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            color: #0a0a0a;
+            line-height: 1.2;
+        }
+        .ng-deliverable-sub {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #9ca3af;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 639px) {
+            .ng-deliverables-list {
+                grid-template-columns: 1fr;
+            }
+            .ng-deliverable-item:nth-child(odd) {
+                border-inline-end: none;
+            }
+            .ng-deliverable-item:nth-last-child(-n+2) {
+                border-bottom: 1px solid rgba(10,10,10,0.08);
+            }
+            .ng-deliverable-item:last-child {
+                border-bottom: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-up { opacity: 1; transform: none; transition: none; }
+            .animate-slow-zoom { animation: none; }
+            * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+        }
+
+        /* ── Hero split — corrige le chevauchement ── */
+        .ng-hero-split {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: clamp(2rem, 5vw, 5rem);
+            align-items: center;
+        }
+        .ng-hero-text-col { min-width: 0; }
+        .ng-hero-illus-col { min-width: 0; }
+        @media (max-width: 1023px) {
+            .ng-hero-illus-col { display: none !important; }
+        }
+
+        /* ── SITES WEB — Moteur responsive ── */
+        .sw-hero-visual {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            pointer-events: none;
+        }
+        .sw-svg { width: 100%; height: auto; display: block; }
+
+        /* Ligne de repère animée */
+        .sw-guide-line {
+            stroke-dasharray: 360;
+            stroke-dashoffset: 360;
+            animation: sw-guide-draw 2.5s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+        }
+        @keyframes sw-guide-draw { to { stroke-dashoffset: 0; } }
+
+        /* Curseur de construction */
+        .sw-cursor {
+            animation: sw-cursor-move 10s ease-in-out infinite;
+            will-change: transform;
+        }
+        @keyframes sw-cursor-move {
+            0%   { transform: translate(60px, 70px);  opacity: 1; }
+            30%  { transform: translate(200px, 52px); opacity: 1; }
+            60%  { transform: translate(300px, 90px); opacity: 1; }
+            85%  { transform: translate(150px, 160px); opacity: 0.6; }
+            100% { transform: translate(60px, 70px);  opacity: 1; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .sw-guide-line { animation: none !important; stroke-dashoffset: 0 !important; }
+            .sw-cursor { animation: none !important; transform: translate(200px, 52px) !important; }
+        }
+    </style>
+</head>
+<body class="selection:bg-white selection:text-black">
+
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:font-bold focus:rounded">Aller au contenu</a>
+
+    <!-- ═══ HEADER ═══ -->
+    <header x-data="{
+        mobileMenuOpen: false, scrolled: false, langOpen: false,
+        currentLang: 'FR', currentFlag: '🇫🇷',
+        init() {
+            const saved = localStorage.getItem('n_graphiste_lang') || 'FR';
+            this.currentLang = saved;
+            const flags = { FR:'🇫🇷', EN:'🇬🇧', ES:'🇪🇸', AR:'🇸🇦' };
+            this.currentFlag = flags[saved] || '🇫🇷';
+        }
+    }"
+    @scroll.window="scrolled = (window.pageYOffset > 50)"
+    @keydown.escape.window="mobileMenuOpen = false; langOpen = false"
+    :class="scrolled ? 'bg-brand-black/90 backdrop-blur-md py-4' : 'bg-transparent py-6'"
+    class="fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 md:px-12" role="banner">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4 md:gap-6 z-50">
+                <a href="index.html" class="flex items-center" aria-label="NG Creative — Accueil">
+                    <img src="LOGO1HEAD.png" alt="Logo NG Creative" class="relative z-10 h-8 md:h-10 w-auto object-contain transition-all duration-700 hover:scale-105">
+                </a>
+                <div class="flex items-center gap-4 border-l border-white/20 pl-4 md:pl-6">
+                    <a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="Instagram">
+                        <svg class="w-5 h-5 md:w-[1.4rem] md:h-[1.4rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="X">
+                        <svg class="w-[1.15rem] h-[1.15rem] md:w-[1.25rem] md:h-[1.25rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="TikTok">
+                        <svg class="w-5 h-5 md:w-[1.35rem] md:h-[1.35rem]" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center text-sm font-semibold tracking-wide" aria-label="Navigation principale">
+                <a href="index.html#services" class="hover:text-gray-400 transition-colors" data-i18n="nav_services">SERVICES</a>
+                <a href="index.html#clients" class="hover:text-gray-400 transition-colors" data-i18n="nav_clients">CLIENTS</a>
+                <a href="index.html#structure" class="hover:text-gray-400 transition-colors" data-i18n="nav_structure">STRUCTURE</a>
+                <a href="contact.html" class="px-6 py-3 border border-white hover:bg-white hover:text-black transition-colors duration-300 rounded-full flex items-center gap-2">
+                    <span data-i18n="nav_contact">CONTACT</span><i data-lucide="arrow-up-right" class="w-4 h-4" aria-hidden="true"></i>
+                </a>
+                <div class="relative">
+                    <button @click="langOpen = !langOpen" @click.outside="langOpen = false"
+                        class="flex items-center gap-2 px-3 py-2 border border-white/20 rounded-full hover:bg-white/10 transition-all text-xs font-bold tracking-wider uppercase focus:outline-none"
+                        :aria-expanded="langOpen" aria-haspopup="listbox" aria-label="Changer la langue">
+                        <span x-text="currentFlag" class="text-base leading-none"></span>
+                        <span x-text="currentLang"></span>
+                        <svg class="w-3 h-3 text-gray-400 transition-transform duration-200" :class="langOpen ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div x-show="langOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95 -translate-y-2" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-95 -translate-y-2" class="absolute right-0 mt-2 w-36 bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl py-2 z-50" x-cloak>
+                        <button @click="currentLang='FR';currentFlag='🇫🇷';langOpen=false;changeLanguage('FR')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇫🇷</span> Français</button>
+                        <button @click="currentLang='EN';currentFlag='🇬🇧';langOpen=false;changeLanguage('EN')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇬🇧</span> English</button>
+                        <button @click="currentLang='ES';currentFlag='🇪🇸';langOpen=false;changeLanguage('ES')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇪🇸</span> Español</button>
+                        <button @click="currentLang='AR';currentFlag='🇸🇦';langOpen=false;changeLanguage('AR')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇸🇦</span> العربية</button>
+                    </div>
+                </div>
+                <a href="Plaquette-Commerciale-NG-Creative.pdf" download="Plaquette-Commerciale-NG-Creative.pdf" class="btn-hover-effect text-xs font-bold tracking-wider uppercase text-white py-1" data-i18n="nav_plaquette">TÉLÉCHARGER LA PLAQUETTE</a>
+            </nav>
+            <button @click="mobileMenuOpen = !mobileMenuOpen; if(mobileMenuOpen) document.body.style.overflow='hidden'; else document.body.style.overflow='';"
+                class="md:hidden z-50 focus:outline-none" :aria-expanded="mobileMenuOpen" aria-label="Ouvrir le menu">
+                <i data-lucide="menu" x-show="!mobileMenuOpen" class="w-8 h-8" aria-hidden="true"></i>
+                <i data-lucide="x" x-show="mobileMenuOpen" class="w-8 h-8" x-cloak aria-hidden="true"></i>
+            </button>
+            <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-full" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-full" class="fixed inset-0 bg-brand-black flex flex-col justify-center items-center gap-8 text-2xl font-bold uppercase z-40" x-cloak role="dialog" aria-modal="true">
+                <a href="index.html#services" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400 transition-colors" data-i18n="nav_services">Services</a>
+                <a href="index.html#clients" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400 transition-colors" data-i18n="nav_clients">Clients</a>
+                <a href="index.html#structure" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400 transition-colors" data-i18n="nav_structure">Structure</a>
+                <a href="Plaquette-Commerciale-NG-Creative.pdf" download @click="mobileMenuOpen=false;document.body.style.overflow='';" class="btn-hover-effect text-lg tracking-wider text-white" data-i18n="nav_plaquette">TÉLÉCHARGER LA PLAQUETTE</a>
+                <a href="contact.html" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="mt-4 px-8 py-4 border border-white hover:bg-white hover:text-black transition-colors rounded-full" data-i18n="nav_contact">Contact</a>
+                <div class="flex gap-4 mt-4 pt-4 border-t border-white/10">
+                    <button @click="changeLanguage('FR');currentLang='FR';currentFlag='🇫🇷';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Français">🇫🇷</button>
+                    <button @click="changeLanguage('EN');currentLang='EN';currentFlag='🇬🇧';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="English">🇬🇧</button>
+                    <button @click="changeLanguage('ES');currentLang='ES';currentFlag='🇪🇸';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Español">🇪🇸</button>
+                    <button @click="changeLanguage('AR');currentLang='AR';currentFlag='🇸🇦';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="العربية">🇸🇦</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- ═══ HERO ═══ -->
+        <section class="relative min-h-screen flex items-center pt-32 pb-20 px-6 md:px-12 overflow-hidden isolate">
+            <div class="absolute inset-0">
+                <img src="FOND 1.png" alt="" class="w-full h-full object-cover opacity-25 animate-slow-zoom origin-center" aria-hidden="true">
+                <div class="absolute inset-0 bg-gradient-to-b from-brand-black/70 via-brand-black/80 to-brand-black"></div>
+            </div>
+            <div class="max-w-7xl mx-auto w-full relative">
+                <div class="observer-target fade-in-up ng-hero-split">
+                    <div class="ng-hero-text-col">
+                        <h1 class="font-black uppercase leading-none tracking-tighter mb-8" style="font-size: clamp(2.8rem, 7.5vw, 7rem);">
+                            <span data-i18n="sw_h1_1">SITES</span>
+                            <span class="text-stroke" data-i18n="sw_h1_2">WEB</span>
+                        </h1>
+                        <div class="ng-hero-intro mb-10">
+                            <p class="ng-service-hero-copy" data-i18n="sw_hero_desc">Design, développement et référencement réunis dans un site rapide, lisible et simple à administrer.</p>
+                        </div>
+                        <a href="contact.html" class="inline-flex items-center gap-3 text-base md:text-lg font-bold uppercase tracking-wider py-4 px-8 border border-white hover:bg-white hover:text-black transition-all duration-300 rounded-full focus:outline-none" data-i18n="sw_cta_hero">
+                            DEMANDER UN DEVIS<i data-lucide="arrow-up-right" class="w-5 h-5" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                    <!-- ILLUSTRATION : Moteur de mise en page responsive -->
+                    <div class="ng-hero-illus-col" aria-hidden="true">
+                        <figure class="sw-hero-visual">
+                            <svg class="sw-svg" viewBox="0 0 440 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                <!-- ══ Frame Desktop ══ -->
+                                <rect x="8" y="8" width="286" height="210" rx="3" stroke="rgba(247,247,247,0.2)" stroke-width="1" fill="rgba(255,255,255,0.018)"/>
+                                <!-- Barre nav desktop -->
+                                <rect x="8" y="8" width="286" height="26" rx="3" fill="rgba(255,255,255,0.035)" stroke="rgba(247,247,247,0.12)" stroke-width="0.5"/>
+                                <!-- Pastilles URL -->
+                                <circle cx="22" cy="21" r="3.5" fill="rgba(247,247,247,0.18)"/>
+                                <circle cx="32" cy="21" r="3.5" fill="rgba(247,247,247,0.1)"/>
+                                <!-- Barre URL -->
+                                <rect x="50" y="16" width="180" height="10" rx="5" fill="rgba(247,247,247,0.06)" stroke="rgba(247,247,247,0.1)" stroke-width="0.5"/>
+
+                                <!-- Hero desktop -->
+                                <rect x="18" y="44" width="178" height="14" rx="1" fill="rgba(247,247,247,0.18)"/>
+                                <rect x="18" y="63" width="130" height="8" rx="1" fill="rgba(247,247,247,0.08)"/>
+                                <rect x="18" y="75" width="108" height="8" rx="1" fill="rgba(247,247,247,0.06)"/>
+                                <!-- CTA -->
+                                <rect x="18" y="92" width="78" height="18" rx="9" stroke="rgba(247,247,247,0.28)" stroke-width="1" fill="none"/>
+                                <!-- Grille modules 3 col -->
+                                <rect x="18" y="122" width="82" height="74" rx="2" fill="rgba(247,247,247,0.04)" stroke="rgba(247,247,247,0.1)" stroke-width="0.5"/>
+                                <rect x="108" y="122" width="82" height="74" rx="2" fill="rgba(247,247,247,0.04)" stroke="rgba(247,247,247,0.1)" stroke-width="0.5"/>
+                                <rect x="198" y="122" width="82" height="74" rx="2" fill="rgba(247,247,247,0.04)" stroke="rgba(247,247,247,0.1)" stroke-width="0.5"/>
+                                <!-- Lignes grille internes -->
+                                <line x1="8" y1="118" x2="294" y2="118" stroke="rgba(247,247,247,0.06)" stroke-width="0.5" stroke-dasharray="3 3"/>
+                                <line x1="18" y1="38" x2="18" y2="218" stroke="rgba(247,247,247,0.04)" stroke-width="0.5" stroke-dasharray="2 4"/>
+                                <line x1="280" y1="38" x2="280" y2="218" stroke="rgba(247,247,247,0.04)" stroke-width="0.5" stroke-dasharray="2 4"/>
+
+                                <!-- ══ Frame Mobile ══ -->
+                                <rect x="316" y="22" width="112" height="196" rx="10" stroke="rgba(247,247,247,0.2)" stroke-width="1" fill="rgba(255,255,255,0.015)"/>
+                                <!-- Encoche mobile -->
+                                <rect x="354" y="26" width="36" height="6" rx="3" fill="rgba(247,247,247,0.12)"/>
+                                <!-- Contenu mobile -->
+                                <rect x="328" y="44" width="88" height="10" rx="1" fill="rgba(247,247,247,0.16)"/>
+                                <rect x="328" y="58" width="66" height="7" rx="1" fill="rgba(247,247,247,0.07)"/>
+                                <rect x="328" y="69" width="54" height="7" rx="1" fill="rgba(247,247,247,0.05)"/>
+                                <!-- CTA mobile -->
+                                <rect x="328" y="84" width="88" height="14" rx="7" stroke="rgba(247,247,247,0.22)" stroke-width="0.75" fill="none"/>
+                                <!-- Modules mobiles empilés -->
+                                <rect x="328" y="108" width="88" height="40" rx="2" fill="rgba(247,247,247,0.04)" stroke="rgba(247,247,247,0.09)" stroke-width="0.5"/>
+                                <rect x="328" y="154" width="88" height="40" rx="2" fill="rgba(247,247,247,0.04)" stroke="rgba(247,247,247,0.09)" stroke-width="0.5"/>
+
+                                <!-- ══ Lignes de connexion responsive ══ -->
+                                <line x1="294" y1="44" x2="316" y2="44" stroke="rgba(247,247,247,0.1)" stroke-width="0.75" stroke-dasharray="2 3"/>
+                                <line x1="294" y1="92" x2="316" y2="84" stroke="rgba(247,247,247,0.08)" stroke-width="0.75" stroke-dasharray="2 3"/>
+                                <line x1="294" y1="122" x2="316" y2="108" stroke="rgba(247,247,247,0.07)" stroke-width="0.75" stroke-dasharray="2 3"/>
+
+                                <!-- ══ Ligne de repère horizontale (animée) ── -->
+                                <line class="sw-guide-line" x1="8" y1="92" x2="428" y2="92" stroke="rgba(247,247,247,0.3)" stroke-width="0.75" stroke-dasharray="4 3"/>
+
+                                <!-- ══ Curseur de construction (animé) ── -->
+                                <g class="sw-cursor">
+                                    <polygon points="0,0 8,10 3,10 3,18 -3,18 -3,10 -8,10" fill="rgba(247,247,247,0.7)" transform="scale(0.8)"/>
+                                </g>
+
+                                <!-- Coins de cadrage (desktop) -->
+                                <line x1="8" y1="8" x2="22" y2="8" stroke="rgba(247,247,247,0.45)" stroke-width="1.5"/>
+                                <line x1="8" y1="8" x2="8" y2="22" stroke="rgba(247,247,247,0.45)" stroke-width="1.5"/>
+                                <line x1="294" y1="8" x2="280" y2="8" stroke="rgba(247,247,247,0.45)" stroke-width="1.5"/>
+                                <line x1="294" y1="8" x2="294" y2="22" stroke="rgba(247,247,247,0.45)" stroke-width="1.5"/>
+                                <line x1="8" y1="218" x2="22" y2="218" stroke="rgba(247,247,247,0.45)" stroke-width="1.5"/>
+                                <line x1="8" y1="218" x2="8" y2="204" stroke="rgba(247,247,247,0.45)" stroke-width="1.5"/>
+
+                                <!-- Label desktop -->
+                                <text x="8" y="240" font-family="monospace" font-size="7" font-weight="700" letter-spacing="0.12em" fill="rgba(247,247,247,0.2)">DESKTOP</text>
+                                <!-- Label mobile -->
+                                <text x="316" y="240" font-family="monospace" font-size="7" font-weight="700" letter-spacing="0.12em" fill="rgba(247,247,247,0.2)">MOBILE</text>
+
+                            </svg>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ TAGS ═══ -->
+        <section class="py-12 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="ng-capabilities-grid observer-target fade-in-up">
+                    <div class="ng-capability-item"><span class="ng-cap-index">01</span><span class="ng-cap-label" data-i18n="sw_tag1">Site Vitrine</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">02</span><span class="ng-cap-label" data-i18n="sw_tag2">E-Commerce</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">03</span><span class="ng-cap-label" data-i18n="sw_tag3">Landing Page</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">04</span><span class="ng-cap-label" data-i18n="sw_tag4">UX / UI Design</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">05</span><span class="ng-cap-label" data-i18n="sw_tag5">SEO</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">06</span><span class="ng-cap-label" data-i18n="sw_tag6">WordPress</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">07</span><span class="ng-cap-label" data-i18n="sw_tag7">Développement Custom</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">08</span><span class="ng-cap-label" data-i18n="sw_tag8">Responsive</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">09</span><span class="ng-cap-label" data-i18n="sw_tag9">Webflow</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ PROCESSUS ═══ -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    <div class="observer-target fade-in-up">
+                        <p class="service-label mb-6" data-i18n="sw_process_label">NOTRE MÉTHODE</p>
+                        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
+                            <span data-i18n="sw_process_h2_1">UN SITE</span><br>
+                            <span class="text-stroke" data-i18n="sw_process_h2_2">QUI PERFORME</span>
+                        </h2>
+                        <p class="text-gray-400 font-semibold leading-relaxed max-w-md" data-i18n="sw_process_desc">
+                            Chaque site que nous créons suit un processus rigoureux en 7 phases. Aucune étape n'est sacrifiée — c'est ce qui fait la différence entre un site ordinaire et un site qui convertit.
+                        </p>
+                    </div>
+                    <div class="observer-target fade-in-up">
+                        <div class="process-step py-5 px-4 rounded-t-xl">
+                            <div class="flex items-center gap-4">
+                                <p class="prestation-number w-8 flex-shrink-0">01</p>
+                                <div class="flex-1">
+                                    <h3 class="font-black uppercase text-sm tracking-tight" data-i18n="sw_step1_title">Discovery & Brief</h3>
+                                    <p class="text-xs text-zinc-400 font-medium mt-0.5" data-i18n="sw_step1_desc">Objectifs, cibles, concurrence, benchmark</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step py-5 px-4">
+                            <div class="flex items-center gap-4">
+                                <p class="prestation-number w-8 flex-shrink-0">02</p>
+                                <div class="flex-1">
+                                    <h3 class="font-black uppercase text-sm tracking-tight" data-i18n="sw_step2_title">Architecture & Wireframes</h3>
+                                    <p class="text-xs text-zinc-400 font-medium mt-0.5" data-i18n="sw_step2_desc">Structure, arborescence, parcours utilisateur</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step py-5 px-4">
+                            <div class="flex items-center gap-4">
+                                <p class="prestation-number w-8 flex-shrink-0">03</p>
+                                <div class="flex-1">
+                                    <h3 class="font-black uppercase text-sm tracking-tight" data-i18n="sw_step3_title">UI Design</h3>
+                                    <p class="text-xs text-zinc-400 font-medium mt-0.5" data-i18n="sw_step3_desc">Maquettes haute fidélité, design system</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step py-5 px-4">
+                            <div class="flex items-center gap-4">
+                                <p class="prestation-number w-8 flex-shrink-0">04</p>
+                                <div class="flex-1">
+                                    <h3 class="font-black uppercase text-sm tracking-tight" data-i18n="sw_step4_title">Développement</h3>
+                                    <p class="text-xs text-zinc-400 font-medium mt-0.5" data-i18n="sw_step4_desc">Intégration, animations, fonctionnalités</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step py-5 px-4">
+                            <div class="flex items-center gap-4">
+                                <p class="prestation-number w-8 flex-shrink-0">05</p>
+                                <div class="flex-1">
+                                    <h3 class="font-black uppercase text-sm tracking-tight" data-i18n="sw_step5_title">SEO & Optimisation</h3>
+                                    <p class="text-xs text-zinc-400 font-medium mt-0.5" data-i18n="sw_step5_desc">Core Web Vitals, balises, vitesse</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step py-5 px-4">
+                            <div class="flex items-center gap-4">
+                                <p class="prestation-number w-8 flex-shrink-0">06</p>
+                                <div class="flex-1">
+                                    <h3 class="font-black uppercase text-sm tracking-tight" data-i18n="sw_step6_title">Tests & Recette</h3>
+                                    <p class="text-xs text-zinc-400 font-medium mt-0.5" data-i18n="sw_step6_desc">Cross-browser, responsive, accessibilité</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step py-5 px-4 rounded-b-xl">
+                            <div class="flex items-center gap-4">
+                                <p class="prestation-number w-8 flex-shrink-0">07</p>
+                                <div class="flex-1">
+                                    <h3 class="font-black uppercase text-sm tracking-tight" data-i18n="sw_step7_title">Mise en ligne & Suivi</h3>
+                                    <p class="text-xs text-zinc-400 font-medium mt-0.5" data-i18n="sw_step7_desc">Déploiement, formation, analytics</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ PRESTATIONS ═══ -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 md:mb-24 observer-target fade-in-up">
+                    <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter">
+                        <span data-i18n="sw_presta_h2_1">NOS</span> <span class="text-stroke" data-i18n="sw_presta_h2_2">PRESTATIONS</span>
+                    </h2>
+                </div>
+                <div class="space-y-0 divide-y divide-gray-900">
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">01</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="sw_p1_title">Site Vitrine Premium</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="sw_p1_desc">Un site élégant et rapide qui reflète l'essence de votre marque. Design sur-mesure, animations fluides, responsive mobile-first et optimisation SEO dès le départ. Votre vitrine digitale devient votre meilleur commercial, disponible 24h/24.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">02</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="sw_p2_title">E-Commerce & Boutique</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="sw_p2_desc">Boutique en ligne optimisée pour la conversion : tunnel d'achat simplifié, fiches produits engageantes, paiement sécurisé, gestion des stocks et tableaux de bord analytics. Nous construisons des expériences d'achat qui transforment les visiteurs en clients fidèles.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">03</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="sw_p3_title">Landing Page & Funnel</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="sw_p3_desc">Pages de destination ultra-ciblées pour vos campagnes publicitaires. Chaque élément est optimisé pour le taux de conversion : hiérarchie visuelle, copywriting persuasif, CTA stratégiques. Le ROAS de vos campagnes en dépend directement.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">04</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="sw_p4_title">UX / UI Design</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="sw_p4_desc">Design d'interface centré sur l'expérience utilisateur. Wireframes, prototypes interactifs, charte graphique digitale et design system complet. Chaque écran est pensé pour guider l'utilisateur naturellement vers votre objectif de conversion.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">05</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="sw_p5_title">SEO & Référencement</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="sw_p5_desc">Audit technique, optimisation on-page, maillage interne, vitesse de chargement et stratégie de contenu. Nous positionnons votre site sur les requêtes stratégiques pour générer un flux continu de visiteurs qualifiés, sans dépendre uniquement de la publicité payante.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">06</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="sw_p6_title">Maintenance & Évolution</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="sw_p6_desc">Votre site évolue avec votre business. Mises à jour de sécurité, ajout de fonctionnalités, optimisation continue des performances et support technique réactif. Nous sommes votre partenaire digital sur le long terme.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ NOS PILIERS (fond blanc) ═══ -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-white text-brand-black rounded-t-[3rem] md:rounded-t-[5rem]">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 md:mb-24 observer-target fade-in-up">
+                    <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter">
+                        <span data-i18n="sw_piliers_h2_1">POURQUOI</span><br>
+                        <span class="text-stroke-black" data-i18n="sw_piliers_h2_2">NOUS ?</span>
+                    </h2>
+                </div>
+                <div class="ng-proof-grid observer-target fade-in-up">
+                    <div class="ng-proof-item">
+                        <span class="ng-proof-number" aria-hidden="true">01</span>
+                        <h3 class="ng-proof-title" data-i18n="sw_pilier1_title">Design &amp; Performance</h3>
+                        <p class="ng-proof-desc" data-i18n="sw_pilier1_desc">Nous refusons de choisir entre beauté et performance. Nos sites sont conçus pour être visuellement distinctifs et rapides techniquement — Core Web Vitals est notre standard minimum.</p>
+                    </div>
+                    <div class="ng-proof-item">
+                        <span class="ng-proof-number" aria-hidden="true">02</span>
+                        <h3 class="ng-proof-title" data-i18n="sw_pilier2_title">SEO Natif</h3>
+                        <p class="ng-proof-desc" data-i18n="sw_pilier2_desc">Le référencement n’est pas une option ajoutée après coup. Il est intégré à chaque décision de conception : architecture, balises sémantiques, vitesse et balisage structuré.</p>
+                    </div>
+                    <div class="ng-proof-item">
+                        <span class="ng-proof-number" aria-hidden="true">03</span>
+                        <h3 class="ng-proof-title" data-i18n="sw_pilier3_title">Accompagnement Total</h3>
+                        <p class="ng-proof-desc" data-i18n="sw_pilier3_desc">Du brief à la mise en ligne, vous avez un interlocuteur unique, des délais clairs et des livrables précis. Formation à l’administration de votre site incluse.</p>
+                    </div>
+                </div>
+
+                <!-- Livrables -->
+                <div class="mt-20 pt-20 border-t border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                        <div class="observer-target fade-in-up">
+                            <h3 class="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-6" data-i18n="sw_livrables_title">Ce que vous recevez</h3>
+                            <p class="text-gray-600 font-semibold leading-relaxed" data-i18n="sw_livrables_desc">Vous êtes propriétaire à 100% de votre site. Nous vous remettons tous les accès, tous les fichiers et toute la documentation nécessaire pour en garder le contrôle.</p>
+                        </div>
+                        <div class="ng-deliverables-list observer-target fade-in-up">
+                            <div class="ng-deliverable-item">
+                                <span class="ng-deliverable-num" aria-hidden="true">01</span>
+                                <div>
+                                    <p class="ng-deliverable-title" data-i18n="sw_l1_title">Code source</p>
+                                    <p class="ng-deliverable-sub" data-i18n="sw_l1_sub">100% propriété du client</p>
+                                </div>
+                            </div>
+                            <div class="ng-deliverable-item">
+                                <span class="ng-deliverable-num" aria-hidden="true">02</span>
+                                <div>
+                                    <p class="ng-deliverable-title" data-i18n="sw_l2_title">Accès admin</p>
+                                    <p class="ng-deliverable-sub" data-i18n="sw_l2_sub">Hébergement &amp; CMS</p>
+                                </div>
+                            </div>
+                            <div class="ng-deliverable-item">
+                                <span class="ng-deliverable-num" aria-hidden="true">03</span>
+                                <div>
+                                    <p class="ng-deliverable-title" data-i18n="sw_l3_title">Documentation</p>
+                                    <p class="ng-deliverable-sub" data-i18n="sw_l3_sub">Guide d’utilisation complet</p>
+                                </div>
+                            </div>
+                            <div class="ng-deliverable-item">
+                                <span class="ng-deliverable-num" aria-hidden="true">04</span>
+                                <div>
+                                    <p class="ng-deliverable-title" data-i18n="sw_l4_title">Analytics</p>
+                                    <p class="ng-deliverable-sub" data-i18n="sw_l4_sub">Google Analytics configuré</p>
+                                </div>
+                            </div>
+                            <div class="ng-deliverable-item">
+                                <span class="ng-deliverable-num" aria-hidden="true">05</span>
+                                <div>
+                                    <p class="ng-deliverable-title" data-i18n="sw_l5_title">Responsive</p>
+                                    <p class="ng-deliverable-sub" data-i18n="sw_l5_sub">Testé mobile, tablette, desktop</p>
+                                </div>
+                            </div>
+                            <div class="ng-deliverable-item">
+                                <span class="ng-deliverable-num" aria-hidden="true">06</span>
+                                <div>
+                                    <p class="ng-deliverable-title" data-i18n="sw_l6_title">Formation</p>
+                                    <p class="ng-deliverable-sub" data-i18n="sw_l6_sub">Prise en main incluse</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ CTA FINAL ═══ -->
+        <section class="py-24 md:py-40 px-6 md:px-12 bg-brand-black relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white rounded-full blur-[100px]" aria-hidden="true"></div>
+            </div>
+            <div class="max-w-5xl mx-auto text-center relative observer-target fade-in-up">
+                <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-none tracking-tighter mb-8">
+                    <span data-i18n="sw_cta_h2_1">VOTRE SITE,</span><br>
+                    <span class="text-stroke" data-i18n="sw_cta_h2_2">DEMAIN.</span>
+                </h2>
+                <a href="contact.html" class="inline-flex items-center gap-3 text-lg md:text-xl font-bold uppercase tracking-wider py-5 px-10 border border-white hover:bg-white hover:text-black transition-all duration-300 rounded-full focus:outline-none" data-i18n="sw_cta_btn">
+                    CONTACTEZ-NOUS<i data-lucide="arrow-up-right" class="w-5 h-5" aria-hidden="true"></i>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="bg-brand-black pt-20 pb-10 px-6 md:px-12 border-t border-gray-900" role="contentinfo">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            <div>
+                <a href="index.html" class="flex items-center mb-6"><img src="LOGO1HEAD.png" alt="Logo NG Creative" class="h-8 w-auto object-contain"></a>
+                <p class="text-sm leading-relaxed" style="font-family: var(--font-copy); color: var(--text-dark-muted); font-weight: 400;" data-i18n="footer_tagline">Direction créative, contenus et expériences digitales.</p>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_services">Services</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="audiovisuel.html" class="hover:text-gray-400 transition-colors" data-i18n="s1_title">Audiovisuel</a></li>
+                    <li><a href="sites-web.html" class="text-white font-bold" aria-current="page" data-i18n="s2_title">Sites Web</a></li>
+                    <li><a href="graphisme.html" class="hover:text-gray-400 transition-colors" data-i18n="s3_title">Graphisme</a></li>
+                    <li><a href="impression.html" class="hover:text-gray-400 transition-colors" data-i18n="s4_title">Impression</a></li>
+                    <li><a href="ads.html" class="hover:text-gray-400 transition-colors" data-i18n="s5_title">Ads</a></li>
+                    <li><a href="marketing-local.html" class="hover:text-gray-400 transition-colors" data-i18n="s6_title">Marketing Local</a></li>
+                    <li><a href="influence.html" class="hover:text-gray-400 transition-colors" data-i18n="s7_title">Influence</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_nav">Navigation</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="index.html" class="hover:text-gray-400 transition-colors font-bold" data-i18n="footer_home">Accueil</a></li>
+                    <li><a href="contact.html" class="hover:text-gray-400 transition-colors font-bold" data-i18n="nav_contact">Contact</a></li>
+                    <li><a href="Plaquette-Commerciale-NG-Creative.pdf" download class="hover:text-gray-400 transition-colors font-bold" data-i18n="footer_plaquette">Plaquette</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_follow">Suivez-nous</h4>
+                <div class="flex gap-5">
+                    <a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="Instagram"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    <a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="X"><svg class="w-[1.15rem] h-[1.15rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                    <a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="TikTok"><svg class="w-5 h-5" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-600 text-xs font-bold">© 2026 NG Creative. <span data-i18n="rights">Tous droits réservés.</span></p>
+            <p class="text-gray-600 text-xs font-bold" data-i18n="made_with">Conçu avec passion.</p>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            FR: {
+                nav_services:"SERVICES",nav_clients:"CLIENTS",nav_structure:"STRUCTURE",nav_contact:"CONTACT",nav_plaquette:"TÉLÉCHARGER LA PLAQUETTE",sw_hero_service_name:"SITES WEB",
+                sw_label:"02 / SITES WEB",sw_h1_1:"SITES",sw_h1_2:"WEB",
+                sw_hero_desc:"Design, développement et référencement réunis dans un site rapide, lisible et simple à administrer.",
+                sw_cta_hero:"DEMANDER UN DEVIS",
+                sw_tag1:"Site Vitrine",sw_tag2:"E-Commerce",sw_tag3:"Landing Page",sw_tag4:"UX / UI Design",sw_tag5:"SEO",sw_tag6:"WordPress",sw_tag7:"Développement Custom",sw_tag8:"Responsive",sw_tag9:"Webflow",
+                sw_process_label:"NOTRE MÉTHODE",sw_process_h2_1:"UN SITE",sw_process_h2_2:"QUI PERFORME",
+                sw_process_desc:"Chaque site que nous créons suit un processus rigoureux en 7 phases. Aucune étape n'est sacrifiée — c'est ce qui fait la différence entre un site ordinaire et un site qui convertit.",
+                sw_step1_title:"Discovery & Brief",sw_step1_desc:"Objectifs, cibles, concurrence, benchmark",
+                sw_step2_title:"Architecture & Wireframes",sw_step2_desc:"Structure, arborescence, parcours utilisateur",
+                sw_step3_title:"UI Design",sw_step3_desc:"Maquettes haute fidélité, design system",
+                sw_step4_title:"Développement",sw_step4_desc:"Intégration, animations, fonctionnalités",
+                sw_step5_title:"SEO & Optimisation",sw_step5_desc:"Core Web Vitals, balises, vitesse",
+                sw_step6_title:"Tests & Recette",sw_step6_desc:"Cross-browser, responsive, accessibilité",
+                sw_step7_title:"Mise en ligne & Suivi",sw_step7_desc:"Déploiement, formation, analytics",
+                sw_presta_h2_1:"NOS",sw_presta_h2_2:"PRESTATIONS",
+                sw_p1_title:"Site Vitrine Premium",sw_p1_desc:"Un site élégant et rapide qui reflète l'essence de votre marque. Design sur-mesure, animations fluides, responsive mobile-first et optimisation SEO dès le départ. Votre vitrine digitale devient votre meilleur commercial, disponible 24h/24.",
+                sw_p2_title:"E-Commerce & Boutique",sw_p2_desc:"Boutique en ligne optimisée pour la conversion : tunnel d'achat simplifié, fiches produits engageantes, paiement sécurisé, gestion des stocks et tableaux de bord analytics.",
+                sw_p3_title:"Landing Page & Funnel",sw_p3_desc:"Pages de destination ultra-ciblées pour vos campagnes publicitaires. Chaque élément est optimisé pour le taux de conversion : hiérarchie visuelle, copywriting persuasif, CTA stratégiques.",
+                sw_p4_title:"UX / UI Design",sw_p4_desc:"Design d'interface centré sur l'expérience utilisateur. Wireframes, prototypes interactifs, charte graphique digitale et design system complet.",
+                sw_p5_title:"SEO & Référencement",sw_p5_desc:"Audit technique, optimisation on-page, maillage interne, vitesse de chargement et stratégie de contenu. Nous positionnons votre site sur les requêtes stratégiques.",
+                sw_p6_title:"Maintenance & Évolution",sw_p6_desc:"Votre site évolue avec votre business. Mises à jour de sécurité, ajout de fonctionnalités, optimisation continue des performances et support technique réactif.",
+                sw_piliers_label:"NOS ENGAGEMENTS",sw_piliers_h2_1:"POURQUOI",sw_piliers_h2_2:"NOUS ?",
+                sw_pilier1_title:"Design & Performance",sw_pilier1_desc:"Nous refusons de choisir entre beauté et performance. Nos sites sont conçus pour être visuellement distinctifs et rapides techniquement — Core Web Vitals est notre standard minimum.",
+                sw_pilier2_title:"SEO Natif",sw_pilier2_desc:"Le référencement n'est pas une option ajoutée après coup. Il est intégré à chaque décision de conception : architecture, balises sémantiques, vitesse et balisage structuré.",
+                sw_pilier3_title:"Accompagnement Total",sw_pilier3_desc:"Du brief à la mise en ligne, vous avez un interlocuteur unique, des délais clairs et des livrables précis. Formation à l'administration de votre site incluse.",
+                sw_livrables_label:"À LA LIVRAISON",sw_livrables_title:"Ce que vous recevez",
+                sw_livrables_desc:"Vous êtes propriétaire à 100% de votre site. Nous vous remettons tous les accès, tous les fichiers et toute la documentation nécessaire pour en garder le contrôle.",
+                sw_l1_title:"Code source",sw_l1_sub:"100% propriété du client",
+                sw_l2_title:"Accès admin",sw_l2_sub:"Hébergement & CMS",
+                sw_l3_title:"Documentation",sw_l3_sub:"Guide d'utilisation complet",
+                sw_l4_title:"Analytics",sw_l4_sub:"Google Analytics configuré",
+                sw_l5_title:"Responsive",sw_l5_sub:"Testé mobile, tablette, desktop",
+                sw_l6_title:"Formation",sw_l6_sub:"Prise en main incluse",
+                sw_cta_label:"PROCHAINE ÉTAPE",sw_cta_h2_1:"VOTRE SITE,",sw_cta_h2_2:"DEMAIN.",
+                sw_cta_desc:"Décrivez votre projet web. Nous vous proposons une solution sur-mesure et un devis sous 24h.",
+                sw_cta_btn:"CONTACTEZ-NOUS",
+                footer_tagline: "Direction créative, contenus et expériences digitales.",
+                footer_title_services:"Services",footer_title_nav:"Navigation",footer_title_follow:"Suivez-nous",
+                footer_home:"Accueil",footer_plaquette:"Plaquette",
+                s1_title:"Audiovisuel",s2_title:"Sites Web",s3_title:"Graphisme",s4_title:"Impression",s5_title:"Ads",s6_title:"Marketing Local",s7_title:"Influence",
+                rights:"Tous droits réservés.",made_with: "Conçu par NG Creative."
+            },
+            EN: {sw_hero_service_name:"WEBSITES",
+                nav_services:"SERVICES",nav_clients:"CLIENTS",nav_structure:"STRUCTURE",nav_contact:"CONTACT",nav_plaquette:"DOWNLOAD OUR BROCHURE",
+                sw_label:"02 / WEBSITES",sw_h1_1:"WEB",sw_h1_2:"SITES",
+                sw_hero_desc:"Design, development and search optimization combined in a fast, intuitive and easily managed website.",
+                sw_cta_hero:"REQUEST A QUOTE",
+                sw_tag1:"Showcase Site",sw_tag2:"E-Commerce",sw_tag3:"Landing Page",sw_tag4:"UX / UI Design",sw_tag5:"SEO",sw_tag6:"WordPress",sw_tag7:"Custom Dev",sw_tag8:"Responsive",sw_tag9:"Webflow",
+                sw_process_label:"OUR METHOD",sw_process_h2_1:"A SITE",sw_process_h2_2:"THAT PERFORMS",
+                sw_process_desc:"Every site we build follows a rigorous 7-phase process. No step is skipped — that is what separates an ordinary site from one that converts.",
+                sw_step1_title:"Discovery & Brief",sw_step1_desc:"Goals, audiences, competition, benchmark",
+                sw_step2_title:"Architecture & Wireframes",sw_step2_desc:"Structure, sitemap, user journey",
+                sw_step3_title:"UI Design",sw_step3_desc:"High-fidelity mockups, design system",
+                sw_step4_title:"Development",sw_step4_desc:"Integration, animations, features",
+                sw_step5_title:"SEO & Optimisation",sw_step5_desc:"Core Web Vitals, tags, speed",
+                sw_step6_title:"Testing & QA",sw_step6_desc:"Cross-browser, responsive, accessibility",
+                sw_step7_title:"Launch & Follow-up",sw_step7_desc:"Deployment, training, analytics",
+                sw_presta_h2_1:"OUR",sw_presta_h2_2:"SERVICES",
+                sw_p1_title:"Premium Showcase Site",sw_p1_desc:"An elegant, fast site reflecting your brand essence. Custom design, smooth animations, mobile-first responsive and SEO from day one. Your digital showcase becomes your best salesperson, available 24/7.",
+                sw_p2_title:"E-Commerce & Store",sw_p2_desc:"Conversion-optimised online store: simplified checkout, engaging product pages, secure payment, stock management and analytics dashboards.",
+                sw_p3_title:"Landing Page & Funnel",sw_p3_desc:"Ultra-targeted landing pages for your advertising campaigns. Every element optimised for conversion: visual hierarchy, persuasive copy, strategic CTAs.",
+                sw_p4_title:"UX / UI Design",sw_p4_desc:"User-centred interface design. Wireframes, interactive prototypes, digital brand guidelines and complete design system.",
+                sw_p5_title:"SEO & Search",sw_p5_desc:"Technical audit, on-page optimisation, internal linking, page speed and content strategy. We rank your site on strategic queries.",
+                sw_p6_title:"Maintenance & Growth",sw_p6_desc:"Your site evolves with your business. Security updates, new features, ongoing performance optimisation and reactive technical support.",
+                sw_piliers_label:"OUR COMMITMENTS",sw_piliers_h2_1:"WHY",sw_piliers_h2_2:"CHOOSE US?",
+                sw_pilier1_title:"Design & Performance",sw_pilier1_desc:"We refuse to choose between beauty and performance. Our sites are visually distinctive and technically fast — Core Web Vitals is our minimum standard.",
+                sw_pilier2_title:"Native SEO",sw_pilier2_desc:"SEO is not an afterthought. It is built into every design decision: architecture, semantic tags, speed and structured markup.",
+                sw_pilier3_title:"Full Support",sw_pilier3_desc:"From brief to launch, you have a single point of contact, clear timelines and precise deliverables. Admin training included.",
+                sw_livrables_label:"AT DELIVERY",sw_livrables_title:"What you receive",
+                sw_livrables_desc:"You own 100% of your site. We hand over all credentials, all files and all documentation needed to stay in control.",
+                sw_l1_title:"Source code",sw_l1_sub:"100% client ownership",
+                sw_l2_title:"Admin access",sw_l2_sub:"Hosting & CMS",
+                sw_l3_title:"Documentation",sw_l3_sub:"Full user guide",
+                sw_l4_title:"Analytics",sw_l4_sub:"Google Analytics configured",
+                sw_l5_title:"Responsive",sw_l5_sub:"Tested on mobile, tablet, desktop",
+                sw_l6_title:"Training",sw_l6_sub:"Onboarding session included",
+                sw_cta_label:"NEXT STEP",sw_cta_h2_1:"YOUR SITE,",sw_cta_h2_2:"TOMORROW.",
+                sw_cta_desc:"Tell us about your web project. We will propose a tailored solution and a quote within 24 hours.",
+                sw_cta_btn:"CONTACT US",
+                footer_tagline: "Creative direction, content and digital experiences.",
+                footer_title_services:"Services",footer_title_nav:"Navigation",footer_title_follow:"Follow Us",
+                footer_home:"Home",footer_plaquette:"Brochure",
+                s1_title:"Audiovisual",s2_title:"Websites",s3_title:"Graphic Design",s4_title:"Printing",s5_title:"Ads",s6_title:"Local Marketing",s7_title:"Influence",
+                rights:"All rights reserved.",made_with: "Designed by NG Creative."
+            },
+            ES: {sw_hero_service_name:"SITIOS WEB",
+                nav_services:"SERVICIOS",nav_clients:"CLIENTES",nav_structure:"ESTRUCTURA",nav_contact:"CONTACTO",nav_plaquette:"DESCARGAR EL DOSSIER",
+                sw_label:"02 / SITIOS WEB",sw_h1_1:"SITIOS",sw_h1_2:"WEB",
+                sw_hero_desc:"Diseño, desarrollo y posicionamiento reunidos en un sitio rápido, legible y fácil de administrar.",
+                sw_cta_hero:"PEDIR PRESUPUESTO",
+                sw_tag1:"Sitio Corporativo",sw_tag2:"E-Commerce",sw_tag3:"Landing Page",sw_tag4:"UX / UI Design",sw_tag5:"SEO",sw_tag6:"WordPress",sw_tag7:"Desarrollo Custom",sw_tag8:"Responsive",sw_tag9:"Webflow",
+                sw_process_label:"NUESTRO MÉTODO",sw_process_h2_1:"UN SITIO",sw_process_h2_2:"QUE RINDE",
+                sw_process_desc:"Cada sitio que creamos sigue un proceso riguroso de 7 fases. Ninguna etapa se sacrifica — eso es lo que diferencia un sitio ordinario de uno que convierte.",
+                sw_step1_title:"Discovery & Brief",sw_step1_desc:"Objetivos, audiencias, competencia, benchmark",
+                sw_step2_title:"Arquitectura & Wireframes",sw_step2_desc:"Estructura, mapa de sitio, recorrido usuario",
+                sw_step3_title:"UI Design",sw_step3_desc:"Maquetas de alta fidelidad, sistema de diseño",
+                sw_step4_title:"Desarrollo",sw_step4_desc:"Integración, animaciones, funcionalidades",
+                sw_step5_title:"SEO & Optimización",sw_step5_desc:"Core Web Vitals, etiquetas, velocidad",
+                sw_step6_title:"Pruebas & QA",sw_step6_desc:"Cross-browser, responsive, accesibilidad",
+                sw_step7_title:"Lanzamiento & Seguimiento",sw_step7_desc:"Despliegue, formación, analytics",
+                sw_presta_h2_1:"NUESTROS",sw_presta_h2_2:"SERVICIOS",
+                sw_p1_title:"Sitio Corporativo Premium",sw_p1_desc:"Un sitio elegante y rápido que refleja la esencia de su marca. Diseño a medida, animaciones fluidas, responsive mobile-first y optimización SEO desde el inicio.",
+                sw_p2_title:"E-Commerce & Tienda",sw_p2_desc:"Tienda online optimizada para la conversión: proceso de compra simplificado, fichas de producto atractivas, pago seguro y paneles de analytics.",
+                sw_p3_title:"Landing Page & Funnel",sw_p3_desc:"Páginas de destino ultra-dirigidas para sus campañas publicitarias. Cada elemento optimizado para la tasa de conversión.",
+                sw_p4_title:"UX / UI Design",sw_p4_desc:"Diseño de interfaz centrado en el usuario. Wireframes, prototipos interactivos, identidad digital y design system completo.",
+                sw_p5_title:"SEO & Posicionamiento",sw_p5_desc:"Auditoría técnica, optimización on-page, enlazado interno, velocidad y estrategia de contenido.",
+                sw_p6_title:"Mantenimiento & Evolución",sw_p6_desc:"Su sitio evoluciona con su negocio. Actualizaciones de seguridad, nuevas funcionalidades y soporte técnico reactivo.",
+                sw_piliers_label:"NUESTROS COMPROMISOS",sw_piliers_h2_1:"¿POR QUÉ",sw_piliers_h2_2:"ELEGIRNOS?",
+                sw_pilier1_title:"Diseño & Rendimiento",sw_pilier1_desc:"Nos negamos a elegir entre belleza y rendimiento. Nuestros sitios son visualmente distintivos y técnicamente rápidos.",
+                sw_pilier2_title:"SEO Nativo",sw_pilier2_desc:"El SEO no es un añadido posterior. Está integrado en cada decisión de diseño: arquitectura, etiquetas semánticas, velocidad.",
+                sw_pilier3_title:"Acompañamiento Total",sw_pilier3_desc:"Del brief al lanzamiento, tiene un interlocutor único, plazos claros y entregables precisos. Formación incluida.",
+                sw_livrables_label:"EN LA ENTREGA",sw_livrables_title:"Lo que recibe",
+                sw_livrables_desc:"Es propietario al 100% de su sitio. Le entregamos todos los accesos, archivos y documentación necesarios.",
+                sw_l1_title:"Código fuente",sw_l1_sub:"100% propiedad del cliente",
+                sw_l2_title:"Acceso admin",sw_l2_sub:"Hosting & CMS",
+                sw_l3_title:"Documentación",sw_l3_sub:"Guía de uso completa",
+                sw_l4_title:"Analytics",sw_l4_sub:"Google Analytics configurado",
+                sw_l5_title:"Responsive",sw_l5_sub:"Probado en móvil, tablet, desktop",
+                sw_l6_title:"Formación",sw_l6_sub:"Sesión de onboarding incluida",
+                sw_cta_label:"PRÓXIMO PASO",sw_cta_h2_1:"SU SITIO,",sw_cta_h2_2:"MAÑANA.",
+                sw_cta_desc:"Descríbanos su proyecto web. Le proponemos una solución a medida y un presupuesto en 24h.",
+                sw_cta_btn:"CONTÁCTENOS",
+                footer_tagline: "Dirección creativa, contenidos y experiencias digitales.",
+                footer_title_services:"Servicios",footer_title_nav:"Navegación",footer_title_follow:"Síganos",
+                footer_home:"Inicio",footer_plaquette:"Dossier",
+                s1_title:"Audiovisual",s2_title:"Sitios Web",s3_title:"Diseño Gráfico",s4_title:"Impresión",s5_title:"Ads",s6_title:"Marketing Local",s7_title:"Influencia",
+                rights:"Todos los derechos reservados.",made_with: "Diseñado por NG Creative."
+            },
+            AR: {sw_hero_service_name:"مواقع الويب",
+                nav_services:"الخدمات",nav_clients:"العملاء",nav_structure:"منهجيتنا",nav_contact:"اتصل بنا",nav_plaquette:"تحميل الكتيب التعريفي",
+                sw_label:"02 / تطوير المواقع",sw_h1_1:"مواقع",sw_h1_2:"إلكترونية",
+                sw_hero_desc:"تصميم وتطوير وتهيئة لمحركات البحث مجتمعة في موقع سريع، واضح وسهل الإدارة.",
+                sw_cta_hero:"طلب عرض سعر",
+                sw_tag1:"موقع تعريفي",sw_tag2:"تجارة إلكترونية",sw_tag3:"صفحة هبوط",sw_tag4:"تصميم UX/UI",sw_tag5:"SEO",sw_tag6:"ووردبريس",sw_tag7:"تطوير مخصص",sw_tag8:"متجاوب",sw_tag9:"ويب فلو",
+                sw_process_label:"منهجيتنا",sw_process_h2_1:"موقع",sw_process_h2_2:"يتفوق",
+                sw_process_desc:"كل موقع نبنيه يتبع عملية صارمة من 7 مراحل. لا نتنازل عن أي خطوة — هذا ما يميز موقعًا عاديًا عن موقع يحوّل الزوار.",
+                sw_step1_title:"الإحاطة والاستكشاف",sw_step1_desc:"الأهداف، الجمهور، المنافسة",
+                sw_step2_title:"الهيكل والنماذج الأولية",sw_step2_desc:"البنية، خريطة الموقع، مسار المستخدم",
+                sw_step3_title:"تصميم الواجهة",sw_step3_desc:"نماذج عالية الدقة، نظام التصميم",
+                sw_step4_title:"التطوير",sw_step4_desc:"التكامل، الحركات، الوظائف",
+                sw_step5_title:"SEO والتحسين",sw_step5_desc:"سرعة التحميل، العلامات، جودة الكود",
+                sw_step6_title:"الاختبار والمراجعة",sw_step6_desc:"متصفحات متعددة، متجاوب، إتاحة",
+                sw_step7_title:"الإطلاق والمتابعة",sw_step7_desc:"النشر، التدريب، التحليلات",
+                sw_presta_h2_1:"خدماتنا",sw_presta_h2_2:"الاحترافية",
+                sw_p1_title:"موقع تعريفي متميز",sw_p1_desc:"موقع أنيق وسريع يعكس جوهر علامتك التجارية. تصميم مخصص، رسوم متحركة سلسة، استجابة للجوال وتحسين SEO منذ البداية.",
+                sw_p2_title:"التجارة الإلكترونية",sw_p2_desc:"متجر إلكتروني محسّن للتحويل: عملية شراء مبسطة، صفحات منتجات جذابة، دفع آمن وإدارة المخزون.",
+                sw_p3_title:"صفحة الهبوط",sw_p3_desc:"صفحات هبوط فائقة الاستهداف لحملاتك الإعلانية. كل عنصر محسّن لمعدل التحويل.",
+                sw_p4_title:"تصميم UX/UI",sw_p4_desc:"تصميم واجهة يركز على تجربة المستخدم. نماذج أولية، مواصفات بصرية ونظام تصميم كامل.",
+                sw_p5_title:"SEO والتحسين لمحركات البحث",sw_p5_desc:"تدقيق تقني، تحسين on-page، سرعة التحميل واستراتيجية المحتوى.",
+                sw_p6_title:"الصيانة والتطوير",sw_p6_desc:"يتطور موقعك مع أعمالك. تحديثات أمنية، ميزات جديدة ودعم تقني متسارع.",
+                sw_piliers_label:"التزاماتنا",sw_piliers_h2_1:"لماذا",sw_piliers_h2_2:"تختارنا؟",
+                sw_pilier1_title:"التصميم والأداء",sw_pilier1_desc:"نرفض الاختيار بين الجمال والأداء. مواقعنا متميزة بصريًا وسريعة تقنيًا.",
+                sw_pilier2_title:"SEO مدمج",sw_pilier2_desc:"تحسين محركات البحث ليس إضافة لاحقة بل مدمج في كل قرار تصميمي.",
+                sw_pilier3_title:"مرافقة شاملة",sw_pilier3_desc:"من الإحاطة إلى الإطلاق، محاور واحد، مواعيد واضحة ومخرجات دقيقة. تدريب مشمول.",
+                sw_livrables_label:"عند التسليم",sw_livrables_title:"ما ستستلمه",
+                sw_livrables_desc:"أنت المالك الكامل لموقعك. نسلمك جميع صلاحيات الوصول والملفات والوثائق اللازمة.",
+                sw_l1_title:"الكود المصدري",sw_l1_sub:"ملكية كاملة للعميل",
+                sw_l2_title:"وصول الإدارة",sw_l2_sub:"الاستضافة ونظام إدارة المحتوى",
+                sw_l3_title:"التوثيق",sw_l3_sub:"دليل استخدام شامل",
+                sw_l4_title:"التحليلات",sw_l4_sub:"Google Analytics مُهيَّأ",
+                sw_l5_title:"الاستجابة",sw_l5_sub:"مختبر على الجوال والتابلت والحاسوب",
+                sw_l6_title:"التدريب",sw_l6_sub:"جلسة تهيئة مشمولة",
+                sw_cta_label:"الخطوة التالية",sw_cta_h2_1:"موقعك،",sw_cta_h2_2:"غدًا.",
+                sw_cta_desc:"أخبرنا عن مشروعك الإلكتروني. نقترح حلًا مخصصًا وعرض سعر خلال 24 ساعة.",
+                sw_cta_btn:"تواصل معنا",
+                footer_tagline: "إدارة إبداعية ومحتوى وتجارب رقمية.",
+                footer_title_services:"الخدمات",footer_title_nav:"التنقل",footer_title_follow:"تابعنا",
+                footer_home:"الرئيسية",footer_plaquette:"الكتيب",
+                s1_title:"الإنتاج السمعي البصري",s2_title:"تطوير المواقع",s3_title:"التصميم الجرافيكي",s4_title:"الطباعة",s5_title:"الإعلانات",s6_title:"التسويق المحلي",s7_title:"التسويق عبر المؤثرين",
+                rights:"جميع الحقوق محفوظة.",made_with: "تصميم بواسطة NG Creative."
+            }
+        };
+
+        function changeLanguage(lang) {
+            localStorage.setItem('n_graphiste_lang', lang);
+            document.documentElement.lang = lang.toLowerCase();
+            document.documentElement.dir = (lang === 'AR') ? 'rtl' : 'ltr';
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key] !== undefined) el.textContent = translations[lang][key];
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('n_graphiste_lang') || 'FR';
+            changeLanguage(savedLang);
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+                }, { threshold: 0.08 });
+                document.querySelectorAll('.observer-target').forEach(el => observer.observe(el));
+            } else {
+                document.querySelectorAll('.observer-target').forEach(el => el.classList.add('visible'));
+            }
+        });
+    </script>
+</body>
+</html>

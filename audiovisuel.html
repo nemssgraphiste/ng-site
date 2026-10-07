@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audiovisuel | NG Creative — Production Vidéo Sur-Mesure</title>
+    <meta name="description" content="Production audiovisuelle sur-mesure : clips, films institutionnels, réels, motion design. De la scénarisation à la post-production, NG Creative donne vie à vos projets vidéo.">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Montserrat', 'sans-serif'], aquire: ['Aquire', 'sans-serif'] },
+                    colors: { brand: { black: '#0a0a0a', white: '#f7f7f7', gray: '#1f1f1f', light: '#e5e5e5' } }
+                }
+            }
+        }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+
+        :root {
+            --font-display: 'Montserrat', sans-serif;
+            --font-brand: 'Aquire', 'Montserrat', sans-serif;
+            --font-copy: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* Sur fond sombre */
+            --text-dark-primary: #f7f7f7;
+            --text-dark-body: #d8d5ce;
+            --text-dark-muted: #aaa69e;
+            --text-dark-subtle: #88847c;
+
+            /* Sur fond clair */
+            --text-light-primary: #0a0a0a;
+            --text-light-body: #34322e;
+            --text-light-muted: #69655e;
+            --text-light-subtle: #77736c;
+        }
+
+        [dir="rtl"] {
+            --font-copy: 'Noto Sans Arabic', 'Manrope', sans-serif;
+            --font-display: 'Noto Sans Arabic', 'Montserrat', sans-serif;
+        }
+
+        @font-face {
+            font-family: 'Aquire';
+            src: url('Aquire.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0a0a0a;
+            color: #f7f7f7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: auto !important;
+            -moz-osx-font-smoothing: auto !important;
+        }
+
+        /* ── Typographie signature ── */
+        .text-stroke {
+            font-style: italic;
+            color: #0a0a0a;
+            text-shadow: -1px -1px 0 #f7f7f7, 0 -1px 0 #f7f7f7, 1px -1px 0 #f7f7f7,
+                          1px 0 0 #f7f7f7, 1px 1px 0 #f7f7f7, 0 1px 0 #f7f7f7,
+                         -1px 1px 0 #f7f7f7, -1px 0 0 #f7f7f7;
+        }
+        .text-stroke-black {
+            font-style: italic;
+            color: #f7f7f7;
+            text-shadow: -1px -1px 0 #0a0a0a, 0 -1px 0 #0a0a0a, 1px -1px 0 #0a0a0a,
+                          1px 0 0 #0a0a0a, 1px 1px 0 #0a0a0a, 0 1px 0 #0a0a0a,
+                         -1px 1px 0 #0a0a0a, -1px 0 0 #0a0a0a;
+        }
+
+        /* ── Boutons ── */
+        .btn-hover-effect { position: relative; overflow: hidden; }
+        .btn-hover-effect::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 1px;
+            background-color: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        .btn-hover-effect:hover::after { transform: scaleX(1); transform-origin: left; }
+
+        /* ── Animations ── */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-slow-zoom { animation: slowZoom 30s ease-in-out infinite; }
+
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+
+        [x-cloak] { display: none !important; }
+        .rounded-full { -webkit-background-clip: padding-box; background-clip: padding-box; }
+
+        /* ── Tags ── */
+        .tag-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.4rem 1rem;
+            border: 1px solid rgba(247,247,247,0.15);
+            border-radius: 9999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            background: rgba(255,255,255,0.04);
+            transition: all 0.3s ease;
+        }
+        .tag-pill:hover { border-color: rgba(247,247,247,0.4); color: #f7f7f7; background: rgba(255,255,255,0.08); }
+
+        /* ── Numéros Aquire ── */
+        .prestation-number {
+            font-family: 'Aquire', 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            color: #6b7280;
+        }
+
+        /* ── Timecode style (audiovisuel) ── */
+        .timecode {
+            font-family: var(--font-copy);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-dark-muted);
+        }
+
+        /* ── Timeline de production ── */
+        .timeline-track {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+        }
+        .timeline-step {
+            flex: 1;
+            position: relative;
+            padding-top: 2.5rem;
+        }
+        .timeline-step::before {
+            content: '';
+            position: absolute;
+            top: 0.75rem;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(247,247,247,0.15);
+        }
+        .timeline-step:first-child::before { left: 50%; }
+        .timeline-step:last-child::before { right: 50%; }
+        .timeline-dot {
+            position: absolute;
+            top: 0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #f7f7f7;
+            border: 2px solid #0a0a0a;
+            outline: 1px solid rgba(247,247,247,0.3);
+        }
+
+        /* ── Aspect ratio frames ── */
+        .ratio-frame {
+            border: 1px solid rgba(247,247,247,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: rgba(255,255,255,0.03);
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+        .ratio-frame:hover {
+            border-color: rgba(247,247,247,0.5);
+            background: rgba(255,255,255,0.06);
+        }
+        .ratio-label {
+            font-family: 'Aquire', 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #6b7280;
+        }
+
+        /* ── Prestations hover ── */
+        .prestation-row {
+            transition: background 0.3s ease;
+        }
+        .prestation-row:hover {
+            background: rgba(247,247,247,0.03);
+        }
+
+        /* ── Livrables ── */
+        .livrable-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1.25rem;
+            border: 1px solid rgba(10,10,10,0.12);
+            border-radius: 0.75rem;
+            background: #ffffff;
+            transition: all 0.25s ease;
+        }
+        .livrable-item:hover {
+            border-color: rgba(10,10,10,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        /* ── Viewfinder héro ── */
+        .viewfinder-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+        }
+        .viewfinder-corner::before,
+        .viewfinder-corner::after {
+            content: '';
+            position: absolute;
+            background: rgba(247,247,247,0.5);
+        }
+        .viewfinder-corner.tl { top: 0; left: 0; }
+        .viewfinder-corner.tl::before { top: 0; left: 0; width: 100%; height: 1px; }
+        .viewfinder-corner.tl::after { top: 0; left: 0; width: 1px; height: 100%; }
+        .viewfinder-corner.tr { top: 0; right: 0; }
+        .viewfinder-corner.tr::before { top: 0; right: 0; width: 100%; height: 1px; }
+        .viewfinder-corner.tr::after { top: 0; right: 0; width: 1px; height: 100%; }
+        .viewfinder-corner.bl { bottom: 0; left: 0; }
+        .viewfinder-corner.bl::before { bottom: 0; left: 0; width: 100%; height: 1px; }
+        .viewfinder-corner.bl::after { bottom: 0; left: 0; width: 1px; height: 100%; }
+        .viewfinder-corner.br { bottom: 0; right: 0; }
+        .viewfinder-corner.br::before { bottom: 0; right: 0; width: 100%; height: 1px; }
+        .viewfinder-corner.br::after { bottom: 0; right: 0; width: 1px; height: 100%; }
+
+
+        /* ── Hero Eyebrow Component ── */
+        .ng-hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+        .ng-hero-eyebrow-number {
+            font-family: var(--font-copy);
+            font-size: clamp(0.68rem, 1vw, 0.72rem);
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.1em;
+            color: rgba(247, 247, 247, 0.7);
+            flex-shrink: 0;
+        }
+        .ng-hero-eyebrow-line {
+            display: inline-block;
+            width: clamp(28px, 4vw, 40px);
+            height: 1px;
+            background-color: rgba(247, 247, 247, 0.6);
+            flex-shrink: 0;
+        }
+        .ng-hero-eyebrow-name {
+            font-family: var(--font-copy);
+            font-size: clamp(0.7rem, 1.1vw, 0.75rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #f7f7f7;
+        }
+
+        /* ── Hero Intro & Subtitle ── */
+        .ng-hero-intro {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.15rem;
+            max-width: 52ch;
+        }
+        .ng-hero-intro-line {
+            display: block;
+            width: clamp(24px, 3.5vw, 36px);
+            height: 1px;
+            background-color: rgba(247, 247, 247, 0.65);
+            flex-shrink: 0;
+            margin-top: 0.75rem;
+            transform-origin: left center;
+        }
+        [dir="rtl"] .ng-hero-intro-line {
+            transform-origin: right center;
+        }
+        .ng-service-hero-copy {
+            font-family: var(--font-copy);
+            font-weight: 600;
+            font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+            line-height: 1.6;
+            color: #f7f7f7;
+            margin: 0;
+            border-inline-start: none;
+            padding-inline-start: 0;
+        }
+
+        /* Subtle hero intro animation */
+        .observer-target.visible .ng-hero-intro-line {
+            animation: heroLineGrow 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .observer-target.visible .ng-service-hero-copy {
+            animation: heroCopyReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards;
+        }
+
+        @keyframes heroLineGrow {
+            from { transform: scaleX(0); opacity: 0; }
+            to { transform: scaleX(1); opacity: 1; }
+        }
+        @keyframes heroCopyReveal {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ng-hero-intro-line,
+            .ng-service-hero-copy {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* ── Solid White Hero Title ── */
+        .ng-hero-title-solid {
+            color: #f7f7f7;
+            font-style: normal;
+            text-shadow: none;
+            -webkit-text-stroke: 0;
+            -webkit-text-fill-color: #f7f7f7;
+        }
+
+        /* ── Capabilities Grid (T12) ── */
+        .ng-capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        }
+        .ng-capability-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            padding-block: 0.875rem;
+            border-top: 1px solid rgba(247,247,247,0.07);
+        }
+        .ng-cap-index {
+            font-family: var(--font-copy);
+            font-size: 0.58rem;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.12em;
+            color: var(--text-dark-subtle);
+            flex-shrink: 0;
+        }
+        .ng-cap-label {
+            font-family: var(--font-copy);
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text-dark-body);
+            letter-spacing: 0.02em;
+        }
+        /* ── Reduced motion ── */
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-up { opacity: 1; transform: none; transition: none; }
+            .animate-slow-zoom { animation: none; }
+            * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+        }
+
+        /* ── Hero split — corrige le chevauchement ── */
+        .ng-hero-split {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: clamp(2rem, 5vw, 5rem);
+            align-items: center;
+        }
+        .ng-hero-text-col { min-width: 0; }
+        .ng-hero-illus-col { min-width: 0; }
+        @media (max-width: 1023px) {
+            .ng-hero-illus-col { display: none !important; }
+        }
+
+        /* ── AUDIOVISUEL — Table de montage ── */
+        .av-hero-visual {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            pointer-events: none;
+            /* AJOUT : Décalage vers la droite par défaut (ex: 30 pixels) */
+            transform: translateX(100px);
+        }
+
+        /* AJOUT : Décalage vers la gauche quand la page est en Arabe (RTL) */
+        [dir="rtl"] .av-hero-visual {
+            transform: translateX(-30px);
+        }
+        .av-tl-svg { width: 100%; height: auto; display: block; overflow: visible; }
+        .av-playhead {
+            animation: av-playhead-travel 18s linear infinite;
+            will-change: transform;
+        }
+        .av-clip-active { animation: av-clip-glow 18s linear infinite; }
+        .av-waveform {
+            stroke-dasharray: 650;
+            stroke-dashoffset: 650;
+            animation: av-wave-reveal 3.5s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards;
+        }
+        @keyframes av-playhead-travel {
+            0%      { transform: translateX(28px); }
+            88%     { transform: translateX(392px); }
+            88.001% { transform: translateX(28px); }
+            100%    { transform: translateX(28px); }
+        }
+        @keyframes av-clip-glow {
+            0%, 5%   { fill: rgba(247,247,247,0.10); }
+            30%, 55% { fill: rgba(247,247,247,0.05); }
+            80%, 100%{ fill: rgba(247,247,247,0.10); }
+        }
+        @keyframes av-wave-reveal { to { stroke-dashoffset: 0; } }
+        @media (prefers-reduced-motion: reduce) {
+            .av-playhead { animation: none !important; transform: translateX(190px) !important; }
+            .av-clip-active { animation: none !important; fill: rgba(247,247,247,0.08) !important; }
+            .av-waveform { animation: none !important; stroke-dashoffset: 0 !important; }
+        }
+    </style>
+</head>
+<body class="selection:bg-white selection:text-black">
+
+    <!-- ═══════════════════════════════════════════ SKIP LINK ═══ -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:font-bold focus:rounded">Aller au contenu</a>
+
+    <!-- ═══════════════════════════════════════════ HEADER ═══ -->
+    <header x-data="{
+        mobileMenuOpen: false,
+        scrolled: false,
+        langOpen: false,
+        currentLang: 'FR',
+        currentFlag: '🇫🇷',
+        init() {
+            const saved = localStorage.getItem('n_graphiste_lang') || 'FR';
+            this.currentLang = saved;
+            const flags = { FR: '🇫🇷', EN: '🇬🇧', ES: '🇪🇸', AR: '🇸🇦' };
+            this.currentFlag = flags[saved] || '🇫🇷';
+        }
+    }"
+    @scroll.window="scrolled = (window.pageYOffset > 50)"
+    @keydown.escape.window="mobileMenuOpen = false; langOpen = false"
+    :class="scrolled ? 'bg-brand-black/90 backdrop-blur-md py-4' : 'bg-transparent py-6'"
+    class="fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 md:px-12"
+    role="banner">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+
+            <!-- Logo + Réseaux -->
+            <div class="flex items-center gap-4 md:gap-6 z-50">
+                <a href="index.html" class="flex items-center" aria-label="NG Creative — Accueil">
+                    <img src="LOGO1HEAD.png" alt="Logo NG Creative" class="relative z-10 h-8 md:h-10 w-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-105">
+                </a>
+                <div class="flex items-center gap-4 border-l border-white/20 pl-4 md:pl-6">
+                    <a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="Instagram NG Creative">
+                        <svg class="w-5 h-5 md:w-[1.4rem] md:h-[1.4rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="X (Twitter) NG Creative">
+                        <svg class="w-[1.15rem] h-[1.15rem] md:w-[1.25rem] md:h-[1.25rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="TikTok NG Creative">
+                        <svg class="w-5 h-5 md:w-[1.35rem] md:h-[1.35rem]" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Navigation desktop -->
+            <nav class="hidden md:flex gap-8 items-center text-sm font-semibold tracking-wide" aria-label="Navigation principale">
+                <a href="index.html#services" class="hover:text-gray-400 transition-colors" data-i18n="nav_services">SERVICES</a>
+                <a href="index.html#clients" class="hover:text-gray-400 transition-colors" data-i18n="nav_clients">CLIENTS</a>
+                <a href="index.html#structure" class="hover:text-gray-400 transition-colors" data-i18n="nav_structure">STRUCTURE</a>
+                <a href="contact.html" class="px-6 py-3 border border-white hover:bg-white hover:text-black transition-colors duration-300 rounded-full flex items-center gap-2">
+                    <span data-i18n="nav_contact">CONTACT</span>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4" aria-hidden="true"></i>
+                </a>
+
+                <!-- Sélecteur de langue desktop -->
+                <div class="relative" id="lang-selector-desktop">
+                    <button @click="langOpen = !langOpen" @click.outside="langOpen = false"
+                        class="flex items-center gap-2 px-3 py-2 border border-white/20 rounded-full hover:bg-white/10 transition-all text-xs font-bold tracking-wider uppercase focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                        :aria-expanded="langOpen" aria-haspopup="listbox" aria-label="Changer la langue">
+                        <span x-text="currentFlag" class="text-base leading-none"></span>
+                        <span x-text="currentLang"></span>
+                        <svg class="w-3 h-3 text-gray-400 transition-transform duration-200" :class="langOpen ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div x-show="langOpen"
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 scale-95 -translate-y-2"
+                        x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 scale-95 -translate-y-2"
+                        class="absolute right-0 mt-2 w-36 bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl py-2 z-50" x-cloak>
+                        <button @click="currentLang='FR'; currentFlag='🇫🇷'; langOpen=false; changeLanguage('FR')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇫🇷</span> Français</button>
+                        <button @click="currentLang='EN'; currentFlag='🇬🇧'; langOpen=false; changeLanguage('EN')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇬🇧</span> English</button>
+                        <button @click="currentLang='ES'; currentFlag='🇪🇸'; langOpen=false; changeLanguage('ES')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇪🇸</span> Español</button>
+                        <button @click="currentLang='AR'; currentFlag='🇸🇦'; langOpen=false; changeLanguage('AR')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇸🇦</span> العربية</button>
+                    </div>
+                </div>
+
+                <a href="Plaquette-Commerciale-NG-Creative.pdf" download="Plaquette-Commerciale-NG-Creative.pdf"
+                    class="btn-hover-effect text-xs font-bold tracking-wider uppercase text-white py-1" data-i18n="nav_plaquette">TÉLÉCHARGER LA PLAQUETTE</a>
+            </nav>
+
+            <!-- Burger mobile -->
+            <button @click="mobileMenuOpen = !mobileMenuOpen; if(mobileMenuOpen) document.body.style.overflow='hidden'; else document.body.style.overflow='';"
+                class="md:hidden z-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded"
+                :aria-expanded="mobileMenuOpen" aria-label="Ouvrir le menu">
+                <i data-lucide="menu" x-show="!mobileMenuOpen" class="w-8 h-8" aria-hidden="true"></i>
+                <i data-lucide="x" x-show="mobileMenuOpen" class="w-8 h-8" x-cloak aria-hidden="true"></i>
+            </button>
+
+            <!-- Menu mobile -->
+            <div x-show="mobileMenuOpen"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-full"
+                x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-300"
+                x-transition:leave-start="opacity-100 translate-y-0"
+                x-transition:leave-end="opacity-0 translate-y-full"
+                class="fixed inset-0 bg-brand-black flex flex-col justify-center items-center gap-8 text-2xl font-bold uppercase z-40"
+                x-cloak role="dialog" aria-modal="true" aria-label="Menu mobile">
+                <a href="index.html#services" @click="mobileMenuOpen=false; document.body.style.overflow='';" class="hover:text-gray-400 transition-colors" data-i18n="nav_services">Services</a>
+                <a href="index.html#clients" @click="mobileMenuOpen=false; document.body.style.overflow='';" class="hover:text-gray-400 transition-colors" data-i18n="nav_clients">Clients</a>
+                <a href="index.html#structure" @click="mobileMenuOpen=false; document.body.style.overflow='';" class="hover:text-gray-400 transition-colors" data-i18n="nav_structure">Structure</a>
+                <a href="Plaquette-Commerciale-NG-Creative.pdf" download="Plaquette-Commerciale-NG-Creative.pdf"
+                    @click="mobileMenuOpen=false; document.body.style.overflow='';"
+                    class="btn-hover-effect text-lg tracking-wider text-white" data-i18n="nav_plaquette">TÉLÉCHARGER LA PLAQUETTE</a>
+                <a href="contact.html" @click="mobileMenuOpen=false; document.body.style.overflow='';"
+                    class="mt-4 px-8 py-4 border border-white hover:bg-white hover:text-black transition-colors rounded-full" data-i18n="nav_contact">Contact</a>
+                <div class="flex gap-4 mt-4 pt-4 border-t border-white/10">
+                    <button @click="changeLanguage('FR'); currentLang='FR'; currentFlag='🇫🇷'; mobileMenuOpen=false; document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Français">🇫🇷</button>
+                    <button @click="changeLanguage('EN'); currentLang='EN'; currentFlag='🇬🇧'; mobileMenuOpen=false; document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="English">🇬🇧</button>
+                    <button @click="changeLanguage('ES'); currentLang='ES'; currentFlag='🇪🇸'; mobileMenuOpen=false; document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Español">🇪🇸</button>
+                    <button @click="changeLanguage('AR'); currentLang='AR'; currentFlag='🇸🇦'; mobileMenuOpen=false; document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="العربية">🇸🇦</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- ═══════════════════════════════════════════ HERO ═══ -->
+        <section class="relative min-h-screen flex items-center pt-32 pb-20 px-6 md:px-12 overflow-hidden isolate">
+            <div class="absolute inset-0">
+                <img src="FOND 1.png" alt="" class="w-full h-full object-cover opacity-25 animate-slow-zoom origin-center" aria-hidden="true">
+                <div class="absolute inset-0 bg-gradient-to-b from-brand-black/70 via-brand-black/80 to-brand-black"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto w-full relative">
+                <div class="observer-target fade-in-up ng-hero-split">
+                    <div class="ng-hero-text-col">
+                        <div class="ng-hero-eyebrow mb-6">
+                        </div>
+                        <h1 class="font-black uppercase leading-none tracking-tighter mb-8" style="font-size: clamp(2.8rem, 7.5vw, 7rem);">
+                            <span data-i18n="av_h1_1">AUDIO</span><span class="ng-hero-title-solid" data-i18n="av_h1_2">VISUEL</span>
+                        </h1>
+                        <div class="ng-hero-intro mb-10">
+                            <p class="ng-service-hero-copy" data-i18n="av_hero_desc">De la page blanche à l'étalonnage final, on ne laisse rien au hasard. Chaque plan, chaque coupe et chaque nuance de couleur est pensé pour donner un maximum d'impact à votre image.</p>
+                        </div>
+                        <a href="contact.html" class="inline-flex items-center gap-3 text-base md:text-lg font-bold uppercase tracking-wider py-4 px-8 border border-white hover:bg-white hover:text-black transition-all duration-300 rounded-full focus-visible:ring-2 focus-visible:ring-white/50 focus:outline-none" data-i18n="av_cta_hero">
+                            DEMANDER UN DEVIS
+                            <i data-lucide="arrow-up-right" class="w-5 h-5" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                    <!-- ILLUSTRATION : Table de montage éditoriale -->
+                    <div class="ng-hero-illus-col" aria-hidden="true">
+                        <figure class="av-hero-visual">
+                            <svg class="av-tl-svg" viewBox="0 0 440 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Cadre panoramique principal -->
+                                <rect x="8" y="8" width="424" height="122" stroke="rgba(247,247,247,0.16)" stroke-width="1" fill="rgba(255,255,255,0.018)"/>
+                                <!-- Coins de cadrage -->
+                                <line x1="8" y1="8" x2="26" y2="8" stroke="rgba(247,247,247,0.55)" stroke-width="1.5"/>
+                                <line x1="8" y1="8" x2="8" y2="26" stroke="rgba(247,247,247,0.55)" stroke-width="1.5"/>
+                                <line x1="432" y1="8" x2="414" y2="8" stroke="rgba(247,247,247,0.55)" stroke-width="1.5"/>
+                                <line x1="432" y1="8" x2="432" y2="26" stroke="rgba(247,247,247,0.55)" stroke-width="1.5"/>
+                                <line x1="8" y1="130" x2="26" y2="130" stroke="rgba(247,247,247,0.55)" stroke-width="1.5"/>
+                                <line x1="8" y1="130" x2="8" y2="112" stroke="rgba(247,247,247,0.55)" stroke-width="1.5"/>
+                                <line x1="432" y1="130" x2="414" y2="130" stroke="rgba(247,247,247,0.55)" stroke-width="1.5"/>
+                                <line x1="432" y1="130" x2="432" y2="112" stroke="rgba(247,247,247,0.55)" stroke-width="1.5"/>
+                                <!-- Plan 1 (actif) -->
+                                <rect class="av-clip-active" x="14" y="14" width="130" height="108" fill="rgba(247,247,247,0.08)" stroke="rgba(247,247,247,0.22)" stroke-width="0.75"/>
+                                <rect x="24" y="58" width="44" height="46" fill="rgba(247,247,247,0.06)"/>
+                                <rect x="74" y="42" width="58" height="62" fill="rgba(247,247,247,0.04)"/>
+                                <!-- Plan 2 -->
+                                <rect x="152" y="14" width="122" height="108" fill="rgba(247,247,247,0.035)" stroke="rgba(247,247,247,0.10)" stroke-width="0.5"/>
+                                <rect x="164" y="48" width="98" height="52" fill="rgba(247,247,247,0.04)"/>
+                                <!-- Plan 3 -->
+                                <rect x="282" y="14" width="142" height="108" fill="rgba(247,247,247,0.04)" stroke="rgba(247,247,247,0.10)" stroke-width="0.5"/>
+                                <rect x="294" y="36" width="54" height="70" fill="rgba(247,247,247,0.04)"/>
+                                <rect x="354" y="50" width="58" height="56" fill="rgba(247,247,247,0.035)"/>
+                                <!-- Repères de coupe -->
+                                <line x1="148" y1="8" x2="148" y2="130" stroke="rgba(247,247,247,0.35)" stroke-width="0.75"/>
+                                <polygon points="144,9 152,9 148,16" fill="rgba(247,247,247,0.45)"/>
+                                <polygon points="144,129 152,129 148,122" fill="rgba(247,247,247,0.45)"/>
+                                <line x1="278" y1="8" x2="278" y2="130" stroke="rgba(247,247,247,0.2)" stroke-width="0.5"/>
+                                <!-- Zone Timeline -->
+                                <line x1="0" y1="148" x2="440" y2="148" stroke="rgba(247,247,247,0.07)" stroke-width="0.5"/>
+                                <text x="4" y="164" font-family="monospace" font-size="7" font-weight="700" letter-spacing="0.1em" fill="rgba(247,247,247,0.25)">V1</text>
+                                <text x="4" y="190" font-family="monospace" font-size="7" font-weight="700" letter-spacing="0.1em" fill="rgba(247,247,247,0.15)">V2</text>
+                                <text x="4" y="214" font-family="monospace" font-size="7" font-weight="700" letter-spacing="0.1em" fill="rgba(247,247,247,0.15)">A1</text>
+                                <!-- Track V1 -->
+                                <rect x="22" y="151" width="410" height="22" fill="rgba(255,255,255,0.01)" stroke="rgba(247,247,247,0.06)" stroke-width="0.5"/>
+                                <rect x="28" y="154" width="116" height="16" rx="1" fill="rgba(247,247,247,0.09)" stroke="rgba(247,247,247,0.22)" stroke-width="0.5"/>
+                                <rect x="152" y="154" width="120" height="16" rx="1" fill="rgba(247,247,247,0.055)" stroke="rgba(247,247,247,0.13)" stroke-width="0.5"/>
+                                <rect x="280" y="154" width="144" height="16" rx="1" fill="rgba(247,247,247,0.065)" stroke="rgba(247,247,247,0.16)" stroke-width="0.5"/>
+                                <!-- Track V2 -->
+                                <rect x="22" y="179" width="410" height="17" fill="rgba(255,255,255,0.008)" stroke="rgba(247,247,247,0.04)" stroke-width="0.5"/>
+                                <rect x="28" y="182" width="62" height="11" rx="1" fill="rgba(247,247,247,0.04)" stroke="rgba(247,247,247,0.09)" stroke-width="0.5"/>
+                                <rect x="100" y="182" width="90" height="11" rx="1" fill="rgba(247,247,247,0.05)" stroke="rgba(247,247,247,0.10)" stroke-width="0.5"/>
+                                <rect x="206" y="182" width="176" height="11" rx="1" fill="rgba(247,247,247,0.04)" stroke="rgba(247,247,247,0.08)" stroke-width="0.5"/>
+                                <!-- Track A1 waveform -->
+                                <rect x="22" y="202" width="410" height="17" fill="rgba(255,255,255,0.008)" stroke="rgba(247,247,247,0.04)" stroke-width="0.5"/>
+                                <path class="av-waveform" d="M28 211 L34 206 L40 215 L46 205 L52 211 L58 207 L64 213 L70 206 L76 211 L82 207 L88 214 L94 204 L100 211 L106 207 L112 213 L118 206 L124 211 L130 207 L136 213 L142 205 L148 211 L154 207 L160 213 L166 206 L172 211 L178 207 L184 213 L190 206 L196 211 L202 207 L208 213 L214 206 L220 211 L226 207 L232 213 L238 206 L244 211 L250 207 L256 213 L262 206 L268 211 L274 207 L280 213 L286 206 L292 211 L298 207 L304 213 L310 206 L316 211 L322 207 L328 212 L334 206 L340 211 L346 207 L352 212 L358 206 L364 211 L370 208 L376 212 L382 207 L388 211 L394 207 L400 212 L408 211" stroke="rgba(247,247,247,0.28)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <!-- Séparateurs verticaux temps -->
+                                <line x1="148" y1="148" x2="148" y2="226" stroke="rgba(247,247,247,0.05)" stroke-width="0.5" stroke-dasharray="2 3"/>
+                                <line x1="278" y1="148" x2="278" y2="226" stroke="rgba(247,247,247,0.05)" stroke-width="0.5" stroke-dasharray="2 3"/>
+                                <!-- Tête de lecture (playhead) -->
+                                <g class="av-playhead">
+                                    <polygon points="-5,148 5,148 0,156" fill="rgba(247,247,247,0.9)"/>
+                                    <line x1="0" y1="156" x2="0" y2="226" stroke="rgba(247,247,247,0.88)" stroke-width="1.5"/>
+                                </g>
+                                <!-- Timecode -->
+                                <line x1="8" y1="244" x2="432" y2="244" stroke="rgba(247,247,247,0.05)" stroke-width="0.5"/>
+                                <text x="28" y="258" font-family="monospace" font-size="7.5" font-weight="700" letter-spacing="0.14em" fill="rgba(247,247,247,0.22)">00:02:14:08</text>
+                            </svg>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ FORMATS / TAGS ═══ -->
+        <section class="py-12 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="ng-capabilities-grid observer-target fade-in-up">
+                    <div class="ng-capability-item"><span class="ng-cap-index">01</span><span class="ng-cap-label" data-i18n="av_tag1">Clip Vidéo</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">02</span><span class="ng-cap-label" data-i18n="av_tag2">Film Institutionnel</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">03</span><span class="ng-cap-label" data-i18n="av_tag3">Réel & Short</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">04</span><span class="ng-cap-label" data-i18n="av_tag4">Motion Design</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">05</span><span class="ng-cap-label" data-i18n="av_tag5">Montage</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">06</span><span class="ng-cap-label" data-i18n="av_tag6">Étalonnage</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">07</span><span class="ng-cap-label" data-i18n="av_tag7">Habillage Sonore</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">08</span><span class="ng-cap-label" data-i18n="av_tag8">Vidéo Pub</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">09</span><span class="ng-cap-label" data-i18n="av_tag9">Interview & Portrait</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ FORMATS VISUELS ═══ -->
+        <section class="py-16 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto observer-target fade-in-up">
+                <p class="timecode mb-8" data-i18n="av_formats_label">FORMATS DE DIFFUSION</p>
+                <div class="flex flex-wrap items-end gap-4 md:gap-6">
+                    <!-- 16:9 -->
+                    <div class="flex flex-col items-center gap-3">
+                        <div class="ratio-frame" style="width:128px;height:72px;">
+                            <span class="ratio-label" data-i18n="av_ratio_cinema">Cinéma</span>
+                        </div>
+                        <p class="timecode">16:9</p>
+                    </div>
+                    <!-- 9:16 -->
+                    <div class="flex flex-col items-center gap-3">
+                        <div class="ratio-frame" style="width:60px;height:107px;">
+                            <span class="ratio-label" data-i18n="av_ratio_story">Story</span>
+                        </div>
+                        <p class="timecode">9:16</p>
+                    </div>
+                    <!-- 1:1 -->
+                    <div class="flex flex-col items-center gap-3">
+                        <div class="ratio-frame" style="width:90px;height:90px;">
+                            <span class="ratio-label" data-i18n="av_ratio_square">Carré</span>
+                        </div>
+                        <p class="timecode">1:1</p>
+                    </div>
+                    <!-- 4:5 -->
+                    <div class="flex flex-col items-center gap-3">
+                        <div class="ratio-frame" style="width:76px;height:95px;">
+                            <span class="ratio-label" data-i18n="av_ratio_portrait">Portrait</span>
+                        </div>
+                        <p class="timecode">4:5</p>
+                    </div>
+                    <!-- 4:3 -->
+                    <div class="flex flex-col items-center gap-3">
+                        <div class="ratio-frame" style="width:100px;height:75px;">
+                            <span class="ratio-label" data-i18n="av_ratio_classic">Classique</span>
+                        </div>
+                        <p class="timecode">4:3</p>
+                    </div>
+                    <div class="ml-auto hidden md:flex flex-col justify-end text-right">
+                        <p class="text-gray-500 text-sm font-semibold max-w-xs leading-relaxed" data-i18n="av_formats_note">Chaque format est optimisé pour sa plateforme de destination. Un contenu bien formaté performe jusqu'à deux fois mieux.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ TIMELINE DE PRODUCTION ═══ -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 md:mb-24 observer-target fade-in-up">
+                    <p class="timecode mb-4" data-i18n="av_process_label">PROCESSUS DE PRODUCTION</p>
+                    <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter">
+                        <span data-i18n="av_process_h2_1">DE L'IDÉE AU</span><br>
+                        <span class="text-stroke" data-i18n="av_process_h2_2">LIVRABLE</span>
+                    </h2>
+                </div>
+
+                <!-- Timeline desktop -->
+                <div class="hidden md:block observer-target fade-in-up">
+                    <div class="timeline-track">
+                        <div class="timeline-step text-center px-2">
+                            <div class="timeline-dot"></div>
+                            <p class="timecode mb-2">00:01</p>
+                            <h3 class="text-sm font-black uppercase tracking-tight mb-1" data-i18n="av_step1_title">Brief</h3>
+                            <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="av_step1_desc">Objectifs, ton, cibles, plateforme</p>
+                        </div>
+                        <div class="timeline-step text-center px-2">
+                            <div class="timeline-dot"></div>
+                            <p class="timecode mb-2">00:02</p>
+                            <h3 class="text-sm font-black uppercase tracking-tight mb-1" data-i18n="av_step2_title">Écriture</h3>
+                            <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="av_step2_desc">Concept, script, storyboard</p>
+                        </div>
+                        <div class="timeline-step text-center px-2">
+                            <div class="timeline-dot"></div>
+                            <p class="timecode mb-2">00:03</p>
+                            <h3 class="text-sm font-black uppercase tracking-tight mb-1" data-i18n="av_step3_title">Préproduction</h3>
+                            <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="av_step3_desc">Casting, lieux, matériel</p>
+                        </div>
+                        <div class="timeline-step text-center px-2">
+                            <div class="timeline-dot"></div>
+                            <p class="timecode mb-2">00:04</p>
+                            <h3 class="text-sm font-black uppercase tracking-tight mb-1" data-i18n="av_step4_title">Tournage</h3>
+                            <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="av_step4_desc">Captation multi-cam, direction</p>
+                        </div>
+                        <div class="timeline-step text-center px-2">
+                            <div class="timeline-dot"></div>
+                            <p class="timecode mb-2">00:05</p>
+                            <h3 class="text-sm font-black uppercase tracking-tight mb-1" data-i18n="av_step5_title">Montage</h3>
+                            <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="av_step5_desc">Assemblage, rythme, narration</p>
+                        </div>
+                        <div class="timeline-step text-center px-2">
+                            <div class="timeline-dot"></div>
+                            <p class="timecode mb-2">00:06</p>
+                            <h3 class="text-sm font-black uppercase tracking-tight mb-1" data-i18n="av_step6_title">Étalonnage</h3>
+                            <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="av_step6_desc">Couleurs, contraste, ambiance</p>
+                        </div>
+                        <div class="timeline-step text-center px-2">
+                            <div class="timeline-dot" style="background:#f7f7f7;box-shadow:0 0 12px rgba(247,247,247,0.4)"></div>
+                            <p class="timecode mb-2">00:07</p>
+                            <h3 class="text-sm font-black uppercase tracking-tight mb-1" data-i18n="av_step7_title">Livraison</h3>
+                            <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="av_step7_desc">Export multi-formats, fichiers sources</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline mobile (liste) -->
+                <div class="md:hidden space-y-6 observer-target fade-in-up">
+                    <div class="flex gap-4 items-start">
+                        <p class="timecode w-12 flex-shrink-0 pt-0.5">00:01</p>
+                        <div><h3 class="font-black uppercase text-sm tracking-tight mb-1" data-i18n="av_step1_title">Brief</h3><p class="text-xs text-gray-500 font-semibold" data-i18n="av_step1_desc">Objectifs, ton, cibles, plateforme</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <p class="timecode w-12 flex-shrink-0 pt-0.5">00:02</p>
+                        <div><h3 class="font-black uppercase text-sm tracking-tight mb-1" data-i18n="av_step2_title">Écriture</h3><p class="text-xs text-gray-500 font-semibold" data-i18n="av_step2_desc">Concept, script, storyboard</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <p class="timecode w-12 flex-shrink-0 pt-0.5">00:03</p>
+                        <div><h3 class="font-black uppercase text-sm tracking-tight mb-1" data-i18n="av_step3_title">Préproduction</h3><p class="text-xs text-gray-500 font-semibold" data-i18n="av_step3_desc">Casting, lieux, matériel</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <p class="timecode w-12 flex-shrink-0 pt-0.5">00:04</p>
+                        <div><h3 class="font-black uppercase text-sm tracking-tight mb-1" data-i18n="av_step4_title">Tournage</h3><p class="text-xs text-gray-500 font-semibold" data-i18n="av_step4_desc">Captation multi-cam, direction</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <p class="timecode w-12 flex-shrink-0 pt-0.5">00:05</p>
+                        <div><h3 class="font-black uppercase text-sm tracking-tight mb-1" data-i18n="av_step5_title">Montage</h3><p class="text-xs text-gray-500 font-semibold" data-i18n="av_step5_desc">Assemblage, rythme, narration</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <p class="timecode w-12 flex-shrink-0 pt-0.5">00:06</p>
+                        <div><h3 class="font-black uppercase text-sm tracking-tight mb-1" data-i18n="av_step6_title">Étalonnage</h3><p class="text-xs text-gray-500 font-semibold" data-i18n="av_step6_desc">Couleurs, contraste, ambiance</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <p class="timecode w-12 flex-shrink-0 pt-0.5">00:07</p>
+                        <div><h3 class="font-black uppercase text-sm tracking-tight mb-1" data-i18n="av_step7_title">Livraison</h3><p class="text-xs text-gray-500 font-semibold" data-i18n="av_step7_desc">Export multi-formats, fichiers sources</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ PRESTATIONS ═══ -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 md:mb-24 observer-target fade-in-up">
+                    <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter">
+                        <span data-i18n="av_presta_h2_1">NOS</span> <span class="text-stroke" data-i18n="av_presta_h2_2">PRESTATIONS</span>
+                    </h2>
+                </div>
+                <div class="space-y-0 divide-y divide-gray-900">
+
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">01</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="av_p1_title">Clip & Court-Métrage</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="av_p1_desc">Réalisation complète de vos clips musicaux, films courts et contenus narratifs. Nous prenons en charge l'écriture du concept, la direction artistique, le tournage multi-caméra, le montage rythmé et l'étalonnage colorimétrique pour un rendu cinématographique soigné.</p></div>
+                    </div>
+
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">02</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="av_p2_title">Film Institutionnel</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="av_p2_desc">Valorisez votre entreprise, vos équipes et vos valeurs à travers un film de marque percutant. Idéal pour vos présentations commerciales, votre site web et vos réseaux sociaux. Nous gérons l'intégralité de la production, du brief à la livraison des fichiers sources.</p></div>
+                    </div>
+
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">03</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="av_p3_title">Réels & Contenus Sociaux</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="av_p3_desc">Création de contenus courts et percutants pour Instagram, TikTok et YouTube Shorts. Captation sur le terrain, montage dynamique, textes et sous-titres animés, habillage sonore : vos réels sont conçus pour maximiser l'engagement et la portée organique.</p></div>
+                    </div>
+
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">04</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="av_p4_title">Motion Design & Animation</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="av_p4_desc">Habillage graphique animé, intros et outros de chaîne, génériques, titres cinétiques et animations de logo. Le motion design renforce votre identité visuelle en mouvement et professionnalise tous vos contenus vidéo, du plus simple au plus complexe.</p></div>
+                    </div>
+
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">05</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="av_p5_title">Vidéo Publicitaire</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="av_p5_desc">Spots publicitaires pour Google Ads, Meta Ads et TikTok Ads conçus pour convertir. Nous maîtrisons les formats, les ratios et les durées optimales pour chaque plateforme. Chaque plan est pensé pour capter l'attention dans les premières secondes et inciter au passage à l'action.</p></div>
+                    </div>
+
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">06</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="av_p6_title">Post-Production & Étalonnage</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="av_p6_desc">Vous avez déjà vos rushes ? Nous prenons en charge le montage, la correction colorimétrique, le mixage audio, l'ajout de sous-titres et l'export multi-formats. Résultat : un rendu final professionnel, cohérent et prêt à diffuser sur toutes vos plateformes.</p></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ LIVRABLES ═══ -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-white text-brand-black rounded-t-[3rem] md:rounded-t-[5rem]">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    <div class="observer-target fade-in-up">
+                        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
+                            <span data-i18n="av_livrables_h2_1">VOS</span><br>
+                            <span class="text-stroke-black" data-i18n="av_livrables_h2_2">LIVRABLES</span>
+                        </h2>
+                        <p class="text-gray-600 font-semibold leading-relaxed max-w-md" data-i18n="av_livrables_desc">
+                            À la fin de chaque production, vous recevez l'intégralité des fichiers dans tous les formats dont vous avez besoin. Aucun frais supplémentaire pour les exports.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 observer-target fade-in-up">
+                        <div class="livrable-item">
+                            <svg class="w-5 h-5 flex-shrink-0 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+                            <div><p class="font-black text-sm uppercase tracking-tight">MP4 / MOV</p><p class="text-xs text-gray-500 font-semibold" data-i18n="av_livrable1_sub">Tous formats & résolutions</p></div>
+                        </div>
+                        <div class="livrable-item">
+                            <svg class="w-5 h-5 flex-shrink-0 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+                            <div><p class="font-black text-sm uppercase tracking-tight" data-i18n="av_livrable2_title">Stems Audio</p><p class="text-xs text-gray-500 font-semibold" data-i18n="av_livrable2_sub">Musique, voix, ambiances séparées</p></div>
+                        </div>
+                        <div class="livrable-item">
+                            <svg class="w-5 h-5 flex-shrink-0 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg>
+                            <div><p class="font-black text-sm uppercase tracking-tight" data-i18n="av_livrable3_title">Sous-titres</p><p class="text-xs text-gray-500 font-semibold" data-i18n="av_livrable3_sub">SRT / VTT inclus</p></div>
+                        </div>
+                        <div class="livrable-item">
+                            <svg class="w-5 h-5 flex-shrink-0 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            <div><p class="font-black text-sm uppercase tracking-tight" data-i18n="av_livrable4_title">Rushes RAW</p><p class="text-xs text-gray-500 font-semibold" data-i18n="av_livrable4_sub">Fichiers sources non montés</p></div>
+                        </div>
+                        <div class="livrable-item">
+                            <svg class="w-5 h-5 flex-shrink-0 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            <div><p class="font-black text-sm uppercase tracking-tight" data-i18n="av_livrable5_title">Projet source</p><p class="text-xs text-gray-500 font-semibold" data-i18n="av_livrable5_sub">Fichier de montage modifiable</p></div>
+                        </div>
+                        <div class="livrable-item">
+                            <svg class="w-5 h-5 flex-shrink-0 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                            <div><p class="font-black text-sm uppercase tracking-tight" data-i18n="av_livrable6_title">Formats sociaux</p><p class="text-xs text-gray-500 font-semibold" data-i18n="av_livrable6_sub">9:16, 1:1, 16:9 déclinés</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ PHILOSOPHIE ═══ -->
+        <section class="py-24 md:py-40 px-6 md:px-12 bg-brand-white text-brand-black border-t border-gray-200">
+            <div class="max-w-5xl mx-auto observer-target fade-in-up">
+                <blockquote class="text-3xl md:text-5xl lg:text-6xl font-black uppercase leading-tight tracking-tight" data-i18n="av_philosophy_quote">
+                    Une image ne suffit pas. C'est le <span class="text-stroke-black">mouvement</span>, le son et le rythme qui transforment un contenu en <span class="text-stroke-black">émotion</span>.
+                </blockquote>
+                <div class="mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-start gap-6">
+                    <p class="text-gray-600 font-semibold text-sm max-w-md leading-relaxed" data-i18n="av_philosophy_body">
+                        Nous refusons la production à la chaîne. Chaque projet que nous acceptons est abordé avec une attention particulière portée à la narration visuelle, au tempo et à l'identité de votre marque. Le résultat n'est pas une vidéo de plus, c'est une prise de parole.
+                    </p>
+                    <a href="contact.html" class="flex-shrink-0 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-black border-b border-black/20 pb-0.5 hover:border-black hover:gap-3 transition-all duration-300" data-i18n="av_philosophy_cta">
+                        PARLER DE VOTRE PROJET
+                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ CTA FINAL ═══ -->
+        <section class="py-24 md:py-40 px-6 md:px-12 bg-brand-black relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white rounded-full blur-[100px]" aria-hidden="true"></div>
+            </div>
+            <div class="max-w-5xl mx-auto text-center relative observer-target fade-in-up">
+                <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-none tracking-tighter mb-8">
+                    <span data-i18n="av_cta_h2_1">PRÊT À PASSER</span><br>
+                    <span class="text-stroke" data-i18n="av_cta_h2_2">À L'ACTION ?</span>
+                </h2>
+                <a href="contact.html" class="inline-flex items-center gap-3 text-lg md:text-xl font-bold uppercase tracking-wider py-5 px-10 border border-white hover:bg-white hover:text-black transition-all duration-300 rounded-full focus-visible:ring-2 focus-visible:ring-white/50 focus:outline-none" data-i18n="av_cta_btn">
+                    CONTACTEZ-NOUS
+                    <i data-lucide="arrow-up-right" class="w-5 h-5" aria-hidden="true"></i>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ═══════════════════════════════════════════ FOOTER ═══ -->
+    <footer class="bg-brand-black pt-20 pb-10 px-6 md:px-12 border-t border-gray-900" role="contentinfo">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            <div>
+                <a href="index.html" class="flex items-center mb-6">
+                    <img src="LOGO1HEAD.png" alt="Logo NG Creative" class="h-8 w-auto object-contain">
+                </a>
+                <p class="text-sm leading-relaxed" style="font-family: var(--font-copy); color: var(--text-dark-muted); font-weight: 400;" data-i18n="footer_tagline">Direction créative, contenus et expériences digitales.</p>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_services">Services</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="audiovisuel.html" class="text-white font-bold" aria-current="page" data-i18n="s1_title">Audiovisuel</a></li>
+                    <li><a href="sites-web.html" class="hover:text-gray-400 transition-colors" data-i18n="s2_title">Sites Web</a></li>
+                    <li><a href="graphisme.html" class="hover:text-gray-400 transition-colors" data-i18n="s3_title">Graphisme</a></li>
+                    <li><a href="impression.html" class="hover:text-gray-400 transition-colors" data-i18n="s4_title">Impression</a></li>
+                    <li><a href="ads.html" class="hover:text-gray-400 transition-colors" data-i18n="s5_title">Ads</a></li>
+                    <li><a href="marketing-local.html" class="hover:text-gray-400 transition-colors" data-i18n="s6_title">Marketing Local</a></li>
+                    <li><a href="influence.html" class="hover:text-gray-400 transition-colors" data-i18n="s7_title">Influence</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_nav">Navigation</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="index.html" class="hover:text-gray-400 transition-colors font-bold" data-i18n="footer_home">Accueil</a></li>
+                    <li><a href="contact.html" class="hover:text-gray-400 transition-colors font-bold" data-i18n="nav_contact">Contact</a></li>
+                    <li><a href="Plaquette-Commerciale-NG-Creative.pdf" download="Plaquette-Commerciale-NG-Creative.pdf" class="hover:text-gray-400 transition-colors font-bold" data-i18n="footer_plaquette">Plaquette</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_follow">Suivez-nous</h4>
+                <div class="flex gap-5">
+                    <a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="Instagram">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="X (Twitter)">
+                        <svg class="w-[1.15rem] h-[1.15rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="TikTok">
+                        <svg class="w-5 h-5" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-600 text-xs font-bold">© 2026 NG Creative. <span data-i18n="rights">Tous droits réservés.</span></p>
+            <p class="text-gray-600 text-xs font-bold" data-i18n="made_with">Conçu avec passion.</p>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════ SCRIPTS ═══ -->
+    <script>
+        /* ─── Système de traduction i18n ─── */
+        const translations = {
+            FR: {
+                nav_services: "SERVICES", nav_clients: "CLIENTS", nav_structure: "STRUCTURE",
+                nav_contact: "CONTACT", nav_plaquette: "TÉLÉCHARGER LA PLAQUETTE",av_hero_service_name:"AUDIOVISUEL",
+                av_label: "01 / AUDIOVISUEL",
+                av_h1_1: "AUDIO", av_h1_2: "VISUEL",
+                av_hero_desc: "De la page blanche à l'étalonnage final, on ne laisse rien au hasard. Chaque plan, chaque coupe et chaque nuance de couleur est pensé pour donner un maximum d'impact à votre image.",
+                av_cta_hero: "DEMANDER UN DEVIS",
+                av_tag1: "Clip Vidéo", av_tag2: "Film Institutionnel", av_tag3: "Réel & Short", av_tag4: "Motion Design", av_tag5: "Montage", av_tag6: "Étalonnage", av_tag7: "Habillage Sonore", av_tag8: "Vidéo Pub", av_tag9: "Interview & Portrait",
+                av_viewfinder_label: "CADRE DE PRODUCTION", av_viewfinder_status: "EN PRODUCTION",
+                av_formats_label: "FORMATS DE DIFFUSION",
+                av_ratio_cinema: "Cinéma", av_ratio_story: "Story", av_ratio_square: "Carré",
+                av_ratio_portrait: "Portrait", av_ratio_classic: "Classique",
+                av_formats_note: "Chaque format est optimisé pour sa plateforme de destination. Un contenu bien formaté performe jusqu'à deux fois mieux.",
+                av_process_label: "PROCESSUS DE PRODUCTION",
+                av_process_h2_1: "DE L'IDÉE AU", av_process_h2_2: "LIVRABLE",
+                av_step1_title: "Brief", av_step1_desc: "Objectifs, ton, cibles, plateforme",
+                av_step2_title: "Écriture", av_step2_desc: "Concept, script, storyboard",
+                av_step3_title: "Préproduction", av_step3_desc: "Casting, lieux, matériel",
+                av_step4_title: "Tournage", av_step4_desc: "Captation multi-cam, direction",
+                av_step5_title: "Montage", av_step5_desc: "Assemblage, rythme, narration",
+                av_step6_title: "Étalonnage", av_step6_desc: "Couleurs, contraste, ambiance",
+                av_step7_title: "Livraison", av_step7_desc: "Export multi-formats, fichiers sources",
+                av_presta_h2_1: "NOS", av_presta_h2_2: "PRESTATIONS",
+                av_p1_title: "Clip & Court-Métrage", av_p1_desc: "Réalisation complète de vos clips musicaux, films courts et contenus narratifs. Nous prenons en charge l'écriture du concept, la direction artistique, le tournage multi-caméra, le montage rythmé et l'étalonnage colorimétrique pour un rendu cinématographique soigné.",
+                av_p2_title: "Film Institutionnel", av_p2_desc: "Valorisez votre entreprise, vos équipes et vos valeurs à travers un film de marque percutant. Idéal pour vos présentations commerciales, votre site web et vos réseaux sociaux. Nous gérons l'intégralité de la production, du brief à la livraison des fichiers sources.",
+                av_p3_title: "Réels & Contenus Sociaux", av_p3_desc: "Création de contenus courts et percutants pour Instagram, TikTok et YouTube Shorts. Captation sur le terrain, montage dynamique, textes et sous-titres animés, habillage sonore : vos réels sont conçus pour maximiser l'engagement et la portée organique.",
+                av_p4_title: "Motion Design & Animation", av_p4_desc: "Habillage graphique animé, intros et outros de chaîne, génériques, titres cinétiques et animations de logo. Le motion design renforce votre identité visuelle en mouvement et professionnalise tous vos contenus vidéo, du plus simple au plus complexe.",
+                av_p5_title: "Vidéo Publicitaire", av_p5_desc: "Spots publicitaires pour Google Ads, Meta Ads et TikTok Ads conçus pour convertir. Nous maîtrisons les formats, les ratios et les durées optimales pour chaque plateforme. Chaque plan est pensé pour capter l'attention dans les premières secondes et inciter au passage à l'action.",
+                av_p6_title: "Post-Production & Étalonnage", av_p6_desc: "Vous avez déjà vos rushes ? Nous prenons en charge le montage, la correction colorimétrique, le mixage audio, l'ajout de sous-titres et l'export multi-formats. Résultat : un rendu final professionnel, cohérent et prêt à diffuser sur toutes vos plateformes.",
+                av_livrables_label: "CE QUE VOUS RECEVEZ",
+                av_livrables_h2_1: "VOS", av_livrables_h2_2: "LIVRABLES",
+                av_livrables_desc: "À la fin de chaque production, vous recevez l'intégralité des fichiers dans tous les formats dont vous avez besoin. Aucun frais supplémentaire pour les exports.",
+                av_livrable1_sub: "Tous formats & résolutions",
+                av_livrable2_title: "Stems Audio", av_livrable2_sub: "Musique, voix, ambiances séparées",
+                av_livrable3_title: "Sous-titres", av_livrable3_sub: "SRT / VTT inclus",
+                av_livrable4_title: "Rushes RAW", av_livrable4_sub: "Fichiers sources non montés",
+                av_livrable5_title: "Projet source", av_livrable5_sub: "Fichier de montage modifiable",
+                av_livrable6_title: "Formats sociaux", av_livrable6_sub: "9:16, 1:1, 16:9 déclinés",
+                av_philosophy_label: "NOTRE APPROCHE",
+                av_philosophy_quote: "Une image ne suffit pas. C'est le mouvement, le son et le rythme qui transforment un contenu en émotion.",
+                av_philosophy_body: "Nous refusons la production à la chaîne. Chaque projet que nous acceptons est abordé avec une attention particulière portée à la narration visuelle, au tempo et à l'identité de votre marque. Le résultat n'est pas une vidéo de plus, c'est une prise de parole.",
+                av_philosophy_cta: "PARLER DE VOTRE PROJET",
+                av_cta_label: "PROCHAINE ÉTAPE",
+                av_cta_h2_1: "PRÊT À PASSER", av_cta_h2_2: "À L'ACTION ?",
+                av_cta_desc: "Décrivez-nous votre projet audiovisuel. Nous vous proposons une solution sur-mesure et un devis sous 24h.",
+                av_cta_btn: "CONTACTEZ-NOUS",
+                footer_tagline: "Direction créative, contenus et expériences digitales.",
+                footer_title_services: "Services", footer_title_nav: "Navigation",
+                footer_title_follow: "Suivez-nous", footer_home: "Accueil", footer_plaquette: "Plaquette",
+                s1_title: "Audiovisuel", s2_title: "Sites Web", s3_title: "Graphisme",
+                s4_title: "Impression", s5_title: "Ads", s6_title: "Marketing Local", s7_title: "Influence",
+                rights: "Tous droits réservés.", made_with: "Conçu par NG Creative."
+            },
+            EN: {av_hero_service_name:"AUDIOVISUAL",
+                nav_services: "SERVICES", nav_clients: "CLIENTS", nav_structure: "STRUCTURE",
+                nav_contact: "CONTACT", nav_plaquette: "DOWNLOAD OUR BROCHURE",
+                av_label: "01 / AUDIOVISUAL",
+                av_h1_1: "AUDIO", av_h1_2: "VISUAL",
+                av_hero_desc: "Scripting, shooting, editing and color grading: we craft every film with the same uncompromising standard, from first frame to delivery.",
+                av_cta_hero: "REQUEST A QUOTE",
+                av_tag1: "Music Video", av_tag2: "Corporate Film", av_tag3: "Reels & Shorts", av_tag4: "Motion Design", av_tag5: "Editing", av_tag6: "Color Grading", av_tag7: "Sound Design", av_tag8: "Ad Video", av_tag9: "Interview & Portrait",
+                av_viewfinder_label: "PRODUCTION FRAME", av_viewfinder_status: "IN PRODUCTION",
+                av_formats_label: "BROADCAST FORMATS",
+                av_ratio_cinema: "Cinema", av_ratio_story: "Story", av_ratio_square: "Square",
+                av_ratio_portrait: "Portrait", av_ratio_classic: "Classic",
+                av_formats_note: "Every format is optimised for its target platform. Well-formatted content can perform up to twice as well.",
+                av_process_label: "PRODUCTION PROCESS",
+                av_process_h2_1: "FROM IDEA TO", av_process_h2_2: "DELIVERY",
+                av_step1_title: "Brief", av_step1_desc: "Goals, tone, audience, platform",
+                av_step2_title: "Writing", av_step2_desc: "Concept, script, storyboard",
+                av_step3_title: "Pre-production", av_step3_desc: "Casting, locations, equipment",
+                av_step4_title: "Shoot", av_step4_desc: "Multi-cam capture, direction",
+                av_step5_title: "Editing", av_step5_desc: "Assembly, pacing, storytelling",
+                av_step6_title: "Colour grading", av_step6_desc: "Colours, contrast, mood",
+                av_step7_title: "Delivery", av_step7_desc: "Multi-format export, source files",
+                av_presta_h2_1: "OUR", av_presta_h2_2: "SERVICES",
+                av_p1_title: "Clip & Short Film", av_p1_desc: "Full production of your music videos, short films and narrative content. We handle concept writing, art direction, multi-camera shoot, dynamic editing and colour grading for a cinematic result.",
+                av_p2_title: "Corporate Film", av_p2_desc: "Showcase your company, teams and values through an impactful brand film. Perfect for commercial presentations, websites and social media. We manage the full production from brief to delivery.",
+                av_p3_title: "Reels & Social Content", av_p3_desc: "Short, punchy content for Instagram, TikTok and YouTube Shorts. On-location capture, dynamic editing, animated captions, sound design: your reels are built to maximise engagement and organic reach.",
+                av_p4_title: "Motion Design & Animation", av_p4_desc: "Animated branding, channel intros and outros, kinetic titles and logo animations. Motion design reinforces your visual identity in motion and elevates all your video content, from the simplest to the most complex.",
+                av_p5_title: "Advertising Video", av_p5_desc: "Ad spots for Google Ads, Meta Ads and TikTok Ads designed to convert. We master formats, ratios and optimal durations for each platform. Every frame is designed to grab attention in the first seconds.",
+                av_p6_title: "Post-Production & Colour", av_p6_desc: "Already have your rushes? We handle editing, colour correction, audio mixing, subtitles and multi-format export. Result: a professional, consistent final cut ready to publish on all your platforms.",
+                av_livrables_label: "WHAT YOU RECEIVE",
+                av_livrables_h2_1: "YOUR", av_livrables_h2_2: "DELIVERABLES",
+                av_livrables_desc: "At the end of every production, you receive all files in every format you need. No extra charge for exports.",
+                av_livrable1_sub: "All formats & resolutions",
+                av_livrable2_title: "Audio Stems", av_livrable2_sub: "Music, voice, ambience separated",
+                av_livrable3_title: "Subtitles", av_livrable3_sub: "SRT / VTT included",
+                av_livrable4_title: "RAW Rushes", av_livrable4_sub: "Unedited source files",
+                av_livrable5_title: "Source project", av_livrable5_sub: "Editable project file",
+                av_livrable6_title: "Social formats", av_livrable6_sub: "9:16, 1:1, 16:9 versions",
+                av_philosophy_label: "OUR APPROACH",
+                av_philosophy_quote: "A single image is not enough. It is movement, sound and rhythm that transform content into emotion.",
+                av_philosophy_body: "We refuse to produce content on an assembly line. Every project we take on is approached with careful attention to visual storytelling, tempo and your brand identity. The result is not just another video — it is a statement.",
+                av_philosophy_cta: "TALK ABOUT YOUR PROJECT",
+                av_cta_label: "NEXT STEP",
+                av_cta_h2_1: "READY TO TAKE", av_cta_h2_2: "ACTION?",
+                av_cta_desc: "Tell us about your audiovisual project. We will propose a tailored solution and a quote within 24 hours.",
+                av_cta_btn: "CONTACT US",
+                footer_tagline: "Creative direction, content and digital experiences.",
+                footer_title_services: "Services", footer_title_nav: "Navigation",
+                footer_title_follow: "Follow Us", footer_home: "Home", footer_plaquette: "Brochure",
+                s1_title: "Audiovisual", s2_title: "Websites", s3_title: "Graphic Design",
+                s4_title: "Printing", s5_title: "Ads", s6_title: "Local Marketing", s7_title: "Influence",
+                rights: "All rights reserved.", made_with: "Designed by NG Creative."
+            },
+            ES: {av_hero_service_name:"AUDIOVISUAL",
+                nav_services: "SERVICIOS", nav_clients: "CLIENTES", nav_structure: "ESTRUCTURA",
+                nav_contact: "CONTACTO", nav_plaquette: "DESCARGAR EL DOSSIER",
+                av_label: "01 / AUDIOVISUAL",
+                av_h1_1: "AUDIO", av_h1_2: "VISUAL",
+                av_hero_desc: "Guion, rodaje, montaje y etalonaje: construimos cada película con la misma exigencia, desde el primer plano hasta la entrega.",
+                av_cta_hero: "PEDIR PRESUPUESTO",
+                av_tag1: "Videoclip", av_tag2: "Video Corporativo", av_tag3: "Reels y Shorts", av_tag4: "Motion Design", av_tag5: "Edición", av_tag6: "Etalonaje", av_tag7: "Diseño Sonoro", av_tag8: "Video Publicitario", av_tag9: "Entrevista y Retrato",
+                av_viewfinder_label: "ENCUADRE DE PRODUCCIÓN", av_viewfinder_status: "EN PRODUCCIÓN",
+                av_formats_label: "FORMATOS DE DIFUSIÓN",
+                av_ratio_cinema: "Cine", av_ratio_story: "Historia", av_ratio_square: "Cuadrado",
+                av_ratio_portrait: "Retrato", av_ratio_classic: "Clásico",
+                av_formats_note: "Cada formato está optimizado para su plataforma de destino. Un contenido bien formateado puede rendir hasta el doble.",
+                av_process_label: "PROCESO DE PRODUCCIÓN",
+                av_process_h2_1: "DE LA IDEA A", av_process_h2_2: "LA ENTREGA",
+                av_step1_title: "Brief", av_step1_desc: "Objetivos, tono, público, plataforma",
+                av_step2_title: "Escritura", av_step2_desc: "Concepto, guión, storyboard",
+                av_step3_title: "Preproducción", av_step3_desc: "Casting, localizaciones, equipo",
+                av_step4_title: "Rodaje", av_step4_desc: "Captación multicámara, dirección",
+                av_step5_title: "Montaje", av_step5_desc: "Ensamblaje, ritmo, narración",
+                av_step6_title: "Etalonaje", av_step6_desc: "Colores, contraste, ambiente",
+                av_step7_title: "Entrega", av_step7_desc: "Exportación multiformato, archivos fuente",
+                av_presta_h2_1: "NUESTROS", av_presta_h2_2: "SERVICIOS",
+                av_p1_title: "Clip & Cortometraje", av_p1_desc: "Realización completa de sus videoclips, cortometrajes y contenidos narrativos. Nos encargamos de la escritura del concepto, la dirección artística, el rodaje multicámara, el montaje rítmico y el etalonaje colorimétrico.",
+                av_p2_title: "Película Corporativa", av_p2_desc: "Ponga en valor su empresa, sus equipos y sus valores a través de una película de marca impactante. Ideal para presentaciones comerciales, su sitio web y sus redes sociales.",
+                av_p3_title: "Reels & Contenido Social", av_p3_desc: "Creación de contenidos cortos e impactantes para Instagram, TikTok y YouTube Shorts. Captación en campo, montaje dinámico, textos y subtítulos animados, diseño sonoro.",
+                av_p4_title: "Motion Design & Animación", av_p4_desc: "Identidad gráfica animada, intros y outros de canal, títulos cinéticos y animaciones de logotipo. El motion design refuerza su identidad visual en movimiento.",
+                av_p5_title: "Vídeo Publicitario", av_p5_desc: "Spots publicitarios para Google Ads, Meta Ads y TikTok Ads diseñados para convertir. Dominamos los formatos, proporciones y duraciones óptimas para cada plataforma.",
+                av_p6_title: "Posproducción & Etalonaje", av_p6_desc: "¿Ya tiene sus rushes? Nos encargamos del montaje, la corrección de color, la mezcla de audio, los subtítulos y la exportación multiformato.",
+                av_livrables_label: "LO QUE RECIBE",
+                av_livrables_h2_1: "SUS", av_livrables_h2_2: "ENTREGABLES",
+                av_livrables_desc: "Al final de cada producción, recibe todos los archivos en todos los formatos que necesita. Sin coste adicional por las exportaciones.",
+                av_livrable1_sub: "Todos los formatos y resoluciones",
+                av_livrable2_title: "Stems de Audio", av_livrable2_sub: "Música, voz, ambientes separados",
+                av_livrable3_title: "Subtítulos", av_livrable3_sub: "SRT / VTT incluidos",
+                av_livrable4_title: "Rushes RAW", av_livrable4_sub: "Archivos fuente sin editar",
+                av_livrable5_title: "Proyecto fuente", av_livrable5_sub: "Archivo de montaje editable",
+                av_livrable6_title: "Formatos sociales", av_livrable6_sub: "9:16, 1:1, 16:9 adaptados",
+                av_philosophy_label: "NUESTRO ENFOQUE",
+                av_philosophy_quote: "Una imagen no es suficiente. Es el movimiento, el sonido y el ritmo lo que transforma un contenido en emoción.",
+                av_philosophy_body: "Rechazamos la producción en cadena. Cada proyecto que aceptamos se aborda con especial atención a la narración visual, el tempo y la identidad de su marca.",
+                av_philosophy_cta: "HABLAR DE SU PROYECTO",
+                av_cta_label: "PRÓXIMO PASO",
+                av_cta_h2_1: "¿LISTO PARA PASAR A", av_cta_h2_2: "LA ACCIÓN?",
+                av_cta_desc: "Descríbanos su proyecto audiovisual. Le proponemos una solución a medida y un presupuesto en 24h.",
+                av_cta_btn: "CONTÁCTENOS",
+                footer_tagline: "Dirección creativa, contenidos y experiencias digitales.",
+                footer_title_services: "Servicios", footer_title_nav: "Navegación",
+                footer_title_follow: "Síganos", footer_home: "Inicio", footer_plaquette: "Dossier",
+                s1_title: "Audiovisual", s2_title: "Sitios Web", s3_title: "Diseño Gráfico",
+                s4_title: "Impresión", s5_title: "Ads", s6_title: "Marketing Local", s7_title: "Influencia",
+                rights: "Todos los derechos reservados.", made_with: "Diseñado por NG Creative."
+            },
+            AR: {av_hero_service_name:"الإنتاج المرئي والمسموع",
+                nav_services: "الخدمات", nav_clients: "العملاء", nav_structure: "منهجيتنا",
+                nav_contact: "اتصل بنا", nav_plaquette: "تحميل الكتيب التعريفي",
+                av_label: "01 / الإنتاج السمعي البصري",
+                av_h1_1: "إنتاج", av_h1_2: "سمعي بصري",
+                av_hero_desc: "كتابة، تصوير، مونتاج وتصحيح ألوان: نبني كل عمل بأعلى معايير الإتقان، من أول مشهد حتى التسليم النهائي.",
+                av_cta_hero: "طلب عرض سعر",
+                av_tag1: "فيديو كليب", av_tag2: "فيلم مؤسسي", av_tag3: "ريلز وشورتس", av_tag4: "موشن جرافيك", av_tag5: "مونتاج", av_tag6: "تصحيح الألوان", av_tag7: "تصميم صوتي", av_tag8: "فيديو إعلاني", av_tag9: "مقابلات وبورتريه",
+                av_viewfinder_label: "إطار الإنتاج", av_viewfinder_status: "قيد الإنتاج",
+                av_formats_label: "صيغ البث",
+                av_ratio_cinema: "سينما", av_ratio_story: "ستوري", av_ratio_square: "مربع",
+                av_ratio_portrait: "عمودي", av_ratio_classic: "كلاسيكي",
+                av_formats_note: "كل صيغة مُحسَّنة لمنصتها المستهدفة. المحتوى ذو الصيغة الصحيحة يحقق ضعف الأداء.",
+                av_process_label: "مسار الإنتاج",
+                av_process_h2_1: "من الفكرة إلى", av_process_h2_2: "التسليم",
+                av_step1_title: "الإحاطة", av_step1_desc: "الأهداف، الأسلوب، الجمهور، المنصة",
+                av_step2_title: "الكتابة", av_step2_desc: "الفكرة، السيناريو، اللوحة المصورة",
+                av_step3_title: "مرحلة ما قبل التصوير", av_step3_desc: "الاختيار، المواقع، المعدات",
+                av_step4_title: "التصوير", av_step4_desc: "تصوير متعدد الكاميرات، إدارة فنية",
+                av_step5_title: "المونتاج", av_step5_desc: "التركيب، الإيقاع، السرد",
+                av_step6_title: "تصحيح الألوان", av_step6_desc: "الألوان، التباين، الأجواء",
+                av_step7_title: "التسليم", av_step7_desc: "تصدير متعدد الصيغ، ملفات المصدر",
+                av_presta_h2_1: "خدماتنا", av_presta_h2_2: "الاحترافية",
+                av_p1_title: "كليب وفيلم قصير", av_p1_desc: "إنتاج كامل لكليباتك الموسيقية وأفلامك القصيرة والمحتوى السردي، من كتابة المفهوم وصولًا إلى المونتاج والتصحيح اللوني.",
+                av_p2_title: "فيلم مؤسسي", av_p2_desc: "أبرز شركتك وقيمك من خلال فيلم علامة تجارية مؤثر. مثالي للعروض التجارية وموقعك الإلكتروني ومنصات التواصل.",
+                av_p3_title: "ريلز ومحتوى الشبكات", av_p3_desc: "محتوى قصير ومؤثر لإنستغرام وتيك توك ويوتيوب شورتس. تصوير ميداني، مونتاج ديناميكي، تعليقات وترجمات متحركة.",
+                av_p4_title: "موشن ديزاين والرسوم المتحركة", av_p4_desc: "هوية بصرية متحركة، مقدمات ونهايات القنوات، عناوين كينيتيكية وتحريك الشعار. الموشن ديزاين يعزز هويتك البصرية.",
+                av_p5_title: "فيديو إعلاني", av_p5_desc: "إعلانات مصورة لـ Google وMeta وTikTok مُصممة للتحويل. نتقن الصيغ والنسب والمدد المثلى لكل منصة.",
+                av_p6_title: "ما بعد الإنتاج وتصحيح الألوان", av_p6_desc: "لديك لقطاتك الخام؟ نتولى المونتاج وتصحيح الألوان ومزج الصوت والترجمة والتصدير متعدد الصيغ.",
+                av_livrables_label: "ما ستستلمه",
+                av_livrables_h2_1: "ملفات", av_livrables_h2_2: "التسليم",
+                av_livrables_desc: "في نهاية كل إنتاج، تستلم جميع الملفات بكافة الصيغ التي تحتاجها. دون أي رسوم إضافية.",
+                av_livrable1_sub: "جميع الصيغ والدقات",
+                av_livrable2_title: "مسارات الصوت", av_livrable2_sub: "موسيقى وصوت وأجواء منفصلة",
+                av_livrable3_title: "الترجمات", av_livrable3_sub: "SRT / VTT مشمولة",
+                av_livrable4_title: "اللقطات الخام", av_livrable4_sub: "ملفات مصدرية غير مُحررة",
+                av_livrable5_title: "مشروع المصدر", av_livrable5_sub: "ملف مونتاج قابل للتعديل",
+                av_livrable6_title: "صيغ الشبكات", av_livrable6_sub: "9:16 و1:1 و16:9",
+                av_philosophy_label: "فلسفتنا",
+                av_philosophy_quote: "الصورة وحدها لا تكفي. الحركة والصوت والإيقاع هي ما يحوّل المحتوى إلى مشاعر.",
+                av_philosophy_body: "نرفض الإنتاج المتسلسل. كل مشروع نقبله يُعالَج باهتمام خاص بالسرد البصري والإيقاع وهوية علامتك التجارية.",
+                av_philosophy_cta: "تحدث عن مشروعك",
+                av_cta_label: "الخطوة التالية",
+                av_cta_h2_1: "مستعد للانطلاق", av_cta_h2_2: "نحو الأمام؟",
+                av_cta_desc: "أخبرنا عن مشروعك السمعي البصري. نقترح عليك حلًا مخصصًا وعرض سعر خلال 24 ساعة.",
+                av_cta_btn: "تواصل معنا",
+                footer_tagline: "إدارة إبداعية ومحتوى وتجارب رقمية.",
+                footer_title_services: "الخدمات", footer_title_nav: "التنقل",
+                footer_title_follow: "تابعنا", footer_home: "الرئيسية", footer_plaquette: "الكتيب",
+                s1_title: "الإنتاج السمعي البصري", s2_title: "تطوير المواقع", s3_title: "التصميم الجرافيكي",
+                s4_title: "الطباعة", s5_title: "الإعلانات", s6_title: "التسويق المحلي", s7_title: "التسويق عبر المؤثرين",
+                rights: "جميع الحقوق محفوظة.", made_with: "تصميم بواسطة NG Creative."
+            }
+        };
+
+        function changeLanguage(lang) {
+            localStorage.setItem('n_graphiste_lang', lang);
+            document.documentElement.lang = lang.toLowerCase();
+            document.documentElement.dir = (lang === 'AR') ? 'rtl' : 'ltr';
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key] !== undefined) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('n_graphiste_lang') || 'FR';
+            changeLanguage(savedLang);
+
+            /* ─── Lucide icons ─── */
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+
+            /* ─── IntersectionObserver pour animations ─── */
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) {
+                            e.target.classList.add('visible');
+                            observer.unobserve(e.target);
+                        }
+                    });
+                }, { threshold: 0.08 });
+                document.querySelectorAll('.observer-target').forEach(el => observer.observe(el));
+            } else {
+                /* Fallback sans JS/IntersectionObserver : rendre tout visible */
+                document.querySelectorAll('.observer-target').forEach(el => el.classList.add('visible'));
+            }
+        });
+    </script>
+</body>
+</html>

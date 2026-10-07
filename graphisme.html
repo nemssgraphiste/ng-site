@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphisme | NG Creative — Identité Visuelle & Design</title>
+    <meta name="description" content="Création graphique sur-mesure : logo, identité visuelle, charte graphique, supports print et digitaux. Un design qui marque les esprits avant même que vous parliez.">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Montserrat','sans-serif'],aquire:['Aquire','sans-serif']},colors:{brand:{black:'#0a0a0a',white:'#f7f7f7',gray:'#1f1f1f',light:'#e5e5e5'}}}}}</script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+
+        :root {
+            --font-display: 'Montserrat', sans-serif;
+            --font-brand: 'Aquire', 'Montserrat', sans-serif;
+            --font-copy: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* Sur fond sombre */
+            --text-dark-primary: #f7f7f7;
+            --text-dark-body: #d8d5ce;
+            --text-dark-muted: #aaa69e;
+            --text-dark-subtle: #88847c;
+
+            /* Sur fond clair */
+            --text-light-primary: #0a0a0a;
+            --text-light-body: #34322e;
+            --text-light-muted: #69655e;
+            --text-light-subtle: #77736c;
+        }
+
+        [dir="rtl"] {
+            --font-copy: 'Noto Sans Arabic', 'Manrope', sans-serif;
+            --font-display: 'Noto Sans Arabic', 'Montserrat', sans-serif;
+        }
+
+        @font-face{font-family:'Aquire';src:url('Aquire.otf') format('opentype');font-weight:normal;font-style:normal;}
+        body{font-family:'Montserrat',sans-serif;background-color:#0a0a0a;color:#f7f7f7;overflow-x:hidden;-webkit-font-smoothing:auto!important;}
+        .text-stroke{font-style:italic;color:#0a0a0a;text-shadow:-1px -1px 0 #f7f7f7,0 -1px 0 #f7f7f7,1px -1px 0 #f7f7f7,1px 0 0 #f7f7f7,1px 1px 0 #f7f7f7,0 1px 0 #f7f7f7,-1px 1px 0 #f7f7f7,-1px 0 0 #f7f7f7;}
+        .text-stroke-black{font-style:italic;color:#f7f7f7;text-shadow:-1px -1px 0 #0a0a0a,0 -1px 0 #0a0a0a,1px -1px 0 #0a0a0a,1px 0 0 #0a0a0a,1px 1px 0 #0a0a0a,0 1px 0 #0a0a0a,-1px 1px 0 #0a0a0a,-1px 0 0 #0a0a0a;}
+        .btn-hover-effect{position:relative;overflow:hidden;}.btn-hover-effect::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:1px;background-color:currentColor;transform:scaleX(0);transform-origin:right;transition:transform 0.3s ease;}.btn-hover-effect:hover::after{transform:scaleX(1);transform-origin:left;}
+        .fade-in-up{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease-out,transform 0.8s ease-out;}.fade-in-up.visible{opacity:1;transform:translateY(0);}
+        @keyframes slowZoom{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}.animate-slow-zoom{animation:slowZoom 30s ease-in-out infinite;}
+        ::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:#0a0a0a;}::-webkit-scrollbar-thumb{background:#333;border-radius:4px;}
+        [x-cloak]{display:none!important;}.rounded-full{-webkit-background-clip:padding-box;background-clip:padding-box;}
+        .tag-pill{display:inline-flex;align-items:center;padding:0.4rem 1rem;border:1px solid rgba(247,247,247,0.15);border-radius:9999px;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9ca3af;background:rgba(255,255,255,0.04);transition:all 0.3s ease;}.tag-pill:hover{border-color:rgba(247,247,247,0.4);color:#f7f7f7;background:rgba(255,255,255,0.08);}
+        .prestation-number{font-family:'Aquire','Montserrat',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.2em;color:#6b7280;}
+        .service-label {
+            font-family: var(--font-copy);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-dark-muted);
+        }
+        .prestation-row{transition:background 0.3s ease;}.prestation-row:hover{background:rgba(247,247,247,0.03);}
+
+        /* ── Composition typo décorative héro ── */
+        .typo-decoration{
+            font-family:'Aquire','Montserrat',sans-serif;
+            font-size:clamp(4rem,12vw,10rem);
+            font-weight:900;
+            text-transform:uppercase;
+            letter-spacing:-0.05em;
+            color:transparent;
+            -webkit-text-stroke:1px rgba(247,247,247,0.06);
+            line-height:1;
+            user-select:none;
+            pointer-events:none;
+        }
+
+        /* ── Étape identité ── */
+        .identity-step{border-left:1px solid rgba(247,247,247,0.12);padding-left:1.5rem;position:relative;transition:border-color 0.3s;}
+        .identity-step:hover{border-color:rgba(247,247,247,0.35);}
+        .identity-step::before{content:'';position:absolute;left:-4px;top:0.25rem;width:7px;height:7px;border-radius:50%;background:#f7f7f7;transition:box-shadow 0.3s;}
+        .identity-step:hover::before{box-shadow:0 0 12px rgba(247,247,247,0.5);}
+
+        /* ══ Format file — Répertoire typographique ══ */
+        .ng-formats-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            border: 1px solid rgba(10,10,10,0.1);
+            border-radius: 2px;
+        }
+        .ng-format-item {
+            padding: 1.5rem 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 0.5rem;
+        }
+        .ng-format-item + .ng-format-item {
+            border-inline-start: 1px solid rgba(10,10,10,0.1);
+        }
+        .ng-format-ext {
+            font-family: 'Aquire', 'Montserrat', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            color: #0a0a0a;
+            line-height: 1;
+        }
+        .ng-format-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: #9ca3af;
+            letter-spacing: 0.05em;
+            line-height: 1.3;
+        }
+        @media (max-width: 767px) {
+            .ng-formats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .ng-format-item:nth-child(3n+1) + .ng-format-item:nth-child(3n+2) {
+                border-inline-start: 1px solid rgba(10,10,10,0.1);
+            }
+            .ng-format-item:nth-child(n+4) {
+                border-top: 1px solid rgba(10,10,10,0.1);
+            }
+        }
+        @media (max-width: 479px) {
+            .ng-formats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .ng-format-item:nth-child(n+3) {
+                border-top: 1px solid rgba(10,10,10,0.1);
+            }
+        }
+
+        /* ══ Engagement card (fond blanc) ══ */
+        .ng-proof-grid {
+            border: 1px solid rgba(10,10,10,0.1);
+            border-radius: 2px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .ng-proof-item {
+            padding: 2rem 1.75rem;
+            position: relative;
+        }
+        .ng-proof-item + .ng-proof-item {
+            border-inline-start: 1px solid rgba(10,10,10,0.1);
+        }
+        .ng-proof-number {
+            font-family: 'Aquire', 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            color: #9ca3af;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+        .ng-proof-title {
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            color: #0a0a0a;
+            margin-bottom: 0.875rem;
+            line-height: 1.2;
+        }
+        .ng-proof-desc {
+            font-family: var(--font-copy);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: var(--text-light-body);
+            font-weight: 400;
+        }
+        @media (max-width: 767px) {
+            .ng-proof-grid {
+                grid-template-columns: 1fr;
+            }
+            .ng-proof-item + .ng-proof-item {
+                border-inline-start: none;
+                border-top: 1px solid rgba(10,10,10,0.1);
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce){.fade-in-up{opacity:1;transform:none;transition:none;}.animate-slow-zoom{animation:none;}*{transition-duration:0.01ms!important;animation-duration:0.01ms!important;}}
+    
+        /* ── Hero Eyebrow Component ── */
+        .ng-hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+        .ng-hero-eyebrow-number {
+            font-family: var(--font-copy);
+            font-size: clamp(0.68rem, 1vw, 0.72rem);
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.1em;
+            color: rgba(247, 247, 247, 0.7);
+            flex-shrink: 0;
+        }
+        .ng-hero-eyebrow-line {
+            display: inline-block;
+            width: clamp(28px, 4vw, 40px);
+            height: 1px;
+            background-color: rgba(247, 247, 247, 0.6);
+            flex-shrink: 0;
+        }
+        .ng-hero-eyebrow-name {
+            font-family: var(--font-copy);
+            font-size: clamp(0.7rem, 1.1vw, 0.75rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #f7f7f7;
+        }
+
+        /* ── Hero Intro & Subtitle ── */
+        .ng-hero-intro {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.15rem;
+            max-width: 52ch;
+        }
+        .ng-hero-intro-line {
+            display: block;
+            width: clamp(24px, 3.5vw, 36px);
+            height: 1px;
+            background-color: rgba(247, 247, 247, 0.65);
+            flex-shrink: 0;
+            margin-top: 0.75rem;
+            transform-origin: left center;
+        }
+        [dir="rtl"] .ng-hero-intro-line {
+            transform-origin: right center;
+        }
+        .ng-service-hero-copy {
+            font-family: var(--font-copy);
+            font-weight: 600;
+            font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+            line-height: 1.6;
+            color: #f7f7f7;
+            margin: 0;
+            border-inline-start: none;
+            padding-inline-start: 0;
+        }
+
+        /* Subtle hero intro animation */
+        .observer-target.visible .ng-hero-intro-line {
+            animation: heroLineGrow 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .observer-target.visible .ng-service-hero-copy {
+            animation: heroCopyReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards;
+        }
+
+        @keyframes heroLineGrow {
+            from { transform: scaleX(0); opacity: 0; }
+            to { transform: scaleX(1); opacity: 1; }
+        }
+        @keyframes heroCopyReveal {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ng-hero-intro-line,
+            .ng-service-hero-copy {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* ── Solid White Hero Title ── */
+        .ng-hero-title-solid {
+            color: #f7f7f7;
+            font-style: normal;
+            text-shadow: none;
+            -webkit-text-stroke: 0;
+            -webkit-text-fill-color: #f7f7f7;
+        }
+
+        /* ── Capabilities Grid (T12) ── */
+        .ng-capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        }
+        .ng-capability-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            padding-block: 0.875rem;
+            border-top: 1px solid rgba(247,247,247,0.07);
+        }
+        .ng-cap-index {
+            font-family: var(--font-copy);
+            font-size: 0.58rem;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.12em;
+            color: var(--text-dark-subtle);
+            flex-shrink: 0;
+        }
+        .ng-cap-label {
+            font-family: var(--font-copy);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark-body);
+            letter-spacing: 0.02em;
+        }
+
+        /* ── Hero split + illustration ── */
+        .ng-hero-split {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: clamp(2rem, 5vw, 5rem);
+            align-items: center;
+        }
+        .ng-hero-text-col { min-width: 0; }
+        .ng-hero-illus-col { min-width: 0; }
+        @media (max-width: 1023px) {
+            .ng-hero-illus-col { display: none !important; }
+        }
+
+        /* ── GRAPHISME — Artboard identité ── */
+        .gr-hero-visual {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            pointer-events: none;
+        }
+        .gr-svg { width: 100%; height: auto; display: block; }
+
+        /* Courbe vectorielle : tracé progressif */
+        .gr-curve {
+            stroke-dasharray: 320;
+            stroke-dashoffset: 320;
+            animation: gr-curve-draw 2.8s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+        }
+        @keyframes gr-curve-draw { to { stroke-dashoffset: 0; } }
+
+        /* Ancres : apparition en cascade */
+        .gr-anchor { opacity: 0; animation: gr-anchor-appear 0.4s ease forwards; }
+        .gr-anchor-1 { animation-delay: 1.2s; }
+        .gr-anchor-2 { animation-delay: 1.6s; }
+        .gr-anchor-3 { animation-delay: 2s; }
+        .gr-anchor-4 { animation-delay: 2.4s; }
+        @keyframes gr-anchor-appear { to { opacity: 1; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .gr-curve { animation: none !important; stroke-dashoffset: 0 !important; }
+            .gr-anchor { animation: none !important; opacity: 1 !important; }
+        }
+    </style>
+</head>
+<body class="selection:bg-white selection:text-black">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:font-bold focus:rounded">Aller au contenu</a>
+
+    <!-- HEADER -->
+    <header x-data="{mobileMenuOpen:false,scrolled:false,langOpen:false,currentLang:'FR',currentFlag:'🇫🇷',init(){const s=localStorage.getItem('n_graphiste_lang')||'FR';this.currentLang=s;const f={FR:'🇫🇷',EN:'🇬🇧',ES:'🇪🇸',AR:'🇸🇦'};this.currentFlag=f[s]||'🇫🇷';}}"
+    @scroll.window="scrolled=(window.pageYOffset>50)"
+    @keydown.escape.window="mobileMenuOpen=false;langOpen=false"
+    :class="scrolled?'bg-brand-black/90 backdrop-blur-md py-4':'bg-transparent py-6'"
+    class="fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 md:px-12" role="banner">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4 md:gap-6 z-50">
+                <a href="index.html" class="flex items-center" aria-label="NG Creative — Accueil"><img src="LOGO1HEAD.png" alt="Logo NG Creative" class="h-8 md:h-10 w-auto object-contain transition-all duration-700 hover:scale-105"></a>
+                <div class="flex items-center gap-4 border-l border-white/20 pl-4 md:pl-6">
+                    <a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="Instagram"><svg class="w-5 h-5 md:w-[1.4rem] md:h-[1.4rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    <a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="X"><svg class="w-[1.15rem] h-[1.15rem] md:w-[1.25rem] md:h-[1.25rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                    <a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="TikTok"><svg class="w-5 h-5 md:w-[1.35rem] md:h-[1.35rem]" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a>
+                </div>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center text-sm font-semibold tracking-wide" aria-label="Navigation principale">
+                <a href="index.html#services" class="hover:text-gray-400 transition-colors" data-i18n="nav_services">SERVICES</a>
+                <a href="index.html#clients" class="hover:text-gray-400 transition-colors" data-i18n="nav_clients">CLIENTS</a>
+                <a href="index.html#structure" class="hover:text-gray-400 transition-colors" data-i18n="nav_structure">STRUCTURE</a>
+                <a href="contact.html" class="px-6 py-3 border border-white hover:bg-white hover:text-black transition-colors duration-300 rounded-full flex items-center gap-2"><span data-i18n="nav_contact">CONTACT</span><i data-lucide="arrow-up-right" class="w-4 h-4" aria-hidden="true"></i></a>
+                <div class="relative">
+                    <button @click="langOpen=!langOpen" @click.outside="langOpen=false" class="flex items-center gap-2 px-3 py-2 border border-white/20 rounded-full hover:bg-white/10 transition-all text-xs font-bold tracking-wider uppercase focus:outline-none" :aria-expanded="langOpen" aria-label="Changer la langue">
+                        <span x-text="currentFlag" class="text-base leading-none"></span><span x-text="currentLang"></span>
+                        <svg class="w-3 h-3 text-gray-400 transition-transform duration-200" :class="langOpen?'rotate-180':''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div x-show="langOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95 -translate-y-2" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-95 -translate-y-2" class="absolute right-0 mt-2 w-36 bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl py-2 z-50" x-cloak>
+                        <button @click="currentLang='FR';currentFlag='🇫🇷';langOpen=false;changeLanguage('FR')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇫🇷</span> Français</button>
+                        <button @click="currentLang='EN';currentFlag='🇬🇧';langOpen=false;changeLanguage('EN')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇬🇧</span> English</button>
+                        <button @click="currentLang='ES';currentFlag='🇪🇸';langOpen=false;changeLanguage('ES')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇪🇸</span> Español</button>
+                        <button @click="currentLang='AR';currentFlag='🇸🇦';langOpen=false;changeLanguage('AR')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇸🇦</span> العربية</button>
+                    </div>
+                </div>
+                <a href="Plaquette-Commerciale-NG-Creative.pdf" download="Plaquette-Commerciale-NG-Creative.pdf" class="btn-hover-effect text-xs font-bold tracking-wider uppercase text-white py-1" data-i18n="nav_plaquette">TÉLÉCHARGER LA PLAQUETTE</a>
+            </nav>
+            <button @click="mobileMenuOpen=!mobileMenuOpen;if(mobileMenuOpen)document.body.style.overflow='hidden';else document.body.style.overflow='';" class="md:hidden z-50 focus:outline-none" :aria-expanded="mobileMenuOpen" aria-label="Ouvrir le menu">
+                <i data-lucide="menu" x-show="!mobileMenuOpen" class="w-8 h-8" aria-hidden="true"></i>
+                <i data-lucide="x" x-show="mobileMenuOpen" class="w-8 h-8" x-cloak aria-hidden="true"></i>
+            </button>
+            <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-full" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-full" class="fixed inset-0 bg-brand-black flex flex-col justify-center items-center gap-8 text-2xl font-bold uppercase z-40" x-cloak role="dialog" aria-modal="true">
+                <a href="index.html#services" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_services">Services</a>
+                <a href="index.html#clients" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_clients">Clients</a>
+                <a href="index.html#structure" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_structure">Structure</a>
+                <a href="Plaquette-Commerciale-NG-Creative.pdf" download @click="mobileMenuOpen=false;document.body.style.overflow='';" class="btn-hover-effect text-lg tracking-wider text-white" data-i18n="nav_plaquette">TÉLÉCHARGER LA PLAQUETTE</a>
+                <a href="contact.html" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="mt-4 px-8 py-4 border border-white hover:bg-white hover:text-black transition-colors rounded-full" data-i18n="nav_contact">Contact</a>
+                <div class="flex gap-4 mt-4 pt-4 border-t border-white/10">
+                    <button @click="changeLanguage('FR');currentLang='FR';currentFlag='🇫🇷';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Français">🇫🇷</button>
+                    <button @click="changeLanguage('EN');currentLang='EN';currentFlag='🇬🇧';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="English">🇬🇧</button>
+                    <button @click="changeLanguage('ES');currentLang='ES';currentFlag='🇪🇸';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Español">🇪🇸</button>
+                    <button @click="changeLanguage('AR');currentLang='AR';currentFlag='🇸🇦';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="العربية">🇸🇦</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- HERO -->
+        <section class="relative min-h-screen flex items-center pt-32 pb-20 px-6 md:px-12 overflow-hidden isolate">
+            <!-- Décoration typographique en fond -->
+            <div class="absolute inset-0 flex items-center justify-end overflow-hidden pointer-events-none select-none" aria-hidden="true">
+                <p class="typo-decoration pr-[-2rem] translate-x-12 md:translate-x-0">DESIGN</p>
+            </div>
+            <div class="absolute inset-0">
+                <img src="FOND 1.png" alt="" class="w-full h-full object-cover opacity-20 animate-slow-zoom origin-center" aria-hidden="true">
+                <div class="absolute inset-0 bg-gradient-to-b from-brand-black/70 via-brand-black/80 to-brand-black"></div>
+            </div>
+            <div class="max-w-7xl mx-auto w-full relative observer-target fade-in-up">
+                <div class="ng-hero-split">
+                    <div class="ng-hero-text-col">
+                        <h1 class="font-black uppercase leading-none tracking-tighter mb-8" style="font-size: clamp(2.8rem, 7.5vw, 7rem);">
+                            <span data-i18n="gr_h1_1">GRAP</span><span class="ng-hero-title-solid" data-i18n="gr_h1_2">HISME</span>
+                        </h1>
+                        <div class="ng-hero-intro mb-10">
+                                    <p class="ng-service-hero-copy" data-i18n="gr_hero_desc">Du logo aux supports de campagne, nous construisons un langage visuel cohérent, reconnaissable et facile à décliner.</p>
+                                </div>
+                        <a href="contact.html" class="inline-flex items-center gap-3 text-base md:text-lg font-bold uppercase tracking-wider py-4 px-8 border border-white hover:bg-white hover:text-black transition-all duration-300 rounded-full focus:outline-none" data-i18n="gr_cta_hero">DEMANDER UN DEVIS <i data-lucide="arrow-up-right" class="w-5 h-5" aria-hidden="true"></i></a>
+                    </div>
+
+                    <!-- ILLUSTRATION : Artboard identité -->
+                    <div class="ng-hero-illus-col" aria-hidden="true">
+                        <figure class="gr-hero-visual">
+                            <svg class="gr-svg" viewBox="0 0 440 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                <!-- Grille de composition -->
+                                <g stroke="rgba(247,247,247,0.05)" stroke-width="0.5">
+                                    <line x1="0" y1="85" x2="440" y2="85"/>
+                                    <line x1="0" y1="170" x2="440" y2="170"/>
+                                    <line x1="0" y1="255" x2="440" y2="255"/>
+                                    <line x1="110" y1="0" x2="110" y2="340"/>
+                                    <line x1="220" y1="0" x2="220" y2="340"/>
+                                    <line x1="330" y1="0" x2="330" y2="340"/>
+                                </g>
+
+                                <!-- Fragment typographique — grande lettre G stylée -->
+                                <!-- Corps extérieur -->
+                                <path d="M 80 30 A 130 130 0 1 0 280 180 L 280 130 L 180 130" stroke="rgba(247,247,247,0.22)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <!-- Corp intérieur (ouverture) -->
+                                <path d="M 80 30 A 130 130 0 1 1 280 170" stroke="rgba(247,247,247,0.06)" stroke-width="6" stroke-linecap="round" fill="none"/>
+
+                                <!-- Repères d'alignement -->
+                                <line x1="60" y1="170" x2="300" y2="170" stroke="rgba(247,247,247,0.2)" stroke-width="0.75" stroke-dasharray="4 3"/>
+                                <line x1="180" y1="20" x2="180" y2="320" stroke="rgba(247,247,247,0.12)" stroke-width="0.5" stroke-dasharray="3 4"/>
+
+                                <!-- Forme pleine — rectangle carré -->
+                                <rect x="300" y="220" width="100" height="100" fill="rgba(247,247,247,0.07)" stroke="rgba(247,247,247,0.18)" stroke-width="1"/>
+                                <!-- Forme contour — cercle -->
+                                <circle cx="60" cy="280" r="44" stroke="rgba(247,247,247,0.16)" stroke-width="1" fill="none"/>
+                                <!-- Ligne de liaison formes -->
+                                <line x1="104" y1="280" x2="300" y2="270" stroke="rgba(247,247,247,0.1)" stroke-width="0.5" stroke-dasharray="3 4"/>
+
+                                <!-- Courbe bézier vectorielle (animée) -->
+                                <path class="gr-curve" d="M 30 310 C 110 240 200 290 280 220 C 340 165 380 250 420 200" stroke="rgba(247,247,247,0.55)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+
+                                <!-- Points d'ancrage (apparition en cascade) -->
+                                <g class="gr-anchor gr-anchor-1">
+                                    <circle cx="30" cy="310" r="4.5" fill="rgba(247,247,247,0)" stroke="rgba(247,247,247,0.8)" stroke-width="1.5"/>
+                                    <circle cx="30" cy="310" r="1.5" fill="rgba(247,247,247,0.9)"/>
+                                </g>
+                                <g class="gr-anchor gr-anchor-2">
+                                    <circle cx="280" cy="220" r="4.5" fill="rgba(247,247,247,0)" stroke="rgba(247,247,247,0.8)" stroke-width="1.5"/>
+                                    <circle cx="280" cy="220" r="1.5" fill="rgba(247,247,247,0.9)"/>
+                                    <!-- Poignée de contrôle -->
+                                    <line x1="200" y1="290" x2="280" y2="220" stroke="rgba(247,247,247,0.25)" stroke-width="0.75"/>
+                                    <circle cx="200" cy="290" r="2.5" fill="rgba(247,247,247,0)" stroke="rgba(247,247,247,0.5)" stroke-width="1"/>
+                                </g>
+                                <g class="gr-anchor gr-anchor-3">
+                                    <circle cx="420" cy="200" r="4.5" fill="rgba(247,247,247,0)" stroke="rgba(247,247,247,0.8)" stroke-width="1.5"/>
+                                    <circle cx="420" cy="200" r="1.5" fill="rgba(247,247,247,0.9)"/>
+                                    <line x1="340" y1="165" x2="420" y2="200" stroke="rgba(247,247,247,0.25)" stroke-width="0.75"/>
+                                    <circle cx="340" cy="165" r="2.5" fill="rgba(247,247,247,0)" stroke="rgba(247,247,247,0.5)" stroke-width="1"/>
+                                </g>
+
+                                <!-- Coins de cadrage artboard -->
+                                <line x1="8" y1="8" x2="26" y2="8" stroke="rgba(247,247,247,0.4)" stroke-width="1.5"/>
+                                <line x1="8" y1="8" x2="8" y2="26" stroke="rgba(247,247,247,0.4)" stroke-width="1.5"/>
+                                <line x1="432" y1="8" x2="414" y2="8" stroke="rgba(247,247,247,0.4)" stroke-width="1.5"/>
+                                <line x1="432" y1="8" x2="432" y2="26" stroke="rgba(247,247,247,0.4)" stroke-width="1.5"/>
+                                <line x1="8" y1="332" x2="26" y2="332" stroke="rgba(247,247,247,0.4)" stroke-width="1.5"/>
+                                <line x1="8" y1="332" x2="8" y2="314" stroke="rgba(247,247,247,0.4)" stroke-width="1.5"/>
+                                <line x1="432" y1="332" x2="414" y2="332" stroke="rgba(247,247,247,0.4)" stroke-width="1.5"/>
+                                <line x1="432" y1="332" x2="432" y2="314" stroke="rgba(247,247,247,0.4)" stroke-width="1.5"/>
+
+                            </svg>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAGS -->
+        <section class="py-12 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto"><div class="ng-capabilities-grid observer-target fade-in-up">
+                <div class="ng-capability-item"><span class="ng-cap-index">01</span><span class="ng-cap-label" data-i18n="gr_tag1">Logo & Identité</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">02</span><span class="ng-cap-label" data-i18n="gr_tag2">Charte Graphique</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">03</span><span class="ng-cap-label" data-i18n="gr_tag3">Flyer & Affiche</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">04</span><span class="ng-cap-label" data-i18n="gr_tag4">Menu Restaurant</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">05</span><span class="ng-cap-label" data-i18n="gr_tag5">Bannière Web</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">06</span><span class="ng-cap-label" data-i18n="gr_tag6">Posts Réseaux</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">07</span><span class="ng-cap-label" data-i18n="gr_tag7">Packaging</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">08</span><span class="ng-cap-label" data-i18n="gr_tag8">Carte de Visite</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">09</span><span class="ng-cap-label" data-i18n="gr_tag9">Maquette Presse</span></div>
+            </div></div>
+        </section>
+
+        <!-- PROCESSUS CRÉATION IDENTITÉ -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    <div class="observer-target fade-in-up">
+                        <p class="service-label mb-6" data-i18n="gr_process_label">CRÉATION D'UNE IDENTITÉ</p>
+                        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
+                            <span data-i18n="gr_process_h2_1">UNE MARQUE</span><br>
+                            <span class="text-stroke" data-i18n="gr_process_h2_2">SE CONSTRUIT</span>
+                        </h2>
+                        <p class="text-gray-400 font-semibold leading-relaxed max-w-md" data-i18n="gr_process_desc">Une identité visuelle forte ne s'improvise pas. Elle est le résultat d'une réflexion stratégique, d'une recherche créative et d'une exécution technique rigoureuse.</p>
+                    </div>
+                    <div class="space-y-6 observer-target fade-in-up">
+                        <div class="identity-step">
+                            <p class="prestation-number mb-1.5">01</p>
+                            <h3 class="font-black uppercase text-base tracking-tight mb-1.5" data-i18n="gr_step1_title">Recherche & Stratégie</h3>
+                            <p class="text-sm text-gray-500 font-semibold leading-relaxed" data-i18n="gr_step1_desc">Analyse de votre secteur, de vos concurrents et de votre positionnement cible. La création commence bien avant le premier trait.</p>
+                        </div>
+                        <div class="identity-step">
+                            <p class="prestation-number mb-1.5">02</p>
+                            <h3 class="font-black uppercase text-base tracking-tight mb-1.5" data-i18n="gr_step2_title">Exploration Conceptuelle</h3>
+                            <p class="text-sm text-gray-500 font-semibold leading-relaxed" data-i18n="gr_step2_desc">Moodboards, directions artistiques alternatives, exploration typographique et symbolique. Nous proposons plusieurs pistes avant de converger.</p>
+                        </div>
+                        <div class="identity-step">
+                            <p class="prestation-number mb-1.5">03</p>
+                            <h3 class="font-black uppercase text-base tracking-tight mb-1.5" data-i18n="gr_step3_title">Création & Affinement</h3>
+                            <p class="text-sm text-gray-500 font-semibold leading-relaxed" data-i18n="gr_step3_desc">Construction du logo définitif, affinement au pixel, tests sur fond blanc, noir, coloré et petits formats.</p>
+                        </div>
+                        <div class="identity-step">
+                            <p class="prestation-number mb-1.5">04</p>
+                            <h3 class="font-black uppercase text-base tracking-tight mb-1.5" data-i18n="gr_step4_title">Charte & Déclinaisons</h3>
+                            <p class="text-sm text-gray-500 font-semibold leading-relaxed" data-i18n="gr_step4_desc">Rédaction de la charte graphique complète et création de toutes les déclinaisons sur vos supports prioritaires.</p>
+                        </div>
+                        <div class="identity-step">
+                            <p class="prestation-number mb-1.5">05</p>
+                            <h3 class="font-black uppercase text-base tracking-tight mb-1.5" data-i18n="gr_step5_title">Livraison des Fichiers</h3>
+                            <p class="text-sm text-gray-500 font-semibold leading-relaxed" data-i18n="gr_step5_desc">Tous les formats sources et exports : AI, EPS, SVG, PNG (fond transparent), PDF et versions pour le web.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRESTATIONS -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 md:mb-24 observer-target fade-in-up">
+                    <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter">
+                        <span data-i18n="gr_presta_h2_1">NOS</span> <span class="text-stroke" data-i18n="gr_presta_h2_2">PRESTATIONS</span>
+                    </h2>
+                </div>
+                <div class="space-y-0 divide-y divide-gray-900">
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">01</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="gr_p1_title">Logo & Identité de Marque</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="gr_p1_desc">Création de logos uniques, modernes et déclinables sur tous les supports. Nous développons votre identité de marque complète : logo principal, variantes, favicon, règles d'usage et fichiers sources dans tous les formats (AI, EPS, SVG, PNG, PDF).</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">02</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="gr_p2_title">Charte Graphique</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="gr_p2_desc">Un guide complet définissant l'univers visuel de votre marque : palette de couleurs, typographies, règles d'utilisation du logo, tone of voice visuel, grilles de mise en page et exemples d'applications. La cohérence visuelle est la clé d'une marque crédible.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">03</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="gr_p3_title">Supports Print</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="gr_p3_desc">Flyers, affiches, cartes de visite, menus, brochures, roll-up et kakémonos. Chaque support print est conçu pour capter l'attention. Fichiers livrés prêts pour l'impression, avec fonds perdus, repères de coupe et profil colorimétrique CMJN.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">04</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="gr_p4_title">Visuels Réseaux Sociaux</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="gr_p4_desc">Posts, stories, bannières de couverture, gabarits éditoriaux et kits de contenu pour Instagram, Facebook, LinkedIn et TikTok. Des visuels cohérents, professionnels et engageants, adaptés aux contraintes de chaque plateforme.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">05</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="gr_p5_title">Packaging & Étiquettes</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="gr_p5_desc">Conception graphique de packagings, étiquettes et habillages produits. Que ce soit pour un lancement ou une refonte de gamme, nous créons des packagings qui se distinguent en linéaire et renforcent la perception de valeur de votre produit.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">06</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="gr_p6_title">Retouche & Création Image</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="gr_p6_desc">Retouche photo professionnelle, compositions visuelles, photomontages et créations digitales. Nous transformons vos photos existantes ou créons des visuels percutants de toutes pièces, adaptés à tous vos besoins de communication.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FORMATS LIVRÉS + POURQUOI NOUS (fond blanc) -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-white text-brand-black rounded-t-[3rem] md:rounded-t-[5rem]">
+            <div class="max-w-7xl mx-auto">
+                <!-- Formats de fichiers livrés -->
+                <div class="mb-20 observer-target fade-in-up">
+                    <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-10">
+                        <span data-i18n="gr_formats_h2_1">VOS</span><br><span class="text-stroke-black" data-i18n="gr_formats_h2_2">FICHIERS</span>
+                    </h2>
+                    <div class="ng-formats-grid">
+                        <div class="ng-format-item">
+                            <span class="ng-format-ext">AI</span>
+                            <span class="ng-format-label" data-i18n="gr_f1">Adobe Illustrator</span>
+                        </div>
+                        <div class="ng-format-item">
+                            <span class="ng-format-ext">EPS</span>
+                            <span class="ng-format-label" data-i18n="gr_f2">Vectoriel universel</span>
+                        </div>
+                        <div class="ng-format-item">
+                            <span class="ng-format-ext">SVG</span>
+                            <span class="ng-format-label" data-i18n="gr_f3">Web &amp; scalable</span>
+                        </div>
+                        <div class="ng-format-item">
+                            <span class="ng-format-ext">PNG</span>
+                            <span class="ng-format-label" data-i18n="gr_f4">Fond transparent</span>
+                        </div>
+                        <div class="ng-format-item">
+                            <span class="ng-format-ext">PDF</span>
+                            <span class="ng-format-label" data-i18n="gr_f5">Print &amp; partage</span>
+                        </div>
+                        <div class="ng-format-item">
+                            <span class="ng-format-ext">JPG</span>
+                            <span class="ng-format-label" data-i18n="gr_f6">Haute résolution</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pourquoi nous -->
+                <div class="pt-16 border-t border-gray-200">
+                    <div class="mb-12 observer-target fade-in-up">
+                        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">
+                            <span data-i18n="gr_why_h2_1">POURQUOI</span> <span class="text-stroke-black" data-i18n="gr_why_h2_2">NOUS ?</span>
+                        </h2>
+                    </div>
+                    <div class="ng-proof-grid">
+                        <div class="ng-proof-item observer-target fade-in-up">
+                            <span class="ng-proof-number" aria-hidden="true">01</span>
+                            <h3 class="ng-proof-title" data-i18n="gr_why1_title">Précision Absolue</h3>
+                            <p class="ng-proof-desc" data-i18n="gr_why1_desc">Chaque pixel est intentionnel. Nous ne livrons pas de design « presque bon » — nous itérons jusqu’à ce que le résultat soit exactement à la hauteur de votre vision, et au-delà.</p>
+                        </div>
+                        <div class="ng-proof-item observer-target fade-in-up">
+                            <span class="ng-proof-number" aria-hidden="true">02</span>
+                            <h3 class="ng-proof-title" data-i18n="gr_why2_title">Cohérence Multi-Support</h3>
+                            <p class="ng-proof-desc" data-i18n="gr_why2_desc">Votre identité reste cohérente, que ce soit sur un panneau 4×3 ou une notification push mobile. Nous pensons global et déclinons avec précision sur chaque format.</p>
+                        </div>
+                        <div class="ng-proof-item observer-target fade-in-up">
+                            <span class="ng-proof-number" aria-hidden="true">03</span>
+                            <h3 class="ng-proof-title" data-i18n="gr_why3_title">Livrables Complets</h3>
+                            <p class="ng-proof-desc" data-i18n="gr_why3_desc">Tous vos fichiers sources, variantes et formats sont livrés avec chaque projet. Vous êtes propriétaire de vos créations et pouvez les utiliser librement sur tous vos supports.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA FINAL -->
+        <section class="py-24 md:py-40 px-6 md:px-12 bg-brand-black relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]"><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white rounded-full blur-[100px]" aria-hidden="true"></div></div>
+            <div class="max-w-5xl mx-auto text-center relative observer-target fade-in-up">
+                <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-none tracking-tighter mb-8">
+                    <span data-i18n="gr_cta_h2_1">DONNEZ VISAGE</span><br><span class="text-stroke" data-i18n="gr_cta_h2_2">À VOTRE MARQUE.</span>
+                </h2>
+                <a href="contact.html" class="inline-flex items-center gap-3 text-lg md:text-xl font-bold uppercase tracking-wider py-5 px-10 border border-white hover:bg-white hover:text-black transition-all duration-300 rounded-full focus:outline-none" data-i18n="gr_cta_btn">CONTACTEZ-NOUS <i data-lucide="arrow-up-right" class="w-5 h-5" aria-hidden="true"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-black pt-20 pb-10 px-6 md:px-12 border-t border-gray-900" role="contentinfo">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            <div><a href="index.html" class="flex items-center mb-6"><img src="LOGO1HEAD.png" alt="Logo NG Creative" class="h-8 w-auto object-contain"></a><p class="text-sm leading-relaxed" style="font-family: var(--font-copy); color: var(--text-dark-muted); font-weight: 400;" data-i18n="footer_tagline">Direction créative, contenus et expériences digitales.</p></div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_services">Services</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="audiovisuel.html" class="hover:text-gray-400 transition-colors" data-i18n="s1_title">Audiovisuel</a></li>
+                    <li><a href="sites-web.html" class="hover:text-gray-400 transition-colors" data-i18n="s2_title">Sites Web</a></li>
+                    <li><a href="graphisme.html" class="text-white font-bold" aria-current="page" data-i18n="s3_title">Graphisme</a></li>
+                    <li><a href="impression.html" class="hover:text-gray-400 transition-colors" data-i18n="s4_title">Impression</a></li>
+                    <li><a href="ads.html" class="hover:text-gray-400 transition-colors" data-i18n="s5_title">Ads</a></li>
+                    <li><a href="marketing-local.html" class="hover:text-gray-400 transition-colors" data-i18n="s6_title">Marketing Local</a></li>
+                    <li><a href="influence.html" class="hover:text-gray-400 transition-colors" data-i18n="s7_title">Influence</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_nav">Navigation</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="index.html" class="hover:text-gray-400 transition-colors font-bold" data-i18n="footer_home">Accueil</a></li>
+                    <li><a href="contact.html" class="hover:text-gray-400 transition-colors font-bold" data-i18n="nav_contact">Contact</a></li>
+                    <li><a href="Plaquette-Commerciale-NG-Creative.pdf" download class="hover:text-gray-400 transition-colors font-bold" data-i18n="footer_plaquette">Plaquette</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_follow">Suivez-nous</h4>
+                <div class="flex gap-5">
+                    <a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="Instagram"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    <a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="X"><svg class="w-[1.15rem] h-[1.15rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                    <a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="TikTok"><svg class="w-5 h-5" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-600 text-xs font-bold">© 2026 NG Creative. <span data-i18n="rights">Tous droits réservés.</span></p>
+            <p class="text-gray-600 text-xs font-bold" data-i18n="made_with">Conçu avec passion.</p>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            FR:{nav_services:"SERVICES",nav_clients:"CLIENTS",nav_structure:"STRUCTURE",nav_contact:"CONTACT",nav_plaquette:"TÉLÉCHARGER LA PLAQUETTE",gr_hero_service_name:"GRAPHISME",gr_label:"03 / GRAPHISME",gr_h1_1:"GRAP",gr_h1_2:"HISME",gr_hero_desc:"Du logo aux supports de campagne, nous construisons un langage visuel cohérent, reconnaissable et facile à décliner.",gr_cta_hero:"DEMANDER UN DEVIS",gr_tag1:"Logo & Identité",gr_tag2:"Charte Graphique",gr_tag3:"Flyer & Affiche",gr_tag4:"Menu Restaurant",gr_tag5:"Bannière Web",gr_tag6:"Posts Réseaux",gr_tag7:"Packaging",gr_tag8:"Carte de Visite",gr_tag9:"Maquette Presse",gr_process_label:"CRÉATION D'UNE IDENTITÉ",gr_process_h2_1:"UNE MARQUE",gr_process_h2_2:"SE CONSTRUIT",gr_process_desc:"Une identité visuelle forte ne s'improvise pas. Elle est le résultat d'une réflexion stratégique, d'une recherche créative et d'une exécution technique rigoureuse.",gr_step1_title:"Recherche & Stratégie",gr_step1_desc:"Analyse de votre secteur, de vos concurrents et de votre positionnement cible. La création commence bien avant le premier trait.",gr_step2_title:"Exploration Conceptuelle",gr_step2_desc:"Moodboards, directions artistiques alternatives, exploration typographique et symbolique. Nous proposons plusieurs pistes avant de converger.",gr_step3_title:"Création & Affinement",gr_step3_desc:"Construction du logo définitif, affinement au pixel, tests sur fond blanc, noir, coloré et petits formats.",gr_step4_title:"Charte & Déclinaisons",gr_step4_desc:"Rédaction de la charte graphique complète et création de toutes les déclinaisons sur vos supports prioritaires.",gr_step5_title:"Livraison des Fichiers",gr_step5_desc:"Tous les formats sources et exports : AI, EPS, SVG, PNG (fond transparent), PDF et versions pour le web.",gr_presta_h2_1:"NOS",gr_presta_h2_2:"PRESTATIONS",gr_p1_title:"Logo & Identité de Marque",gr_p1_desc:"Création de logos uniques, modernes et déclinables sur tous les supports. Nous développons votre identité de marque complète : logo principal, variantes, favicon, règles d'usage et fichiers sources dans tous les formats.",gr_p2_title:"Charte Graphique",gr_p2_desc:"Un guide complet définissant l'univers visuel de votre marque : palette de couleurs, typographies, règles d'utilisation du logo, tone of voice visuel, grilles de mise en page et exemples d'applications.",gr_p3_title:"Supports Print",gr_p3_desc:"Flyers, affiches, cartes de visite, menus, brochures, roll-up et kakémonos. Fichiers livrés prêts pour l'impression, avec fonds perdus, repères de coupe et profil colorimétrique CMJN.",gr_p4_title:"Visuels Réseaux Sociaux",gr_p4_desc:"Posts, stories, bannières de couverture, gabarits éditoriaux et kits de contenu pour Instagram, Facebook, LinkedIn et TikTok.",gr_p5_title:"Packaging & Étiquettes",gr_p5_desc:"Conception graphique de packagings, étiquettes et habillages produits. Nous créons des packagings qui se distinguent en linéaire et renforcent la valeur perçue.",gr_p6_title:"Retouche & Création Image",gr_p6_desc:"Retouche photo professionnelle, compositions visuelles, photomontages et créations digitales adaptés à tous vos besoins de communication.",gr_formats_label:"FORMATS LIVRÉS",gr_formats_h2_1:"VOS",gr_formats_h2_2:"FICHIERS",gr_f1:"Adobe Illustrator",gr_f2:"Vectoriel universel",gr_f3:"Web & scalable",gr_f4:"Fond transparent",gr_f5:"Print & partage",gr_f6:"Haute résolution",gr_why_h2_1:"POURQUOI",gr_why_h2_2:"NOUS ?",gr_why1_title:"Précision Absolue",gr_why1_desc:"Chaque pixel est intentionnel. Nous itérons jusqu'à ce que le résultat soit exactement à la hauteur de votre vision.",gr_why2_title:"Cohérence Multi-Support",gr_why2_desc:"Votre identité reste cohérente, que ce soit sur un panneau 4×3 ou une notification push mobile.",gr_why3_title:"Livrables Complets",gr_why3_desc:"Tous vos fichiers sources, variantes et formats livrés. Vous êtes propriétaire de vos créations.",gr_cta_label:"PROCHAINE ÉTAPE",gr_cta_h2_1:"DONNEZ VISAGE",gr_cta_h2_2:"À VOTRE MARQUE.",gr_cta_desc:"Partagez-nous votre brief graphique. Nous vous proposons une direction artistique et un devis sous 24h.",gr_cta_btn:"CONTACTEZ-NOUS",footer_tagline: "Direction créative, contenus et expériences digitales.",footer_title_services:"Services",footer_title_nav:"Navigation",footer_title_follow:"Suivez-nous",footer_home:"Accueil",footer_plaquette:"Plaquette",s1_title:"Audiovisuel",s2_title:"Sites Web",s3_title:"Graphisme",s4_title:"Impression",s5_title:"Ads",s6_title:"Marketing Local",s7_title:"Influence",rights:"Tous droits réservés.",made_with: "Conçu par NG Creative."},
+            EN:{gr_hero_service_name:"GRAPHIC DESIGN",nav_services:"SERVICES",nav_clients:"CLIENTS",nav_structure:"STRUCTURE",nav_contact:"CONTACT",nav_plaquette:"DOWNLOAD OUR BROCHURE",gr_label:"03 / GRAPHIC DESIGN",gr_h1_1:"GRAP",gr_h1_2:"HIC",gr_hero_desc:"From brand identity to campaign collateral, we build a cohesive, memorable and versatile visual language.",gr_cta_hero:"REQUEST A QUOTE",gr_tag1:"Logo & Identity",gr_tag2:"Brand Guidelines",gr_tag3:"Flyer & Poster",gr_tag4:"Restaurant Menu",gr_tag5:"Web Banner",gr_tag6:"Social Posts",gr_tag7:"Packaging",gr_tag8:"Business Card",gr_tag9:"Press Layout",gr_process_label:"IDENTITY CREATION",gr_process_h2_1:"A BRAND",gr_process_h2_2:"IS BUILT",gr_process_desc:"A strong visual identity is never improvised. It is the result of strategic thinking, creative research and rigorous technical execution.",gr_step1_title:"Research & Strategy",gr_step1_desc:"Analysis of your sector, competitors and target positioning. Creation starts well before the first stroke.",gr_step2_title:"Conceptual Exploration",gr_step2_desc:"Moodboards, alternative art directions, typographic and symbolic exploration. We propose several directions before converging.",gr_step3_title:"Creation & Refinement",gr_step3_desc:"Building the definitive logo, pixel-level refinement, testing on white, black, coloured and small-scale backgrounds.",gr_step4_title:"Guidelines & Roll-outs",gr_step4_desc:"Writing the complete brand guidelines and creating all variants for your priority touchpoints.",gr_step5_title:"File Delivery",gr_step5_desc:"All source formats and exports: AI, EPS, SVG, PNG (transparent background), PDF and web versions.",gr_presta_h2_1:"OUR",gr_presta_h2_2:"SERVICES",gr_p1_title:"Logo & Brand Identity",gr_p1_desc:"Creation of unique, modern logos adaptable to all media. We develop your complete brand identity: primary logo, variants, favicon, usage rules and source files in all formats.",gr_p2_title:"Brand Guidelines",gr_p2_desc:"A complete guide defining your brand's visual universe: colour palette, typography, logo usage rules, visual tone of voice, layout grids and application examples.",gr_p3_title:"Print Materials",gr_p3_desc:"Flyers, posters, business cards, menus, brochures, roll-ups and banners. Files delivered print-ready with bleeds, crop marks and CMYK colour profile.",gr_p4_title:"Social Media Visuals",gr_p4_desc:"Posts, stories, cover banners, editorial templates and content kits for Instagram, Facebook, LinkedIn and TikTok.",gr_p5_title:"Packaging & Labels",gr_p5_desc:"Graphic design for packaging, labels and product wrapping. We create packaging that stands out on shelves and reinforces perceived value.",gr_p6_title:"Photo Retouching & Image Creation",gr_p6_desc:"Professional photo retouching, visual compositions, photomontages and digital creations adapted to all your communication needs.",gr_formats_label:"FILES DELIVERED",gr_formats_h2_1:"YOUR",gr_formats_h2_2:"FILES",gr_f1:"Adobe Illustrator",gr_f2:"Universal vector",gr_f3:"Web & scalable",gr_f4:"Transparent background",gr_f5:"Print & sharing",gr_f6:"High resolution",gr_why_h2_1:"WHY",gr_why_h2_2:"CHOOSE US?",gr_why1_title:"Absolute Precision",gr_why1_desc:"Every pixel is intentional. We iterate until the result perfectly matches your vision, and then some.",gr_why2_title:"Multi-Channel Consistency",gr_why2_desc:"Your identity stays consistent whether on a billboard or a mobile push notification. We think big and adapt precisely.",gr_why3_title:"Complete Deliverables",gr_why3_desc:"All source files, variants and formats delivered. You own your creations outright.",gr_cta_label:"NEXT STEP",gr_cta_h2_1:"GIVE YOUR BRAND",gr_cta_h2_2:"A FACE.",gr_cta_desc:"Share your creative brief. We will propose an art direction and a quote within 24 hours.",gr_cta_btn:"CONTACT US",footer_tagline: "Creative direction, content and digital experiences.",footer_title_services:"Services",footer_title_nav:"Navigation",footer_title_follow:"Follow Us",footer_home:"Home",footer_plaquette:"Brochure",s1_title:"Audiovisual",s2_title:"Websites",s3_title:"Graphic Design",s4_title:"Printing",s5_title:"Ads",s6_title:"Local Marketing",s7_title:"Influence",rights:"All rights reserved.",made_with: "Designed by NG Creative."},
+            ES:{gr_hero_service_name:"DISEÑO GRÁFICO",nav_services:"SERVICIOS",nav_clients:"CLIENTES",nav_structure:"ESTRUCTURA",nav_contact:"CONTACTO",nav_plaquette:"DESCARGAR EL DOSSIER",gr_label:"03 / DISEÑO GRÁFICO",gr_h1_1:"DISE",gr_h1_2:"ÑO",gr_hero_desc:"Del logotipo a los soportes de campaña, construimos un lenguaje visual coherente, reconocible y fácil de aplicar.",gr_cta_hero:"PEDIR PRESUPUESTO",gr_tag1:"Logo & Identidad",gr_tag2:"Manual de Marca",gr_tag3:"Folleto & Cartel",gr_tag4:"Menú Restaurante",gr_tag5:"Banner Web",gr_tag6:"Posts Redes",gr_tag7:"Packaging",gr_tag8:"Tarjeta de Visita",gr_tag9:"Maqueta Prensa",gr_process_label:"CREACIÓN DE IDENTIDAD",gr_process_h2_1:"UNA MARCA",gr_process_h2_2:"SE CONSTRUYE",gr_process_desc:"Una identidad visual fuerte no se improvisa. Es el resultado de una reflexión estratégica, investigación creativa y ejecución técnica rigurosa.",gr_step1_title:"Investigación & Estrategia",gr_step1_desc:"Análisis de su sector, competidores y posicionamiento objetivo.",gr_step2_title:"Exploración Conceptual",gr_step2_desc:"Moodboards, direcciones artísticas alternativas, exploración tipográfica y simbólica.",gr_step3_title:"Creación & Refinamiento",gr_step3_desc:"Construcción del logo definitivo, refinamiento al píxel, pruebas en distintos fondos.",gr_step4_title:"Manual & Adaptaciones",gr_step4_desc:"Redacción del manual de marca completo y creación de todas las variantes.",gr_step5_title:"Entrega de Archivos",gr_step5_desc:"Todos los formatos fuente y exportaciones: AI, EPS, SVG, PNG, PDF y versiones web.",gr_presta_h2_1:"NUESTROS",gr_presta_h2_2:"SERVICIOS",gr_p1_title:"Logo & Identidad de Marca",gr_p1_desc:"Creación de logotipos únicos, modernos y adaptables a todos los soportes. Desarrollamos su identidad completa con todos los formatos.",gr_p2_title:"Manual de Marca",gr_p2_desc:"Una guía completa que define el universo visual de su marca: colores, tipografías, reglas de uso del logo y ejemplos de aplicación.",gr_p3_title:"Materiales Print",gr_p3_desc:"Folletos, carteles, tarjetas, menús, brochures y roll-ups. Archivos listos para imprimir con sangrado, marcas de corte y perfil CMYK.",gr_p4_title:"Visuales Redes Sociales",gr_p4_desc:"Posts, stories, portadas, plantillas editoriales y kits de contenido para todas las plataformas.",gr_p5_title:"Packaging & Etiquetas",gr_p5_desc:"Diseño gráfico de packaging, etiquetas y habillages de producto que destacan en el lineal.",gr_p6_title:"Retoque & Creación de Imagen",gr_p6_desc:"Retoque fotográfico profesional, composiciones visuales y fotomontajes adaptados a sus necesidades.",gr_formats_label:"ARCHIVOS ENTREGADOS",gr_formats_h2_1:"SUS",gr_formats_h2_2:"ARCHIVOS",gr_f1:"Adobe Illustrator",gr_f2:"Vector universal",gr_f3:"Web & escalable",gr_f4:"Fondo transparente",gr_f5:"Print & compartir",gr_f6:"Alta resolución",gr_why_h2_1:"¿POR QUÉ",gr_why_h2_2:"ELEGIRNOS?",gr_why1_title:"Precisión Absoluta",gr_why1_desc:"Cada píxel es intencional. Iteramos hasta que el resultado esté exactamente a la altura de su visión.",gr_why2_title:"Coherencia Multi-Soporte",gr_why2_desc:"Su identidad es coherente en un cartel 4×3 o en una notificación push móvil.",gr_why3_title:"Entregables Completos",gr_why3_desc:"Todos sus archivos fuente, variantes y formatos entregados. Es propietario de sus creaciones.",gr_cta_label:"PRÓXIMO PASO",gr_cta_h2_1:"DÉ ROSTRO A",gr_cta_h2_2:"SU MARCA.",gr_cta_desc:"Comparta su brief creativo. Le proponemos una dirección artística y un presupuesto en 24h.",gr_cta_btn:"CONTÁCTENOS",footer_tagline: "Dirección creativa, contenidos y experiencias digitales.",footer_title_services:"Servicios",footer_title_nav:"Navegación",footer_title_follow:"Síganos",footer_home:"Inicio",footer_plaquette:"Dossier",s1_title:"Audiovisual",s2_title:"Sitios Web",s3_title:"Diseño Gráfico",s4_title:"Impresión",s5_title:"Ads",s6_title:"Marketing Local",s7_title:"Influencia",rights:"Todos los derechos reservados.",made_with: "Diseñado por NG Creative."},
+            AR:{gr_hero_service_name:"التصميم الجرافيكي",nav_services:"الخدمات",nav_clients:"العملاء",nav_structure:"منهجيتنا",nav_contact:"اتصل بنا",nav_plaquette:"تحميل الكتيب التعريفي",gr_label:"03 / التصميم الجرافيكي",gr_h1_1:"تصميم",gr_h1_2:"جرافيكي",gr_hero_desc:"من الشعار إلى تصاميم الحملات، نبني لغة بصرية متناسقة، مميزة وسهلة التطبيق عبر كافة الوسائط.",gr_cta_hero:"طلب عرض سعر",gr_tag1:"شعار وهوية",gr_tag2:"دليل العلامة",gr_tag3:"نشرة وملصق",gr_tag4:"قائمة مطعم",gr_tag5:"بانر ويب",gr_tag6:"منشورات الشبكات",gr_tag7:"تغليف",gr_tag8:"بطاقة عمل",gr_tag9:"تصميم مجلة",gr_process_label:"مراحل إنشاء الهوية",gr_process_h2_1:"العلامة",gr_process_h2_2:"تُبنى",gr_process_desc:"الهوية البصرية القوية لا تُرتجل. هي ثمرة تفكير استراتيجي وبحث إبداعي وتنفيذ تقني صارم.",gr_step1_title:"البحث والاستراتيجية",gr_step1_desc:"تحليل قطاعك ومنافسيك وموضعك المستهدف.",gr_step2_title:"الاستكشاف المفاهيمي",gr_step2_desc:"لوحات مزاج، اتجاهات فنية بديلة، استكشاف طباعي ورمزي.",gr_step3_title:"الإنشاء والتحسين",gr_step3_desc:"بناء الشعار النهائي، تدقيق بكسل بكسل، اختبارات على خلفيات مختلفة.",gr_step4_title:"الدليل والتطبيقات",gr_step4_desc:"كتابة دليل العلامة الكامل وإنشاء جميع التطبيقات.",gr_step5_title:"تسليم الملفات",gr_step5_desc:"جميع صيغ المصدر والتصديرات: AI وEPS وSVG وPNG وPDF.",gr_presta_h2_1:"خدماتنا",gr_presta_h2_2:"الاحترافية",gr_p1_title:"الشعار وهوية العلامة",gr_p1_desc:"إنشاء شعارات فريدة وعصرية قابلة للتطبيق على جميع الوسائط مع جميع الصيغ.",gr_p2_title:"دليل العلامة التجارية",gr_p2_desc:"دليل شامل يحدد الكون البصري لعلامتك: الألوان والخطوط وقواعد استخدام الشعار.",gr_p3_title:"المطبوعات",gr_p3_desc:"نشرات وملصقات وبطاقات عمل وقوائم وكتيبات وبانرات. ملفات جاهزة للطباعة.",gr_p4_title:"مرئيات الشبكات الاجتماعية",gr_p4_desc:"منشورات وقصص وأغلفة وقوالب تحريرية لجميع المنصات.",gr_p5_title:"التغليف والملصقات",gr_p5_desc:"تصميم جرافيكي للتغليف والملصقات التي تبرز على الرفوف.",gr_p6_title:"تعديل الصور والإنشاء البصري",gr_p6_desc:"تعديل صور احترافي وتركيبات بصرية ومونتاج فوتوغرافي.",gr_formats_label:"الملفات المسلَّمة",gr_formats_h2_1:"ملفاتك",gr_formats_h2_2:"كاملة",gr_f1:"Adobe Illustrator",gr_f2:"متجه عالمي",gr_f3:"ويب وقابل للتكبير",gr_f4:"خلفية شفافة",gr_f5:"طباعة ومشاركة",gr_f6:"دقة عالية",gr_why_h2_1:"لماذا",gr_why_h2_2:"تختارنا؟",gr_why1_title:"دقة مطلقة",gr_why1_desc:"كل بكسل مقصود. نكرر التعديلات حتى يرقى الناتج إلى مستوى رؤيتك.",gr_why2_title:"اتساق متعدد الوسائط",gr_why2_desc:"هويتك متسقة سواء على لوحة إعلانية ضخمة أو إشعار هاتفي.",gr_why3_title:"مخرجات كاملة",gr_why3_desc:"جميع ملفات المصدر والتطبيقات والصيغ. أنت المالك الكامل لإبداعاتك.",gr_cta_label:"الخطوة التالية",gr_cta_h2_1:"أعطِ علامتك",gr_cta_h2_2:"وجهًا.",gr_cta_desc:"شاركنا إحاطتك الإبداعية. نقترح توجهًا فنيًا وعرض سعر خلال 24 ساعة.",gr_cta_btn:"تواصل معنا",footer_tagline: "إدارة إبداعية ومحتوى وتجارب رقمية.",footer_title_services:"الخدمات",footer_title_nav:"التنقل",footer_title_follow:"تابعنا",footer_home:"الرئيسية",footer_plaquette:"الكتيب",s1_title:"الإنتاج السمعي البصري",s2_title:"تطوير المواقع",s3_title:"التصميم الجرافيكي",s4_title:"الطباعة",s5_title:"الإعلانات",s6_title:"التسويق المحلي",s7_title:"التسويق عبر المؤثرين",rights:"جميع الحقوق محفوظة.",made_with: "تصميم بواسطة NG Creative."}
+        };
+        function changeLanguage(lang){localStorage.setItem('n_graphiste_lang',lang);document.documentElement.lang=lang.toLowerCase();document.documentElement.dir=(lang==='AR')?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(translations[lang]&&translations[lang][k]!==undefined)el.textContent=translations[lang][k];});}
+        document.addEventListener('DOMContentLoaded',()=>{const s=localStorage.getItem('n_graphiste_lang')||'FR';changeLanguage(s);if(typeof lucide!=='undefined')lucide.createIcons();if('IntersectionObserver' in window){const o=new IntersectionObserver((e)=>{e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target);}});},{threshold:0.08});document.querySelectorAll('.observer-target').forEach(el=>o.observe(el));}else{document.querySelectorAll('.observer-target').forEach(el=>el.classList.add('visible'));}});
+    </script>
+</body>
+</html>

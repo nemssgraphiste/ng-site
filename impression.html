@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impression | NG Creative — Supports Print & Grands Formats</title>
+    <meta name="description" content="Impression offset et numérique, grands formats, bâches et signalétique. Des supports physiques premium conçus et produits avec précision par NG Creative.">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Montserrat','sans-serif'],aquire:['Aquire','sans-serif']},colors:{brand:{black:'#0a0a0a',white:'#f7f7f7',gray:'#1f1f1f',light:'#e5e5e5'}}}}}</script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+
+        :root {
+            --font-display: 'Montserrat', sans-serif;
+            --font-brand: 'Aquire', 'Montserrat', sans-serif;
+            --font-copy: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* Sur fond sombre */
+            --text-dark-primary: #f7f7f7;
+            --text-dark-body: #d8d5ce;
+            --text-dark-muted: #aaa69e;
+            --text-dark-subtle: #88847c;
+
+            /* Sur fond clair */
+            --text-light-primary: #0a0a0a;
+            --text-light-body: #34322e;
+            --text-light-muted: #69655e;
+            --text-light-subtle: #77736c;
+        }
+
+        [dir="rtl"] {
+            --font-copy: 'Noto Sans Arabic', 'Manrope', sans-serif;
+            --font-display: 'Noto Sans Arabic', 'Montserrat', sans-serif;
+        }
+
+        @font-face{font-family:'Aquire';src:url('Aquire.otf') format('opentype');}
+        body{font-family:'Montserrat',sans-serif;background-color:#0a0a0a;color:#f7f7f7;overflow-x:hidden;-webkit-font-smoothing:auto!important;}
+        .text-stroke{font-style:italic;color:#0a0a0a;text-shadow:-1px -1px 0 #f7f7f7,0 -1px 0 #f7f7f7,1px -1px 0 #f7f7f7,1px 0 0 #f7f7f7,1px 1px 0 #f7f7f7,0 1px 0 #f7f7f7,-1px 1px 0 #f7f7f7,-1px 0 0 #f7f7f7;}
+        .text-stroke-black{font-style:italic;color:#f7f7f7;text-shadow:-1px -1px 0 #0a0a0a,0 -1px 0 #0a0a0a,1px -1px 0 #0a0a0a,1px 0 0 #0a0a0a,1px 1px 0 #0a0a0a,0 1px 0 #0a0a0a,-1px 1px 0 #0a0a0a,-1px 0 0 #0a0a0a;}
+        .btn-hover-effect{position:relative;overflow:hidden;}.btn-hover-effect::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:1px;background-color:currentColor;transform:scaleX(0);transform-origin:right;transition:transform 0.3s ease;}.btn-hover-effect:hover::after{transform:scaleX(1);transform-origin:left;}
+        .fade-in-up{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease-out,transform 0.8s ease-out;}.fade-in-up.visible{opacity:1;transform:translateY(0);}
+        @keyframes slowZoom{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}.animate-slow-zoom{animation:slowZoom 30s ease-in-out infinite;}
+        ::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:#0a0a0a;}::-webkit-scrollbar-thumb{background:#333;border-radius:4px;}
+        [x-cloak]{display:none!important;}.rounded-full{-webkit-background-clip:padding-box;background-clip:padding-box;}
+        .tag-pill{display:inline-flex;align-items:center;padding:0.4rem 1rem;border:1px solid rgba(247,247,247,0.15);border-radius:9999px;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9ca3af;background:rgba(255,255,255,0.04);transition:all 0.3s ease;}.tag-pill:hover{border-color:rgba(247,247,247,0.4);color:#f7f7f7;background:rgba(255,255,255,0.08);}
+        .prestation-number{font-family:'Aquire','Montserrat',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.2em;color:#6b7280;}
+        .service-label {
+            font-family: var(--font-copy);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-dark-muted);
+        }
+        .prestation-row{transition:background 0.3s ease;}.prestation-row:hover{background:rgba(247,247,247,0.03);}
+
+        /* ── Simulation finitions papier ── */
+        .finition-card{
+            border:1px solid rgba(247,247,247,0.12);
+            border-radius:0.75rem;
+            overflow:hidden;
+            transition:all 0.3s ease;
+            cursor:default;
+        }
+        .finition-card:hover{border-color:rgba(247,247,247,0.35);transform:translateY(-3px);}
+        .finition-surface{height:80px;position:relative;}
+        .finition-mat{background:#1a1a1a;}
+        .finition-brillant{background:linear-gradient(135deg,#1a1a1a 0%,#3a3a3a 40%,#2a2a2a 60%,#1a1a1a 100%);}
+        .finition-softtouch{background:radial-gradient(circle at 30% 30%,#2a2a2a 0%,#1a1a1a 70%);}
+        .finition-dorure{background:linear-gradient(135deg,#1a1a1a 0%,#2c2518 30%,#3d3420 50%,#2c2518 70%,#1a1a1a 100%);}
+        .finition-uv{background:linear-gradient(to bottom right,#1a1a1a 0%,#222 40%,#1f1f2e 70%,#1a1a1a 100%);}
+
+        /* ── Formats papier CSS ── */
+        .paper-format{
+            border:1px solid rgba(247,247,247,0.15);
+            display:flex;flex-direction:column;
+            align-items:center;justify-content:flex-end;
+            padding:0.5rem;
+            background:rgba(255,255,255,0.03);
+            transition:all 0.3s ease;
+            position:relative;
+        }
+        .paper-format:hover{border-color:rgba(247,247,247,0.4);background:rgba(255,255,255,0.06);}
+
+        /* ── Checklist item ── */
+        .check-item{
+            display:flex;align-items:flex-start;gap:0.75rem;
+            padding:0.875rem 1.25rem;
+            border:1px solid rgba(10,10,10,0.1);
+            border-radius:0.75rem;
+            background:#fff;
+            transition:all 0.25s ease;
+        }
+        .check-item:hover{border-color:rgba(10,10,10,0.25);box-shadow:0 6px 20px rgba(0,0,0,0.07);transform:translateY(-2px);}
+
+        @media(prefers-reduced-motion:reduce){.fade-in-up{opacity:1;transform:none;transition:none;}.animate-slow-zoom{animation:none;}*{transition-duration:0.01ms!important;animation-duration:0.01ms!important;}}
+    
+        /* ── Hero Eyebrow Component ── */
+        .ng-hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+        .ng-hero-eyebrow-number {
+            font-family: var(--font-copy);
+            font-size: clamp(0.68rem, 1vw, 0.72rem);
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.1em;
+            color: rgba(247, 247, 247, 0.7);
+            flex-shrink: 0;
+        }
+        .ng-hero-eyebrow-line {
+            display: inline-block;
+            width: clamp(28px, 4vw, 40px);
+            height: 1px;
+            background-color: rgba(247, 247, 247, 0.6);
+            flex-shrink: 0;
+        }
+        .ng-hero-eyebrow-name {
+            font-family: var(--font-copy);
+            font-size: clamp(0.7rem, 1.1vw, 0.75rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #f7f7f7;
+        }
+
+        /* ── Hero Intro & Subtitle ── */
+        .ng-hero-intro {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.15rem;
+            max-width: 52ch;
+        }
+        .ng-hero-intro-line {
+            display: block;
+            width: clamp(24px, 3.5vw, 36px);
+            height: 1px;
+            background-color: rgba(247, 247, 247, 0.65);
+            flex-shrink: 0;
+            margin-top: 0.75rem;
+            transform-origin: left center;
+        }
+        [dir="rtl"] .ng-hero-intro-line {
+            transform-origin: right center;
+        }
+        .ng-service-hero-copy {
+            font-family: var(--font-copy);
+            font-weight: 600;
+            font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+            line-height: 1.6;
+            color: #f7f7f7;
+            margin: 0;
+            border-inline-start: none;
+            padding-inline-start: 0;
+        }
+
+        /* Subtle hero intro animation */
+        .observer-target.visible .ng-hero-intro-line {
+            animation: heroLineGrow 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .observer-target.visible .ng-service-hero-copy {
+            animation: heroCopyReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards;
+        }
+
+        @keyframes heroLineGrow {
+            from { transform: scaleX(0); opacity: 0; }
+            to { transform: scaleX(1); opacity: 1; }
+        }
+        @keyframes heroCopyReveal {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ng-hero-intro-line,
+            .ng-service-hero-copy {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* ── Solid White Hero Title ── */
+        .ng-hero-title-solid {
+            color: #f7f7f7;
+            font-style: normal;
+            text-shadow: none;
+            -webkit-text-stroke: 0;
+            -webkit-text-fill-color: #f7f7f7;
+        }
+
+        /* ── Capabilities Grid (T12) ── */
+        .ng-capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        }
+        .ng-capability-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            padding-block: 0.875rem;
+            border-top: 1px solid rgba(247,247,247,0.07);
+        }
+        .ng-cap-index {
+            font-family: var(--font-copy);
+            font-size: 0.58rem;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.12em;
+            color: var(--text-dark-subtle);
+            flex-shrink: 0;
+        }
+        .ng-cap-label {
+            font-family: var(--font-copy);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark-body);
+            letter-spacing: 0.02em;
+        }
+
+        /* ── Hero split + illustration ── */
+        .ng-hero-split {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: clamp(2rem, 5vw, 5rem);
+            align-items: center;
+        }
+        .ng-hero-text-col { min-width: 0; }
+        .ng-hero-illus-col { min-width: 0; }
+        @media (max-width: 1023px) {
+            .ng-hero-illus-col { display: none !important; }
+        }
+
+        /* ── IMPRESSION — Chaîne d'impression ── */
+        .imp-hero-visual {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            pointer-events: none;
+        }
+        .imp-svg { width: 100%; height: auto; display: block; }
+
+        /* Ligne de coupe (couperet) : animation progressive */
+        .imp-cut-line {
+            stroke-dasharray: 280;
+            stroke-dashoffset: 280;
+            animation: imp-cut-draw 2s cubic-bezier(0.22,1,0.36,1) 0.5s forwards;
+        }
+        @keyframes imp-cut-draw { to { stroke-dashoffset: 0; } }
+
+        /* Repères de coupe : apparition en cascade */
+        .imp-mark { opacity: 0; animation: imp-mark-appear 0.3s ease forwards; }
+        .imp-mark-1 { animation-delay: 1.2s; }
+        .imp-mark-2 { animation-delay: 1.5s; }
+        .imp-mark-3 { animation-delay: 1.8s; }
+        .imp-mark-4 { animation-delay: 2.1s; }
+        @keyframes imp-mark-appear { to { opacity: 1; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .imp-cut-line { animation: none !important; stroke-dashoffset: 0 !important; }
+            .imp-mark { animation: none !important; opacity: 1 !important; }
+        }
+    </style>
+</head>
+<body class="selection:bg-white selection:text-black">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:font-bold focus:rounded">Aller au contenu</a>
+
+    <!-- HEADER -->
+    <header x-data="{mobileMenuOpen:false,scrolled:false,langOpen:false,currentLang:'FR',currentFlag:'🇫🇷',init(){const s=localStorage.getItem('n_graphiste_lang')||'FR';this.currentLang=s;const f={FR:'🇫🇷',EN:'🇬🇧',ES:'🇪🇸',AR:'🇸🇦'};this.currentFlag=f[s]||'🇫🇷';}}"
+    @scroll.window="scrolled=(window.pageYOffset>50)"
+    @keydown.escape.window="mobileMenuOpen=false;langOpen=false"
+    :class="scrolled?'bg-brand-black/90 backdrop-blur-md py-4':'bg-transparent py-6'"
+    class="fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 md:px-12" role="banner">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4 md:gap-6 z-50">
+                <a href="index.html" class="flex items-center" aria-label="NG Creative — Accueil"><img src="LOGO1HEAD.png" alt="Logo NG Creative" class="h-8 md:h-10 w-auto object-contain transition-all duration-700 hover:scale-105"></a>
+                <div class="flex items-center gap-4 border-l border-white/20 pl-4 md:pl-6">
+                    <a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="Instagram"><svg class="w-5 h-5 md:w-[1.4rem] md:h-[1.4rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    <a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="X"><svg class="w-[1.15rem] h-[1.15rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                    <a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="TikTok"><svg class="w-5 h-5" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a>
+                </div>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center text-sm font-semibold tracking-wide" aria-label="Navigation principale">
+                <a href="index.html#services" class="hover:text-gray-400 transition-colors" data-i18n="nav_services">SERVICES</a>
+                <a href="index.html#clients" class="hover:text-gray-400 transition-colors" data-i18n="nav_clients">CLIENTS</a>
+                <a href="index.html#structure" class="hover:text-gray-400 transition-colors" data-i18n="nav_structure">STRUCTURE</a>
+                <a href="contact.html" class="px-6 py-3 border border-white hover:bg-white hover:text-black transition-colors duration-300 rounded-full flex items-center gap-2"><span data-i18n="nav_contact">CONTACT</span><i data-lucide="arrow-up-right" class="w-4 h-4" aria-hidden="true"></i></a>
+                <div class="relative">
+                    <button @click="langOpen=!langOpen" @click.outside="langOpen=false" class="flex items-center gap-2 px-3 py-2 border border-white/20 rounded-full hover:bg-white/10 transition-all text-xs font-bold tracking-wider uppercase focus:outline-none" :aria-expanded="langOpen" aria-label="Changer la langue">
+                        <span x-text="currentFlag" class="text-base leading-none"></span><span x-text="currentLang"></span>
+                        <svg class="w-3 h-3 text-gray-400 transition-transform duration-200" :class="langOpen?'rotate-180':''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div x-show="langOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95 -translate-y-2" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-95 -translate-y-2" class="absolute right-0 mt-2 w-36 bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl py-2 z-50" x-cloak>
+                        <button @click="currentLang='FR';currentFlag='🇫🇷';langOpen=false;changeLanguage('FR')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇫🇷</span> Français</button>
+                        <button @click="currentLang='EN';currentFlag='🇬🇧';langOpen=false;changeLanguage('EN')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇬🇧</span> English</button>
+                        <button @click="currentLang='ES';currentFlag='🇪🇸';langOpen=false;changeLanguage('ES')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇪🇸</span> Español</button>
+                        <button @click="currentLang='AR';currentFlag='🇸🇦';langOpen=false;changeLanguage('AR')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇸🇦</span> العربية</button>
+                    </div>
+                </div>
+                <a href="Plaquette-Commerciale-NG-Creative.pdf" download="Plaquette-Commerciale-NG-Creative.pdf" class="btn-hover-effect text-xs font-bold tracking-wider uppercase text-white py-1" data-i18n="nav_plaquette">TÉLÉCHARGER LA PLAQUETTE</a>
+            </nav>
+            <button @click="mobileMenuOpen=!mobileMenuOpen;if(mobileMenuOpen)document.body.style.overflow='hidden';else document.body.style.overflow='';" class="md:hidden z-50 focus:outline-none" :aria-expanded="mobileMenuOpen" aria-label="Ouvrir le menu">
+                <i data-lucide="menu" x-show="!mobileMenuOpen" class="w-8 h-8" aria-hidden="true"></i>
+                <i data-lucide="x" x-show="mobileMenuOpen" class="w-8 h-8" x-cloak aria-hidden="true"></i>
+            </button>
+            <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-full" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-full" class="fixed inset-0 bg-brand-black flex flex-col justify-center items-center gap-8 text-2xl font-bold uppercase z-40" x-cloak role="dialog" aria-modal="true">
+                <a href="index.html#services" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_services">Services</a>
+                <a href="index.html#clients" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_clients">Clients</a>
+                <a href="index.html#structure" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_structure">Structure</a>
+                <a href="Plaquette-Commerciale-NG-Creative.pdf" download @click="mobileMenuOpen=false;document.body.style.overflow='';" class="btn-hover-effect text-lg tracking-wider text-white" data-i18n="nav_plaquette">TÉLÉCHARGER LA PLAQUETTE</a>
+                <a href="contact.html" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="mt-4 px-8 py-4 border border-white hover:bg-white hover:text-black transition-colors rounded-full" data-i18n="nav_contact">Contact</a>
+                <div class="flex gap-4 mt-4 pt-4 border-t border-white/10">
+                    <button @click="changeLanguage('FR');currentLang='FR';currentFlag='🇫🇷';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="Français">🇫🇷</button>
+                    <button @click="changeLanguage('EN');currentLang='EN';currentFlag='🇬🇧';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="English">🇬🇧</button>
+                    <button @click="changeLanguage('ES');currentLang='ES';currentFlag='🇪🇸';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="Español">🇪🇸</button>
+                    <button @click="changeLanguage('AR');currentLang='AR';currentFlag='🇸🇦';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="العربية">🇸🇦</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- HERO -->
+        <section class="relative min-h-screen flex items-center pt-32 pb-20 px-6 md:px-12 overflow-hidden isolate">
+            <div class="absolute inset-0">
+                <img src="FOND 1.png" alt="" class="w-full h-full object-cover opacity-20 animate-slow-zoom origin-center" aria-hidden="true">
+                <div class="absolute inset-0 bg-gradient-to-b from-brand-black/70 via-brand-black/80 to-brand-black"></div>
+            </div>
+            <div class="max-w-7xl mx-auto w-full relative observer-target fade-in-up">
+                <div class="ng-hero-split">
+                    <div class="ng-hero-text-col">
+                        <h1 class="font-black uppercase leading-none tracking-tighter mb-8" style="font-size: clamp(2.8rem, 7.5vw, 7rem);">
+                            <span data-i18n="imp_h1_1">IMPRES</span><span class="ng-hero-title-solid" data-i18n="imp_h1_2">SION</span>
+                        </h1>
+                        <div class="ng-hero-intro mb-10">
+                                    <p class="ng-service-hero-copy" data-i18n="imp_hero_desc">Du choix du papier au contrôle des fichiers, chaque support est préparé avec précision avant de passer en production.</p>
+                                </div>
+                        <a href="contact.html" class="inline-flex items-center gap-3 text-base md:text-lg font-bold uppercase tracking-wider py-4 px-8 border border-white hover:bg-white hover:text-black transition-all duration-300 rounded-full focus:outline-none" data-i18n="imp_cta_hero">DEMANDER UN DEVIS <i data-lucide="arrow-up-right" class="w-5 h-5" aria-hidden="true"></i></a>
+                    </div>
+
+                    <!-- ILLUSTRATION : Chaîne d'impression -->
+                    <div class="ng-hero-illus-col" aria-hidden="true">
+                        <figure class="imp-hero-visual">
+                            <svg class="imp-svg" viewBox="0 0 440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                <!-- ══ Feuille principale : document à imprimer ══ -->
+                                <rect x="60" y="10" width="210" height="272" rx="2" stroke="rgba(247,247,247,0.2)" stroke-width="1" fill="rgba(255,255,255,0.018)"/>
+
+                                <!-- Marge interieure -->
+                                <rect x="76" y="26" width="178" height="240" stroke="rgba(247,247,247,0.08)" stroke-width="0.5" fill="none"/>
+
+                                <!-- Contenu document : lignes de texte abstraites -->
+                                <rect x="84" y="40" width="130" height="12" rx="1" fill="rgba(247,247,247,0.16)"/>
+                                <rect x="84" y="58" width="162" height="7" rx="1" fill="rgba(247,247,247,0.07)"/>
+                                <rect x="84" y="69" width="150" height="7" rx="1" fill="rgba(247,247,247,0.06)"/>
+                                <rect x="84" y="80" width="140" height="7" rx="1" fill="rgba(247,247,247,0.05)"/>
+
+                                <!-- Séparateur image/texte -->
+                                <line x1="84" y1="96" x2="246" y2="96" stroke="rgba(247,247,247,0.06)" stroke-width="0.5"/>
+
+                                <!-- Zone image -->
+                                <rect x="84" y="104" width="162" height="82" rx="1" fill="rgba(247,247,247,0.04)" stroke="rgba(247,247,247,0.09)" stroke-width="0.5"/>
+                                <!-- Diagonale image placeholder -->
+                                <line x1="84" y1="104" x2="246" y2="186" stroke="rgba(247,247,247,0.06)" stroke-width="0.5"/>
+                                <line x1="246" y1="104" x2="84" y2="186" stroke="rgba(247,247,247,0.06)" stroke-width="0.5"/>
+
+                                <!-- Texte bas -->
+                                <rect x="84" y="196" width="140" height="7" rx="1" fill="rgba(247,247,247,0.07)"/>
+                                <rect x="84" y="207" width="120" height="7" rx="1" fill="rgba(247,247,247,0.06)"/>
+                                <rect x="84" y="218" width="100" height="7" rx="1" fill="rgba(247,247,247,0.05)"/>
+
+                                <!-- ══ Repères de coupe (traits de bord) ── -->
+                                <!-- Coin TL -->
+                                <g class="imp-mark imp-mark-1">
+                                    <line x1="44" y1="10" x2="54" y2="10" stroke="rgba(247,247,247,0.55)" stroke-width="1"/>
+                                    <line x1="60" y1="0" x2="60" y2="6" stroke="rgba(247,247,247,0.55)" stroke-width="1"/>
+                                </g>
+                                <!-- Coin TR -->
+                                <g class="imp-mark imp-mark-2">
+                                    <line x1="276" y1="10" x2="286" y2="10" stroke="rgba(247,247,247,0.55)" stroke-width="1"/>
+                                    <line x1="270" y1="0" x2="270" y2="6" stroke="rgba(247,247,247,0.55)" stroke-width="1"/>
+                                </g>
+                                <!-- Coin BL -->
+                                <g class="imp-mark imp-mark-3">
+                                    <line x1="44" y1="282" x2="54" y2="282" stroke="rgba(247,247,247,0.55)" stroke-width="1"/>
+                                    <line x1="60" y1="286" x2="60" y2="292" stroke="rgba(247,247,247,0.55)" stroke-width="1"/>
+                                </g>
+                                <!-- Coin BR -->
+                                <g class="imp-mark imp-mark-4">
+                                    <line x1="276" y1="282" x2="286" y2="282" stroke="rgba(247,247,247,0.55)" stroke-width="1"/>
+                                    <line x1="270" y1="286" x2="270" y2="292" stroke="rgba(247,247,247,0.55)" stroke-width="1"/>
+                                </g>
+
+                                <!-- ══ Axe de coupe horizontal (animé) ══ -->
+                                <line class="imp-cut-line" x1="36" y1="220" x2="294" y2="220" stroke="rgba(247,247,247,0.4)" stroke-width="1" stroke-dasharray="4 3"/>
+                                <!-- Curseur couperet -->
+                                <polygon points="294,216 302,220 294,224" fill="rgba(247,247,247,0.7)"/>
+
+                                <!-- ══ Seconde feuille (sortie) ══ -->
+                                <rect x="310" y="60" width="110" height="143" rx="2" stroke="rgba(247,247,247,0.12)" stroke-width="0.75" fill="rgba(255,255,255,0.01)"/>
+                                <rect x="318" y="70" width="94" height="123" fill="rgba(247,247,247,0.02)" stroke="rgba(247,247,247,0.05)" stroke-width="0.5"/>
+                                <!-- Contenu sortie -->
+                                <rect x="324" y="78" width="68" height="8" rx="1" fill="rgba(247,247,247,0.1)"/>
+                                <rect x="324" y="92" width="82" height="5" rx="1" fill="rgba(247,247,247,0.05)"/>
+                                <rect x="324" y="101" width="76" height="5" rx="1" fill="rgba(247,247,247,0.04)"/>
+                                <rect x="324" y="116" width="82" height="44" rx="1" fill="rgba(247,247,247,0.03)" stroke="rgba(247,247,247,0.06)" stroke-width="0.5"/>
+
+                                <!-- Flèche entre les deux documents -->
+                                <line x1="296" y1="150" x2="310" y2="150" stroke="rgba(247,247,247,0.22)" stroke-width="1"/>
+                                <polygon points="308,146 314,150 308,154" fill="rgba(247,247,247,0.5)"/>
+
+                                <!-- Label -->
+                                <text x="60" y="306" font-family="monospace" font-size="7" font-weight="700" letter-spacing="0.12em" fill="rgba(247,247,247,0.2)">FORMAT FINAL</text>
+                                <text x="310" y="218" font-family="monospace" font-size="7" font-weight="700" letter-spacing="0.12em" fill="rgba(247,247,247,0.16)">BAT</text>
+
+                            </svg>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAGS -->
+        <section class="py-12 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto"><div class="ng-capabilities-grid observer-target fade-in-up">
+                <div class="ng-capability-item"><span class="ng-cap-index">01</span><span class="ng-cap-label" data-i18n="imp_tag1">Flyer & Tract</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">02</span><span class="ng-cap-label" data-i18n="imp_tag2">Affiche</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">03</span><span class="ng-cap-label" data-i18n="imp_tag3">Carte de Visite</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">04</span><span class="ng-cap-label" data-i18n="imp_tag4">Brochure</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">05</span><span class="ng-cap-label" data-i18n="imp_tag5">Roll-Up</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">06</span><span class="ng-cap-label" data-i18n="imp_tag6">Bâche & Kakémono</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">07</span><span class="ng-cap-label" data-i18n="imp_tag7">Menu Restaurant</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">08</span><span class="ng-cap-label" data-i18n="imp_tag8">Autocollant & Sticker</span></div>
+                <div class="ng-capability-item"><span class="ng-cap-index">09</span><span class="ng-cap-label" data-i18n="imp_tag9">Grand Format</span></div>
+            </div></div>
+        </section>
+
+        <!-- FINITIONS PAPIER (CSS pur) -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 observer-target fade-in-up">
+                    <p class="service-label mb-4" data-i18n="imp_finitions_label">FINITIONS DISPONIBLES</p>
+                    <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">
+                        <span data-i18n="imp_finitions_h2_1">LA MATIÈRE</span><br>
+                        <span class="text-stroke" data-i18n="imp_finitions_h2_2">COMPTE</span>
+                    </h2>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 observer-target fade-in-up">
+                    <div class="finition-card">
+                        <div class="finition-surface finition-mat"></div>
+                        <div class="p-3">
+                            <p class="service-label mb-1" data-i18n="imp_fin1_label">FINITION</p>
+                            <p class="font-black text-sm uppercase tracking-tight" data-i18n="imp_fin1_title">Papier Mat</p>
+                            <p class="text-xs text-gray-500 font-semibold mt-1 leading-relaxed" data-i18n="imp_fin1_desc">Surface douce, sans reflet. Rendu élégant et lisible.</p>
+                        </div>
+                    </div>
+                    <div class="finition-card">
+                        <div class="finition-surface finition-brillant"></div>
+                        <div class="p-3">
+                            <p class="service-label mb-1" data-i18n="imp_fin2_label">FINITION</p>
+                            <p class="font-black text-sm uppercase tracking-tight" data-i18n="imp_fin2_title">Pelliculage Brillant</p>
+                            <p class="text-xs text-gray-500 font-semibold mt-1 leading-relaxed" data-i18n="imp_fin2_desc">Couleurs vivaces, rendu premium et percutant.</p>
+                        </div>
+                    </div>
+                    <div class="finition-card">
+                        <div class="finition-surface finition-softtouch"></div>
+                        <div class="p-3">
+                            <p class="service-label mb-1" data-i18n="imp_fin3_label">FINITION</p>
+                            <p class="font-black text-sm uppercase tracking-tight" data-i18n="imp_fin3_title">Soft-Touch</p>
+                            <p class="text-xs text-gray-500 font-semibold mt-1 leading-relaxed" data-i18n="imp_fin3_desc">Toucher velouté et ultra-mat. Le summum du luxe.</p>
+                        </div>
+                    </div>
+                    <div class="finition-card">
+                        <div class="finition-surface finition-dorure"></div>
+                        <div class="p-3">
+                            <p class="service-label mb-1" data-i18n="imp_fin4_label">FINITION</p>
+                            <p class="font-black text-sm uppercase tracking-tight" data-i18n="imp_fin4_title">Dorure à Chaud</p>
+                            <p class="text-xs text-gray-500 font-semibold mt-1 leading-relaxed" data-i18n="imp_fin4_desc">Effet métallique pour une impression d'exception.</p>
+                        </div>
+                    </div>
+                    <div class="finition-card">
+                        <div class="finition-surface finition-uv"></div>
+                        <div class="p-3">
+                            <p class="service-label mb-1" data-i18n="imp_fin5_label">FINITION</p>
+                            <p class="font-black text-sm uppercase tracking-tight" data-i18n="imp_fin5_title">Vernis UV Sélectif</p>
+                            <p class="text-xs text-gray-500 font-semibold mt-1 leading-relaxed" data-i18n="imp_fin5_desc">Relief brillant sur zones ciblées. Impact visuel fort.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FORMATS DISPONIBLES -->
+        <section class="py-16 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto observer-target fade-in-up">
+                <p class="service-label mb-8" data-i18n="imp_formats_label">FORMATS COURANTS</p>
+                <div class="flex flex-wrap items-end gap-4 md:gap-6">
+                    <!-- A6 -->
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="paper-format" style="width:42px;height:60px;"><span class="text-[0.5rem] font-bold text-gray-600 leading-none">A6</span></div>
+                        <p class="service-label text-[0.55rem]">10.5×14.8</p>
+                    </div>
+                    <!-- A5 -->
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="paper-format" style="width:60px;height:85px;"><span class="text-[0.5rem] font-bold text-gray-600 leading-none">A5</span></div>
+                        <p class="service-label text-[0.55rem]">14.8×21</p>
+                    </div>
+                    <!-- A4 -->
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="paper-format" style="width:85px;height:120px;"><span class="text-[0.5rem] font-bold text-gray-600 leading-none">A4</span></div>
+                        <p class="service-label text-[0.55rem]">21×29.7</p>
+                    </div>
+                    <!-- A3 -->
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="paper-format" style="width:120px;height:170px;"><span class="text-[0.5rem] font-bold text-gray-600 leading-none">A3</span></div>
+                        <p class="service-label text-[0.55rem]">29.7×42</p>
+                    </div>
+                    <!-- Roll-up -->
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="paper-format" style="width:38px;height:170px;"><span class="text-[0.45rem] font-bold text-gray-600 leading-none text-center px-1" data-i18n="imp_format_rollup">Roll-Up</span></div>
+                        <p class="service-label text-[0.55rem]">85×200</p>
+                    </div>
+                    <!-- Bâche -->
+                    <div class="flex flex-col items-center gap-2 ml-4">
+                        <div class="paper-format" style="width:170px;height:80px;"><span class="text-[0.5rem] font-bold text-gray-600 leading-none" data-i18n="imp_format_bache">Bâche / Grand Format</span></div>
+                        <p class="service-label text-[0.55rem]" data-i18n="imp_format_bache_size">Sur mesure</p>
+                    </div>
+                    <div class="ml-auto hidden lg:flex items-end">
+                        <p class="text-gray-500 text-sm font-semibold max-w-xs leading-relaxed" data-i18n="imp_formats_note">Des formats standards aux tailles événementielles sur mesure, nous maîtrisons l'intégralité de la chaîne graphique.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRESTATIONS -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 md:mb-24 observer-target fade-in-up">
+                    <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter">
+                        <span data-i18n="imp_presta_h2_1">NOS</span> <span class="text-stroke" data-i18n="imp_presta_h2_2">PRESTATIONS</span>
+                    </h2>
+                </div>
+                <div class="space-y-0 divide-y divide-gray-900">
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">01</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="imp_p1_title">Flyers & Affiches</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="imp_p1_desc">Conception graphique et impression de flyers, dépliants et affiches dans tous les formats. Tirage offset ou numérique selon la quantité. Papiers couchés mat ou brillant, disponibles en pelliculage soft-touch ou vernis UV sélectif pour un rendu premium.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">02</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="imp_p2_title">Cartes de Visite</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="imp_p2_desc">Cartes de visite standard, carrées ou rondes en grammages premium (350g à 600g). Options : pelliculage soft-touch, dorure à chaud, vernis UV, découpe spéciale, impression recto-verso. Votre première impression ne se répète pas.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">03</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="imp_p3_title">Brochures & Catalogues</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="imp_p3_desc">Mise en page et impression de plaquettes commerciales, catalogues produits et brochures institutionnelles. Couvertures rigides ou souples, reliure dos carré-collé, agrafage ou spirale. Impression offset haute qualité pour des couleurs fidèles et des noirs profonds.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">04</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="imp_p4_title">Roll-Up & Kakémono</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="imp_p4_desc">Signalétique événementielle prête à monter. Roll-ups en impression haute définition sur bâche polyester ou vinyle, avec système d'enroulement inclus. Idéal pour salons, conférences, boutiques et showrooms. Livraison express disponible.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">05</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="imp_p5_title">Bâche & Grand Format</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="imp_p5_desc">Impression grands formats pour l'événementiel, la décoration de vitrine et la signalétique extérieure. Bâches indoor et outdoor avec ourlets et œillets, adhésifs, toiles tendues et impressions sur supports rigides. Toutes dimensions sur mesure.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">06</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="imp_p6_title">Menus & Supports Resto</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="imp_p6_desc">Menus de restaurant, cartes des vins, ardoises et set de table. Impression plastifiée ou pelliculée pour une durabilité optimale. Nous gérons la mise en page, l'impression et assurons un rendu qui valorise votre établissement à chaque service.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHECKLIST FICHIER TECHNIQUE (fond blanc) -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-white text-brand-black rounded-t-[3rem] md:rounded-t-[5rem]">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    <div class="observer-target fade-in-up">
+                        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
+                            <span data-i18n="imp_check_h2_1">FICHIER</span><br>
+                            <span class="text-stroke-black" data-i18n="imp_check_h2_2">PRÊT À IMPRIMER</span>
+                        </h2>
+                        <p class="text-gray-600 font-semibold leading-relaxed max-w-md" data-i18n="imp_check_desc">
+                            Confier votre fichier à imprimer nécessite quelques règles techniques. Nous vérifions systématiquement ces points avant tout lancement de production pour éviter toute mauvaise surprise.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 gap-3 observer-target fade-in-up">
+                        <div class="check-item">
+                            <svg class="w-5 h-5 flex-shrink-0 text-gray-800 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <div><p class="font-black text-sm uppercase tracking-tight" data-i18n="imp_c1_title">Fonds Perdus : 3mm</p><p class="text-xs text-gray-500 font-semibold" data-i18n="imp_c1_desc">Élément graphique étendu de 3mm au-delà du cadre de coupe</p></div>
+                        </div>
+                        <div class="check-item">
+                            <svg class="w-5 h-5 flex-shrink-0 text-gray-800 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <div><p class="font-black text-sm uppercase tracking-tight" data-i18n="imp_c2_title">Mode Colorimétrique CMJN</p><p class="text-xs text-gray-500 font-semibold" data-i18n="imp_c2_desc">Obligatoire pour l'impression. Le mode RVB est destiné aux écrans.</p></div>
+                        </div>
+                        <div class="check-item">
+                            <svg class="w-5 h-5 flex-shrink-0 text-gray-800 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <div><p class="font-black text-sm uppercase tracking-tight" data-i18n="imp_c3_title">Résolution 300 DPI minimum</p><p class="text-xs text-gray-500 font-semibond" data-i18n="imp_c3_desc">Toutes les images doivent être en haute résolution pour éviter le flou.</p></div>
+                        </div>
+                        <div class="check-item">
+                            <svg class="w-5 h-5 flex-shrink-0 text-gray-800 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <div><p class="font-black text-sm uppercase tracking-tight" data-i18n="imp_c4_title">Textes vectorisés ou polices embarquées</p><p class="text-xs text-gray-500 font-semibold" data-i18n="imp_c4_desc">Pour éviter les substitutions de polices sur notre poste de production.</p></div>
+                        </div>
+                        <div class="check-item">
+                            <svg class="w-5 h-5 flex-shrink-0 text-gray-800 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <div><p class="font-black text-sm uppercase tracking-tight" data-i18n="imp_c5_title">Marges de sécurité : 5mm</p><p class="text-xs text-gray-500 font-semibold" data-i18n="imp_c5_desc">Textes et éléments importants à 5mm du bord de coupe au minimum.</p></div>
+                        </div>
+                        <div class="check-item">
+                            <svg class="w-5 h-5 flex-shrink-0 text-gray-800 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <div><p class="font-black text-sm uppercase tracking-tight" data-i18n="imp_c6_title">Format de livraison : PDF/X</p><p class="text-xs text-gray-500 font-semibold" data-i18n="imp_c6_desc">PDF/X-1a ou PDF/X-4 pour une compatibilité maximale avec les RIP d'imprimerie.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-24 md:py-40 px-6 md:px-12 bg-brand-black relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]"><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white rounded-full blur-[100px]" aria-hidden="true"></div></div>
+            <div class="max-w-5xl mx-auto text-center relative observer-target fade-in-up">
+                <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-none tracking-tighter mb-8">
+                    <span data-i18n="imp_cta_h2_1">IMPRIMEZ</span><br>
+                    <span class="text-stroke" data-i18n="imp_cta_h2_2">GRAND.</span>
+                </h2>
+                <a href="contact.html" class="inline-flex items-center gap-3 text-lg md:text-xl font-bold uppercase tracking-wider py-5 px-10 border border-white hover:bg-white hover:text-black transition-all duration-300 rounded-full focus:outline-none" data-i18n="imp_cta_btn">CONTACTEZ-NOUS <i data-lucide="arrow-up-right" class="w-5 h-5" aria-hidden="true"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-black pt-20 pb-10 px-6 md:px-12 border-t border-gray-900" role="contentinfo">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            <div><a href="index.html" class="flex items-center mb-6"><img src="LOGO1HEAD.png" alt="Logo NG Creative" class="h-8 w-auto object-contain"></a><p class="text-sm leading-relaxed" style="font-family: var(--font-copy); color: var(--text-dark-muted); font-weight: 400;" data-i18n="footer_tagline">Direction créative, contenus et expériences digitales.</p></div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_services">Services</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="audiovisuel.html" class="hover:text-gray-400 transition-colors" data-i18n="s1_title">Audiovisuel</a></li>
+                    <li><a href="sites-web.html" class="hover:text-gray-400 transition-colors" data-i18n="s2_title">Sites Web</a></li>
+                    <li><a href="graphisme.html" class="hover:text-gray-400 transition-colors" data-i18n="s3_title">Graphisme</a></li>
+                    <li><a href="impression.html" class="text-white font-bold" aria-current="page" data-i18n="s4_title">Impression</a></li>
+                    <li><a href="ads.html" class="hover:text-gray-400 transition-colors" data-i18n="s5_title">Ads</a></li>
+                    <li><a href="marketing-local.html" class="hover:text-gray-400 transition-colors" data-i18n="s6_title">Marketing Local</a></li>
+                    <li><a href="influence.html" class="hover:text-gray-400 transition-colors" data-i18n="s7_title">Influence</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_nav">Navigation</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="index.html" class="hover:text-gray-400 transition-colors font-bold" data-i18n="footer_home">Accueil</a></li>
+                    <li><a href="contact.html" class="hover:text-gray-400 transition-colors font-bold" data-i18n="nav_contact">Contact</a></li>
+                    <li><a href="Plaquette-Commerciale-NG-Creative.pdf" download class="hover:text-gray-400 transition-colors font-bold" data-i18n="footer_plaquette">Plaquette</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_follow">Suivez-nous</h4>
+                <div class="flex gap-5">
+                    <a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="Instagram"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    <a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="X"><svg class="w-[1.15rem] h-[1.15rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                    <a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="TikTok"><svg class="w-5 h-5" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-600 text-xs font-bold">© 2026 NG Creative. <span data-i18n="rights">Tous droits réservés.</span></p>
+            <p class="text-gray-600 text-xs font-bold" data-i18n="made_with">Conçu avec passion.</p>
+        </div>
+    </footer>
+
+    <script>
+        const translations={
+            FR:{nav_services:"SERVICES",nav_clients:"CLIENTS",nav_structure:"STRUCTURE",nav_contact:"CONTACT",nav_plaquette:"TÉLÉCHARGER LA PLAQUETTE",imp_hero_service_name:"IMPRESSION",imp_label:"04 / IMPRESSION",imp_h1_1:"IMPRES",imp_h1_2:"SION",imp_hero_desc:"Du choix du papier au contrôle des fichiers, chaque support est préparé avec précision avant de passer en production.",imp_cta_hero:"DEMANDER UN DEVIS",imp_tag1:"Flyer & Tract",imp_tag2:"Affiche",imp_tag3:"Carte de Visite",imp_tag4:"Brochure",imp_tag5:"Roll-Up",imp_tag6:"Bâche & Kakémono",imp_tag7:"Menu Restaurant",imp_tag8:"Autocollant & Sticker",imp_tag9:"Grand Format",imp_finitions_label:"FINITIONS DISPONIBLES",imp_finitions_h2_1:"LA MATIÈRE",imp_finitions_h2_2:"COMPTE",imp_fin1_label:"FINITION",imp_fin1_title:"Papier Mat",imp_fin1_desc:"Surface douce, sans reflet. Rendu élégant et lisible.",imp_fin2_label:"FINITION",imp_fin2_title:"Pelliculage Brillant",imp_fin2_desc:"Couleurs vivaces, rendu premium et percutant.",imp_fin3_label:"FINITION",imp_fin3_title:"Soft-Touch",imp_fin3_desc:"Toucher velouté et ultra-mat. Le summum du luxe.",imp_fin4_label:"FINITION",imp_fin4_title:"Dorure à Chaud",imp_fin4_desc:"Effet métallique pour une impression d'exception.",imp_fin5_label:"FINITION",imp_fin5_title:"Vernis UV Sélectif",imp_fin5_desc:"Relief brillant sur zones ciblées. Impact visuel fort.",imp_formats_label:"FORMATS COURANTS",imp_format_rollup:"Roll-Up",imp_format_bache:"Bâche / Grand Format",imp_format_bache_size:"Sur mesure",imp_formats_note:"Des formats standards aux tailles événementielles sur mesure, nous maîtrisons l'intégralité de la chaîne graphique.",imp_presta_h2_1:"NOS",imp_presta_h2_2:"PRESTATIONS",imp_p1_title:"Flyers & Affiches",imp_p1_desc:"Conception graphique et impression de flyers, dépliants et affiches dans tous les formats. Tirage offset ou numérique selon la quantité.",imp_p2_title:"Cartes de Visite",imp_p2_desc:"Cartes de visite standard, carrées ou rondes en grammages premium. Options : pelliculage soft-touch, dorure à chaud, vernis UV, découpe spéciale.",imp_p3_title:"Brochures & Catalogues",imp_p3_desc:"Mise en page et impression de plaquettes commerciales, catalogues produits et brochures institutionnelles. Couvertures rigides ou souples.",imp_p4_title:"Roll-Up & Kakémono",imp_p4_desc:"Signalétique événementielle prête à monter. Impression haute définition sur bâche polyester ou vinyle, avec système d'enroulement inclus.",imp_p5_title:"Bâche & Grand Format",imp_p5_desc:"Impression grands formats pour l'événementiel, la décoration de vitrine et la signalétique extérieure. Toutes dimensions sur mesure.",imp_p6_title:"Menus & Supports Resto",imp_p6_desc:"Menus de restaurant, cartes des vins, ardoises et set de table. Impression plastifiée ou pelliculée pour une durabilité optimale.",imp_check_label:"PRÉPARATION FICHIER",imp_check_h2_1:"FICHIER",imp_check_h2_2:"PRÊT À IMPRIMER",imp_check_desc:"Confier votre fichier à imprimer nécessite quelques règles techniques. Nous vérifions systématiquement ces points avant tout lancement de production.",imp_c1_title:"Fonds Perdus : 3mm",imp_c1_desc:"Élément graphique étendu de 3mm au-delà du cadre de coupe",imp_c2_title:"Mode Colorimétrique CMJN",imp_c2_desc:"Obligatoire pour l'impression. Le mode RVB est destiné aux écrans.",imp_c3_title:"Résolution 300 DPI minimum",imp_c3_desc:"Toutes les images doivent être en haute résolution pour éviter le flou.",imp_c4_title:"Textes vectorisés ou polices embarquées",imp_c4_desc:"Pour éviter les substitutions de polices sur notre poste de production.",imp_c5_title:"Marges de sécurité : 5mm",imp_c5_desc:"Textes et éléments importants à 5mm du bord de coupe au minimum.",imp_c6_title:"Format de livraison : PDF/X",imp_c6_desc:"PDF/X-1a ou PDF/X-4 pour une compatibilité maximale avec les RIP d'imprimerie.",imp_cta_label:"PROCHAINE ÉTAPE",imp_cta_h2_1:"IMPRIMEZ",imp_cta_h2_2:"GRAND.",imp_cta_desc:"Partagez-nous votre projet d'impression. Devis rapide, production soignée, livraison dans les délais.",imp_cta_btn:"CONTACTEZ-NOUS",footer_tagline: "Direction créative, contenus et expériences digitales.",footer_title_services:"Services",footer_title_nav:"Navigation",footer_title_follow:"Suivez-nous",footer_home:"Accueil",footer_plaquette:"Plaquette",s1_title:"Audiovisuel",s2_title:"Sites Web",s3_title:"Graphisme",s4_title:"Impression",s5_title:"Ads",s6_title:"Marketing Local",s7_title:"Influence",rights:"Tous droits réservés.",made_with: "Conçu par NG Creative."},
+            EN:{imp_hero_service_name:"IMPRESSION & PRINT",nav_services:"SERVICES",nav_clients:"CLIENTS",nav_structure:"STRUCTURE",nav_contact:"CONTACT",nav_plaquette:"DOWNLOAD OUR BROCHURE",imp_label:"04 / PRINTING",imp_h1_1:"PRINT",imp_h1_2:"ING",imp_hero_desc:"From paper selection to prepress checks, every asset is rigorously prepared before heading to production.",imp_cta_hero:"REQUEST A QUOTE",imp_tag1:"Flyer & Leaflet",imp_tag2:"Poster",imp_tag3:"Business Card",imp_tag4:"Brochure",imp_tag5:"Roll-Up",imp_tag6:"Banner & Display",imp_tag7:"Restaurant Menu",imp_tag8:"Sticker & Label",imp_tag9:"Large Format",imp_finitions_label:"AVAILABLE FINISHES",imp_finitions_h2_1:"MATERIAL",imp_finitions_h2_2:"MATTERS",imp_fin1_label:"FINISH",imp_fin1_title:"Matte Paper",imp_fin1_desc:"Soft, glare-free surface. Elegant and readable result.",imp_fin2_label:"FINISH",imp_fin2_title:"Gloss Lamination",imp_fin2_desc:"Vivid colours, premium and striking result.",imp_fin3_label:"FINISH",imp_fin3_title:"Soft-Touch",imp_fin3_desc:"Velvety, ultra-matte feel. The pinnacle of luxury.",imp_fin4_label:"FINISH",imp_fin4_title:"Hot Foil Stamping",imp_fin4_desc:"Metallic effect for exceptional print quality.",imp_fin5_label:"FINISH",imp_fin5_title:"Selective UV Varnish",imp_fin5_desc:"Gloss relief on targeted areas. Strong visual impact.",imp_formats_label:"COMMON FORMATS",imp_format_rollup:"Roll-Up",imp_format_bache:"Banner / Large Format",imp_format_bache_size:"Custom size",imp_formats_note:"From standard sizes to custom event-scale formats, we master the full print workflow.",imp_presta_h2_1:"OUR",imp_presta_h2_2:"SERVICES",imp_p1_title:"Flyers & Posters",imp_p1_desc:"Graphic design and printing of flyers, leaflets and posters in all formats. Offset or digital printing depending on quantity.",imp_p2_title:"Business Cards",imp_p2_desc:"Standard, square or round business cards in premium weights. Options: soft-touch lamination, hot foil, UV varnish, special die-cut.",imp_p3_title:"Brochures & Catalogues",imp_p3_desc:"Layout and printing of commercial brochures, product catalogues and institutional booklets. Hard or soft covers, perfect binding, stapling or spiral.",imp_p4_title:"Roll-Up & Display",imp_p4_desc:"Event signage ready to install. High-definition printing on polyester or vinyl with retractable system included.",imp_p5_title:"Banner & Large Format",imp_p5_desc:"Large-format printing for events, window dressing and outdoor signage. All custom sizes available.",imp_p6_title:"Menus & Restaurant Materials",imp_p6_desc:"Restaurant menus, wine lists, slate boards and table mats. Laminated for optimal durability.",imp_check_label:"FILE PREPARATION",imp_check_h2_1:"FILE",imp_check_h2_2:"PRINT-READY",imp_check_desc:"Preparing a print file requires specific technical rules. We systematically check these points before starting production.",imp_c1_title:"Bleed: 3mm",imp_c1_desc:"Graphic elements extended 3mm beyond the cut line",imp_c2_title:"CMYK Colour Mode",imp_c2_desc:"Mandatory for printing. RGB mode is for screens only.",imp_c3_title:"Resolution: 300 DPI minimum",imp_c3_desc:"All images must be high resolution to avoid blurriness.",imp_c4_title:"Outlined or embedded fonts",imp_c4_desc:"To prevent font substitution on our production workstations.",imp_c5_title:"Safety margins: 5mm",imp_c5_desc:"Important text and elements must be at least 5mm from the cut line.",imp_c6_title:"Delivery format: PDF/X",imp_c6_desc:"PDF/X-1a or PDF/X-4 for maximum compatibility with print RIPs.",imp_cta_label:"NEXT STEP",imp_cta_h2_1:"PRINT",imp_cta_h2_2:"BIG.",imp_cta_desc:"Share your print project with us. Fast quote, careful production, on-time delivery.",imp_cta_btn:"CONTACT US",footer_tagline: "Creative direction, content and digital experiences.",footer_title_services:"Services",footer_title_nav:"Navigation",footer_title_follow:"Follow Us",footer_home:"Home",footer_plaquette:"Brochure",s1_title:"Audiovisual",s2_title:"Websites",s3_title:"Graphic Design",s4_title:"Printing",s5_title:"Ads",s6_title:"Local Marketing",s7_title:"Influence",rights:"All rights reserved.",made_with: "Designed by NG Creative."},
+            ES:{imp_hero_service_name:"IMPRESIÓN",nav_services:"SERVICIOS",nav_clients:"CLIENTES",nav_structure:"ESTRUCTURA",nav_contact:"CONTACTO",nav_plaquette:"DESCARGAR EL DOSSIER",imp_label:"04 / IMPRESIÓN",imp_h1_1:"IMPRE",imp_h1_2:"SIÓN",imp_hero_desc:"De la elección del papel al control de archivos, cada soporte se prepara con precisión antes de pasar a producción.",imp_cta_hero:"PEDIR PRESUPUESTO",imp_tag1:"Folleto & Octavilla",imp_tag2:"Cartel",imp_tag3:"Tarjeta de Visita",imp_tag4:"Brochure",imp_tag5:"Roll-Up",imp_tag6:"Lona & Display",imp_tag7:"Carta Restaurante",imp_tag8:"Adhesivo & Pegatina",imp_tag9:"Gran Formato",imp_finitions_label:"ACABADOS DISPONIBLES",imp_finitions_h2_1:"EL MATERIAL",imp_finitions_h2_2:"IMPORTA",imp_fin1_label:"ACABADO",imp_fin1_title:"Papel Mate",imp_fin1_desc:"Superficie suave, sin reflejos. Resultado elegante y legible.",imp_fin2_label:"ACABADO",imp_fin2_title:"Plastificado Brillo",imp_fin2_desc:"Colores vívidos, resultado premium e impactante.",imp_fin3_label:"ACABADO",imp_fin3_title:"Soft-Touch",imp_fin3_desc:"Tacto aterciopelado y ultra-mate. El summum del lujo.",imp_fin4_label:"ACABADO",imp_fin4_title:"Stamping en Caliente",imp_fin4_desc:"Efecto metálico para una impresión excepcional.",imp_fin5_label:"ACABADO",imp_fin5_title:"Barniz UV Selectivo",imp_fin5_desc:"Relieve brillante en zonas clave. Gran impacto visual.",imp_formats_label:"FORMATOS COMUNES",imp_format_rollup:"Roll-Up",imp_format_bache:"Lona / Gran Formato",imp_format_bache_size:"A medida",imp_formats_note:"Desde tamaños estándar hasta formatos de evento a medida, dominamos toda la cadena gráfica.",imp_presta_h2_1:"NUESTROS",imp_presta_h2_2:"SERVICIOS",imp_p1_title:"Folletos & Carteles",imp_p1_desc:"Diseño gráfico e impresión de folletos, trípticos y carteles en todos los formatos.",imp_p2_title:"Tarjetas de Visita",imp_p2_desc:"Tarjetas estándar, cuadradas o redondas en gramaturas premium. Opciones: plastificado, stamping, barniz UV.",imp_p3_title:"Brochures & Catálogos",imp_p3_desc:"Maquetación e impresión de dossieres comerciales, catálogos de producto y brochures institucionales.",imp_p4_title:"Roll-Up & Displays",imp_p4_desc:"Señalética de evento lista para montar. Impresión en alta definición con sistema enrollable incluido.",imp_p5_title:"Lona & Gran Formato",imp_p5_desc:"Impresión en gran formato para eventos, escaparatismo y señalética exterior. Todos los tamaños a medida.",imp_p6_title:"Cartas & Materiales Restaurante",imp_p6_desc:"Cartas de restaurante, listas de vinos y manteles. Laminados para óptima durabilidad.",imp_check_label:"PREPARACIÓN DEL ARCHIVO",imp_check_h2_1:"ARCHIVO",imp_check_h2_2:"LISTO PARA IMPRIMIR",imp_check_desc:"Preparar un archivo de impresión requiere ciertas reglas técnicas. Las comprobamos sistemáticamente antes de iniciar la producción.",imp_c1_title:"Sangrado: 3mm",imp_c1_desc:"Elementos gráficos extendidos 3mm más allá de la línea de corte",imp_c2_title:"Modo de color CMYK",imp_c2_desc:"Obligatorio para impresión. El modo RGB es para pantallas.",imp_c3_title:"Resolución mínima 300 DPI",imp_c3_desc:"Todas las imágenes deben estar en alta resolución.",imp_c4_title:"Textos vectorizados o fuentes incrustadas",imp_c4_desc:"Para evitar sustituciones de fuentes en producción.",imp_c5_title:"Márgenes de seguridad: 5mm",imp_c5_desc:"Textos y elementos importantes a 5mm del borde de corte mínimo.",imp_c6_title:"Formato de entrega: PDF/X",imp_c6_desc:"PDF/X-1a o PDF/X-4 para máxima compatibilidad.",imp_cta_label:"PRÓXIMO PASO",imp_cta_h2_1:"IMPRIMA",imp_cta_h2_2:"A LO GRANDE.",imp_cta_desc:"Comparta su proyecto de impresión. Presupuesto rápido, producción cuidada, entrega puntual.",imp_cta_btn:"CONTÁCTENOS",footer_tagline: "Dirección creativa, contenidos y experiencias digitales.",footer_title_services:"Servicios",footer_title_nav:"Navegación",footer_title_follow:"Síganos",footer_home:"Inicio",footer_plaquette:"Dossier",s1_title:"Audiovisual",s2_title:"Sitios Web",s3_title:"Diseño Gráfico",s4_title:"Impresión",s5_title:"Ads",s6_title:"Marketing Local",s7_title:"Influencia",rights:"Todos los derechos reservados.",made_with: "Diseñado por NG Creative."},
+            AR:{imp_hero_service_name:"الطباعة",nav_services:"الخدمات",nav_clients:"العملاء",nav_structure:"منهجيتنا",nav_contact:"اتصل بنا",nav_plaquette:"تحميل الكتيب التعريفي",imp_label:"04 / الطباعة",imp_h1_1:"طباعة",imp_h1_2:"احترافية",imp_hero_desc:"من اختيار نوع الورق إلى فحص الملفات، يُجهَّز كل مطبوع بدقة واحترافية قبل بدء الإنتاج.",imp_cta_hero:"طلب عرض سعر",imp_tag1:"نشرة وملصق",imp_tag2:"لافتة",imp_tag3:"بطاقة عمل",imp_tag4:"كتيب",imp_tag5:"رول-اب",imp_tag6:"بانر وعرض",imp_tag7:"قائمة مطعم",imp_tag8:"ملصق لاصق",imp_tag9:"طباعة كبيرة",imp_finitions_label:"اللمسات النهائية المتاحة",imp_finitions_h2_1:"المادة",imp_finitions_h2_2:"تهم",imp_fin1_label:"لمسة",imp_fin1_title:"ورق مطفي",imp_fin1_desc:"سطح ناعم بدون انعكاسات. نتيجة أنيقة ومقروءة.",imp_fin2_label:"لمسة",imp_fin2_title:"تغليف لامع",imp_fin2_desc:"ألوان زاهية ونتيجة مميزة ومؤثرة.",imp_fin3_label:"لمسة",imp_fin3_title:"سوفت-تاتش",imp_fin3_desc:"ملمس مخملي مطفي. قمة الفخامة.",imp_fin4_label:"لمسة",imp_fin4_title:"ختم ذهبي حراري",imp_fin4_desc:"تأثير معدني لطباعة استثنائية.",imp_fin5_label:"لمسة",imp_fin5_title:"ورنيش UV انتقائي",imp_fin5_desc:"بريق نافر على مناطق محددة. تأثير بصري قوي.",imp_formats_label:"الأحجام الشائعة",imp_format_rollup:"رول-اب",imp_format_bache:"بانر / طباعة كبيرة",imp_format_bache_size:"حسب الطلب",imp_formats_note:"من الأحجام القياسية إلى الأحجام الضخمة، نتحكم في كامل سلسلة الإنتاج الجرافيكي.",imp_presta_h2_1:"خدماتنا",imp_presta_h2_2:"الاحترافية",imp_p1_title:"النشرات والملصقات",imp_p1_desc:"تصميم وطباعة النشرات والمطويات والملصقات بجميع الأحجام.",imp_p2_title:"بطاقات العمل",imp_p2_desc:"بطاقات عمل قياسية أو مربعة أو دائرية بأوزان ورق فاخرة.",imp_p3_title:"الكتيبات والكتالوجات",imp_p3_desc:"إخراج وطباعة الكتيبات التجارية وكتالوجات المنتجات.",imp_p4_title:"رول-اب والمعروضات",imp_p4_desc:"لافتات أحداث جاهزة للتركيب. طباعة عالية الدقة مع نظام لف مشمول.",imp_p5_title:"بانر وطباعة كبيرة الحجم",imp_p5_desc:"طباعة ضخمة للفعاليات وديكور الواجهات واللافتات الخارجية.",imp_p6_title:"قوائم المطاعم",imp_p6_desc:"قوائم مطاعم وبطاقات وإكسسوارات مطعم مع تغليف للمتانة.",imp_check_label:"تحضير الملف",imp_check_h2_1:"ملف",imp_check_h2_2:"جاهز للطباعة",imp_check_desc:"تحضير ملف للطباعة يتطلب قواعد تقنية محددة. نتحقق منها منهجيًا قبل الإنتاج.",imp_c1_title:"الإفراز (Bleed): 3mm",imp_c1_desc:"تمديد العناصر الجرافيكية 3mm خارج إطار القطع",imp_c2_title:"نمط ألوان CMYK",imp_c2_desc:"إلزامي للطباعة. نمط RGB مخصص للشاشات فقط.",imp_c3_title:"دقة 300 DPI كحد أدنى",imp_c3_desc:"يجب أن تكون جميع الصور بدقة عالية لتجنب التمويه.",imp_c4_title:"خطوط محولة لمسارات أو مدمجة",imp_c4_desc:"لتفادي استبدال الخطوط في الإنتاج.",imp_c5_title:"هوامش الأمان: 5mm",imp_c5_desc:"النصوص والعناصر الهامة على بعد 5mm من خط القطع.",imp_c6_title:"صيغة التسليم: PDF/X",imp_c6_desc:"PDF/X-1a أو PDF/X-4 لتوافق أقصى.",imp_cta_label:"الخطوة التالية",imp_cta_h2_1:"اطبع",imp_cta_h2_2:"بكل ضخامة.",imp_cta_desc:"شاركنا مشروع طباعتك. عرض سعر سريع، إنتاج دقيق، تسليم في الموعد.",imp_cta_btn:"تواصل معنا",footer_tagline: "إدارة إبداعية ومحتوى وتجارب رقمية.",footer_title_services:"الخدمات",footer_title_nav:"التنقل",footer_title_follow:"تابعنا",footer_home:"الرئيسية",footer_plaquette:"الكتيب",s1_title:"الإنتاج السمعي البصري",s2_title:"تطوير المواقع",s3_title:"التصميم الجرافيكي",s4_title:"الطباعة",s5_title:"الإعلانات",s6_title:"التسويق المحلي",s7_title:"التسويق عبر المؤثرين",rights:"جميع الحقوق محفوظة.",made_with: "تصميم بواسطة NG Creative."}
+        };
+        function changeLanguage(lang){localStorage.setItem('n_graphiste_lang',lang);document.documentElement.lang=lang.toLowerCase();document.documentElement.dir=(lang==='AR')?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(translations[lang]&&translations[lang][k]!==undefined)el.textContent=translations[lang][k];});}
+        document.addEventListener('DOMContentLoaded',()=>{const s=localStorage.getItem('n_graphiste_lang')||'FR';changeLanguage(s);if(typeof lucide!=='undefined')lucide.createIcons();if('IntersectionObserver' in window){const o=new IntersectionObserver((e)=>{e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target);}});},{threshold:0.08});document.querySelectorAll('.observer-target').forEach(el=>o.observe(el));}else{document.querySelectorAll('.observer-target').forEach(el=>el.classList.add('visible'));}});
+    </script>
+</body>
+</html>

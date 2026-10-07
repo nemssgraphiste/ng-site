@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing d'Influence | NG Creative — Collaborations Influenceurs</title>
+    <meta name="description" content="Campagnes d'influence authentiques avec des créateurs de contenu alignés à votre marque. Nano, micro et macro-influenceurs sur Instagram, TikTok et YouTube.">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Montserrat','sans-serif'],aquire:['Aquire','sans-serif']},colors:{brand:{black:'#0a0a0a',white:'#f7f7f7',gray:'#1f1f1f',light:'#e5e5e5'}}}}}</script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+
+        :root {
+            --font-display: 'Montserrat', sans-serif;
+            --font-brand: 'Aquire', 'Montserrat', sans-serif;
+            --font-copy: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* Sur fond sombre */
+            --text-dark-primary: #f7f7f7;
+            --text-dark-body: #d8d5ce;
+            --text-dark-muted: #aaa69e;
+            --text-dark-subtle: #88847c;
+
+            /* Sur fond clair */
+            --text-light-primary: #0a0a0a;
+            --text-light-body: #34322e;
+            --text-light-muted: #69655e;
+            --text-light-subtle: #77736c;
+        }
+
+        [dir="rtl"] {
+            --font-copy: 'Noto Sans Arabic', 'Manrope', sans-serif;
+            --font-display: 'Noto Sans Arabic', 'Montserrat', sans-serif;
+        }
+
+        @font-face{font-family:'Aquire';src:url('Aquire.otf') format('opentype');}
+        body{font-family:'Montserrat',sans-serif;background-color:#0a0a0a;color:#f7f7f7;overflow-x:hidden;-webkit-font-smoothing:auto!important;}
+        .text-stroke{font-style:italic;color:#0a0a0a;text-shadow:-1px -1px 0 #f7f7f7,0 -1px 0 #f7f7f7,1px -1px 0 #f7f7f7,1px 0 0 #f7f7f7,1px 1px 0 #f7f7f7,0 1px 0 #f7f7f7,-1px 1px 0 #f7f7f7,-1px 0 0 #f7f7f7;}
+        .text-stroke-black{font-style:italic;color:#f7f7f7;text-shadow:-1px -1px 0 #0a0a0a,0 -1px 0 #0a0a0a,1px -1px 0 #0a0a0a,1px 0 0 #0a0a0a,1px 1px 0 #0a0a0a,0 1px 0 #0a0a0a,-1px 1px 0 #0a0a0a,-1px 0 0 #0a0a0a;}
+        .btn-hover-effect{position:relative;overflow:hidden;}.btn-hover-effect::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:1px;background-color:currentColor;transform:scaleX(0);transform-origin:right;transition:transform 0.3s ease;}.btn-hover-effect:hover::after{transform:scaleX(1);transform-origin:left;}
+        .fade-in-up{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease-out,transform 0.8s ease-out;}.fade-in-up.visible{opacity:1;transform:translateY(0);}
+        @keyframes slowZoom{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}.animate-slow-zoom{animation:slowZoom 30s ease-in-out infinite;}
+        ::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:#0a0a0a;}::-webkit-scrollbar-thumb{background:#333;border-radius:4px;}
+        [x-cloak]{display:none!important;}.rounded-full{-webkit-background-clip:padding-box;background-clip:padding-box;}
+        .tag-pill{display:inline-flex;align-items:center;padding:0.4rem 1rem;border:1px solid rgba(247,247,247,0.15);border-radius:9999px;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9ca3af;background:rgba(255,255,255,0.04);transition:all 0.3s ease;}.tag-pill:hover{border-color:rgba(247,247,247,0.4);color:#f7f7f7;background:rgba(255,255,255,0.08);}
+        .prestation-number{font-family:'Aquire','Montserrat',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.2em;color:#6b7280;}
+        .service-label {
+            font-family: var(--font-copy);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-dark-muted);
+        }
+        .prestation-row{transition:background 0.3s ease;}.prestation-row:hover{background:rgba(247,247,247,0.03);}
+
+        /* ── Profil influenceur CSS ── */
+        .influencer-profile{
+            border:1px solid rgba(247,247,247,0.12);
+            border-radius:1rem;
+            overflow:hidden;
+            transition:all 0.3s ease;
+            background:rgba(255,255,255,0.02);
+        }
+        .influencer-profile:hover{border-color:rgba(247,247,247,0.3);transform:translateY(-4px);}
+        .profile-header{height:60px;position:relative;display:flex;align-items:flex-end;padding:0 1rem 0 1rem;}
+        .profile-avatar{width:48px;height:48px;border-radius:50%;background:rgba(247,247,247,0.1);border:2px solid rgba(247,247,247,0.15);position:absolute;bottom:-20px;left:1rem;display:flex;align-items:center;justify-content:center;}
+        .profile-body{padding:1.5rem 1rem 1rem;}
+        .stat-pill{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9ca3af;background:rgba(255,255,255,0.04);border:1px solid rgba(247,247,247,0.1);border-radius:99px;padding:0.25rem 0.625rem;}
+
+        /* ── Typologie influenceur ── */
+        .typology-row{
+            display:grid;
+            grid-template-columns:1fr 1fr 1fr;
+            gap:0;
+            border:1px solid rgba(247,247,247,0.1);
+            border-radius:0.75rem;
+            overflow:hidden;
+        }
+        .typology-cell{
+            padding:1.25rem;
+            position:relative;
+            transition:background 0.25s;
+        }
+        .typology-cell:hover{background:rgba(247,247,247,0.04);}
+        .typology-cell:not(:last-child){border-right:1px solid rgba(247,247,247,0.1);}
+
+        /* ── Timeline process influence ── */
+        .process-bar{
+            position:relative;
+            display:flex;
+            flex-direction:column;
+            gap:0;
+        }
+        .process-bar-item{
+            display:flex;
+            gap:1.25rem;
+            position:relative;
+        }
+        .process-bar-item::before{
+            content:'';
+            position:absolute;
+            left:20px;
+            top:44px;
+            width:1px;
+            height:calc(100% - 24px);
+            background:rgba(247,247,247,0.1);
+        }
+        .process-bar-item:last-child::before{display:none;}
+        .process-dot{
+            width:40px;height:40px;border-radius:50%;border:1px solid rgba(247,247,247,0.2);background:rgba(247,247,247,0.04);flex-shrink:0;display:flex;align-items:center;justify-content:center;
+            font-family:'Aquire','Montserrat',sans-serif;font-size:0.6rem;color:#6b7280;
+            margin-top:2px;
+        }
+        .process-content{padding-bottom:2rem;}
+
+        /* ══ Valeur ajoutée / Proof block ══ */
+        /* .eng-card remplace par .ng-proof-grid / .ng-proof-item */
+        .ng-proof-grid {
+            border: 1px solid rgba(10,10,10,0.1);
+            border-radius: 2px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .ng-proof-item {
+            padding: 2rem 1.75rem;
+            position: relative;
+        }
+        .ng-proof-item + .ng-proof-item {
+            border-inline-start: 1px solid rgba(10,10,10,0.1);
+        }
+        .ng-proof-number {
+            font-family: 'Aquire', 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            color: #9ca3af;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+        .ng-proof-title {
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            color: #0a0a0a;
+            margin-bottom: 0.875rem;
+            line-height: 1.2;
+        }
+        .ng-proof-desc {
+            font-family: var(--font-copy);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: var(--text-light-body);
+            font-weight: 400;
+        }
+        @media (max-width: 767px) {
+            .ng-proof-grid {
+                grid-template-columns: 1fr;
+            }
+            .ng-proof-item + .ng-proof-item {
+                border-inline-start: none;
+                border-top: 1px solid rgba(10,10,10,0.1);
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce){.fade-in-up{opacity:1;transform:none;transition:none;}.animate-slow-zoom{animation:none;}*{transition-duration:0.01ms!important;animation-duration:0.01ms!important;}}
+    
+        /* ── Hero Eyebrow Component ── */
+        .ng-hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+        .ng-hero-eyebrow-number {
+            font-family: var(--font-copy);
+            font-size: clamp(0.68rem, 1vw, 0.72rem);
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.1em;
+            color: rgba(247, 247, 247, 0.7);
+            flex-shrink: 0;
+        }
+        .ng-hero-eyebrow-line {
+            display: inline-block;
+            width: clamp(28px, 4vw, 40px);
+            height: 1px;
+            background-color: rgba(247, 247, 247, 0.6);
+            flex-shrink: 0;
+        }
+        .ng-hero-eyebrow-name {
+            font-family: var(--font-copy);
+            font-size: clamp(0.7rem, 1.1vw, 0.75rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #f7f7f7;
+        }
+
+        /* ── Hero Intro & Subtitle ── */
+        .ng-hero-intro {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.15rem;
+            max-width: 52ch;
+        }
+        .ng-hero-intro-line {
+            display: block;
+            width: clamp(24px, 3.5vw, 36px);
+            height: 1px;
+            background-color: rgba(247, 247, 247, 0.65);
+            flex-shrink: 0;
+            margin-top: 0.75rem;
+            transform-origin: left center;
+        }
+        [dir="rtl"] .ng-hero-intro-line {
+            transform-origin: right center;
+        }
+        .ng-service-hero-copy {
+            font-family: var(--font-copy);
+            font-weight: 600;
+            font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+            line-height: 1.6;
+            color: #f7f7f7;
+            margin: 0;
+            border-inline-start: none;
+            padding-inline-start: 0;
+        }
+
+        /* Subtle hero intro animation */
+        .observer-target.visible .ng-hero-intro-line {
+            animation: heroLineGrow 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .observer-target.visible .ng-service-hero-copy {
+            animation: heroCopyReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards;
+        }
+
+        @keyframes heroLineGrow {
+            from { transform: scaleX(0); opacity: 0; }
+            to { transform: scaleX(1); opacity: 1; }
+        }
+        @keyframes heroCopyReveal {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ng-hero-intro-line,
+            .ng-service-hero-copy {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* ── Solid White Hero Title ── */
+        .ng-hero-title-solid {
+            color: #f7f7f7;
+            font-style: normal;
+            text-shadow: none;
+            -webkit-text-stroke: 0;
+            -webkit-text-fill-color: #f7f7f7;
+        }
+
+        /* ── Capabilities Grid (T12) ── */
+        .ng-capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        }
+        .ng-capability-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            padding-block: 0.875rem;
+            border-top: 1px solid rgba(247,247,247,0.07);
+        }
+        .ng-cap-index {
+            font-family: var(--font-copy);
+            font-size: 0.58rem;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.12em;
+            color: var(--text-dark-subtle);
+            flex-shrink: 0;
+        }
+        .ng-cap-label {
+            font-family: var(--font-copy);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark-body);
+            letter-spacing: 0.02em;
+        }
+
+        /* ── Hero split + illustration ── */
+        .ng-hero-split {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: clamp(2rem, 5vw, 5rem);
+            align-items: center;
+        }
+        .ng-hero-text-col { min-width: 0; }
+        .ng-hero-illus-col { min-width: 0; }
+        @media (max-width: 1023px) {
+            .ng-hero-illus-col { display: none !important; }
+        }
+
+        /* ── INFLUENCE — Propagation éditoriale ── */
+        .inf-hero-visual {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            pointer-events: none;
+        }
+        .inf-svg { width: 100%; height: auto; display: block; }
+
+        /* Ondes de diffusion : expansion pulsée */
+        .inf-wave {
+            transform-origin: 220px 150px;
+            animation: inf-wave-pulse 6s ease-out infinite;
+        }
+        .inf-wave-1 { animation-delay: 0s; }
+        .inf-wave-2 { animation-delay: 1.5s; }
+        .inf-wave-3 { animation-delay: 3s; }
+        @keyframes inf-wave-pulse {
+            0%   { transform: scale(0.1); opacity: 0.8; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+
+        /* Connexions : tracé progressif */
+        .inf-link {
+            stroke-dasharray: 180;
+            stroke-dashoffset: 180;
+            animation: inf-link-draw 1.5s cubic-bezier(0.22,1,0.36,1) forwards;
+        }
+        .inf-link-1 { animation-delay: 0.4s; }
+        .inf-link-2 { animation-delay: 0.7s; }
+        .inf-link-3 { animation-delay: 1.0s; }
+        .inf-link-4 { animation-delay: 1.3s; }
+        .inf-link-5 { animation-delay: 1.6s; }
+        @keyframes inf-link-draw { to { stroke-dashoffset: 0; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .inf-wave { animation: none !important; opacity: 0.12 !important; transform: scale(1) !important; }
+            .inf-link { animation: none !important; stroke-dashoffset: 0 !important; }
+        }
+    </style>
+</head>
+<body class="selection:bg-white selection:text-black">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:font-bold focus:rounded">Aller au contenu</a>
+
+    <!-- HEADER -->
+    <header x-data="{mobileMenuOpen:false,scrolled:false,langOpen:false,currentLang:'FR',currentFlag:'🇫🇷',init(){const s=localStorage.getItem('n_graphiste_lang')||'FR';this.currentLang=s;const f={FR:'🇫🇷',EN:'🇬🇧',ES:'🇪🇸',AR:'🇸🇦'};this.currentFlag=f[s]||'🇫🇷';}}"
+    @scroll.window="scrolled=(window.pageYOffset>50)"
+    @keydown.escape.window="mobileMenuOpen=false;langOpen=false"
+    :class="scrolled?'bg-brand-black/90 backdrop-blur-md py-4':'bg-transparent py-6'"
+    class="fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 md:px-12" role="banner">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4 md:gap-6 z-50">
+                <a href="index.html" class="flex items-center" aria-label="NG Creative — Accueil"><img src="LOGO1HEAD.png" alt="Logo NG Creative" class="h-8 md:h-10 w-auto object-contain transition-all duration-700 hover:scale-105"></a>
+                <div class="flex items-center gap-4 border-l border-white/20 pl-4 md:pl-6">
+                    <a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="Instagram"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    <a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="X"><svg class="w-[1.15rem] h-[1.15rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                    <a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="TikTok"><svg class="w-5 h-5" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a>
+                </div>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center text-sm font-semibold tracking-wide" aria-label="Navigation principale">
+                <a href="index.html#services" class="hover:text-gray-400 transition-colors" data-i18n="nav_services">SERVICES</a>
+                <a href="index.html#clients" class="hover:text-gray-400 transition-colors" data-i18n="nav_clients">CLIENTS</a>
+                <a href="index.html#structure" class="hover:text-gray-400 transition-colors" data-i18n="nav_structure">STRUCTURE</a>
+                <a href="contact.html" class="px-6 py-3 border border-white hover:bg-white hover:text-black transition-colors duration-300 rounded-full flex items-center gap-2"><span data-i18n="nav_contact">CONTACT</span><i data-lucide="arrow-up-right" class="w-4 h-4" aria-hidden="true"></i></a>
+                <div class="relative">
+                    <button @click="langOpen=!langOpen" @click.outside="langOpen=false" class="flex items-center gap-2 px-3 py-2 border border-white/20 rounded-full hover:bg-white/10 transition-all text-xs font-bold tracking-wider uppercase focus:outline-none" :aria-expanded="langOpen" aria-label="Changer la langue">
+                        <span x-text="currentFlag" class="text-base leading-none"></span><span x-text="currentLang"></span>
+                        <svg class="w-3 h-3 text-gray-400 transition-transform duration-200" :class="langOpen?'rotate-180':''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div x-show="langOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95 -translate-y-2" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-95 -translate-y-2" class="absolute right-0 mt-2 w-36 bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl py-2 z-50" x-cloak>
+                        <button @click="currentLang='FR';currentFlag='🇫🇷';langOpen=false;changeLanguage('FR')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇫🇷</span> Français</button>
+                        <button @click="currentLang='EN';currentFlag='🇬🇧';langOpen=false;changeLanguage('EN')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇬🇧</span> English</button>
+                        <button @click="currentLang='ES';currentFlag='🇪🇸';langOpen=false;changeLanguage('ES')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇪🇸</span> Español</button>
+                        <button @click="currentLang='AR';currentFlag='🇸🇦';langOpen=false;changeLanguage('AR')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇸🇦</span> العربية</button>
+                    </div>
+                </div>
+                <a href="Plaquette-Commerciale-NG-Creative.pdf" download="Plaquette-Commerciale-NG-Creative.pdf" class="btn-hover-effect text-xs font-bold tracking-wider uppercase text-white py-1" data-i18n="nav_plaquette">TÉLÉCHARGER LA PLAQUETTE</a>
+            </nav>
+            <button @click="mobileMenuOpen=!mobileMenuOpen;if(mobileMenuOpen)document.body.style.overflow='hidden';else document.body.style.overflow='';" class="md:hidden z-50 focus:outline-none" :aria-expanded="mobileMenuOpen" aria-label="Ouvrir le menu">
+                <i data-lucide="menu" x-show="!mobileMenuOpen" class="w-8 h-8" aria-hidden="true"></i>
+                <i data-lucide="x" x-show="mobileMenuOpen" class="w-8 h-8" x-cloak aria-hidden="true"></i>
+            </button>
+            <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-full" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-full" class="fixed inset-0 bg-brand-black flex flex-col justify-center items-center gap-8 text-2xl font-bold uppercase z-40" x-cloak role="dialog" aria-modal="true">
+                <a href="index.html#services" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_services">Services</a>
+                <a href="index.html#clients" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_clients">Clients</a>
+                <a href="index.html#structure" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_structure">Structure</a>
+                <a href="Plaquette-Commerciale-NG-Creative.pdf" download @click="mobileMenuOpen=false;document.body.style.overflow='';" class="btn-hover-effect text-lg tracking-wider text-white" data-i18n="nav_plaquette">TÉLÉCHARGER LA PLAQUETTE</a>
+                <a href="contact.html" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="mt-4 px-8 py-4 border border-white hover:bg-white hover:text-black transition-colors rounded-full" data-i18n="nav_contact">Contact</a>
+                <div class="flex gap-4 mt-4 pt-4 border-t border-white/10">
+                    <button @click="changeLanguage('FR');currentLang='FR';currentFlag='🇫🇷';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="Français">🇫🇷</button>
+                    <button @click="changeLanguage('EN');currentLang='EN';currentFlag='🇬🇧';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="English">🇬🇧</button>
+                    <button @click="changeLanguage('ES');currentLang='ES';currentFlag='🇪🇸';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="Español">🇪🇸</button>
+                    <button @click="changeLanguage('AR');currentLang='AR';currentFlag='🇸🇦';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="العربية">🇸🇦</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- HERO -->
+        <section class="relative min-h-screen flex items-center pt-32 pb-20 px-6 md:px-12 overflow-hidden isolate">
+            <div class="absolute inset-0">
+                <img src="FOND 1.png" alt="" class="w-full h-full object-cover opacity-20 animate-slow-zoom origin-center" aria-hidden="true">
+                <div class="absolute inset-0 bg-gradient-to-b from-brand-black/70 via-brand-black/80 to-brand-black"></div>
+            </div>
+            <div class="max-w-7xl mx-auto w-full relative observer-target fade-in-up">
+                <div class="ng-hero-split">
+                    <div class="ng-hero-text-col">
+                        <h1 class="font-black uppercase leading-none tracking-tighter mb-8" style="font-size: clamp(2.8rem, 7.5vw, 7rem);">
+                            <span data-i18n="inf_h1_1">INFLU</span><span class="ng-hero-title-solid" data-i18n="inf_h1_2">ENCE</span>
+                        </h1>
+                        <div class="ng-hero-intro mb-10">
+                                    <p class="ng-service-hero-copy" data-i18n="inf_hero_desc">Nous sélectionnons les créateurs, cadrons les collaborations et suivons les résultats, de la prise de contact au bilan de campagne.</p>
+                                </div>
+                        <a href="contact.html" class="inline-flex items-center gap-3 text-base md:text-lg font-bold uppercase tracking-wider py-4 px-8 border border-white hover:bg-white hover:text-black transition-all duration-300 rounded-full focus:outline-none" data-i18n="inf_cta_hero">LANCER UNE CAMPAGNE <i data-lucide="arrow-up-right" class="w-5 h-5" aria-hidden="true"></i></a>
+                    </div>
+
+                    <!-- ILLUSTRATION : Propagation éditoriale influence -->
+                    <div class="ng-hero-illus-col" aria-hidden="true">
+                        <figure class="inf-hero-visual">
+                            <svg class="inf-svg" viewBox="0 0 440 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                <!-- ══ Ondes de diffusion (source centrale) ══ -->
+                                <circle class="inf-wave inf-wave-1" cx="220" cy="150" r="48" stroke="rgba(247,247,247,0.22)" stroke-width="1" fill="none"/>
+                                <circle class="inf-wave inf-wave-2" cx="220" cy="150" r="48" stroke="rgba(247,247,247,0.14)" stroke-width="1" fill="none"/>
+                                <circle class="inf-wave inf-wave-3" cx="220" cy="150" r="48" stroke="rgba(247,247,247,0.08)" stroke-width="1" fill="none"/>
+
+                                <!-- ══ Nœud source central ══ -->
+                                <circle cx="220" cy="150" r="22" fill="rgba(247,247,247,0.06)" stroke="rgba(247,247,247,0.35)" stroke-width="1.5"/>
+                                <circle cx="220" cy="150" r="8" fill="rgba(247,247,247,0.18)" stroke="rgba(247,247,247,0.55)" stroke-width="1"/>
+                                <circle cx="220" cy="150" r="2.5" fill="rgba(247,247,247,0.9)"/>
+
+                                <!-- ══ Connexions vers les influenceurs ══ -->
+                                <!-- Vers NW -->
+                                <line class="inf-link inf-link-1" x1="205" y1="136" x2="90" y2="58" stroke="rgba(247,247,247,0.2)" stroke-width="1"/>
+                                <!-- Vers NE -->
+                                <line class="inf-link inf-link-2" x1="234" y1="136" x2="360" y2="52" stroke="rgba(247,247,247,0.18)" stroke-width="1"/>
+                                <!-- Vers E -->
+                                <line class="inf-link inf-link-3" x1="242" y1="152" x2="400" y2="148" stroke="rgba(247,247,247,0.16)" stroke-width="1"/>
+                                <!-- Vers SW -->
+                                <line class="inf-link inf-link-4" x1="205" y1="163" x2="72" y2="240" stroke="rgba(247,247,247,0.18)" stroke-width="1"/>
+                                <!-- Vers SE -->
+                                <line class="inf-link inf-link-5" x1="232" y1="166" x2="342" y2="244" stroke="rgba(247,247,247,0.16)" stroke-width="1"/>
+
+                                <!-- ══ Nœuds influenceurs (Niveau 1) ══ -->
+                                <!-- NW -->
+                                <circle cx="90" cy="58" r="18" fill="rgba(247,247,247,0.045)" stroke="rgba(247,247,247,0.22)" stroke-width="1"/>
+                                <circle cx="90" cy="58" r="5.5" fill="rgba(247,247,247,0.5)"/>
+                                <!-- NE -->
+                                <circle cx="360" cy="52" r="16" fill="rgba(247,247,247,0.04)" stroke="rgba(247,247,247,0.18)" stroke-width="1"/>
+                                <circle cx="360" cy="52" r="5" fill="rgba(247,247,247,0.45)"/>
+                                <!-- E -->
+                                <circle cx="400" cy="148" r="14" fill="rgba(247,247,247,0.035)" stroke="rgba(247,247,247,0.16)" stroke-width="1"/>
+                                <circle cx="400" cy="148" r="4.5" fill="rgba(247,247,247,0.4)"/>
+                                <!-- SW -->
+                                <circle cx="72" cy="240" r="16" fill="rgba(247,247,247,0.04)" stroke="rgba(247,247,247,0.18)" stroke-width="1"/>
+                                <circle cx="72" cy="240" r="5" fill="rgba(247,247,247,0.45)"/>
+                                <!-- SE -->
+                                <circle cx="342" cy="244" r="14" fill="rgba(247,247,247,0.035)" stroke="rgba(247,247,247,0.15)" stroke-width="1"/>
+                                <circle cx="342" cy="244" r="4.5" fill="rgba(247,247,247,0.4)"/>
+
+                                <!-- ══ Nœuds audience (Niveau 2, très discrets) ══ -->
+                                <circle cx="34" cy="28" r="7" stroke="rgba(247,247,247,0.12)" stroke-width="0.75" fill="none"/>
+                                <circle cx="125" cy="22" r="6" stroke="rgba(247,247,247,0.1)" stroke-width="0.75" fill="none"/>
+                                <circle cx="420" cy="90" r="6" stroke="rgba(247,247,247,0.1)" stroke-width="0.75" fill="none"/>
+                                <circle cx="428" cy="200" r="5" stroke="rgba(247,247,247,0.09)" stroke-width="0.75" fill="none"/>
+                                <circle cx="28" cy="278" r="6" stroke="rgba(247,247,247,0.1)" stroke-width="0.75" fill="none"/>
+                                <circle cx="115" cy="278" r="5" stroke="rgba(247,247,247,0.09)" stroke-width="0.75" fill="none"/>
+                                <circle cx="390" cy="278" r="5" stroke="rgba(247,247,247,0.09)" stroke-width="0.75" fill="none"/>
+
+                                <!-- Connexions niveau 2 -->
+                                <line x1="90" y1="40" x2="34" y2="28" stroke="rgba(247,247,247,0.07)" stroke-width="0.5"/>
+                                <line x1="100" y1="42" x2="125" y2="22" stroke="rgba(247,247,247,0.07)" stroke-width="0.5"/>
+                                <line x1="376" y1="60" x2="420" y2="90" stroke="rgba(247,247,247,0.07)" stroke-width="0.5"/>
+                                <line x1="414" y1="155" x2="428" y2="200" stroke="rgba(247,247,247,0.06)" stroke-width="0.5"/>
+                                <line x1="60" y1="248" x2="28" y2="278" stroke="rgba(247,247,247,0.07)" stroke-width="0.5"/>
+                                <line x1="84" y1="252" x2="115" y2="278" stroke="rgba(247,247,247,0.07)" stroke-width="0.5"/>
+                                <line x1="354" y1="255" x2="390" y2="278" stroke="rgba(247,247,247,0.06)" stroke-width="0.5"/>
+
+                            </svg>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAGS -->
+        <section class="py-12 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto"><div class="ng-capabilities-grid observer-target fade-in-up">
+                    <div class="ng-capability-item"><span class="ng-cap-index">01</span><span class="ng-cap-label" data-i18n="inf_tag1">Nano-Influenceurs</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">02</span><span class="ng-cap-label" data-i18n="inf_tag2">Micro-Influenceurs</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">03</span><span class="ng-cap-label" data-i18n="inf_tag3">Macro-Influenceurs</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">04</span><span class="ng-cap-label">Instagram</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">05</span><span class="ng-cap-label">TikTok</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">06</span><span class="ng-cap-label">YouTube</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">07</span><span class="ng-cap-label" data-i18n="inf_tag4">UGC Content</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">08</span><span class="ng-cap-label" data-i18n="inf_tag5">Placement Produit</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">09</span><span class="ng-cap-label" data-i18n="inf_tag6">Codes Promo</span></div>
+                </div>
+            </div></div>
+        </section>
+
+        <!-- TYPOLOGIES D'INFLUENCEURS -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 observer-target fade-in-up">
+                    <p class="service-label mb-4" data-i18n="inf_typo_label">TYPOLOGIES</p>
+                    <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">
+                        <span data-i18n="inf_typo_h2_1">LE BON</span><br>
+                        <span class="text-stroke" data-i18n="inf_typo_h2_2">CRÉATEUR</span>
+                    </h2>
+                </div>
+                <!-- Tableau de typologies -->
+                <div class="typology-row observer-target fade-in-up">
+                    <div class="typology-cell">
+                        <p class="prestation-number mb-3" data-i18n="inf_nano_sub">1K — 10K abonnés</p>
+                        <h3 class="font-black text-xl uppercase tracking-tight mb-3" data-i18n="inf_nano_title">Nano</h3>
+                        <p class="text-xs text-gray-500 font-semibold leading-relaxed mb-4" data-i18n="inf_nano_desc">Audience de niche, ultra-engagée. Taux d'engagement souvent supérieur à 8%. Idéal pour les lancements et les campagnes de proximité authentique.</p>
+                        <div class="space-y-1">
+                            <p class="text-xs text-gray-600 font-semibold">↑ <span data-i18n="inf_nano_pro">Engagement fort</span></p>
+                            <p class="text-xs text-gray-600 font-semibold">↑ <span data-i18n="inf_nano_pro2">Coût accessible</span></p>
+                            <p class="text-xs text-gray-600 font-semibold">↑ <span data-i18n="inf_nano_pro3">Authenticité maximale</span></p>
+                        </div>
+                    </div>
+                    <div class="typology-cell bg-white/[0.02]">
+                        <p class="prestation-number mb-3" data-i18n="inf_micro_sub">10K — 100K abonnés</p>
+                        <h3 class="font-black text-xl uppercase tracking-tight mb-3" data-i18n="inf_micro_title">Micro</h3>
+                        <p class="text-xs text-gray-500 font-semibold leading-relaxed mb-4" data-i18n="inf_micro_desc">Le meilleur équilibre portée / engagement. Communauté qualifiée et fidèle, autorité dans leur niche. Le choix optimal pour la plupart des campagnes de performance.</p>
+                        <div class="space-y-1">
+                            <p class="text-xs text-gray-600 font-semibold">↑ <span data-i18n="inf_micro_pro">Portée qualifiée</span></p>
+                            <p class="text-xs text-gray-600 font-semibold">↑ <span data-i18n="inf_micro_pro2">ROI optimisé</span></p>
+                            <p class="text-xs text-gray-600 font-semibold">↑ <span data-i18n="inf_micro_pro3">Crédibilité niche</span></p>
+                        </div>
+                    </div>
+                    <div class="typology-cell">
+                        <p class="prestation-number mb-3" data-i18n="inf_macro_sub">100K — 1M+ abonnés</p>
+                        <h3 class="font-black text-xl uppercase tracking-tight mb-3" data-i18n="inf_macro_title">Macro</h3>
+                        <p class="text-xs text-gray-500 font-semibold leading-relaxed mb-4" data-i18n="inf_macro_desc">Impact de notoriété massif. Idéal pour les lancements nationaux, la construction de marque à grande échelle et les campagnes nécessitant une visibilité immédiate et très large.</p>
+                        <div class="space-y-1">
+                            <p class="text-xs text-gray-600 font-semibold">↑ <span data-i18n="inf_macro_pro">Portée massive</span></p>
+                            <p class="text-xs text-gray-600 font-semibold">↑ <span data-i18n="inf_macro_pro2">Effet notoriété</span></p>
+                            <p class="text-xs text-gray-600 font-semibold">↑ <span data-i18n="inf_macro_pro3">Brand awareness fort</span></p>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-600 font-semibold mt-4 italic" data-i18n="inf_typo_note">Note : Les fourchettes d'abonnés sont indicatives et peuvent varier selon les plateformes et les sources du secteur.</p>
+            </div>
+        </section>
+
+        <!-- PROCESSUS CAMPAGNE -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    <div class="observer-target fade-in-up">
+                        <p class="service-label mb-4" data-i18n="inf_process_label">NOTRE MÉTHODE</p>
+                        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
+                            <span data-i18n="inf_process_h2_1">CAMPAGNE</span><br>
+                            <span class="text-stroke" data-i18n="inf_process_h2_2">SUR-MESURE</span>
+                        </h2>
+                        <p class="text-gray-400 font-semibold leading-relaxed max-w-md" data-i18n="inf_process_desc">Chaque campagne est construite autour de vos objectifs spécifiques. Nous ne faisons pas de placement de masse — nous construisons des collaborations stratégiques qui ont du sens pour votre marque et votre audience cible.</p>
+                    </div>
+                    <div class="process-bar observer-target fade-in-up">
+                        <div class="process-bar-item">
+                            <div class="process-dot">01</div>
+                            <div class="process-content">
+                                <h3 class="font-black text-sm uppercase tracking-tight mb-1.5" data-i18n="inf_proc1_title">Briefing & Objectifs</h3>
+                                <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="inf_proc1_desc">Définition claire des objectifs, de la cible, du budget et des KPIs de réussite de la campagne.</p>
+                            </div>
+                        </div>
+                        <div class="process-bar-item">
+                            <div class="process-dot">02</div>
+                            <div class="process-content">
+                                <h3 class="font-black text-sm uppercase tracking-tight mb-1.5" data-i18n="inf_proc2_title">Sélection des Créateurs</h3>
+                                <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="inf_proc2_desc">Identification et vérification des profils : authenticité de l'audience, taux d'engagement réel, cohérence éditoriale et valeurs alignées à votre marque.</p>
+                            </div>
+                        </div>
+                        <div class="process-bar-item">
+                            <div class="process-dot">03</div>
+                            <div class="process-content">
+                                <h3 class="font-black text-sm uppercase tracking-tight mb-1.5" data-i18n="inf_proc3_title">Négociation & Contrats</h3>
+                                <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="inf_proc3_desc">Mise en place des accords de collaboration, brief créatif, droits d'utilisation du contenu, calendrier de publication et conditions de paiement.</p>
+                            </div>
+                        </div>
+                        <div class="process-bar-item">
+                            <div class="process-dot">04</div>
+                            <div class="process-content">
+                                <h3 class="font-black text-sm uppercase tracking-tight mb-1.5" data-i18n="inf_proc4_title">Production & Validation</h3>
+                                <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="inf_proc4_desc">Suivi de la création de contenu, validations à chaque étape pour garantir l'alignement avec la charte de marque tout en préservant l'authenticité du créateur.</p>
+                            </div>
+                        </div>
+                        <div class="process-bar-item">
+                            <div class="process-dot">05</div>
+                            <div class="process-content">
+                                <h3 class="font-black text-sm uppercase tracking-tight mb-1.5" data-i18n="inf_proc5_title">Publication & Tracking</h3>
+                                <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="inf_proc5_desc">Coordination des publications, monitoring en temps réel des performances et rapport de campagne complet avec toutes les métriques de résultat.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRESTATIONS -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 md:mb-24 observer-target fade-in-up">
+                    <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter">
+                        <span data-i18n="inf_presta_h2_1">NOS</span> <span class="text-stroke" data-i18n="inf_presta_h2_2">PRESTATIONS</span>
+                    </h2>
+                </div>
+                <div class="space-y-0 divide-y divide-gray-900">
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">01</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="inf_p1_title">Stratégie d'Influence</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="inf_p1_desc">Définition de la stratégie d'influence alignée à vos objectifs marketing : notoriété, conversion, lancement de produit ou gestion de communauté. Choix des plateformes, des formats de contenu et des typologies d'influenceurs en fonction de votre cible et de votre budget.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">02</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="inf_p2_title">Casting & Sélection</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="inf_p2_desc">Identification et qualification des créateurs les plus pertinents pour votre marque. Analyse approfondie : authenticité de l'audience, détection des faux abonnés, taux d'engagement réel, cohérence thématique et historique de collaborations. Nous sélectionnons la qualité, pas la quantité.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">03</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="inf_p3_title">Gestion de Campagne</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="inf_p3_desc">Pilotage opérationnel complet de la campagne : négociation, brief créatif, validation du contenu avant publication, coordination des plannings, gestion des droits d'image et suivi des livraisons. Vous restez concentré sur votre business, nous gérons l'exécution.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">04</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="inf_p4_title">UGC & Contenu Créateur</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="inf_p4_desc">Acquisition de contenu généré par les créateurs (UGC) utilisable dans vos propres campagnes publicitaires. Le contenu authentique créé par des vrais utilisateurs génère en moyenne 4x plus d'engagement que le contenu de marque traditionnel. Nous gérons les droits d'utilisation.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">05</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="inf_p5_title">Mesure & Reporting</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="inf_p5_desc">Rapport de campagne complet : portée réelle, impressions, taux d'engagement, swipe-ups, clics, conversions trackées et earned media value (EMV). Analyse de la performance par créateur et recommandations pour les prochaines campagnes.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AVANTAGES (fond blanc) -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-white text-brand-black rounded-t-[3rem] md:rounded-t-[5rem]">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 observer-target fade-in-up">
+                    <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">
+                        <span data-i18n="inf_why_h2_1">AU-DELÀ</span><br>
+                        <span class="text-stroke-black" data-i18n="inf_why_h2_2">DE LA PORTÉE.</span>
+                    </h2>
+                </div>
+                <div class="ng-proof-grid">
+                    <div class="ng-proof-item observer-target fade-in-up">
+                        <span class="ng-proof-number" aria-hidden="true">01</span>
+                        <h3 class="ng-proof-title" data-i18n="inf_why1_title">Sélection Rigoureuse</h3>
+                        <p class="ng-proof-desc" data-i18n="inf_why1_desc">Nous vérifions chaque créateur : authenticité de l’audience, absence de faux abonnés, cohérence des valeurs avec votre marque. Qualité avant quantité.</p>
+                    </div>
+                    <div class="ng-proof-item observer-target fade-in-up">
+                        <span class="ng-proof-number" aria-hidden="true">02</span>
+                        <h3 class="ng-proof-title" data-i18n="inf_why2_title">Contenu Authentique</h3>
+                        <p class="ng-proof-desc" data-i18n="inf_why2_desc">Nous briefons sans contraindre. Le créateur garde sa voix unique — ce qui génère une résonance authentique auprès de son audience, impossible à atteindre avec de la publicité classique.</p>
+                    </div>
+                    <div class="ng-proof-item observer-target fade-in-up">
+                        <span class="ng-proof-number" aria-hidden="true">03</span>
+                        <h3 class="ng-proof-title" data-i18n="inf_why3_title">Performance Trackée</h3>
+                        <p class="ng-proof-desc" data-i18n="inf_why3_desc">Chaque campagne est mesurée avec précision. Codes promo uniques, liens trackés et pixels de conversion pour connaître le ROI réel de chaque collaboration.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-24 md:py-40 px-6 md:px-12 bg-brand-black relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]"><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white rounded-full blur-[100px]" aria-hidden="true"></div></div>
+            <div class="max-w-5xl mx-auto text-center relative observer-target fade-in-up">
+                <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-none tracking-tighter mb-8">
+                    <span data-i18n="inf_cta_h2_1">FAITES PARLER</span><br>
+                    <span class="text-stroke" data-i18n="inf_cta_h2_2">DE VOUS.</span>
+                </h2>
+                <a href="contact.html" class="inline-flex items-center gap-3 text-lg md:text-xl font-bold uppercase tracking-wider py-5 px-10 border border-white hover:bg-white hover:text-black transition-all duration-300 rounded-full focus:outline-none" data-i18n="inf_cta_btn">CONTACTEZ-NOUS <i data-lucide="arrow-up-right" class="w-5 h-5" aria-hidden="true"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-black pt-20 pb-10 px-6 md:px-12 border-t border-gray-900" role="contentinfo">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            <div><a href="index.html" class="flex items-center mb-6"><img src="LOGO1HEAD.png" alt="Logo NG Creative" class="h-8 w-auto object-contain"></a><p class="text-sm leading-relaxed" style="font-family: var(--font-copy); color: var(--text-dark-muted); font-weight: 400;" data-i18n="footer_tagline">Direction créative, contenus et expériences digitales.</p></div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_services">Services</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="audiovisuel.html" class="hover:text-gray-400 transition-colors" data-i18n="s1_title">Audiovisuel</a></li>
+                    <li><a href="sites-web.html" class="hover:text-gray-400 transition-colors" data-i18n="s2_title">Sites Web</a></li>
+                    <li><a href="graphisme.html" class="hover:text-gray-400 transition-colors" data-i18n="s3_title">Graphisme</a></li>
+                    <li><a href="impression.html" class="hover:text-gray-400 transition-colors" data-i18n="s4_title">Impression</a></li>
+                    <li><a href="ads.html" class="hover:text-gray-400 transition-colors" data-i18n="s5_title">Ads</a></li>
+                    <li><a href="marketing-local.html" class="hover:text-gray-400 transition-colors" data-i18n="s6_title">Marketing Local</a></li>
+                    <li><a href="influence.html" class="text-white font-bold" aria-current="page" data-i18n="s7_title">Influence</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_nav">Navigation</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="index.html" class="hover:text-gray-400 transition-colors font-bold" data-i18n="footer_home">Accueil</a></li>
+                    <li><a href="contact.html" class="hover:text-gray-400 transition-colors font-bold" data-i18n="nav_contact">Contact</a></li>
+                    <li><a href="Plaquette-Commerciale-NG-Creative.pdf" download class="hover:text-gray-400 transition-colors font-bold" data-i18n="footer_plaquette">Plaquette</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_follow">Suivez-nous</h4>
+                <div class="flex gap-5">
+                    <a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="Instagram"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    <a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="X"><svg class="w-[1.15rem] h-[1.15rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                    <a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="TikTok"><svg class="w-5 h-5" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-600 text-xs font-bold">© 2026 NG Creative. <span data-i18n="rights">Tous droits réservés.</span></p>
+            <p class="text-gray-600 text-xs font-bold" data-i18n="made_with">Conçu avec passion.</p>
+        </div>
+    </footer>
+
+    <script>
+        const translations={
+            FR:{nav_services:"SERVICES",nav_clients:"CLIENTS",nav_structure:"STRUCTURE",nav_contact:"CONTACT",nav_plaquette:"TÉLÉCHARGER LA PLAQUETTE",inf_hero_service_name:"INFLUENCE",inf_label:"07 / INFLUENCE",inf_h1_1:"INFLU",inf_h1_2:"ENCE",inf_hero_desc:"Nous sélectionnons les créateurs, cadrons les collaborations et suivons les résultats, de la prise de contact au bilan de campagne.",inf_cta_hero:"LANCER UNE CAMPAGNE",inf_tag1:"Nano-Influenceurs",inf_tag2:"Micro-Influenceurs",inf_tag3:"Macro-Influenceurs",inf_tag4:"UGC Content",inf_tag5:"Placement Produit",inf_tag6:"Codes Promo",inf_typo_label:"TYPOLOGIES",inf_typo_h2_1:"LE BON",inf_typo_h2_2:"CRÉATEUR",inf_nano_sub:"1K — 10K abonnés",inf_nano_title:"Nano",inf_nano_desc:"Audience de niche, ultra-engagée. Taux d'engagement souvent supérieur à 8%. Idéal pour les lancements et les campagnes de proximité authentique.",inf_nano_pro:"Engagement fort",inf_nano_pro2:"Coût accessible",inf_nano_pro3:"Authenticité maximale",inf_micro_sub:"10K — 100K abonnés",inf_micro_title:"Micro",inf_micro_desc:"Le meilleur équilibre portée / engagement. Communauté qualifiée et fidèle, autorité dans leur niche.",inf_micro_pro:"Portée qualifiée",inf_micro_pro2:"ROI optimisé",inf_micro_pro3:"Crédibilité niche",inf_macro_sub:"100K — 1M+ abonnés",inf_macro_title:"Macro",inf_macro_desc:"Impact de notoriété massif. Idéal pour les lancements nationaux et la construction de marque à grande échelle.",inf_macro_pro:"Portée massive",inf_macro_pro2:"Effet notoriété",inf_macro_pro3:"Brand awareness fort",inf_typo_note:"Note : Les fourchettes d'abonnés sont indicatives et peuvent varier selon les plateformes.",inf_process_label:"NOTRE MÉTHODE",inf_process_h2_1:"CAMPAGNE",inf_process_h2_2:"SUR-MESURE",inf_process_desc:"Chaque campagne est construite autour de vos objectifs spécifiques. Nous construisons des collaborations stratégiques qui ont du sens pour votre marque.",inf_proc1_title:"Briefing & Objectifs",inf_proc1_desc:"Définition claire des objectifs, de la cible, du budget et des KPIs de réussite de la campagne.",inf_proc2_title:"Sélection des Créateurs",inf_proc2_desc:"Identification et vérification des profils : authenticité de l'audience, taux d'engagement réel, cohérence éditoriale.",inf_proc3_title:"Négociation & Contrats",inf_proc3_desc:"Accords de collaboration, brief créatif, droits d'utilisation du contenu, calendrier et conditions.",inf_proc4_title:"Production & Validation",inf_proc4_desc:"Suivi de la création de contenu, validations à chaque étape pour garantir l'alignement avec la charte.",inf_proc5_title:"Publication & Tracking",inf_proc5_desc:"Coordination des publications, monitoring en temps réel et rapport de campagne complet.",inf_presta_h2_1:"NOS",inf_presta_h2_2:"PRESTATIONS",inf_p1_title:"Stratégie d'Influence",inf_p1_desc:"Définition de la stratégie alignée à vos objectifs : notoriété, conversion, lancement de produit. Choix des plateformes et des typologies d'influenceurs.",inf_p2_title:"Casting & Sélection",inf_p2_desc:"Identification et qualification des créateurs : authenticité, taux d'engagement réel, cohérence thématique et valeurs alignées à votre marque.",inf_p3_title:"Gestion de Campagne",inf_p3_desc:"Pilotage opérationnel complet : négociation, brief créatif, validation du contenu, coordination des plannings et gestion des droits.",inf_p4_title:"UGC & Contenu Créateur",inf_p4_desc:"Acquisition de contenu UGC utilisable dans vos campagnes publicitaires. Le contenu authentique génère 4x plus d'engagement que le contenu de marque.",inf_p5_title:"Mesure & Reporting",inf_p5_desc:"Rapport complet : portée réelle, impressions, taux d'engagement, conversions et earned media value (EMV) par créateur.",inf_why_label:"NOTRE VALEUR AJOUTÉE",inf_why_h2_1:"AU-DELÀ",inf_why_h2_2:"DE LA PORTÉE.",inf_why1_title:"Sélection Rigoureuse",inf_why1_desc:"Nous vérifions chaque créateur : authenticité, absence de faux abonnés, cohérence des valeurs. Qualité avant quantité.",inf_why2_title:"Contenu Authentique",inf_why2_desc:"Nous briefons sans contraindre. Le créateur garde sa voix unique — ce qui génère une résonance impossible avec la pub classique.",inf_why3_title:"Performance Trackée",inf_why3_desc:"Codes promo uniques, liens trackés et pixels de conversion pour mesurer le ROI réel de chaque collaboration.",inf_cta_label:"PROCHAINE ÉTAPE",inf_cta_h2_1:"FAITES PARLER",inf_cta_h2_2:"DE VOUS.",inf_cta_desc:"Partagez votre brief de campagne. Nous sélectionnons les créateurs les plus pertinents et proposons un plan sous 48h.",inf_cta_btn:"CONTACTEZ-NOUS",footer_tagline: "Direction créative, contenus et expériences digitales.",footer_title_services:"Services",footer_title_nav:"Navigation",footer_title_follow:"Suivez-nous",footer_home:"Accueil",footer_plaquette:"Plaquette",s1_title:"Audiovisuel",s2_title:"Sites Web",s3_title:"Graphisme",s4_title:"Impression",s5_title:"Ads",s6_title:"Marketing Local",s7_title:"Influence",rights:"Tous droits réservés.",made_with: "Conçu par NG Creative."},
+            EN:{inf_hero_service_name:"INFLUENCE",nav_services:"SERVICES",nav_clients:"CLIENTS",nav_structure:"STRUCTURE",nav_contact:"CONTACT",nav_plaquette:"DOWNLOAD OUR BROCHURE",inf_label:"07 / INFLUENCE",inf_h1_1:"INFLU",inf_h1_2:"ENCE",inf_hero_desc:"We source creators, structure collaborations and track performance, from initial outreach to comprehensive campaign reporting.",inf_cta_hero:"LAUNCH A CAMPAIGN",inf_tag1:"Nano-Influencers",inf_tag2:"Micro-Influencers",inf_tag3:"Macro-Influencers",inf_tag4:"UGC Content",inf_tag5:"Product Placement",inf_tag6:"Promo Codes",inf_typo_label:"TYPOLOGIES",inf_typo_h2_1:"THE RIGHT",inf_typo_h2_2:"CREATOR",inf_nano_sub:"1K — 10K followers",inf_nano_title:"Nano",inf_nano_desc:"Niche audience, ultra-engaged. Engagement rate often above 8%. Ideal for launches and authentic proximity campaigns.",inf_nano_pro:"Strong engagement",inf_nano_pro2:"Affordable cost",inf_nano_pro3:"Maximum authenticity",inf_micro_sub:"10K — 100K followers",inf_micro_title:"Micro",inf_micro_desc:"The best balance of reach and engagement. Qualified, loyal community with authority in their niche.",inf_micro_pro:"Qualified reach",inf_micro_pro2:"Optimised ROI",inf_micro_pro3:"Niche credibility",inf_macro_sub:"100K — 1M+ followers",inf_macro_title:"Macro",inf_macro_desc:"Massive awareness impact. Ideal for national launches and large-scale brand building.",inf_macro_pro:"Massive reach",inf_macro_pro2:"Awareness effect",inf_macro_pro3:"Strong brand awareness",inf_typo_note:"Note: Follower ranges are indicative and may vary by platform.",inf_process_label:"OUR METHOD",inf_process_h2_1:"BESPOKE",inf_process_h2_2:"CAMPAIGN",inf_process_desc:"Every campaign is built around your specific objectives. We build strategic collaborations that make sense for your brand.",inf_proc1_title:"Briefing & Objectives",inf_proc1_desc:"Clear definition of objectives, target audience, budget and success KPIs.",inf_proc2_title:"Creator Selection",inf_proc2_desc:"Profile identification and verification: audience authenticity, real engagement rate, editorial alignment.",inf_proc3_title:"Negotiation & Contracts",inf_proc3_desc:"Collaboration agreements, creative brief, content usage rights, publication calendar and payment terms.",inf_proc4_title:"Production & Validation",inf_proc4_desc:"Content creation oversight, stage-by-stage validations to ensure brand alignment while preserving creator authenticity.",inf_proc5_title:"Publication & Tracking",inf_proc5_desc:"Publication coordination, real-time performance monitoring and full campaign report.",inf_presta_h2_1:"OUR",inf_presta_h2_2:"SERVICES",inf_p1_title:"Influence Strategy",inf_p1_desc:"Strategy definition aligned with your goals: awareness, conversion, product launch. Platform and influencer typology selection.",inf_p2_title:"Casting & Selection",inf_p2_desc:"Creator identification and qualification: authenticity, real engagement rate, thematic consistency and brand-aligned values.",inf_p3_title:"Campaign Management",inf_p3_desc:"Full operational management: negotiation, creative brief, content validation, scheduling and rights management.",inf_p4_title:"UGC & Creator Content",inf_p4_desc:"Acquisition of creator-generated content for use in your ad campaigns. Authentic content generates 4x more engagement.",inf_p5_title:"Measurement & Reporting",inf_p5_desc:"Full report: real reach, impressions, engagement rates, conversions and earned media value (EMV) per creator.",inf_why_label:"OUR VALUE ADD",inf_why_h2_1:"BEYOND",inf_why_h2_2:"REACH.",inf_why1_title:"Rigorous Selection",inf_why1_desc:"We verify every creator: audience authenticity, fake follower detection, values alignment. Quality over quantity.",inf_why2_title:"Authentic Content",inf_why2_desc:"We brief without constraining. The creator keeps their unique voice — generating resonance impossible with traditional advertising.",inf_why3_title:"Tracked Performance",inf_why3_desc:"Unique promo codes, tracked links and conversion pixels to measure the real ROI of each collaboration.",inf_cta_label:"NEXT STEP",inf_cta_h2_1:"GET PEOPLE",inf_cta_h2_2:"TALKING.",inf_cta_desc:"Share your campaign brief. We select the most relevant creators and propose a custom influence plan within 48 hours.",inf_cta_btn:"CONTACT US",footer_tagline: "Creative direction, content and digital experiences.",footer_title_services:"Services",footer_title_nav:"Navigation",footer_title_follow:"Follow Us",footer_home:"Home",footer_plaquette:"Brochure",s1_title:"Audiovisual",s2_title:"Websites",s3_title:"Graphic Design",s4_title:"Printing",s5_title:"Ads",s6_title:"Local Marketing",s7_title:"Influence",rights:"All rights reserved.",made_with: "Designed by NG Creative."},
+            ES:{inf_hero_service_name:"INFLUENCIA",nav_services:"SERVICIOS",nav_clients:"CLIENTES",nav_structure:"ESTRUCTURA",nav_contact:"CONTACTO",nav_plaquette:"DESCARGAR EL DOSSIER",inf_label:"07 / INFLUENCIA",inf_h1_1:"INFLU",inf_h1_2:"ENCIA",inf_hero_desc:"Seleccionamos a los creadores, estructuramos las colaboraciones y medimos los resultados, del primer contacto al balance final.",inf_cta_hero:"LANZAR UNA CAMPAÑA",inf_tag1:"Nano-Influencers",inf_tag2:"Micro-Influencers",inf_tag3:"Macro-Influencers",inf_tag4:"Contenido UGC",inf_tag5:"Placement de Producto",inf_tag6:"Códigos Promocionales",inf_typo_label:"TIPOLOGÍAS",inf_typo_h2_1:"EL CREADOR",inf_typo_h2_2:"ADECUADO",inf_nano_sub:"1K — 10K seguidores",inf_nano_title:"Nano",inf_nano_desc:"Audiencia de nicho, ultra-comprometida. Tasa de engagement a menudo superior al 8%.",inf_nano_pro:"Fuerte engagement",inf_nano_pro2:"Coste accesible",inf_nano_pro3:"Máxima autenticidad",inf_micro_sub:"10K — 100K seguidores",inf_micro_title:"Micro",inf_micro_desc:"El mejor equilibrio alcance/engagement. Comunidad cualificada y fiel con autoridad en su nicho.",inf_micro_pro:"Alcance cualificado",inf_micro_pro2:"ROI optimizado",inf_micro_pro3:"Credibilidad de nicho",inf_macro_sub:"100K — 1M+ seguidores",inf_macro_title:"Macro",inf_macro_desc:"Impacto masivo de notoriedad. Ideal para lanzamientos nacionales y construcción de marca a gran escala.",inf_macro_pro:"Alcance masivo",inf_macro_pro2:"Efecto notoriedad",inf_macro_pro3:"Fuerte brand awareness",inf_typo_note:"Nota: Las franjas de seguidores son indicativas y pueden variar según la plataforma.",inf_process_label:"NUESTRO MÉTODO",inf_process_h2_1:"CAMPAÑA",inf_process_h2_2:"A MEDIDA",inf_process_desc:"Cada campaña se construye en torno a sus objetivos específicos. Construimos colaboraciones estratégicas que tienen sentido para su marca.",inf_proc1_title:"Briefing & Objetivos",inf_proc1_desc:"Definición clara de objetivos, público objetivo, presupuesto y KPIs de éxito.",inf_proc2_title:"Selección de Creadores",inf_proc2_desc:"Identificación y verificación de perfiles: autenticidad, tasa de engagement real, alineación editorial.",inf_proc3_title:"Negociación & Contratos",inf_proc3_desc:"Acuerdos de colaboración, brief creativo, derechos de uso, calendario y condiciones.",inf_proc4_title:"Producción & Validación",inf_proc4_desc:"Seguimiento de la creación de contenido y validaciones por etapas para garantizar la alineación con la marca.",inf_proc5_title:"Publicación & Seguimiento",inf_proc5_desc:"Coordinación de publicaciones, monitoreo en tiempo real e informe completo de campaña.",inf_presta_h2_1:"NUESTROS",inf_presta_h2_2:"SERVICIOS",inf_p1_title:"Estrategia de Influencia",inf_p1_desc:"Definición de estrategia alineada con sus objetivos: notoriedad, conversión, lanzamiento. Elección de plataformas y tipologías.",inf_p2_title:"Casting & Selección",inf_p2_desc:"Identificación y calificación de creadores: autenticidad, engagement real, coherencia temática.",inf_p3_title:"Gestión de Campaña",inf_p3_desc:"Gestión operacional completa: negociación, brief, validación de contenido, coordinación y gestión de derechos.",inf_p4_title:"UGC & Contenido Creador",inf_p4_desc:"Adquisición de contenido UGC para usar en sus campañas publicitarias. El contenido auténtico genera 4x más engagement.",inf_p5_title:"Medición & Informes",inf_p5_desc:"Informe completo: alcance real, impresiones, engagement, conversiones y earned media value por creador.",inf_why_label:"NUESTRO VALOR AÑADIDO",inf_why_h2_1:"MÁS ALLÁ",inf_why_h2_2:"DEL ALCANCE.",inf_why1_title:"Selección Rigurosa",inf_why1_desc:"Verificamos cada creador: autenticidad, ausencia de falsos seguidores, alineación de valores. Calidad antes que cantidad.",inf_why2_title:"Contenido Auténtico",inf_why2_desc:"Brifeamos sin constreñir. El creador conserva su voz única, generando resonancia imposible con la publicidad clásica.",inf_why3_title:"Rendimiento Medido",inf_why3_desc:"Códigos únicos, enlaces rastreados y píxeles de conversión para medir el ROI real de cada colaboración.",inf_cta_label:"PRÓXIMO PASO",inf_cta_h2_1:"QUE HABLEN",inf_cta_h2_2:"DE USTED.",inf_cta_desc:"Comparta su brief de campaña. Seleccionamos los creadores más relevantes y proponemos un plan en 48h.",inf_cta_btn:"CONTÁCTENOS",footer_tagline: "Dirección creativa, contenidos y experiencias digitales.",footer_title_services:"Servicios",footer_title_nav:"Navegación",footer_title_follow:"Síganos",footer_home:"Inicio",footer_plaquette:"Dossier",s1_title:"Audiovisual",s2_title:"Sitios Web",s3_title:"Diseño Gráfico",s4_title:"Impresión",s5_title:"Ads",s6_title:"Marketing Local",s7_title:"Influencia",rights:"Todos los derechos reservados.",made_with: "Diseñado por NG Creative."},
+            AR:{inf_hero_service_name:"التسويق عبر المؤثرين",nav_services:"الخدمات",nav_clients:"العملاء",nav_structure:"منهجيتنا",nav_contact:"اتصل بنا",nav_plaquette:"تحميل الكتيب التعريفي",inf_label:"07 / التسويق عبر المؤثرين",inf_h1_1:"تأثير",inf_h1_2:"رقمي",inf_hero_desc:"نختار صناع المحتوى بعناية، نؤطر التعاونات ونقيس النتائج، من أول تواصل حتى تقرير الحملة الشامل.",inf_cta_hero:"إطلاق حملة",inf_tag1:"مؤثرون نانو",inf_tag2:"مؤثرون ميكرو",inf_tag3:"مؤثرون ماكرو",inf_tag4:"محتوى UGC",inf_tag5:"وضع المنتج",inf_tag6:"رموز ترويجية",inf_typo_label:"التصنيفات",inf_typo_h2_1:"المبدع",inf_typo_h2_2:"المناسب",inf_nano_sub:"1K — 10K متابع",inf_nano_title:"نانو",inf_nano_desc:"جمهور متخصص ومتفاعل للغاية. معدل التفاعل كثيرًا ما يتجاوز 8%. مثالي للإطلاقات وحملات القرب الأصيل.",inf_nano_pro:"تفاعل قوي",inf_nano_pro2:"تكلفة معقولة",inf_nano_pro3:"أصالة قصوى",inf_micro_sub:"10K — 100K متابع",inf_micro_title:"ميكرو",inf_micro_desc:"أفضل توازن بين الوصول والتفاعل. مجتمع مؤهل ومخلص وله سلطة في مجاله.",inf_micro_pro:"وصول مؤهل",inf_micro_pro2:"عائد محسّن",inf_micro_pro3:"مصداقية متخصصة",inf_macro_sub:"100K — 1M+ متابع",inf_macro_title:"ماكرو",inf_macro_desc:"تأثير توعوي ضخم. مثالي للإطلاقات الوطنية وبناء العلامة على نطاق واسع.",inf_macro_pro:"وصول ضخم",inf_macro_pro2:"تأثير التوعية",inf_macro_pro3:"وعي قوي بالعلامة",inf_typo_note:"ملاحظة: نطاقات المتابعين استرشادية وقد تختلف حسب المنصات.",inf_process_label:"منهجيتنا",inf_process_h2_1:"حملة",inf_process_h2_2:"مخصصة",inf_process_desc:"كل حملة مبنية حول أهدافك المحددة. نبني تعاونات استراتيجية تعكس هوية علامتك التجارية.",inf_proc1_title:"الإحاطة والأهداف",inf_proc1_desc:"تحديد واضح للأهداف والجمهور المستهدف والميزانية ومؤشرات النجاح.",inf_proc2_title:"اختيار المبدعين",inf_proc2_desc:"تحديد والتحقق من الملفات: أصالة الجمهور ومعدل التفاعل الفعلي والتوافق التحريري.",inf_proc3_title:"التفاوض والعقود",inf_proc3_desc:"اتفاقيات التعاون والإحاطة الإبداعية وحقوق الاستخدام والجدول الزمني والشروط.",inf_proc4_title:"الإنتاج والتحقق",inf_proc4_desc:"متابعة إنشاء المحتوى والتحقق في كل مرحلة لضمان التوافق مع هوية العلامة.",inf_proc5_title:"النشر والتتبع",inf_proc5_desc:"تنسيق النشر ومتابعة الأداء في الوقت الفعلي وتقرير حملة شامل.",inf_presta_h2_1:"خدماتنا",inf_presta_h2_2:"الاحترافية",inf_p1_title:"استراتيجية التأثير",inf_p1_desc:"تحديد الاستراتيجية وفق أهدافك: توعية أو تحويل أو إطلاق منتج. اختيار المنصات وتصنيفات المؤثرين.",inf_p2_title:"الاختيار والانتقاء",inf_p2_desc:"تحديد وتأهيل المبدعين: الأصالة ومعدل التفاعل الفعلي والتوافق الموضوعي وقيم العلامة.",inf_p3_title:"إدارة الحملة",inf_p3_desc:"إدارة تشغيلية كاملة: تفاوض وإحاطة إبداعية والتحقق من المحتوى وتنسيق الجداول وإدارة الحقوق.",inf_p4_title:"محتوى UGC والمبدعين",inf_p4_desc:"اقتناء محتوى المبدعين لاستخدامه في حملاتك الإعلانية. المحتوى الأصيل يولّد 4 أضعاف التفاعل.",inf_p5_title:"القياس والتقارير",inf_p5_desc:"تقرير شامل: الوصول الفعلي والانطباعات ومعدلات التفاعل والتحويلات وقيمة الإعلام المكتسب لكل مبدع.",inf_why_label:"قيمتنا المضافة",inf_why_h2_1:"أبعد من",inf_why_h2_2:"مجرد الوصول.",inf_why1_title:"انتقاء صارم",inf_why1_desc:"نتحقق من كل مبدع: أصالة الجمهور وغياب المتابعين المزيفين وتوافق القيم. الجودة قبل الكمية.",inf_why2_title:"محتوى أصيل",inf_why2_desc:"نُحيط دون إكراه. المبدع يحتفظ بصوته الفريد مما يولّد صدى يستحيل تحقيقه بالإعلان التقليدي.",inf_why3_title:"أداء مُتتبَّع",inf_why3_desc:"رموز ترويجية فريدة وروابط مُتتبَّعة وبكسلات تحويل لقياس العائد الفعلي لكل تعاون.",inf_cta_label:"الخطوة التالية",inf_cta_h2_1:"اجعل الناس",inf_cta_h2_2:"يتحدثون عنك.",inf_cta_desc:"شاركنا إحاطة حملتك. نختار المبدعين الأنسب ونقترح خطة تأثير مخصصة خلال 48 ساعة.",inf_cta_btn:"تواصل معنا",footer_tagline: "إدارة إبداعية ومحتوى وتجارب رقمية.",footer_title_services:"الخدمات",footer_title_nav:"التنقل",footer_title_follow:"تابعنا",footer_home:"الرئيسية",footer_plaquette:"الكتيب",s1_title:"الإنتاج السمعي البصري",s2_title:"تطوير المواقع",s3_title:"التصميم الجرافيكي",s4_title:"الطباعة",s5_title:"الإعلانات",s6_title:"التسويق المحلي",s7_title:"التسويق عبر المؤثرين",rights:"جميع الحقوق محفوظة.",made_with: "تصميم بواسطة NG Creative."}
+        };
+        function changeLanguage(lang){localStorage.setItem('n_graphiste_lang',lang);document.documentElement.lang=lang.toLowerCase();document.documentElement.dir=(lang==='AR')?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(translations[lang]&&translations[lang][k]!==undefined)el.textContent=translations[lang][k];});}
+        document.addEventListener('DOMContentLoaded',()=>{const s=localStorage.getItem('n_graphiste_lang')||'FR';changeLanguage(s);if(typeof lucide!=='undefined')lucide.createIcons();if('IntersectionObserver' in window){const o=new IntersectionObserver((e)=>{e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target);}});},{threshold:0.08});document.querySelectorAll('.observer-target').forEach(el=>o.observe(el));}else{document.querySelectorAll('.observer-target').forEach(el=>el.classList.add('visible'));}});
+    </script>
+</body>
+</html>

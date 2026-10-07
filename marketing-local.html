@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Local | NG Creative — Visibilité Google Maps & SEO Local</title>
+    <meta name="description" content="Dominez votre zone de chalandise : optimisation Google My Business, SEO local, avis clients et référencement géolocalisé. NG Creative propulse votre visibilité locale.">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Montserrat','sans-serif'],aquire:['Aquire','sans-serif']},colors:{brand:{black:'#0a0a0a',white:'#f7f7f7',gray:'#1f1f1f',light:'#e5e5e5'}}}}}</script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+
+        :root {
+            --font-display: 'Montserrat', sans-serif;
+            --font-brand: 'Aquire', 'Montserrat', sans-serif;
+            --font-copy: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* Sur fond sombre */
+            --text-dark-primary: #f7f7f7;
+            --text-dark-body: #d8d5ce;
+            --text-dark-muted: #aaa69e;
+            --text-dark-subtle: #88847c;
+
+            /* Sur fond clair */
+            --text-light-primary: #0a0a0a;
+            --text-light-body: #34322e;
+            --text-light-muted: #69655e;
+            --text-light-subtle: #77736c;
+        }
+
+        [dir="rtl"] {
+            --font-copy: 'Noto Sans Arabic', 'Manrope', sans-serif;
+            --font-display: 'Noto Sans Arabic', 'Montserrat', sans-serif;
+        }
+
+        @font-face{font-family:'Aquire';src:url('Aquire.otf') format('opentype');}
+        body{font-family:'Montserrat',sans-serif;background-color:#0a0a0a;color:#f7f7f7;overflow-x:hidden;-webkit-font-smoothing:auto!important;}
+        .text-stroke{font-style:italic;color:#0a0a0a;text-shadow:-1px -1px 0 #f7f7f7,0 -1px 0 #f7f7f7,1px -1px 0 #f7f7f7,1px 0 0 #f7f7f7,1px 1px 0 #f7f7f7,0 1px 0 #f7f7f7,-1px 1px 0 #f7f7f7,-1px 0 0 #f7f7f7;}
+        .text-stroke-black{font-style:italic;color:#f7f7f7;text-shadow:-1px -1px 0 #0a0a0a,0 -1px 0 #0a0a0a,1px -1px 0 #0a0a0a,1px 0 0 #0a0a0a,1px 1px 0 #0a0a0a,0 1px 0 #0a0a0a,-1px 1px 0 #0a0a0a,-1px 0 0 #0a0a0a;}
+        .btn-hover-effect{position:relative;overflow:hidden;}.btn-hover-effect::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:1px;background-color:currentColor;transform:scaleX(0);transform-origin:right;transition:transform 0.3s ease;}.btn-hover-effect:hover::after{transform:scaleX(1);transform-origin:left;}
+        .fade-in-up{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease-out,transform 0.8s ease-out;}.fade-in-up.visible{opacity:1;transform:translateY(0);}
+        @keyframes slowZoom{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}.animate-slow-zoom{animation:slowZoom 30s ease-in-out infinite;}
+        ::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:#0a0a0a;}::-webkit-scrollbar-thumb{background:#333;border-radius:4px;}
+        [x-cloak]{display:none!important;}.rounded-full{-webkit-background-clip:padding-box;background-clip:padding-box;}
+        .tag-pill{display:inline-flex;align-items:center;padding:0.4rem 1rem;border:1px solid rgba(247,247,247,0.15);border-radius:9999px;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9ca3af;background:rgba(255,255,255,0.04);transition:all 0.3s ease;}.tag-pill:hover{border-color:rgba(247,247,247,0.4);color:#f7f7f7;background:rgba(255,255,255,0.08);}
+        .prestation-number{font-family:'Aquire','Montserrat',sans-serif;font-size:0.7rem;font-weight:400;letter-spacing:0.2em;color:#6b7280;}
+        .service-label {
+            font-family: var(--font-copy);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-dark-muted);
+        }
+        .prestation-row{transition:background 0.3s ease;}.prestation-row:hover{background:rgba(247,247,247,0.03);}
+
+        
+
+        /* ── Parcours local ── */
+        .local-step{
+            flex:1;
+            text-align:center;
+            position:relative;
+            padding:1rem 0.5rem;
+        }
+        .local-step::after{
+            content:'→';
+            position:absolute;
+            right:-12px;
+            top:50%;
+            transform:translateY(-50%);
+            color:rgba(247,247,247,0.2);
+            font-size:1.2rem;
+            font-weight:900;
+        }
+        .local-step:last-child::after{display:none;}
+
+        /* ── GMB mockup CSS ── */
+        .gmb-card{
+            border:1px solid rgba(247,247,247,0.12);
+            border-radius:1rem;
+            overflow:hidden;
+            background:rgba(255,255,255,0.03);
+            max-width:340px;
+        }
+        .gmb-header{height:90px;background:rgba(255,255,255,0.05);position:relative;}
+        .gmb-logo{width:52px;height:52px;background:#1f1f1f;border:2px solid rgba(247,247,247,0.15);border-radius:8px;position:absolute;bottom:-20px;left:1rem;}
+        .gmb-body{padding:1.5rem 1rem 1rem;}
+        .star{color:#f59e0b;font-size:0.75rem;}
+
+        /* ── Engagements / Proof block ── */
+        .ng-proof-grid {
+            border: 1px solid rgba(10,10,10,0.1);
+            border-radius: 2px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .ng-proof-item {
+            padding: 2rem 1.75rem;
+            position: relative;
+        }
+        .ng-proof-item + .ng-proof-item {
+            border-inline-start: 1px solid rgba(10,10,10,0.1);
+        }
+        .ng-proof-number {
+            font-family: 'Aquire', 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            color: #9ca3af;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+        .ng-proof-title {
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            color: #0a0a0a;
+            margin-bottom: 0.875rem;
+            line-height: 1.2;
+        }
+        .ng-proof-desc {
+            font-family: var(--font-copy);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: var(--text-light-body);
+            font-weight: 400;
+        }
+        @media (max-width: 767px) {
+            .ng-proof-grid {
+                grid-template-columns: 1fr;
+            }
+            .ng-proof-item + .ng-proof-item {
+                border-inline-start: none;
+                border-top: 1px solid rgba(10,10,10,0.1);
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce){.fade-in-up{opacity:1;transform:none;transition:none;}.animate-slow-zoom{animation:none;}*{transition-duration:0.01ms!important;animation-duration:0.01ms!important;}}
+    
+        /* ── Hero Eyebrow Component ── */
+        .ng-hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+        .ng-hero-eyebrow-number {
+            font-family: var(--font-copy);
+            font-size: clamp(0.68rem, 1vw, 0.72rem);
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.1em;
+            color: rgba(247, 247, 247, 0.7);
+            flex-shrink: 0;
+        }
+        .ng-hero-eyebrow-line {
+            display: inline-block;
+            width: clamp(28px, 4vw, 40px);
+            height: 1px;
+            background-color: rgba(247, 247, 247, 0.6);
+            flex-shrink: 0;
+        }
+        .ng-hero-eyebrow-name {
+            font-family: var(--font-copy);
+            font-size: clamp(0.7rem, 1.1vw, 0.75rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #f7f7f7;
+        }
+
+        /* ── Hero Intro & Subtitle ── */
+        .ng-hero-intro {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.15rem;
+            max-width: 52ch;
+        }
+        .ng-hero-intro-line {
+            display: block;
+            width: clamp(24px, 3.5vw, 36px);
+            height: 1px;
+            background-color: rgba(247, 247, 247, 0.65);
+            flex-shrink: 0;
+            margin-top: 0.75rem;
+            transform-origin: left center;
+        }
+        [dir="rtl"] .ng-hero-intro-line {
+            transform-origin: right center;
+        }
+        .ng-service-hero-copy {
+            font-family: var(--font-copy);
+            font-weight: 600;
+            font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+            line-height: 1.6;
+            color: #f7f7f7;
+            margin: 0;
+            border-inline-start: none;
+            padding-inline-start: 0;
+        }
+
+        /* Subtle hero intro animation */
+        .observer-target.visible .ng-hero-intro-line {
+            animation: heroLineGrow 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .observer-target.visible .ng-service-hero-copy {
+            animation: heroCopyReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards;
+        }
+
+        @keyframes heroLineGrow {
+            from { transform: scaleX(0); opacity: 0; }
+            to { transform: scaleX(1); opacity: 1; }
+        }
+        @keyframes heroCopyReveal {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ng-hero-intro-line,
+            .ng-service-hero-copy {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* ── Solid White Hero Title ── */
+        .ng-hero-title-solid {
+            color: #f7f7f7;
+            font-style: normal;
+            text-shadow: none;
+            -webkit-text-stroke: 0;
+            -webkit-text-fill-color: #f7f7f7;
+        }
+
+        /* ── Capabilities Grid (T12) ── */
+        .ng-capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        }
+        .ng-capability-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            padding-block: 0.875rem;
+            border-top: 1px solid rgba(247,247,247,0.07);
+        }
+        .ng-cap-index {
+            font-family: var(--font-copy);
+            font-size: 0.58rem;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.12em;
+            color: var(--text-dark-subtle);
+            flex-shrink: 0;
+        }
+        .ng-cap-label {
+            font-family: var(--font-copy);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark-body);
+            letter-spacing: 0.02em;
+        }
+
+    
+        /* ── Local Cartography Visual Component ── */
+        .local-map-visual {
+            position: relative;
+            width: 100%;
+            max-width: 460px;
+            aspect-ratio: 460 / 380;
+            background: rgba(255, 255, 255, 0.012);
+            border: 1px solid rgba(247, 247, 247, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        /* Framing Corner Marks */
+        .local-map-corner {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            pointer-events: none;
+            z-index: 20;
+        }
+        .local-map-corner-tl { top: -1px; left: -1px; border-top: 2px solid rgba(247, 247, 247, 0.4); border-left: 2px solid rgba(247, 247, 247, 0.4); }
+        .local-map-corner-tr { top: -1px; right: -1px; border-top: 2px solid rgba(247, 247, 247, 0.4); border-right: 2px solid rgba(247, 247, 247, 0.4); }
+        .local-map-corner-bl { bottom: -1px; left: -1px; border-bottom: 2px solid rgba(247, 247, 247, 0.4); border-left: 2px solid rgba(247, 247, 247, 0.4); }
+        .local-map-corner-br { bottom: -1px; right: -1px; border-bottom: 2px solid rgba(247, 247, 247, 0.4); border-right: 2px solid rgba(247, 247, 247, 0.4); }
+
+        .local-map-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Central Business Pin */
+        .local-map-pin-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -85%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 15;
+            pointer-events: none;
+        }
+        .local-map-pin-halo {
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 8px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at center, rgba(247, 247, 247, 0.45) 0%, rgba(247, 247, 247, 0) 70%);
+        }
+
+        /* Cartographic Annotations */
+        .local-map-annotation {
+            position: absolute;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            z-index: 18;
+            pointer-events: none;
+        }
+        .local-map-annotation-line {
+            width: 16px;
+            height: 1px;
+            background: rgba(247, 247, 247, 0.35);
+            flex-shrink: 0;
+        }
+        .local-map-annotation-text {
+            font-family: var(--font-copy);
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #d8d5ce;
+            white-space: nowrap;
+        }
+
+        .local-map-annotation-primary {
+            bottom: 28%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .local-map-annotation-secondary {
+            top: 24%;
+            right: 8%;
+        }
+        .local-map-annotation-extended {
+            top: 8%;
+            left: 8%;
+        }
+
+        [dir="rtl"] .local-map-annotation {
+            flex-direction: row-reverse;
+        }
+
+        /* Smooth Entrance Animations */
+        .local-map-streets-layer,
+        .local-map-blocks-layer {
+            opacity: 0;
+            transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .local-map-zones-layer {
+            opacity: 0;
+            transform-origin: 230px 190px;
+            transform: scale(0.96);
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .local-map-route-path {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            transition: stroke-dashoffset 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .local-map-pin-container,
+        .local-map-points-layer,
+        .local-map-annotation {
+            opacity: 0;
+            transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .observer-target.visible .local-map-streets-layer,
+        .observer-target.visible .local-map-blocks-layer {
+            opacity: 1;
+        }
+        .observer-target.visible .local-map-zones-layer {
+            opacity: 1;
+            transform: scale(1);
+            transition-delay: 0.1s;
+        }
+        .observer-target.visible .local-map-route-path {
+            stroke-dashoffset: 0;
+            transition-delay: 0.25s;
+        }
+        .observer-target.visible .local-map-points-layer {
+            opacity: 1;
+            transition-delay: 0.2s;
+        }
+        .observer-target.visible .local-map-pin-container {
+            opacity: 1;
+            transition-delay: 0.3s;
+        }
+        .observer-target.visible .local-map-annotation {
+            opacity: 1;
+            transition-delay: 0.4s;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .local-map-streets-layer,
+            .local-map-blocks-layer,
+            .local-map-zones-layer,
+            .local-map-route-path,
+            .local-map-pin-container,
+            .local-map-points-layer,
+            .local-map-annotation {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+                stroke-dashoffset: 0 !important;
+                transition: none !important;
+            }
+        }
+        /* ── Hero split — corrige le chevauchement ── */
+        .ng-hero-split {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: clamp(2rem, 5vw, 5rem);
+            align-items: center;
+        }
+        .ng-hero-text-col { min-width: 0; }
+        .ng-hero-illus-col { min-width: 0; }
+        @media (max-width: 1023px) {
+            .ng-hero-illus-col { display: none !important; }
+        }
+    </style>
+</head>
+<body class="selection:bg-white selection:text-black">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:font-bold focus:rounded">Aller au contenu</a>
+
+    <!-- HEADER -->
+    <header x-data="{mobileMenuOpen:false,scrolled:false,langOpen:false,currentLang:'FR',currentFlag:'🇫🇷',init(){const s=localStorage.getItem('n_graphiste_lang')||'FR';this.currentLang=s;const f={FR:'🇫🇷',EN:'🇬🇧',ES:'🇪🇸',AR:'🇸🇦'};this.currentFlag=f[s]||'🇫🇷';}}"
+    @scroll.window="scrolled=(window.pageYOffset>50)"
+    @keydown.escape.window="mobileMenuOpen=false;langOpen=false"
+    :class="scrolled?'bg-brand-black/90 backdrop-blur-md py-4':'bg-transparent py-6'"
+    class="fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 md:px-12" role="banner">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4 md:gap-6 z-50">
+                <a href="index.html" class="flex items-center" aria-label="NG Creative — Accueil"><img src="LOGO1HEAD.png" alt="Logo NG Creative" class="h-8 md:h-10 w-auto object-contain transition-all duration-700 hover:scale-105"></a>
+                <div class="flex items-center gap-4 border-l border-white/20 pl-4 md:pl-6">
+                    <a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="Instagram"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    <a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="X"><svg class="w-[1.15rem] h-[1.15rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                    <a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="text-white transition-all duration-700 hover:scale-105 flex-shrink-0" aria-label="TikTok"><svg class="w-5 h-5" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a>
+                </div>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center text-sm font-semibold tracking-wide" aria-label="Navigation principale">
+                <a href="index.html#services" class="hover:text-gray-400 transition-colors" data-i18n="nav_services">SERVICES</a>
+                <a href="index.html#clients" class="hover:text-gray-400 transition-colors" data-i18n="nav_clients">CLIENTS</a>
+                <a href="index.html#structure" class="hover:text-gray-400 transition-colors" data-i18n="nav_structure">STRUCTURE</a>
+                <a href="contact.html" class="px-6 py-3 border border-white hover:bg-white hover:text-black transition-colors duration-300 rounded-full flex items-center gap-2"><span data-i18n="nav_contact">CONTACT</span><i data-lucide="arrow-up-right" class="w-4 h-4" aria-hidden="true"></i></a>
+                <div class="relative">
+                    <button @click="langOpen=!langOpen" @click.outside="langOpen=false" class="flex items-center gap-2 px-3 py-2 border border-white/20 rounded-full hover:bg-white/10 transition-all text-xs font-bold tracking-wider uppercase focus:outline-none" :aria-expanded="langOpen" aria-label="Changer la langue">
+                        <span x-text="currentFlag" class="text-base leading-none"></span><span x-text="currentLang"></span>
+                        <svg class="w-3 h-3 text-gray-400 transition-transform duration-200" :class="langOpen?'rotate-180':''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div x-show="langOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95 -translate-y-2" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-95 -translate-y-2" class="absolute right-0 mt-2 w-36 bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl py-2 z-50" x-cloak>
+                        <button @click="currentLang='FR';currentFlag='🇫🇷';langOpen=false;changeLanguage('FR')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇫🇷</span> Français</button>
+                        <button @click="currentLang='EN';currentFlag='🇬🇧';langOpen=false;changeLanguage('EN')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇬🇧</span> English</button>
+                        <button @click="currentLang='ES';currentFlag='🇪🇸';langOpen=false;changeLanguage('ES')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇪🇸</span> Español</button>
+                        <button @click="currentLang='AR';currentFlag='🇸🇦';langOpen=false;changeLanguage('AR')" class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-left"><span class="text-base">🇸🇦</span> العربية</button>
+                    </div>
+                </div>
+                <a href="Plaquette-Commerciale-NG-Creative.pdf" download="Plaquette-Commerciale-NG-Creative.pdf" class="btn-hover-effect text-xs font-bold tracking-wider uppercase text-white py-1" data-i18n="nav_plaquette">TÉLÉCHARGER LA PLAQUETTE</a>
+            </nav>
+            <button @click="mobileMenuOpen=!mobileMenuOpen;if(mobileMenuOpen)document.body.style.overflow='hidden';else document.body.style.overflow='';" class="md:hidden z-50 focus:outline-none" :aria-expanded="mobileMenuOpen" aria-label="Ouvrir le menu">
+                <i data-lucide="menu" x-show="!mobileMenuOpen" class="w-8 h-8" aria-hidden="true"></i>
+                <i data-lucide="x" x-show="mobileMenuOpen" class="w-8 h-8" x-cloak aria-hidden="true"></i>
+            </button>
+            <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-full" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-full" class="fixed inset-0 bg-brand-black flex flex-col justify-center items-center gap-8 text-2xl font-bold uppercase z-40" x-cloak role="dialog" aria-modal="true">
+                <a href="index.html#services" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_services">Services</a>
+                <a href="index.html#clients" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_clients">Clients</a>
+                <a href="index.html#structure" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="hover:text-gray-400" data-i18n="nav_structure">Structure</a>
+                <a href="Plaquette-Commerciale-NG-Creative.pdf" download @click="mobileMenuOpen=false;document.body.style.overflow='';" class="btn-hover-effect text-lg tracking-wider text-white" data-i18n="nav_plaquette">TÉLÉCHARGER LA PLAQUETTE</a>
+                <a href="contact.html" @click="mobileMenuOpen=false;document.body.style.overflow='';" class="mt-4 px-8 py-4 border border-white hover:bg-white hover:text-black transition-colors rounded-full" data-i18n="nav_contact">Contact</a>
+                <div class="flex gap-4 mt-4 pt-4 border-t border-white/10">
+                    <button @click="changeLanguage('FR');currentLang='FR';currentFlag='🇫🇷';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="Français">🇫🇷</button>
+                    <button @click="changeLanguage('EN');currentLang='EN';currentFlag='🇬🇧';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="English">🇬🇧</button>
+                    <button @click="changeLanguage('ES');currentLang='ES';currentFlag='🇪🇸';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="Español">🇪🇸</button>
+                    <button @click="changeLanguage('AR');currentLang='AR';currentFlag='🇸🇦';mobileMenuOpen=false;document.body.style.overflow='';" class="text-2xl p-2 rounded-full hover:bg-white/10" aria-label="العربية">🇸🇦</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- HERO -->
+        <section class="relative min-h-screen flex items-center pt-32 pb-20 px-6 md:px-12 overflow-hidden isolate">
+            <div class="absolute inset-0">
+                <img src="FOND 1.png" alt="" class="w-full h-full object-cover opacity-20 animate-slow-zoom origin-center" aria-hidden="true">
+                <div class="absolute inset-0 bg-gradient-to-b from-brand-black/70 via-brand-black/80 to-brand-black"></div>
+            </div>
+            <div class="max-w-7xl mx-auto w-full relative observer-target fade-in-up">
+                <div class="ng-hero-split">
+                    <div class="ng-hero-text-col">
+                        <div class="ng-hero-eyebrow mb-6">
+                        </div>
+                        <h1 class="font-black uppercase leading-none tracking-tighter mb-8" style="font-size: clamp(2.8rem, 7.5vw, 7rem);">
+                            <span data-i18n="ml_h1_1">MARKETING</span> <span class="text-stroke" data-i18n="ml_h1_2">LOCAL</span>
+                        </h1>
+                        <div class="ng-hero-intro mb-10">
+                            <p class="ng-service-hero-copy" data-i18n="ml_hero_desc">Fiche Google, pages locales et avis clients. Nous travaillons chaque point de contact pour renforcer votre visibilité dans votre zone.</p>
+                        </div>
+                        <a href="contact.html" class="inline-flex items-center gap-3 text-base md:text-lg font-bold uppercase tracking-wider py-4 px-8 border border-white hover:bg-white hover:text-black transition-all duration-300 rounded-full focus:outline-none" data-i18n="ml_cta_hero">BOOSTER MA VISIBILITÉ <i data-lucide="arrow-up-right" class="w-5 h-5" aria-hidden="true"></i></a>
+                    </div>
+                    <!-- Cartographie locale éditoriale -->
+                    <div class="ng-hero-illus-col hidden lg:flex justify-center items-center">
+                        <figure class="local-map-visual" role="img" aria-labelledby="local-map-description">
+                            <figcaption id="local-map-description" class="sr-only" data-i18n="ml_map_aria">Carte abstraite représentant un établissement visible dans plusieurs zones de recherche locale.</figcaption>
+                            
+                            <!-- Angles de cadrage -->
+                            <span class="local-map-corner local-map-corner-tl" aria-hidden="true"></span>
+                            <span class="local-map-corner local-map-corner-tr" aria-hidden="true"></span>
+                            <span class="local-map-corner local-map-corner-bl" aria-hidden="true"></span>
+                            <span class="local-map-corner local-map-corner-br" aria-hidden="true"></span>
+
+                            <!-- Cartographie SVG -->
+                            <svg class="local-map-svg" viewBox="0 0 460 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <!-- Îlots urbains -->
+                                <g class="local-map-blocks-layer" fill="rgba(247, 247, 247, 0.022)">
+                                    <path d="M 30 30 L 140 30 L 130 110 L 30 100 Z"/>
+                                    <path d="M 160 30 L 290 30 L 280 100 L 150 110 Z"/>
+                                    <path d="M 310 30 L 430 30 L 430 120 L 300 100 Z"/>
+                                    <path d="M 30 120 L 125 130 L 115 220 L 30 210 Z"/>
+                                    <path d="M 30 230 L 110 240 L 95 350 L 30 350 Z"/>
+                                    <path d="M 130 250 L 210 250 L 205 350 L 120 350 Z"/>
+                                    <path d="M 235 250 L 320 250 L 325 350 L 230 350 Z"/>
+                                    <path d="M 345 230 L 430 210 L 430 350 L 350 350 Z"/>
+                                    <path d="M 325 120 L 430 140 L 430 190 L 330 210 Z"/>
+                                </g>
+
+                                <!-- Réseau de rues -->
+                                <g class="local-map-streets-layer">
+                                    <!-- Voies secondaires -->
+                                    <g stroke="rgba(247, 247, 247, 0.07)" stroke-width="1">
+                                        <line x1="30" y1="65" x2="430" y2="65"/>
+                                        <line x1="30" y1="285" x2="430" y2="285"/>
+                                        <line x1="85" y1="30" x2="85" y2="350"/>
+                                        <line x1="380" y1="30" x2="380" y2="350"/>
+                                        <line x1="175" y1="30" x2="175" y2="180"/>
+                                        <line x1="275" y1="200" x2="275" y2="350"/>
+                                    </g>
+                                    <!-- Axes principaux -->
+                                    <g stroke="rgba(247, 247, 247, 0.16)" stroke-width="1.5">
+                                        <path d="M 30 170 Q 140 160 230 190 T 430 180"/>
+                                        <line x1="230" y1="30" x2="230" y2="350"/>
+                                        <path d="M 140 30 L 230 190 L 335 350"/>
+                                    </g>
+                                </g>
+
+                                <!-- Zones de portée concentriques -->
+                                <g class="local-map-zones-layer">
+                                    <!-- Zone 3 (Élargie) -->
+                                    <circle cx="230" cy="190" r="165" stroke="rgba(247, 247, 247, 0.07)" stroke-width="1"/>
+                                    <!-- Zone 2 (Secondaire) -->
+                                    <circle cx="230" cy="190" r="110" stroke="rgba(247, 247, 247, 0.12)" stroke-width="1" stroke-dasharray="3 3"/>
+                                    <!-- Zone 1 (Primaire) -->
+                                    <circle cx="230" cy="190" r="55" stroke="rgba(247, 247, 247, 0.24)" stroke-width="1" fill="rgba(247, 247, 247, 0.035)"/>
+                                </g>
+
+                                <!-- Itinéraire de conversion -->
+                                <path class="local-map-route-path" d="M 75 175 L 140 170 L 175 180 L 230 190" stroke="#f7f7f7" stroke-width="2" stroke-dasharray="4 3" stroke-linecap="round"/>
+
+                                <!-- Points de recherche & clients locaux -->
+                                <g class="local-map-points-layer">
+                                    <!-- Point 1 (Zone Élargie Nord-Est) -->
+                                    <circle cx="370" cy="75" r="3" fill="#f7f7f7" fill-opacity="0.5"/>
+                                    <circle cx="370" cy="75" r="6.5" stroke="rgba(247, 247, 247, 0.2)" stroke-width="1"/>
+                                    <!-- Point 2 (Zone Secondaire Sud-Ouest) -->
+                                    <circle cx="150" cy="270" r="3.5" fill="#f7f7f7" fill-opacity="0.7"/>
+                                    <circle cx="150" cy="270" r="7" stroke="rgba(247, 247, 247, 0.25)" stroke-width="1"/>
+                                    <!-- Point 3 (Départ itinéraire) -->
+                                    <circle cx="75" cy="175" r="4" fill="#f7f7f7"/>
+                                    <circle cx="75" cy="175" r="8.5" stroke="rgba(247, 247, 247, 0.4)" stroke-width="1.2"/>
+                                    <!-- Point 4 (Zone Secondaire Est) -->
+                                    <circle cx="330" cy="210" r="3" fill="#f7f7f7" fill-opacity="0.6"/>
+                                    <circle cx="330" cy="210" r="6.5" stroke="rgba(247, 247, 247, 0.2)" stroke-width="1"/>
+                                    <!-- Point 5 (Zone Primaire) -->
+                                    <circle cx="205" cy="165" r="2.5" fill="#f7f7f7" fill-opacity="0.85"/>
+                                </g>
+                            </svg>
+
+                            <!-- Repère Établissement Central -->
+                            <div class="local-map-pin-container" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" class="w-8 h-8" fill="#f7f7f7" style="filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                    <circle cx="12" cy="9" r="2.2" fill="#0a0a0a"/>
+                                </svg>
+                                <div class="local-map-pin-halo"></div>
+                            </div>
+
+                            <!-- Annotations des 3 Zones -->
+                            <div class="local-map-annotation local-map-annotation-primary">
+                                <span class="local-map-annotation-line" aria-hidden="true"></span>
+                                <span class="local-map-annotation-text" data-i18n="ml_zone1">Zone Primaire</span>
+                            </div>
+                            <div class="local-map-annotation local-map-annotation-secondary">
+                                <span class="local-map-annotation-line" aria-hidden="true"></span>
+                                <span class="local-map-annotation-text" data-i18n="ml_zone2">Zone Secondaire</span>
+                            </div>
+                            <div class="local-map-annotation local-map-annotation-extended">
+                                <span class="local-map-annotation-line" aria-hidden="true"></span>
+                                <span class="local-map-annotation-text" data-i18n="ml_zone3">Zone Élargie</span>
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAGS -->
+        <section class="py-12 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto"><div class="ng-capabilities-grid observer-target fade-in-up">
+                    <div class="ng-capability-item"><span class="ng-cap-index">01</span><span class="ng-cap-label">Google My Business</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">02</span><span class="ng-cap-label">Google Maps</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">03</span><span class="ng-cap-label" data-i18n="ml_tag1">SEO Local</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">04</span><span class="ng-cap-label" data-i18n="ml_tag2">Avis Clients</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">05</span><span class="ng-cap-label" data-i18n="ml_tag3">Pack Local</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">06</span><span class="ng-cap-label" data-i18n="ml_tag4">Citations NAP</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">07</span><span class="ng-cap-label" data-i18n="ml_tag5">Mots-clés Locaux</span></div>
+                    <div class="ng-capability-item"><span class="ng-cap-index">08</span><span class="ng-cap-label" data-i18n="ml_tag6">Annuaires Locaux</span></div>
+                </div>
+            </div></div>
+        </section>
+
+        <!-- PARCOURS RECHERCHE LOCALE -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 observer-target fade-in-up">
+                    <p class="service-label mb-4" data-i18n="ml_parcours_label">LE CHEMIN DU CLIENT LOCAL</p>
+                    <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">
+                        <span data-i18n="ml_parcours_h2_1">ÊTRE LÀ</span><br>
+                        <span class="text-stroke" data-i18n="ml_parcours_h2_2">AU BON MOMENT</span>
+                    </h2>
+                </div>
+                <div class="observer-target fade-in-up">
+                    <div class="flex flex-col md:flex-row items-stretch">
+                        <div class="local-step">
+                            <div class="w-12 h-12 bg-white/08 border border-white/15 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i data-lucide="search" class="w-5 h-5" aria-hidden="true"></i>
+                            </div>
+                            <p class="prestation-number mb-1">01</p>
+                            <h3 class="font-black text-sm uppercase tracking-tight mb-1.5" data-i18n="ml_step1_title">Recherche Locale</h3>
+                            <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="ml_step1_desc">"Restaurant près de moi", "coiffeur [ville]"…</p>
+                        </div>
+                        <div class="local-step">
+                            <div class="w-12 h-12 bg-white/08 border border-white/15 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i data-lucide="map-pin" class="w-5 h-5" aria-hidden="true"></i>
+                            </div>
+                            <p class="prestation-number mb-1">02</p>
+                            <h3 class="font-black text-sm uppercase tracking-tight mb-1.5" data-i18n="ml_step2_title">Pack Local Google</h3>
+                            <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="ml_step2_desc">Les 3 fiches en haut des résultats</p>
+                        </div>
+                        <div class="local-step">
+                            <div class="w-12 h-12 bg-white/08 border border-white/15 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i data-lucide="building-2" class="w-5 h-5" aria-hidden="true"></i>
+                            </div>
+                            <p class="prestation-number mb-1">03</p>
+                            <h3 class="font-black text-sm uppercase tracking-tight mb-1.5" data-i18n="ml_step3_title">Fiche Google (GMB)</h3>
+                            <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="ml_step3_desc">Photo, horaires, avis, adresse, site</p>
+                        </div>
+                        <div class="local-step">
+                            <div class="w-12 h-12 bg-white/08 border border-white/15 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i data-lucide="phone-call" class="w-5 h-5" aria-hidden="true"></i>
+                            </div>
+                            <p class="prestation-number mb-1">04</p>
+                            <h3 class="font-black text-sm uppercase tracking-tight mb-1.5" data-i18n="ml_step4_title">Contact Direct</h3>
+                            <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="ml_step4_desc">Appel, itinéraire, prise de RDV</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GMB MOCKUP + FACTEURS -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    <!-- GMB Mockup CSS -->
+                    <div class="observer-target fade-in-up">
+                        <p class="service-label mb-6" data-i18n="ml_gmb_label">ILLUSTRATION — FICHE GOOGLE</p>
+                        <div class="gmb-card">
+                            <div class="gmb-header bg-gradient-to-br from-gray-800 to-gray-900">
+                                <div class="gmb-logo"></div>
+                            </div>
+                            <div class="gmb-body">
+                                <div class="mt-5">
+                                    <div class="h-3 bg-white/20 rounded w-3/4 mb-2"></div>
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <div class="flex gap-0.5">
+                                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                                        </div>
+                                        <p class="text-xs font-bold text-gray-400">5.0 <span class="text-gray-600" data-i18n="ml_gmb_reviews">(42 avis)</span></p>
+                                    </div>
+                                    <p class="text-xs text-gray-500 font-semibold mb-1">📍 <span data-i18n="ml_gmb_address">Votre adresse, Votre ville</span></p>
+                                    <p class="text-xs text-gray-500 font-semibold mb-1">🕐 <span class="text-green-400 font-bold" data-i18n="ml_gmb_open">Ouvert</span> · <span data-i18n="ml_gmb_hours">Ferme à 19h</span></p>
+                                    <p class="text-xs text-gray-500 font-semibold mb-4">🌐 <span data-i18n="ml_gmb_web">votre-site.com</span></p>
+                                    <div class="flex gap-2">
+                                        <div class="flex-1 h-8 bg-white/08 rounded border border-white/12 flex items-center justify-center">
+                                            <p class="text-xs font-bold text-gray-400" data-i18n="ml_gmb_call">Appeler</p>
+                                        </div>
+                                        <div class="flex-1 h-8 bg-white/08 rounded border border-white/12 flex items-center justify-center">
+                                            <p class="text-xs font-bold text-gray-400" data-i18n="ml_gmb_itinerary">Itinéraire</p>
+                                        </div>
+                                        <div class="flex-1 h-8 bg-white/08 rounded border border-white/12 flex items-center justify-center">
+                                            <p class="text-xs font-bold text-gray-400" data-i18n="ml_gmb_site">Site web</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 font-semibold mt-4 italic" data-i18n="ml_gmb_disclaimer">Illustration. Les données affichées sont fictives et servent uniquement à représenter la structure d'une fiche Google My Business optimisée.</p>
+                    </div>
+                    <!-- Facteurs de classement -->
+                    <div class="observer-target fade-in-up">
+                        <p class="service-label mb-6" data-i18n="ml_factors_label">FACTEURS DE CLASSEMENT LOCAL</p>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4 py-4 border-b border-gray-900">
+                                <div class="w-10 h-10 bg-white/08 border border-white/12 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="building" class="w-4 h-4" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-black text-sm uppercase tracking-tight mb-1" data-i18n="ml_factor1_title">Fiche GMB Complète & Active</h3>
+                                    <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="ml_factor1_desc">Photos, horaires, catégorie, description, posts réguliers. Une fiche complète est le facteur n°1.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 py-4 border-b border-gray-900">
+                                <div class="w-10 h-10 bg-white/08 border border-white/12 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="star" class="w-4 h-4" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-black text-sm uppercase tracking-tight mb-1" data-i18n="ml_factor2_title">Avis Clients & Réponses</h3>
+                                    <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="ml_factor2_desc">Nombre, fraîcheur et réponses aux avis influencent directement le classement dans le Pack Local.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 py-4 border-b border-gray-900">
+                                <div class="w-10 h-10 bg-white/08 border border-white/12 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="link" class="w-4 h-4" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-black text-sm uppercase tracking-tight mb-1" data-i18n="ml_factor3_title">Cohérence NAP</h3>
+                                    <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="ml_factor3_desc">Nom, Adresse et Téléphone identiques sur tous les annuaires. La cohérence NAP renforce la confiance de Google.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 py-4 border-b border-gray-900">
+                                <div class="w-10 h-10 bg-white/08 border border-white/12 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="code-2" class="w-4 h-4" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-black text-sm uppercase tracking-tight mb-1" data-i18n="ml_factor4_title">SEO Local du Site</h3>
+                                    <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="ml_factor4_desc">Balises title géolocalisées, schema.org LocalBusiness, pages de services par ville et contenus locaux.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 py-4">
+                                <div class="w-10 h-10 bg-white/08 border border-white/12 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="globe" class="w-4 h-4" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-black text-sm uppercase tracking-tight mb-1" data-i18n="ml_factor5_title">Citations & Annuaires</h3>
+                                    <p class="text-xs text-gray-500 font-semibold leading-relaxed" data-i18n="ml_factor5_desc">Présence sur les annuaires sectoriels et locaux (Pages Jaunes, Yelp, Tripadvisor…) avec des informations cohérentes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRESTATIONS -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-black border-t border-gray-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 md:mb-24 observer-target fade-in-up">
+                    <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter">
+                        <span data-i18n="ml_presta_h2_1">NOS</span> <span class="text-stroke" data-i18n="ml_presta_h2_2">PRESTATIONS</span>
+                    </h2>
+                </div>
+                <div class="space-y-0 divide-y divide-gray-900">
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">01</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="ml_p1_title">Optimisation Google My Business</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="ml_p1_desc">Création ou reprise complète de votre fiche Google My Business : catégories, attributs, description optimisée, photos professionnelles, produits et services, Q&A, posts réguliers. Une fiche GMB parfaitement optimisée est le levier le plus direct pour apparaître dans le Pack Local de Google.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">02</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="ml_p2_title">SEO Local & Référencement Géo</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="ml_p2_desc">Optimisation des balises title et meta avec mots-clés géolocalisés, création de pages de services par ville, intégration du schema LocalBusiness, maillage interne local et création de contenus ciblant les requêtes de votre zone. Votre site travaille pour vous localement.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">03</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="ml_p3_title">Gestion des Avis Clients</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="ml_p3_desc">Stratégie de collecte d'avis (SMS, e-mail, QR code), réponses professionnelles aux avis positifs et négatifs, monitoring de votre réputation en ligne et alertes en temps réel. Les avis sont un facteur de classement direct et un déclencheur de confiance pour vos prospects.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">04</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="ml_p4_title">Citations & Annuaires Locaux</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="ml_p4_desc">Inscription et mise à jour de vos informations NAP (Nom, Adresse, Téléphone) sur tous les annuaires pertinents de votre secteur. La cohérence et la quantité de citations locales sont des signaux de confiance majeurs pour Google et Bing.</p></div>
+                    </div>
+                    <div class="prestation-row py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 items-start observer-target fade-in-up">
+                        <div class="md:col-span-1"><p class="prestation-number">05</p></div>
+                        <div class="md:col-span-4"><h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight" data-i18n="ml_p5_title">Campagnes Locales Ads</h3></div>
+                        <div class="md:col-span-7"><p class="text-zinc-300 font-medium leading-relaxed" data-i18n="ml_p5_desc">Campagnes Google Ads géolocalisées et extensions d'adresse pour générer des visites en magasin, des appels et des demandes de directions. Ciblage par rayon géographique, par ville ou par quartier, avec rapports de visites en point de vente disponibles.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- POURQUOI NOUS (fond blanc) -->
+        <section class="py-24 md:py-32 px-6 md:px-12 bg-brand-white text-brand-black rounded-t-[3rem] md:rounded-t-[5rem]">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 observer-target fade-in-up">
+                    <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">
+                        <span data-i18n="ml_why_h2_1">VOTRE ZONE,</span><br>
+                        <span class="text-stroke-black" data-i18n="ml_why_h2_2">VOTRE TERRAIN.</span>
+                    </h2>
+                </div>
+                <div class="ng-proof-grid">
+                    <div class="ng-proof-item observer-target fade-in-up">
+                        <span class="ng-proof-number" aria-hidden="true">01</span>
+                        <h3 class="ng-proof-title" data-i18n="ml_why1_title">Visibilité Géolocalisée</h3>
+                        <p class="ng-proof-desc" data-i18n="ml_why1_desc">Nous positionnons votre établissement sur les requêtes locales qui génèrent des clients physiques — pas des visites virtuelles sans valeur.</p>
+                    </div>
+                    <div class="ng-proof-item observer-target fade-in-up">
+                        <span class="ng-proof-number" aria-hidden="true">02</span>
+                        <h3 class="ng-proof-title" data-i18n="ml_why2_title">Réputation Maîtrisée</h3>
+                        <p class="ng-proof-desc" data-i18n="ml_why2_desc">Nous gérons votre réputation en ligne proactivement : solliciter les avis, répondre aux commentaires, protéger votre image locale.</p>
+                    </div>
+                    <div class="ng-proof-item observer-target fade-in-up">
+                        <span class="ng-proof-number" aria-hidden="true">03</span>
+                        <h3 class="ng-proof-title" data-i18n="ml_why3_title">Résultats Mesurables</h3>
+                        <p class="ng-proof-desc" data-i18n="ml_why3_desc">Nombre d’appels, de demandes d’itinéraire, de clics vers le site : chaque action générée par votre fiche GMB est tracée et reportée.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-24 md:py-40 px-6 md:px-12 bg-brand-black relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]"><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white rounded-full blur-[100px]" aria-hidden="true"></div></div>
+            <div class="max-w-5xl mx-auto text-center relative observer-target fade-in-up">
+                <h2 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-none tracking-tighter mb-8">
+                    <span data-i18n="ml_cta_h2_1">DOMINEZ</span><br>
+                    <span class="text-stroke" data-i18n="ml_cta_h2_2">VOTRE ZONE.</span>
+                </h2>
+                <a href="contact.html" class="inline-flex items-center gap-3 text-lg md:text-xl font-bold uppercase tracking-wider py-5 px-10 border border-white hover:bg-white hover:text-black transition-all duration-300 rounded-full focus:outline-none" data-i18n="ml_cta_btn">CONTACTEZ-NOUS <i data-lucide="arrow-up-right" class="w-5 h-5" aria-hidden="true"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-black pt-20 pb-10 px-6 md:px-12 border-t border-gray-900" role="contentinfo">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            <div><a href="index.html" class="flex items-center mb-6"><img src="LOGO1HEAD.png" alt="Logo NG Creative" class="h-8 w-auto object-contain"></a><p class="text-sm leading-relaxed" style="font-family: var(--font-copy); color: var(--text-dark-muted); font-weight: 400;" data-i18n="footer_tagline">Direction créative, contenus et expériences digitales.</p></div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_services">Services</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="audiovisuel.html" class="hover:text-gray-400 transition-colors" data-i18n="s1_title">Audiovisuel</a></li>
+                    <li><a href="sites-web.html" class="hover:text-gray-400 transition-colors" data-i18n="s2_title">Sites Web</a></li>
+                    <li><a href="graphisme.html" class="hover:text-gray-400 transition-colors" data-i18n="s3_title">Graphisme</a></li>
+                    <li><a href="impression.html" class="hover:text-gray-400 transition-colors" data-i18n="s4_title">Impression</a></li>
+                    <li><a href="ads.html" class="hover:text-gray-400 transition-colors" data-i18n="s5_title">Ads</a></li>
+                    <li><a href="marketing-local.html" class="text-white font-bold" aria-current="page" data-i18n="s6_title">Marketing Local</a></li>
+                    <li><a href="influence.html" class="hover:text-gray-400 transition-colors" data-i18n="s7_title">Influence</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_nav">Navigation</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="index.html" class="hover:text-gray-400 transition-colors font-bold" data-i18n="footer_home">Accueil</a></li>
+                    <li><a href="contact.html" class="hover:text-gray-400 transition-colors font-bold" data-i18n="nav_contact">Contact</a></li>
+                    <li><a href="Plaquette-Commerciale-NG-Creative.pdf" download class="hover:text-gray-400 transition-colors font-bold" data-i18n="footer_plaquette">Plaquette</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs text-gray-500 mb-6" data-i18n="footer_title_follow">Suivez-nous</h4>
+                <div class="flex gap-5">
+                    <a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="Instagram"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    <a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="X"><svg class="w-[1.15rem] h-[1.15rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                    <a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 transition-colors" aria-label="TikTok"><svg class="w-5 h-5" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-600 text-xs font-bold">© 2026 NG Creative. <span data-i18n="rights">Tous droits réservés.</span></p>
+            <p class="text-gray-600 text-xs font-bold" data-i18n="made_with">Conçu avec passion.</p>
+        </div>
+    </footer>
+
+    <script>
+        const translations={
+            FR:{ml_map_aria:"Carte abstraite représentant un établissement visible dans plusieurs zones de recherche locale.",nav_services:"SERVICES",nav_clients:"CLIENTS",nav_structure:"STRUCTURE",nav_contact:"CONTACT",nav_plaquette:"TÉLÉCHARGER LA PLAQUETTE",ml_hero_service_name:"MARKETING LOCAL",ml_label:"06 / MARKETING LOCAL",ml_h1_1:"MARKETING",ml_h1_2:"LOCAL",ml_hero_desc:"Fiche Google, pages locales et avis clients. Nous travaillons chaque point de contact pour renforcer votre visibilité dans votre zone.",ml_cta_hero:"BOOSTER MA VISIBILITÉ",ml_zone1:"Zone Primaire",ml_zone2:"Zone Secondaire",ml_zone3:"Zone Élargie",ml_tag1:"SEO Local",ml_tag2:"Avis Clients",ml_tag3:"Pack Local",ml_tag4:"Citations NAP",ml_tag5:"Mots-clés Locaux",ml_tag6:"Annuaires Locaux",ml_parcours_label:"LE CHEMIN DU CLIENT LOCAL",ml_parcours_h2_1:"ÊTRE LÀ",ml_parcours_h2_2:"AU BON MOMENT",ml_step1_title:"Recherche Locale",ml_step1_desc:'"Restaurant près de moi", "coiffeur [ville]"…',ml_step2_title:"Pack Local Google",ml_step2_desc:"Les 3 fiches en haut des résultats",ml_step3_title:"Fiche Google (GMB)",ml_step3_desc:"Photo, horaires, avis, adresse, site",ml_step4_title:"Contact Direct",ml_step4_desc:"Appel, itinéraire, prise de RDV",ml_gmb_label:"ILLUSTRATION — FICHE GOOGLE",ml_gmb_reviews:"42 avis",ml_gmb_address:"Votre adresse, Votre ville",ml_gmb_open:"Ouvert",ml_gmb_hours:"Ferme à 19h",ml_gmb_web:"votre-site.com",ml_gmb_call:"Appeler",ml_gmb_itinerary:"Itinéraire",ml_gmb_site:"Site web",ml_gmb_disclaimer:"Illustration. Les données affichées sont fictives et servent uniquement à représenter la structure d'une fiche Google My Business optimisée.",ml_factors_label:"FACTEURS DE CLASSEMENT LOCAL",ml_factor1_title:"Fiche GMB Complète & Active",ml_factor1_desc:"Photos, horaires, catégorie, description, posts réguliers. Une fiche complète est le facteur n°1.",ml_factor2_title:"Avis Clients & Réponses",ml_factor2_desc:"Nombre, fraîcheur et réponses aux avis influencent directement le classement dans le Pack Local.",ml_factor3_title:"Cohérence NAP",ml_factor3_desc:"Nom, Adresse et Téléphone identiques sur tous les annuaires. La cohérence NAP renforce la confiance de Google.",ml_factor4_title:"SEO Local du Site",ml_factor4_desc:"Balises title géolocalisées, schema.org LocalBusiness, pages de services par ville et contenus locaux.",ml_factor5_title:"Citations & Annuaires",ml_factor5_desc:"Présence sur les annuaires sectoriels et locaux avec des informations cohérentes.",ml_presta_h2_1:"NOS",ml_presta_h2_2:"PRESTATIONS",ml_p1_title:"Optimisation Google My Business",ml_p1_desc:"Création ou reprise complète de votre fiche GMB : catégories, attributs, description, photos, posts réguliers.",ml_p2_title:"SEO Local & Référencement Géo",ml_p2_desc:"Optimisation des balises avec mots-clés géolocalisés, pages par ville, schema LocalBusiness et maillage local.",ml_p3_title:"Gestion des Avis Clients",ml_p3_desc:"Stratégie de collecte d'avis, réponses professionnelles et monitoring de votre réputation en ligne.",ml_p4_title:"Citations & Annuaires Locaux",ml_p4_desc:"Inscription et mise à jour de vos informations NAP sur tous les annuaires pertinents de votre secteur.",ml_p5_title:"Campagnes Locales Ads",ml_p5_desc:"Campagnes Google Ads géolocalisées et extensions d'adresse pour générer des visites en magasin et des appels.",ml_why_label:"NOS ENGAGEMENTS",ml_why_h2_1:"VOTRE ZONE,",ml_why_h2_2:"VOTRE TERRAIN.",ml_why1_title:"Visibilité Géolocalisée",ml_why1_desc:"Nous positionnons votre établissement sur les requêtes locales qui génèrent des clients physiques.",ml_why2_title:"Réputation Maîtrisée",ml_why2_desc:"Nous gérons votre réputation en ligne proactivement : solliciter les avis, répondre aux commentaires.",ml_why3_title:"Résultats Mesurables",ml_why3_desc:"Appels, itinéraires, clics : chaque action générée par votre fiche GMB est tracée et reportée.",ml_cta_label:"PROCHAINE ÉTAPE",ml_cta_h2_1:"DOMINEZ",ml_cta_h2_2:"VOTRE ZONE.",ml_cta_desc:"Auditez votre présence locale avec nous. Nous identifions les manques et proposons un plan d'action sous 24h.",ml_cta_btn:"CONTACTEZ-NOUS",footer_tagline: "Direction créative, contenus et expériences digitales.",footer_title_services:"Services",footer_title_nav:"Navigation",footer_title_follow:"Suivez-nous",footer_home:"Accueil",footer_plaquette:"Plaquette",s1_title:"Audiovisuel",s2_title:"Sites Web",s3_title:"Graphisme",s4_title:"Impression",s5_title:"Ads",s6_title:"Marketing Local",s7_title:"Influence",rights:"Tous droits réservés.",made_with: "Conçu par NG Creative."},
+            EN:{ml_map_aria:"Abstract map illustrating a local business visible across multiple local search zones.",ml_hero_service_name:"LOCAL MARKETING",nav_services:"SERVICES",nav_clients:"CLIENTS",nav_structure:"STRUCTURE",nav_contact:"CONTACT",nav_plaquette:"DOWNLOAD OUR BROCHURE",ml_label:"06 / LOCAL MARKETING",ml_h1_1:"LOCAL",ml_h1_2:"MARKETING",ml_hero_desc:"Google Business Profile, local landing pages and customer reviews: we optimize every touchpoint to dominate your local area.",ml_cta_hero:"BOOST MY VISIBILITY",ml_zone1:"Primary Zone",ml_zone2:"Secondary Zone",ml_zone3:"Extended Zone",ml_tag1:"Local SEO",ml_tag2:"Customer Reviews",ml_tag3:"Local Pack",ml_tag4:"NAP Citations",ml_tag5:"Local Keywords",ml_tag6:"Local Directories",ml_parcours_label:"THE LOCAL CUSTOMER JOURNEY",ml_parcours_h2_1:"BE THERE",ml_parcours_h2_2:"AT THE RIGHT TIME",ml_step1_title:"Local Search",ml_step1_desc:'"Restaurant near me", "hairdresser [city]"…',ml_step2_title:"Google Local Pack",ml_step2_desc:"The top 3 listings in search results",ml_step3_title:"Google Listing (GMB)",ml_step3_desc:"Photo, hours, reviews, address, website",ml_step4_title:"Direct Contact",ml_step4_desc:"Call, directions, book an appointment",ml_gmb_label:"ILLUSTRATION — GOOGLE LISTING",ml_gmb_reviews:"42 reviews",ml_gmb_address:"Your address, Your city",ml_gmb_open:"Open",ml_gmb_hours:"Closes at 7pm",ml_gmb_web:"your-site.com",ml_gmb_call:"Call",ml_gmb_itinerary:"Directions",ml_gmb_site:"Website",ml_gmb_disclaimer:"Illustration. Data shown is fictional and serves only to represent the structure of an optimised Google My Business listing.",ml_factors_label:"LOCAL RANKING FACTORS",ml_factor1_title:"Complete & Active GMB Listing",ml_factor1_desc:"Photos, hours, category, description, regular posts. A complete listing is the number one factor.",ml_factor2_title:"Customer Reviews & Responses",ml_factor2_desc:"Volume, recency and responses to reviews directly influence ranking in the Local Pack.",ml_factor3_title:"NAP Consistency",ml_factor3_desc:"Identical Name, Address and Phone across all directories builds Google's trust.",ml_factor4_title:"Website Local SEO",ml_factor4_desc:"Geo-targeted title tags, schema.org LocalBusiness, city-specific service pages and local content.",ml_factor5_title:"Citations & Local Directories",ml_factor5_desc:"Presence on sector-specific and local directories with consistent information.",ml_presta_h2_1:"OUR",ml_presta_h2_2:"SERVICES",ml_p1_title:"Google My Business Optimisation",ml_p1_desc:"Full creation or takeover of your GMB listing: categories, attributes, description, photos, regular posts.",ml_p2_title:"Local SEO & Geo Targeting",ml_p2_desc:"Geo-targeted tags, city pages, LocalBusiness schema and local interlinking.",ml_p3_title:"Customer Review Management",ml_p3_desc:"Review collection strategy, professional responses and online reputation monitoring.",ml_p4_title:"Citations & Local Directories",ml_p4_desc:"Listing and updating your NAP information on all relevant directories in your sector.",ml_p5_title:"Local Ads Campaigns",ml_p5_desc:"Geo-targeted Google Ads and address extensions to generate store visits and calls.",ml_why_label:"OUR COMMITMENTS",ml_why_h2_1:"YOUR ZONE,",ml_why_h2_2:"YOUR TURF.",ml_why1_title:"Geo-Targeted Visibility",ml_why1_desc:"We rank your business for local queries that generate real, physical customers.",ml_why2_title:"Managed Reputation",ml_why2_desc:"We proactively manage your online reputation: gathering reviews, responding to comments.",ml_why3_title:"Measurable Results",ml_why3_desc:"Calls, directions, clicks: every action generated by your GMB listing is tracked and reported.",ml_cta_label:"NEXT STEP",ml_cta_h2_1:"DOMINATE",ml_cta_h2_2:"YOUR ZONE.",ml_cta_desc:"Audit your local presence with us. We identify gaps and propose a concrete action plan within 24 hours.",ml_cta_btn:"CONTACT US",footer_tagline: "Creative direction, content and digital experiences.",footer_title_services:"Services",footer_title_nav:"Navigation",footer_title_follow:"Follow Us",footer_home:"Home",footer_plaquette:"Brochure",s1_title:"Audiovisual",s2_title:"Websites",s3_title:"Graphic Design",s4_title:"Printing",s5_title:"Ads",s6_title:"Local Marketing",s7_title:"Influence",rights:"All rights reserved.",made_with: "Designed by NG Creative."},
+            ES:{ml_map_aria:"Mapa abstracto que ilustra un negocio local visible en múltiples zonas de búsqueda local.",ml_hero_service_name:"MARKETING LOCAL",nav_services:"SERVICIOS",nav_clients:"CLIENTES",nav_structure:"ESTRUCTURA",nav_contact:"CONTACTO",nav_plaquette:"DESCARGAR EL DOSSIER",ml_label:"06 / MARKETING LOCAL",ml_h1_1:"MARKETING",ml_h1_2:"LOCAL",ml_hero_desc:"Ficha de Google, páginas locales y reseñas: trabajamos cada punto de contacto para potenciar su visibilidad local.",ml_cta_hero:"IMPULSAR MI VISIBILIDAD",ml_zone1:"Zona Primaria",ml_zone2:"Zona Secundaria",ml_zone3:"Zona Ampliada",ml_tag1:"SEO Local",ml_tag2:"Opiniones Clientes",ml_tag3:"Pack Local",ml_tag4:"Citas NAP",ml_tag5:"Palabras Clave Locales",ml_tag6:"Directorios Locales",ml_parcours_label:"EL CAMINO DEL CLIENTE LOCAL",ml_parcours_h2_1:"ESTAR AHÍ",ml_parcours_h2_2:"EN EL MOMENTO JUSTO",ml_step1_title:"Búsqueda Local",ml_step1_desc:'"Restaurante cerca de mí", "peluquero [ciudad]"…',ml_step2_title:"Pack Local Google",ml_step2_desc:"Los 3 primeros resultados locales",ml_step3_title:"Ficha Google (GMB)",ml_step3_desc:"Foto, horarios, opiniones, dirección, web",ml_step4_title:"Contacto Directo",ml_step4_desc:"Llamada, itinerario, reserva de cita",ml_gmb_label:"ILUSTRACIÓN — FICHA GOOGLE",ml_gmb_reviews:"42 opiniones",ml_gmb_address:"Su dirección, Su ciudad",ml_gmb_open:"Abierto",ml_gmb_hours:"Cierra a las 19h",ml_gmb_web:"su-sitio.com",ml_gmb_call:"Llamar",ml_gmb_itinerary:"Cómo llegar",ml_gmb_site:"Sitio web",ml_gmb_disclaimer:"Ilustración. Los datos mostrados son ficticios y sirven únicamente para representar la estructura de una ficha GMB optimizada.",ml_factors_label:"FACTORES DE POSICIONAMIENTO LOCAL",ml_factor1_title:"Ficha GMB Completa & Activa",ml_factor1_desc:"Fotos, horarios, categoría, descripción, publicaciones regulares. Una ficha completa es el factor n°1.",ml_factor2_title:"Opiniones & Respuestas",ml_factor2_desc:"Volumen, recencia y respuestas a las opiniones influyen directamente en el Pack Local.",ml_factor3_title:"Coherencia NAP",ml_factor3_desc:"Nombre, Dirección y Teléfono idénticos en todos los directorios. Refuerza la confianza de Google.",ml_factor4_title:"SEO Local del Sitio",ml_factor4_desc:"Etiquetas geolocalizadas, schema LocalBusiness, páginas por ciudad y contenido local.",ml_factor5_title:"Citas & Directorios Locales",ml_factor5_desc:"Presencia en directorios sectoriales y locales con información coherente.",ml_presta_h2_1:"NUESTROS",ml_presta_h2_2:"SERVICIOS",ml_p1_title:"Optimización Google My Business",ml_p1_desc:"Creación o mejora completa de su ficha GMB: categorías, atributos, descripción, fotos, publicaciones.",ml_p2_title:"SEO Local & Geo-Targeting",ml_p2_desc:"Etiquetas geolocalizadas, páginas por ciudad, schema LocalBusiness y enlazado local.",ml_p3_title:"Gestión de Opiniones",ml_p3_desc:"Estrategia de captación de reseñas, respuestas profesionales y monitoreo de la reputación online.",ml_p4_title:"Citas & Directorios Locales",ml_p4_desc:"Alta y actualización de su información NAP en todos los directorios relevantes.",ml_p5_title:"Campañas Locales de Ads",ml_p5_desc:"Google Ads geolocalizados con extensiones de dirección para generar visitas y llamadas.",ml_why_label:"NUESTROS COMPROMISOS",ml_why_h2_1:"SU ZONA,",ml_why_h2_2:"SU TERRITORIO.",ml_why1_title:"Visibilidad Geolocalizada",ml_why1_desc:"Posicionamos su negocio en las búsquedas locales que generan clientes físicos.",ml_why2_title:"Reputación Controlada",ml_why2_desc:"Gestionamos proactivamente su reputación online: solicitar reseñas, responder comentarios.",ml_why3_title:"Resultados Medibles",ml_why3_desc:"Llamadas, itinerarios, clics: cada acción generada por su ficha GMB es rastreada y reportada.",ml_cta_label:"PRÓXIMO PASO",ml_cta_h2_1:"DOMINE",ml_cta_h2_2:"SU ZONA.",ml_cta_desc:"Audite su presencia local con nosotros. Identificamos las carencias y proponemos un plan de acción en 24h.",ml_cta_btn:"CONTÁCTENOS",footer_tagline: "Dirección creativa, contenidos y experiencias digitales.",footer_title_services:"Servicios",footer_title_nav:"Navegación",footer_title_follow:"Síganos",footer_home:"Inicio",footer_plaquette:"Dossier",s1_title:"Audiovisual",s2_title:"Sitios Web",s3_title:"Diseño Gráfico",s4_title:"Impresión",s5_title:"Ads",s6_title:"Marketing Local",s7_title:"Influencia",rights:"Todos los derechos reservados.",made_with: "Diseñado por NG Creative."},
+            AR:{ml_map_aria:"خريطة توضيحية تبيّن نشاطاً تجارياً مرئياً عبر مناطق البحث الجغرافي المحلي المتعددة.",ml_hero_service_name:"التسويق المحلي",nav_services:"الخدمات",nav_clients:"العملاء",nav_structure:"منهجيتنا",nav_contact:"اتصل بنا",nav_plaquette:"تحميل الكتيب التعريفي",ml_label:"06 / التسويق المحلي",ml_h1_1:"تسويق",ml_h1_2:"محلي",ml_hero_desc:"ملف جوجل للأعمال، الصفحات المحلية وتقييمات العملاء: نطور كل نقطة اتصال لتعزيز حضوركم في منطقتكم الجغرافية.",ml_cta_hero:"تعزيز ظهوري",ml_zone1:"المنطقة الأساسية",ml_zone2:"المنطقة الثانوية",ml_zone3:"المنطقة الموسّعة",ml_tag1:"SEO محلي",ml_tag2:"آراء العملاء",ml_tag3:"الحزمة المحلية",ml_tag4:"استشهادات NAP",ml_tag5:"كلمات مفتاحية محلية",ml_tag6:"دلائل محلية",ml_parcours_label:"مسار العميل المحلي",ml_parcours_h2_1:"كُن موجودًا",ml_parcours_h2_2:"في الوقت المناسب",ml_step1_title:"البحث المحلي",ml_step1_desc:'"مطعم بالقرب مني"، "حلاق [المدينة]"…',ml_step2_title:"الحزمة المحلية Google",ml_step2_desc:"البطاقات الثلاث الأولى في النتائج",ml_step3_title:"ملف Google (GMB)",ml_step3_desc:"صورة وساعات وآراء وعنوان وموقع",ml_step4_title:"تواصل مباشر",ml_step4_desc:"اتصال، اتجاهات، حجز موعد",ml_gmb_label:"توضيح — ملف Google",ml_gmb_reviews:"42 تقييم",ml_gmb_address:"عنوانك، مدينتك",ml_gmb_open:"مفتوح",ml_gmb_hours:"يغلق الساعة 7م",ml_gmb_web:"your-site.com",ml_gmb_call:"اتصل",ml_gmb_itinerary:"الاتجاهات",ml_gmb_site:"الموقع",ml_gmb_disclaimer:"توضيح. البيانات المعروضة خيالية وتخدم فقط لتمثيل هيكل ملف Google My Business المحسّن.",ml_factors_label:"عوامل الترتيب المحلي",ml_factor1_title:"ملف GMB كامل ونشط",ml_factor1_desc:"صور وساعات وفئة ووصف ومنشورات منتظمة. الملف الكامل هو العامل الأول.",ml_factor2_title:"آراء العملاء والردود",ml_factor2_desc:"حجم وحداثة والردود على الآراء تؤثر مباشرة على الترتيب في الحزمة المحلية.",ml_factor3_title:"اتساق NAP",ml_factor3_desc:"الاسم والعنوان والهاتف متطابقان في جميع الدلائل. الاتساق يعزز ثقة Google.",ml_factor4_title:"SEO المحلي للموقع",ml_factor4_desc:"عناوين جغرافية، schema LocalBusiness، صفحات خدمات حسب المدينة ومحتوى محلي.",ml_factor5_title:"الاستشهادات والدلائل المحلية",ml_factor5_desc:"الحضور في الدلائل القطاعية والمحلية بمعلومات متسقة.",ml_presta_h2_1:"خدماتنا",ml_presta_h2_2:"الاحترافية",ml_p1_title:"تحسين Google My Business",ml_p1_desc:"إنشاء أو تحديث كامل لملف GMB: الفئات والسمات والوصف والصور والمنشورات المنتظمة.",ml_p2_title:"SEO المحلي والاستهداف الجغرافي",ml_p2_desc:"عناوين مُستهدفة جغرافيًا وصفحات حسب المدينة وschema LocalBusiness وربط داخلي محلي.",ml_p3_title:"إدارة آراء العملاء",ml_p3_desc:"استراتيجية جمع التقييمات وردود احترافية ومراقبة سمعتك على الإنترنت.",ml_p4_title:"الاستشهادات والدلائل المحلية",ml_p4_desc:"التسجيل وتحديث معلومات NAP في جميع الدلائل ذات الصلة بقطاعك.",ml_p5_title:"حملات الإعلانات المحلية",ml_p5_desc:"إعلانات Google مُستهدفة جغرافيًا مع امتدادات العنوان لتوليد الزيارات والمكالمات.",ml_why_label:"التزاماتنا",ml_why_h2_1:"منطقتك،",ml_why_h2_2:"ميدانك.",ml_why1_title:"ظهور جغرافي مُستهدف",ml_why1_desc:"نضع نشاطك التجاري في مقدمة البحث المحلي الذي يولّد عملاء فعليين.",ml_why2_title:"سمعة مُدارة",ml_why2_desc:"ندير سمعتك الإلكترونية بشكل استباقي: جمع التقييمات والرد على التعليقات.",ml_why3_title:"نتائج قابلة للقياس",ml_why3_desc:"المكالمات والاتجاهات والنقرات: كل إجراء من ملف GMB يُتتبع ويُرفع في التقارير.",ml_cta_label:"الخطوة التالية",ml_cta_h2_1:"هيمن على",ml_cta_h2_2:"منطقتك.",ml_cta_desc:"دقّق حضورك المحلي معنا. نحدد الثغرات ونقترح خطة عمل ملموسة خلال 24 ساعة.",ml_cta_btn:"تواصل معنا",footer_tagline: "إدارة إبداعية ومحتوى وتجارب رقمية.",footer_title_services:"الخدمات",footer_title_nav:"التنقل",footer_title_follow:"تابعنا",footer_home:"الرئيسية",footer_plaquette:"الكتيب",s1_title:"الإنتاج السمعي البصري",s2_title:"تطوير المواقع",s3_title:"التصميم الجرافيكي",s4_title:"الطباعة",s5_title:"الإعلانات",s6_title:"التسويق المحلي",s7_title:"التسويق عبر المؤثرين",rights:"جميع الحقوق محفوظة.",made_with: "تصميم بواسطة NG Creative."}
+        };
+        function changeLanguage(lang){localStorage.setItem('n_graphiste_lang',lang);document.documentElement.lang=lang.toLowerCase();document.documentElement.dir=(lang==='AR')?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(translations[lang]&&translations[lang][k]!==undefined)el.textContent=translations[lang][k];});}
+        document.addEventListener('DOMContentLoaded',()=>{const s=localStorage.getItem('n_graphiste_lang')||'FR';changeLanguage(s);if(typeof lucide!=='undefined')lucide.createIcons();if('IntersectionObserver' in window){const o=new IntersectionObserver((e)=>{e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target);}});},{threshold:0.08});document.querySelectorAll('.observer-target').forEach(el=>o.observe(el));}else{document.querySelectorAll('.observer-target').forEach(el=>el.classList.add('visible'));}});
+    </script>
+</body>
+</html>
