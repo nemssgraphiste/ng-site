@@ -358,6 +358,19 @@
         .crumbs a:hover { color: var(--fg); }
         .crumbs [aria-current] { color: var(--fg); }
         .crumbs__sep { width: 1rem; height: 1px; background: var(--rule3); }
+        /* téléphone : les petites grilles de mise en page (titre + intertitre…) ne s'élargissent plus au mot le plus long,
+           ce qui laisse l'ajustement automatique des titres travailler sur la vraie largeur disponible */
+        @media (max-width: 639px), (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
+            .stack { grid-template-columns: minmax(0, 1fr); }
+        }
+        /* téléphone : fil d'Ariane plus compact ; le tiret accompagne l'élément qui le suit,
+           si bien qu'aucune ligne ne se termine par un séparateur suspendu, quelle que soit la langue */
+        @media (max-width: 639px) {
+            .crumbs { column-gap: .5rem; letter-spacing: .1em; }
+            .crumbs > .crumbs__sep { display: none; }
+            .crumbs > [aria-current] { display: inline-flex; align-items: center; }
+            .crumbs > * + *::before { content: ''; flex: none; width: .75rem; height: 1px; margin-inline-end: .5rem; background: var(--rule3); }
+        }
 
 
         /* ---------- Icônes ---------- */
@@ -747,116 +760,182 @@
             inset-inline: 0;
             height: 1.5px;
             background: currentColor;
-            transition: transform var(--t-s) var(--ease-out);
+            transition: transform var(--t-s) var(--ease-out), inset-inline-start var(--t-s) var(--ease-out);
         }
         .burger__lines::before { top: 0; }
         .burger__lines::after { bottom: 0; inset-inline-start: .45rem; }
         @media (hover: hover) { .burger:hover .burger__lines::after { transform: translateX(-.45rem); } [dir="rtl"] .burger:hover .burger__lines::after { transform: translateX(.45rem); } }
+        .burger[aria-expanded="true"] .burger__lines::before { transform: translateY(calc(.35rem - .75px)) rotate(45deg); }
+        .burger[aria-expanded="true"] .burger__lines::after { inset-inline-start: 0; transform: translateY(calc(-.35rem + .75px)) rotate(-45deg); }
+        @media (hover: hover) { .burger[aria-expanded="true"]:hover .burger__lines::after { transform: translateY(calc(-.35rem + .75px)) rotate(-45deg); } }
         @media (min-width: 1080px) { .burger { display: none; } }
-        @media (max-width: 479px) { .burger__label { display: none; } }
+        @media (max-width: 479px) {
+            .burger__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+        }
 
-        /* ---------- Menu mobile (dialogue plein écran) ---------- */
-        .menu {
-            --bg: var(--ink);
-            width: 100vw;
-            max-width: 100vw;
-            height: 100vh;
-            height: 100dvh;
-            max-height: none;
-            margin: 0;
-            padding: 0;
-            border: 0;
+        /* ---------- Menu mobile : panneau déroulant attaché à l'en-tête ----------
+           Fond plein (encre) dès qu'une partie du panneau est visible : l'ouverture
+           découpe le panneau (clip-path) sans jamais jouer sur son opacité. */
+        .hdr.is-menu-open { background: var(--ink); border-bottom-color: var(--rule-d); transition: none; }
+        .mnav-scrim {
+            position: fixed;
+            inset: var(--header-h) 0 0;
+            z-index: -1;
+            background: rgba(10, 10, 10, .6);
+            opacity: 0;
+            transition: opacity 200ms var(--ease-io);
+        }
+        .hdr.is-menu-open .mnav-scrim { opacity: 1; transition: opacity 280ms var(--ease-out); }
+        .mnav {
+            position: absolute;
+            top: 100%;
+            inset-inline: 0;
+            max-height: calc(100vh - var(--header-h));
+            max-height: calc(100dvh - var(--header-h));
             overflow-y: auto;
             overscroll-behavior: contain;
             background: var(--ink);
             color: var(--d1);
+            border-top: 1px solid var(--rule-d);
+            border-bottom: 1px solid var(--rule-d);
+            box-shadow: 0 32px 48px -24px rgba(0, 0, 0, .7);
+            clip-path: inset(0 0 100% 0);
+            transition: clip-path 220ms var(--ease-io);
         }
-        .menu::backdrop { background: var(--ink); }
-        .menu__in {
-            min-height: 100%;
-            display: flex;
-            flex-direction: column;
-            padding: 0 var(--gutter) max(1.5rem, env(safe-area-inset-bottom));
+        .hdr.is-menu-open .mnav { clip-path: inset(0 0 -4rem 0); transition: clip-path 300ms var(--ease-out); }
+        .mnav__in {
+            max-width: var(--maxw);
+            margin-inline: auto;
+            padding: .25rem var(--gutter) max(1rem, env(safe-area-inset-bottom));
+            transform: translateY(-.5rem);
+            opacity: 0;
+            transition: transform 200ms var(--ease-io), opacity 140ms var(--ease-io);
         }
-        .menu__top {
+        .hdr.is-menu-open .mnav__in { transform: none; opacity: 1; transition: transform 300ms var(--ease-out) 40ms, opacity 220ms var(--ease-out) 40ms; }
+        .mnav__list { list-style: none; margin: 0; padding: 0; }
+        .mnav__list > li { border-bottom: 1px solid var(--rule-d); }
+        .mnav__link {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            height: var(--header-h);
-            border-bottom: 1px solid var(--rule-d);
-            flex: none;
+            gap: .75rem;
+            min-height: 3rem;
+            padding-block: .55rem;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(1.25rem, 1.05rem + 1.1vw, 1.625rem);
+            line-height: 1.05;
+            letter-spacing: -.015em;
+            text-transform: uppercase;
+            color: var(--d1);
         }
-        .menu__top img { height: 1.75rem; width: auto; }
-        .menu__close {
+        [dir="rtl"] .mnav__link { letter-spacing: 0; line-height: 1.35; }
+        .mnav__sub {
+            list-style: none;
+            margin: -.2rem 0 0;
+            padding: 0 0 .75rem;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            column-gap: 1.25rem;
+        }
+        @media (min-width: 640px) { .mnav__sub { grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); } }
+        .mnav__sub a {
+            display: flex;
+            align-items: center;
+            gap: .55rem;
+            min-height: 2.625rem;
+            font-size: .9375rem;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--d2);
+        }
+        .mnav__link[aria-current="page"]::before, .mnav__sub a[aria-current="page"]::before {
+            content: '';
+            flex: none;
+            width: .875rem;
+            height: 2px;
+            background: currentColor;
+        }
+        .mnav__sub a[aria-current="page"] { color: var(--d1); }
+        .mnav__sub a[aria-current="page"]::before { width: .625rem; height: 1.5px; }
+        @media (hover: hover) {
+            .mnav__link:hover { color: var(--d2); }
+            .mnav__sub a:hover { color: var(--d1); }
+        }
+        .mnav__foot {
+            display: grid;
+            justify-items: start;
+            gap: 0;
+            padding-top: .5rem;
+        }
+        @media (min-width: 640px) {
+            .mnav__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .25rem 1.5rem; }
+        }
+        .mnav__dl {
             display: inline-flex;
             align-items: center;
-            gap: .6rem;
+            gap: .5rem;
             min-height: 2.75rem;
-            min-width: 2.75rem;
-            justify-content: center;
             font-family: var(--font-display);
             font-size: .75rem;
             font-weight: 700;
             letter-spacing: .14em;
             text-transform: uppercase;
-        }
-        .menu__close .ico { width: 1.4rem; height: 1.4rem; }
-        .menu__nav { padding-block: 1.5rem 1rem; display: grid; gap: .25rem; }
-        .menu__big {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 1rem;
-            padding-block: .55rem;
-            font-family: var(--font-display);
-            font-weight: 900;
-            font-size: clamp(2rem, 9vw, 3.25rem);
-            line-height: 1;
-            text-transform: uppercase;
-            letter-spacing: -.03em;
-        }
-        [dir="rtl"] .menu__big { letter-spacing: 0; font-weight: 800; line-height: 1.3; }
-        .menu__big[aria-current="page"] { color: var(--d3); }
-        .menu__sub {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0 1rem;
-            padding: .25rem 0 1rem;
-            margin-bottom: .5rem;
-            border-bottom: 1px solid var(--rule-d);
-        }
-        .menu__sub a {
-            display: flex;
-            align-items: center;
-            min-height: 2.75rem;
-            font-size: 1rem;
-            font-weight: 600;
             color: var(--d2);
-            border-top: 1px solid var(--rule-d);
         }
-        .menu__sub a[aria-current="page"] { color: var(--d1); }
-        .menu__sub a[aria-current="page"]::before { content: ''; width: .35rem; height: .35rem; border: 1px solid currentColor; transform: rotate(45deg); margin-inline-end: .6rem; }
-        .menu__foot {
-            margin-top: auto;
-            display: grid;
-            gap: 1.25rem;
-            padding-top: 1.25rem;
-            border-top: 1px solid var(--rule-d);
-        }
-        .menu__langs { display: flex; gap: .5rem; flex-wrap: wrap; }
-        .menu__langs button {
-            min-width: 3.25rem;
+        [dir="rtl"] .mnav__dl { letter-spacing: 0; font-size: .875rem; }
+        .mnav__dl .ico { width: .95rem; height: .95rem; flex: none; }
+        /* le texte du premier code de langue s'aligne sur la gouttière */
+        .mnav__langs { display: flex; margin-inline-start: -.6rem; }
+        @media (min-width: 640px) { .mnav__langs { margin-inline: 0 -.6rem; } }
+        .mnav__langs button {
+            position: relative;
+            min-width: 2.75rem;
             min-height: 2.75rem;
-            padding-inline: .9rem;
-            border: 1px solid var(--rule-d2);
-            border-radius: 999px;
+            padding-inline: .6rem;
             font-family: var(--font-display);
-            font-size: .8125rem;
+            font-size: .75rem;
             font-weight: 700;
-            letter-spacing: .1em;
+            letter-spacing: .12em;
+            color: var(--d3);
         }
-        .menu__langs button[aria-pressed="true"] { background: var(--d1); color: var(--ink); border-color: var(--d1); }
-        .menu__row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+        .mnav__langs button[aria-pressed="true"] { color: var(--d1); }
+        .mnav__langs button[aria-pressed="true"]::after {
+            content: '';
+            position: absolute;
+            inset-inline: .6rem;
+            bottom: .55rem;
+            height: 1px;
+            background: currentColor;
+        }
+        @media (hover: hover) { .mnav__langs button:hover { color: var(--d1); } }
+        /* les réseaux sociaux ne quittent l'en-tête qu'en dessous de 360 px : ils passent alors dans le panneau */
+        .mnav__social { display: none; }
+        @media (max-width: 359px) {
+            .mnav__social { display: flex; width: 100%; gap: .25rem; margin-inline-start: -.6rem; }
+            .mnav__social a { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; }
+            .mnav__social svg { width: 1.15rem; height: 1.15rem; }
+        }
+        /* téléphones peu hauts : rythme légèrement resserré */
+        @media (max-height: 700px) {
+            .mnav__link { min-height: 2.75rem; padding-block: .45rem; }
+        }
+        /* téléphone en paysage : pages à gauche, services à droite, pour éviter de défiler */
+        @media (max-height: 480px) {
+            .mnav__link { min-height: 2.75rem; padding-block: .4rem; font-size: 1.125rem; }
+            .mnav__sub a { min-height: 2.5rem; }
+        }
+        @media (min-width: 540px) and (max-height: 480px) {
+            .mnav__list { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.75fr); column-gap: clamp(1.5rem, 4vw, 2.5rem); align-items: start; }
+            .mnav__list > li:nth-child(2) { grid-column: 2; grid-row: 1 / span 4; }
+            .mnav__sub { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1rem; padding-bottom: .5rem; }
+            .mnav__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 1.5rem; }
+            .mnav__langs { margin-inline: 0 -.6rem; }
+        }
+        @media (min-width: 1080px) { .mnav, .mnav-scrim { display: none; } }
+        @media (prefers-reduced-motion: reduce) {
+            .mnav, .mnav__in, .mnav-scrim, .hdr.is-menu-open .mnav, .hdr.is-menu-open .mnav__in, .hdr.is-menu-open .mnav-scrim { transition: none; }
+            .mnav__in { transform: none; }
+        }
 
         /* ---------- Appel final ---------- */
         .cta-final { overflow: hidden; }
@@ -873,6 +952,18 @@
         .cta-final__foot { display: grid; gap: 2rem; align-items: end; }
         @media (min-width: 900px) { .cta-final__foot { grid-template-columns: minmax(0, 1fr) auto; } }
         .cta-final__actions { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center; }
+        /* téléphone : cadre moins épais, actions empilées, bouton sur la largeur utile et lien centré dessous */
+        @media (max-width: 639px) {
+            .cta-final__box { padding-inline: clamp(1.25rem, 6vw, 2rem); }
+            .cta-final__title { font-size: min(1rem + 7.2vw, 11.25vw); }
+            .cta-final__actions { flex-direction: column; align-items: stretch; gap: 1.25rem; }
+            .cta-final__actions .btn { padding-inline: 1.5rem; }
+            .cta-final__actions .link { align-self: center; }
+        }
+        /* titre équilibré (évite un mot seul sur sa ligne) sur téléphone, portrait ou paysage */
+        @media (max-width: 639px), (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
+            .cta-final__title .ln { text-wrap: balance; }
+        }
 
 
         /* ---------- Pied de page ---------- */
@@ -1006,12 +1097,8 @@
         .dlg[open]::backdrop { animation: ng-fade-in var(--t-m) var(--ease-out) both; }
         .dlg.is-closing { animation: ng-dlg-out 240ms var(--ease-io) both; }
         .dlg.is-closing::backdrop { animation: ng-fade-out 240ms var(--ease-io) both; }
-        .menu[open] { animation: ng-menu-in var(--t-m) var(--ease-out) both; }
-        .menu.is-closing { animation: ng-fade-out 220ms var(--ease-io) both; }
-        .menu[open]::backdrop, .menu.is-closing::backdrop { animation: none; }
         @keyframes ng-dlg-in { from { opacity: 0; transform: translateY(14px); } }
         @keyframes ng-dlg-out { to { opacity: 0; transform: translateY(10px); } }
-        @keyframes ng-menu-in { from { opacity: 0; clip-path: inset(0 0 100% 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
         @keyframes ng-fade-in { from { opacity: 0; } }
         @keyframes ng-fade-out { to { opacity: 0; } }
 
@@ -1319,11 +1406,25 @@
         }
         [dir="rtl"] .hero-svc__title { line-height: 1.12; font-size: clamp(2.5rem, 14cqi, 7rem); }
         .hero-svc__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem; }
+        /* téléphone : même composition que l'accueil — bouton sur la largeur utile, lien centré dessous */
+        @media (max-width: 639px) {
+            .hero-svc__actions { justify-self: stretch; flex-direction: column; align-items: stretch; gap: 1.25rem; }
+            .hero-svc__actions .btn { padding-inline: 1.5rem; }
+            .hero-svc__actions .link { align-self: center; }
+        }
         .hero-svc__art { position: relative; min-width: 0; }
         .hero-svc__art .illus { width: 100%; max-width: 38rem; margin-inline: auto; }
         @media (max-width: 1023px) {
             .hero-svc { min-height: 0; }
             .hero-svc__art .illus { max-width: 34rem; }
+        }
+        /* téléphone en paysage : le titre se règle aussi sur la hauteur pour que le texte et l'appel à l'action
+           apparaissent dans le premier écran */
+        @media (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
+            .hero-svc { padding-top: calc(var(--header-h) + 1.25rem); }
+            .hero-svc__title { font-size: min(17cqi, 20svh); }
+            [dir="rtl"] .hero-svc__title { font-size: min(14cqi, 20svh); }
+            .hero-svc__art .illus { max-width: min(34rem, 120svh); }
         }
 
         /* ---------- Illustrations ---------- */
@@ -1403,6 +1504,12 @@
         }
         .presta__mark { grid-row: 1; width: 1.75rem; height: 1.75rem; margin-top: .15em; color: var(--fg3); }
         .presta__mark svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.25; }
+        /* téléphone : pictogramme à l'échelle du titre (centré sur sa première ligne), retrait réduit, titres équilibrés */
+        @media (max-width: 639px) {
+            .presta__item { grid-template-columns: 1.5rem minmax(0, 1fr); column-gap: .875rem; }
+            .presta__mark { width: 1.5rem; height: 1.5rem; margin-top: 0; }
+            .presta__t { text-wrap: balance; }
+        }
         .presta__t {
             font-family: var(--font-display);
             font-weight: 800;
@@ -1438,6 +1545,12 @@
             padding-top: .2em;
         }
         @media (min-width: 720px) { .steps__n { grid-row: auto; } }
+        /* téléphone : colonne des numéros resserrée (textes alignés sur ceux des prestations), numéro sur la ligne de base du titre */
+        @media (max-width: 639px) {
+            .steps__item { grid-template-columns: 2.5rem minmax(0, 1fr); column-gap: .75rem; }
+            .steps__n { padding-top: 0; }
+            .steps__d { text-wrap: pretty; }
+        }
         .steps__t {
             font-family: var(--font-display);
             font-weight: 800;
@@ -1504,6 +1617,10 @@
         @media (min-width: 640px) { .specimen { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
         @media (min-width: 1024px) { .specimen { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
         .specimen li { display: grid; gap: .6rem; padding: 1.75rem 1.25rem 1.5rem 0; border-bottom: 1px solid var(--rule); }
+        /* téléphone : retrait du côté de fin de ligne (correct en arabe) et libellés d'une même rangée à la même hauteur */
+        @media (max-width: 639px), (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
+            .specimen li { padding-block: 1.75rem 1.5rem; padding-inline: 0 1.25rem; align-content: start; }
+        }
         .specimen__x { font-family: var(--font-display); font-weight: 900; font-size: clamp(2.6rem, 1.6rem + 3vw, 4.5rem); line-height: .9; letter-spacing: -.04em; direction: ltr; text-align: start; }
         [dir="rtl"] .specimen__x { text-align: right; }
         .specimen__x.ol { font-style: normal; }
@@ -1570,10 +1687,38 @@
                 <a class="btn btn--sm hdr__cta" href="contact.html"><span data-i18n="nav_contact">Contact</span><svg class="ico ico--ne ico--dir " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
             </nav>
 
-            <button class="burger" type="button" data-dialog-open="ng-menu" aria-haspopup="dialog" aria-controls="ng-menu">
-                <span class="burger__label" data-i18n="menu">Menu</span><span class="burger__lines" aria-hidden="true"></span><span class="sr-only" data-i18n="a11y_open_menu">Ouvrir le menu</span>
+            <button class="burger" type="button" aria-expanded="false" aria-controls="ng-menu">
+                <span class="burger__label" data-i18n="menu">Menu</span><span class="burger__lines" aria-hidden="true"></span>
             </button>
         </div>
+        <div class="mnav-scrim" data-mnav-scrim hidden></div>
+        <nav class="mnav ink" id="ng-menu" data-i18n-attr="aria-label:menu" aria-label="Menu" hidden>
+            <div class="mnav__in">
+                <ul class="mnav__list" role="list">
+                    <li><a class="mnav__link" href="index.html" data-i18n="nav_home">Accueil</a></li>
+                    <li>
+                        <a class="mnav__link" href="index.html#services" data-i18n="nav_services">Services</a>
+                        <ul class="mnav__sub" role="list">
+                            <li><a href="audiovisuel.html" data-i18n="s1_title">Audiovisuel</a></li>
+                            <li><a href="sites-web.html" data-i18n="s2_title">Sites web</a></li>
+                            <li><a href="graphisme.html" aria-current="page" data-i18n="s3_title">Graphisme</a></li>
+                            <li><a href="impression.html" data-i18n="s4_title">Impression</a></li>
+                            <li><a href="ads.html" data-i18n="s5_title">Publicité Ads</a></li>
+                            <li><a href="marketing-local.html" data-i18n="s6_title">Marketing local</a></li>
+                            <li><a href="influence.html" data-i18n="s7_title">Influence</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="mnav__link" href="index.html#clients" data-i18n="nav_clients">Clients</a></li>
+                    <li><a class="mnav__link" href="index.html#structure" data-i18n="nav_structure">Méthode</a></li>
+                    <li><a class="mnav__link" href="contact.html" data-i18n="nav_contact">Contact</a></li>
+                </ul>
+                <div class="mnav__foot">
+                    <a class="mnav__dl" href="Plaquette-Commerciale-NG-Creative.pdf" download="Plaquette-Commerciale-NG-Creative.pdf"><span data-i18n="nav_plaquette">Télécharger la plaquette</span><svg class="ico " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+                    <div class="mnav__langs" role="group" data-i18n-attr="aria-label:a11y_lang_group" aria-label="Choisir la langue"><button type="button" data-lang-btn="FR" lang="fr" aria-pressed="true" aria-label="Français">FR</button><button type="button" data-lang-btn="EN" lang="en" aria-pressed="false" aria-label="English">EN</button><button type="button" data-lang-btn="ES" lang="es" aria-pressed="false" aria-label="Español">ES</button><button type="button" data-lang-btn="AR" lang="ar" aria-pressed="false" aria-label="العربية">AR</button></div>
+                    <div class="mnav__social"><a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="" data-i18n-attr="aria-label:a11y_ig" aria-label="Instagram @ngraphiste_ (nouvel onglet)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a><a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="" data-i18n-attr="aria-label:a11y_tt" aria-label="TikTok @ngraphiste_ (nouvel onglet)"><svg viewBox="0 0 448 512" aria-hidden="true" focusable="false" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a><a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="" data-i18n-attr="aria-label:a11y_x" aria-label="X @nemssgraphiste (nouvel onglet)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a></div>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <main id="main">
@@ -1802,38 +1947,6 @@
             </div>
         </div>
     </footer>
-
-    <dialog class="dlg menu" id="ng-menu" aria-label="Menu" data-i18n-attr="aria-label:menu">
-        <div class="menu__in">
-            <div class="menu__top">
-                <a href="index.html" data-i18n-attr="aria-label:a11y_home" aria-label="NG Creative — accueil"><img src="LOGO1HEAD.png" alt="NG Creative" decoding="async"></a>
-                <button class="menu__close" type="button" data-dialog-close data-autofocus><span data-i18n="close">Fermer</span><svg class="ico " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-            </div>
-            <nav class="menu__nav" data-i18n-attr="aria-label:a11y_nav" aria-label="Navigation principale">
-                <a class="menu__big" href="index.html" data-i18n="nav_home">Accueil</a>
-                <a class="menu__big" href="index.html#services" data-i18n="nav_services">Services</a>
-                <div class="menu__sub">
-                    <a href="audiovisuel.html" data-i18n="s1_title">Audiovisuel</a>
-                    <a href="sites-web.html" data-i18n="s2_title">Sites web</a>
-                    <a href="graphisme.html" aria-current="page" data-i18n="s3_title">Graphisme</a>
-                    <a href="impression.html" data-i18n="s4_title">Impression</a>
-                    <a href="ads.html" data-i18n="s5_title">Publicité Ads</a>
-                    <a href="marketing-local.html" data-i18n="s6_title">Marketing local</a>
-                    <a href="influence.html" data-i18n="s7_title">Influence</a>
-                </div>
-                <a class="menu__big" href="index.html#clients" data-i18n="nav_clients">Clients</a>
-                <a class="menu__big" href="index.html#structure" data-i18n="nav_structure">Méthode</a>
-                <a class="menu__big" href="contact.html" data-i18n="nav_contact">Contact</a>
-            </nav>
-            <div class="menu__foot">
-                <a class="link link--caps" href="Plaquette-Commerciale-NG-Creative.pdf" download="Plaquette-Commerciale-NG-Creative.pdf"><span data-i18n="nav_plaquette">Télécharger la plaquette</span><svg class="ico " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
-                <div class="menu__row">
-                    <div class="menu__langs" role="group" data-i18n-attr="aria-label:a11y_lang_group" aria-label="Langue"><button type="button" data-lang-btn="FR" lang="fr" aria-pressed="true" aria-label="Français">FR</button><button type="button" data-lang-btn="EN" lang="en" aria-pressed="false" aria-label="English">EN</button><button type="button" data-lang-btn="ES" lang="es" aria-pressed="false" aria-label="Español">ES</button><button type="button" data-lang-btn="AR" lang="ar" aria-pressed="false" aria-label="العربية">AR</button></div>
-                    <div class="ftr__social"><a href="https://www.instagram.com/ngraphiste_/" target="_blank" rel="noopener noreferrer" class="" data-i18n-attr="aria-label:a11y_ig" aria-label="Instagram @ngraphiste_ (nouvel onglet)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a><a href="https://www.tiktok.com/@ngraphiste_" target="_blank" rel="noopener noreferrer" class="" data-i18n-attr="aria-label:a11y_tt" aria-label="TikTok @ngraphiste_ (nouvel onglet)"><svg viewBox="0 0 448 512" aria-hidden="true" focusable="false" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a><a href="https://x.com/nemssgraphiste" target="_blank" rel="noopener noreferrer" class="" data-i18n-attr="aria-label:a11y_x" aria-label="X @nemssgraphiste (nouvel onglet)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a></div>
-                </div>
-            </div>
-        </div>
-    </dialog>
 
     <dialog class="dlg dlg--doc paper" id="dlg-legal" aria-labelledby="dlg-legal-t">
         <div class="doc">
@@ -2836,30 +2949,108 @@
             }
 
             /* ---------- Menu mobile : liens d'ancre de la même page ---------- */
+            /* Menu mobile : panneau de navigation déroulant (bouton à deux traits).
+               Ce n'est pas une boîte de dialogue : pas de piège du focus ni de verrouillage du défilement.
+               Il se ferme par le bouton, Échap, un appui hors du panneau, la sortie du focus,
+               l'activation d'un lien, un changement de langue, d'orientation ou le passage au desktop. */
             function initMenu() {
-                var menu = document.getElementById('ng-menu');
-                if (!menu) return;
-                menu.addEventListener('click', function (e) {
+                var hdr = document.querySelector('.hdr');
+                var panel = document.getElementById('ng-menu');
+                var btn = hdr ? hdr.querySelector('.burger') : null;
+                var scrim = hdr ? hdr.querySelector('[data-mnav-scrim]') : null;
+                if (!hdr || !panel || !btn) return;
+                var isOpen = false, token = 0, timer = 0;
+                var CLOSE_MS = 240;
+
+                function finishClose(my) {
+                    if (my !== token) return;
+                    panel.hidden = true;
+                    if (scrim) scrim.hidden = true;
+                }
+                function open() {
+                    if (isOpen) return;
+                    isOpen = true;
+                    token++;
+                    clearTimeout(timer);
+                    btn.setAttribute('aria-expanded', 'true');
+                    panel.hidden = false;
+                    if (scrim) scrim.hidden = false;
+                    void panel.offsetHeight; // point de départ de la transition
+                    hdr.classList.add('is-menu-open');
+                    panel.scrollTop = 0;
+                }
+                function close(opts) {
+                    opts = opts || {};
+                    if (!isOpen) {
+                        if (opts.immediate) { token++; clearTimeout(timer); finishClose(token); }
+                        return;
+                    }
+                    isOpen = false;
+                    var my = ++token;
+                    clearTimeout(timer);
+                    var focusInside = panel.contains(document.activeElement);
+                    btn.setAttribute('aria-expanded', 'false');
+                    hdr.classList.remove('is-menu-open');
+                    if (opts.refocus !== false && focusInside) {
+                        try { btn.focus({ preventScroll: true }); } catch (e) { btn.focus(); }
+                    }
+                    if (opts.immediate || NG.reduced()) finishClose(my);
+                    else timer = setTimeout(function () { finishClose(my); }, CLOSE_MS);
+                }
+                NG.menu = { open: open, close: close, isOpen: function () { return isOpen; } };
+
+                btn.addEventListener('click', function () { if (isOpen) close(); else open(); });
+                document.addEventListener('keydown', function (e) {
+                    if (isOpen && e.key === 'Escape') { e.preventDefault(); close({ refocus: true }); if (document.activeElement !== btn && !panel.contains(document.activeElement)) { try { btn.focus({ preventScroll: true }); } catch (err) { } } }
+                });
+                if (scrim) scrim.addEventListener('click', function () { close(); });
+                // Menu ouvert : la page reste immobile sous l'en-tête, le panneau et le voile ;
+                // seul le panneau peut défiler, et uniquement si son contenu dépasse la hauteur disponible.
+                var still = function (e) {
+                    if (!isOpen || !e.cancelable) return;
+                    if (panel.contains(e.target) && panel.scrollHeight > panel.clientHeight + 1) return;
+                    e.preventDefault();
+                };
+                hdr.addEventListener('wheel', still, { passive: false });
+                hdr.addEventListener('touchmove', still, { passive: false });
+                // le focus quitte l'en-tête (Tab au-delà du dernier lien) : le panneau se referme
+                hdr.addEventListener('focusout', function (e) {
+                    if (isOpen && e.relatedTarget && !hdr.contains(e.relatedTarget)) close({ refocus: false });
+                });
+                panel.addEventListener('click', function (e) {
+                    if (e.target.closest('[data-lang-btn]')) { close({ refocus: true }); return; }
                     var a = e.target.closest('a[href]');
                     if (!a) return;
                     var url;
                     try { url = new URL(a.getAttribute('href'), window.location.href); } catch (err) { return; }
-                    var samePage = url.pathname === window.location.pathname && url.hash;
-                    if (a.hasAttribute('download') || e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) { NG.dialogs.close(menu, { restore: false, immediate: true }); return; }
-                    if (samePage) {
-                        e.preventDefault();
-                        var target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
-                        NG.dialogs.close(menu, { restore: false, immediate: true });
-                        if (target) {
-                            window.requestAnimationFrame(function () {
-                                target.scrollIntoView({ behavior: NG.reduced() ? 'auto' : 'smooth', block: 'start' });
-                                if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
-                                try { target.focus({ preventScroll: true }); } catch (err) { }
-                                if (history.replaceState) history.replaceState(null, '', url.hash);
-                            });
+                    if (a.hasAttribute('download') || a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) { close({ immediate: true, refocus: false }); return; }
+                    var samePage = url.pathname === window.location.pathname && url.search === window.location.search && url.hash;
+                    close({ immediate: true, refocus: false });
+                    if (!samePage) return; // navigation normale vers l'autre page (ancre comprise)
+                    e.preventDefault();
+                    var id = decodeURIComponent(url.hash.slice(1));
+                    var target = id === 'top' ? (document.getElementById('top') || document.body) : document.getElementById(id);
+                    if (!target) return;
+                    window.requestAnimationFrame(function () {
+                        if (id === 'top') window.scrollTo({ top: 0, behavior: NG.reduced() ? 'auto' : 'smooth' });
+                        else target.scrollIntoView({ behavior: NG.reduced() ? 'auto' : 'smooth', block: 'start' });
+                        if (target !== document.body) {
+                            if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+                            try { target.focus({ preventScroll: true }); } catch (err) { }
                         }
-                    }
+                        if (history.replaceState) history.replaceState(null, '', url.hash);
+                    });
                 });
+                // passage au desktop, changement d'orientation, retour depuis le cache, ouverture d'une fenêtre
+                var desktop = window.matchMedia('(min-width: 1080px)');
+                var onDesktop = function () { if (desktop.matches) close({ immediate: true, refocus: false }); };
+                if (desktop.addEventListener) desktop.addEventListener('change', onDesktop); else if (desktop.addListener) desktop.addListener(onDesktop);
+                var portrait = window.matchMedia('(orientation: portrait)');
+                var onTurn = function () { close({ immediate: true, refocus: false }); };
+                if (portrait.addEventListener) portrait.addEventListener('change', onTurn); else if (portrait.addListener) portrait.addListener(onTurn);
+                window.addEventListener('pageshow', function () { close({ immediate: true, refocus: false }); });
+                window.addEventListener('pagehide', function () { close({ immediate: true, refocus: false }); });
+                document.addEventListener('ng:beforeopen', function () { close({ immediate: true, refocus: false }); }, true);
             }
 
             /* ---------- Révélations ---------- */
@@ -2914,13 +3105,16 @@
             /* ---------- Ajustement d'un titre à sa colonne (mot le plus long) ---------- */
             NG.fit = function (el) {
                 if (!el || !el.parentElement) return;
+                // en mouvement réduit, une transition de 1 ms s'applique à toutes les propriétés :
+                // on la neutralise le temps de la mesure pour lire les tailles réelles, pas les valeurs de départ
+                el.style.transitionProperty = 'none';
                 el.style.fontSize = '';
                 var base = parseFloat(window.getComputedStyle(el).fontSize);
                 var max = parseFloat(el.getAttribute('data-fit-max')) || base;
                 var avail = el.clientWidth;
-                if (!avail) return;
+                if (!avail) { el.style.transitionProperty = ''; return; }
                 var probe = document.createElement('span');
-                probe.style.cssText = 'position:fixed;visibility:hidden;white-space:nowrap;left:0;top:0;pointer-events:none;';
+                probe.style.cssText = 'position:fixed;visibility:hidden;white-space:nowrap;left:0;top:0;pointer-events:none;transition-property:none;';
                 document.body.appendChild(probe);
                 var measure = function (text, styleEl) {
                     var st = window.getComputedStyle(styleEl);
@@ -2942,9 +3136,10 @@
                     });
                 }
                 probe.remove();
-                if (!widest) return;
+                if (!widest) { el.style.transitionProperty = ''; return; }
                 var size = Math.min(max, base * (avail / widest) * 0.985);
                 if (size < base || el.hasAttribute('data-fit-grow')) el.style.fontSize = size.toFixed(2) + 'px';
+                el.style.transitionProperty = '';
             };
             function initFit() {
                 var els = document.querySelectorAll('[data-fit], [data-fit-line], [data-fit-lines], .display:not([data-nofit]), main h3:not([data-nofit])');
